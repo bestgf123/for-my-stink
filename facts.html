@@ -30,7 +30,7 @@ body {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 50;
+    z-index: 100;
     overflow: hidden;
 }
 .confetti span {
@@ -39,36 +39,31 @@ body {
     width: 9px;
     height: 15px;
     opacity: .85;
-    animation:
-        fall linear infinite;
+    animation: fall linear infinite;
 }
-.confetti span:nth-child(1) { left: 5%; background:#ffdf6b; animation-duration:5s; animation-delay:0s; }
-.confetti span:nth-child(2) { left: 12%; background:#ff7ba9; animation-duration:7s; animation-delay:1s; }
-.confetti span:nth-child(3) { left: 19%; background:#72d8ff; animation-duration:6s; animation-delay:2s; }
-.confetti span:nth-child(4) { left: 27%; background:#b7ff8a; animation-duration:8s; animation-delay:.5s; }
-.confetti span:nth-child(5) { left: 34%; background:#ffd166; animation-duration:5.5s; animation-delay:1.5s; }
-.confetti span:nth-child(6) { left: 42%; background:#ff8ad8; animation-duration:7.5s; animation-delay:2.5s; }
-.confetti span:nth-child(7) { left: 50%; background:#8ae7ff; animation-duration:6.5s; animation-delay:.8s; }
-.confetti span:nth-child(8) { left: 58%; background:#fff083; animation-duration:8s; animation-delay:1.8s; }
-.confetti span:nth-child(9) { left: 66%; background:#ff8c8c; animation-duration:5s; animation-delay:2.2s; }
-.confetti span:nth-child(10) { left: 73%; background:#b794ff; animation-duration:7s; animation-delay:.2s; }
-.confetti span:nth-child(11) { left: 81%; background:#79e6bd; animation-duration:6s; animation-delay:1.2s; }
-.confetti span:nth-child(12) { left: 89%; background:#ffca7a; animation-duration:8s; animation-delay:2.8s; }
-.confetti span:nth-child(13) { left: 96%; background:#ff77c8; animation-duration:6.5s; animation-delay:.4s; }
+.confetti span:nth-child(1) { left:5%; background:#ffdf6b; animation-duration:5s; }
+.confetti span:nth-child(2) { left:12%; background:#ff7ba9; animation-duration:7s; animation-delay:1s; }
+.confetti span:nth-child(3) { left:19%; background:#72d8ff; animation-duration:6s; animation-delay:2s; }
+.confetti span:nth-child(4) { left:27%; background:#b7ff8a; animation-duration:8s; animation-delay:.5s; }
+.confetti span:nth-child(5) { left:34%; background:#ffd166; animation-duration:5.5s; animation-delay:1.5s; }
+.confetti span:nth-child(6) { left:42%; background:#ff8ad8; animation-duration:7.5s; animation-delay:2.5s; }
+.confetti span:nth-child(7) { left:50%; background:#8ae7ff; animation-duration:6.5s; animation-delay:.8s; }
+.confetti span:nth-child(8) { left:58%; background:#fff083; animation-duration:8s; animation-delay:1.8s; }
+.confetti span:nth-child(9) { left:66%; background:#ff8c8c; animation-duration:5s; animation-delay:2.2s; }
+.confetti span:nth-child(10) { left:73%; background:#b794ff; animation-duration:7s; animation-delay:.2s; }
+.confetti span:nth-child(11) { left:81%; background:#79e6bd; animation-duration:6s; animation-delay:1.2s; }
+.confetti span:nth-child(12) { left:89%; background:#ffca7a; animation-duration:8s; animation-delay:2.8s; }
+.confetti span:nth-child(13) { left:96%; background:#ff77c8; animation-duration:6.5s; animation-delay:.4s; }
 @keyframes fall {
     0% {
-        transform:
-            translateY(-30px)
-            rotate(0deg);
+        transform: translateY(-30px) rotate(0deg);
     }
     100% {
-        transform:
-            translateY(110vh)
-            rotate(720deg);
+        transform: translateY(110vh) rotate(720deg);
     }
 }
 /* =========================
-   FLOATING BALLOONS
+   BALLOONS
 ========================= */
 .balloon {
     position: fixed;
@@ -77,8 +72,8 @@ body {
     border-radius: 50% 50% 45% 45%;
     opacity: .55;
     pointer-events: none;
-    animation:
-        balloonFloat 6s ease-in-out infinite;
+    animation: balloonFloat 6s ease-in-out infinite;
+    z-index: 1;
 }
 .balloon:after {
     content: "";
@@ -125,10 +120,9 @@ body {
 ========================= */
 .container {
     width: 100%;
-    max-width: 900px;
+    max-width: 950px;
     margin: auto;
-    padding:
-        45px 18px 70px;
+    padding: 45px 18px 70px;
     position: relative;
     z-index: 2;
 }
@@ -140,8 +134,7 @@ body {
 }
 .partyHat {
     font-size: 65px;
-    animation:
-        hatWiggle 2s ease-in-out infinite;
+    animation: hatWiggle 2s ease-in-out infinite;
 }
 @keyframes hatWiggle {
     0%,100% {
@@ -152,123 +145,123 @@ body {
     }
 }
 h1 {
-    font-size:
-        clamp(42px, 9vw, 72px);
+    font-size: clamp(42px, 9vw, 72px);
     margin: 5px 0;
     color: #ffe28a;
-    text-shadow:
-        0 5px 20px rgba(0,0,0,.4);
+    text-shadow: 0 5px 20px rgba(0,0,0,.4);
 }
 .subtitle {
     font-size: 18px;
     line-height: 1.6;
     color: #fff0f7;
     max-width: 650px;
-    margin:
-        0 auto 35px;
+    margin: 0 auto 35px;
 }
 /* =========================
    CAKE
 ========================= */
 .cakeArea {
     position: relative;
-    margin:
-        25px auto 45px;
+    margin: 25px auto 45px;
     width: 100%;
-    max-width: 650px;
+    max-width: 760px;
     text-align: center;
 }
 .cake {
     position: relative;
     width: 100%;
-    min-height: 270px;
+    height: 400px;
     margin: auto;
 }
-/* Cake layers */
+/* Bottom cake */
 .cakeBottom {
     position: absolute;
-    left: 7%;
-    right: 7%;
-    bottom: 0;
-    height: 125px;
+    left: 5%;
+    right: 5%;
+    bottom: 15px;
+    height: 170px;
     background:
         linear-gradient(
             180deg,
             #ff91ba,
             #e86e9b
         );
-    border-radius:
-        22px 22px 35px 35px;
-    border:
-        5px solid #fff1f5;
+    border-radius: 25px 25px 45px 45px;
+    border: 6px solid #fff1f5;
     box-shadow:
-        0 15px 35px rgba(0,0,0,.35);
+        0 18px 40px rgba(0,0,0,.4);
 }
 .cakeBottom:before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: 25px;
-    height: 15px;
-    background:
-        #fff4f6;
+    top: 35px;
+    height: 18px;
+    background: #fff4f6;
     box-shadow:
-        0 42px 0 #fff4f6;
-    opacity: .9;
+        0 55px 0 #fff4f6;
 }
+.cakeBottom:after {
+    content: "🎀  ✨  🎀  ✨  🎀";
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    font-size: 28px;
+    letter-spacing: 18px;
+}
+/* Top cake */
 .cakeTop {
     position: absolute;
-    left: 12%;
-    right: 12%;
-    bottom: 105px;
-    height: 100px;
+    left: 10%;
+    right: 10%;
+    bottom: 155px;
+    height: 125px;
     background:
         linear-gradient(
             180deg,
-            #fff2f4,
+            #fff5f7,
             #ffd4e2
         );
-    border-radius:
-        50% 50% 22px 22px;
-    border:
-        5px solid #fff8fa;
+    border-radius: 55% 55% 25px 25px;
+    border: 6px solid #fff8fa;
     box-shadow:
-        0 8px 15px rgba(0,0,0,.2);
+        0 10px 20px rgba(0,0,0,.2);
 }
 .cakeTop:after {
     content: "";
     position: absolute;
-    left: 8%;
-    right: 8%;
-    bottom: 12px;
-    height: 15px;
+    left: 7%;
+    right: 7%;
+    bottom: 15px;
+    height: 18px;
     border-radius: 50%;
-    background:
-        #f29abb;
+    background: #f29abb;
 }
-/* Candles */
+/* =========================
+   CANDLES
+========================= */
 .candles {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 180px;
+    left: 10%;
+    right: 10%;
+    bottom: 265px;
     display: flex;
-    justify-content: center;
-    gap: clamp(12px, 5vw, 35px);
-    z-index: 10;
+    justify-content: space-around;
+    align-items: flex-end;
+    z-index: 20;
 }
 .candleWrap {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
 }
 .flame {
-    width: 25px;
-    height: 35px;
-    margin-bottom: 4px;
-    border-radius:
-        50% 50% 50% 50%;
+    width: 28px;
+    height: 38px;
+    border-radius: 50% 50% 50% 50%;
     background:
         radial-gradient(
             circle at 50% 65%,
@@ -277,52 +270,49 @@ h1 {
             #ff6a45 65%,
             transparent 66%
         );
-    filter:
-        drop-shadow(
-            0 0 12px #ffae42
-        );
+    filter: drop-shadow(0 0 12px #ffae42);
     animation:
         flame 1s ease-in-out infinite alternate;
 }
 @keyframes flame {
     from {
-        transform:
-            scale(.9)
-            rotate(-3deg);
+        transform: scale(.9) rotate(-3deg);
     }
     to {
-        transform:
-            scale(1.1)
-            rotate(3deg);
+        transform: scale(1.1) rotate(3deg);
     }
 }
 .candle {
-    width: 42px;
-    height: 100px;
-    border-radius:
-        8px 8px 5px 5px;
-    border: 3px solid rgba(255,255,255,.7);
+    width: 58px;
+    height: 115px;
+    border-radius: 9px 9px 6px 6px;
+    border: 4px solid rgba(255,255,255,.8);
     cursor: pointer;
     font-family: Georgia, serif;
     font-size: 28px;
+    font-weight: bold;
     color: white;
     box-shadow:
-        0 5px 10px rgba(0,0,0,.25);
+        0 7px 15px rgba(0,0,0,.3);
     transition:
         transform .2s,
-        filter .2s;
+        filter .2s,
+        box-shadow .2s;
 }
 .candle:hover {
     transform:
-        translateY(-8px)
-        scale(1.05);
-    filter:
-        brightness(1.12);
+        translateY(-10px)
+        scale(1.06);
+    filter: brightness(1.12);
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.4);
+}
+.candle:active {
+    transform: translateY(-5px) scale(.98);
 }
 .candle:focus {
-    outline:
-        4px solid #ffe28a;
-    outline-offset: 4px;
+    outline: 4px solid #ffe28a;
+    outline-offset: 5px;
 }
 .candle1 {
     background:
@@ -356,6 +346,13 @@ h1 {
             #fff 10px 20px
         );
 }
+.candleLabel {
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+    max-width: 120px;
+}
 /* =========================
    INSTRUCTIONS
 ========================= */
@@ -370,17 +367,14 @@ h1 {
 ========================= */
 .section {
     display: none;
-    background:
-        rgba(255,248,238,.97);
+    background: rgba(255,248,238,.97);
     color: #35283b;
     border-radius: 25px;
-    padding: 30px;
-    margin:
-        25px 0 40px;
+    padding: 35px;
+    margin: 25px 0 40px;
     box-shadow:
         0 18px 45px rgba(0,0,0,.4);
-    animation:
-        sectionIn .35s ease;
+    animation: sectionIn .35s ease;
 }
 .section.active {
     display: block;
@@ -388,24 +382,21 @@ h1 {
 @keyframes sectionIn {
     from {
         opacity: 0;
-        transform:
-            translateY(15px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 .sectionTitle {
     text-align: center;
     color: #7c426e;
     font-size: 31px;
-    margin:
-        0 0 25px;
+    margin: 0 0 25px;
 }
 /* =========================
-   FAMOUS BIRTHDAYS
+   CELEBRITY SLIDES
 ========================= */
 .celebrityCard {
     display: none;
@@ -415,21 +406,19 @@ h1 {
     display: block;
 }
 .celebrityImage {
-    width: 210px;
-    height: 250px;
+    width: 230px;
+    height: 270px;
     object-fit: cover;
-    border-radius: 20px;
-    border:
-        5px solid #f2c86d;
+    border-radius: 22px;
+    border: 5px solid #f2c86d;
     box-shadow:
-        0 10px 25px rgba(0,0,0,.25);
+        0 10px 25px rgba(0,0,0,.3);
     background: #ddd;
 }
 .celebrityCard h3 {
-    font-size: 26px;
+    font-size: 28px;
     color: #633d62;
-    margin:
-        18px 0 8px;
+    margin: 18px 0 8px;
 }
 .celebrityCard p {
     line-height: 1.65;
@@ -437,25 +426,33 @@ h1 {
     margin: auto;
     font-size: 17px;
 }
+.slideCount {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #8c7187;
+}
 .slideControls {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 22px;
 }
-.slideControls button {
+.slideControls button,
+.closeButton {
     border: none;
     border-radius: 25px;
-    padding:
-        11px 20px;
+    padding: 12px 22px;
     background: #dca8cb;
     color: #39263a;
     font-family: Georgia, serif;
     font-weight: bold;
     cursor: pointer;
+    transition: .2s;
 }
-.slideControls button:hover {
+.slideControls button:hover,
+.closeButton:hover {
     background: #c78db8;
+    transform: translateY(-2px);
 }
 /* =========================
    MEANING
@@ -468,71 +465,99 @@ h1 {
     display: block;
 }
 .meaningImage {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     object-fit: cover;
     border-radius: 20px;
-    border:
-        4px solid #e3bb62;
+    border: 4px solid #e3bb62;
     box-shadow:
-        0 8px 22px rgba(0,0,0,.2);
+        0 8px 22px rgba(0,0,0,.25);
+}
+.virgoImage {
+    width: 230px;
+    height: 230px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            #f6d58a,
+            #c984ad 55%,
+            #74466f
+        );
+    border: 5px solid #e3bb62;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+    font-size: 135px;
+    color: white;
 }
 .moonImage {
-    width: 220px;
-    height: 220px;
+    width: 230px;
+    height: 230px;
     margin: auto;
     border-radius: 50%;
     background:
         radial-gradient(
-            circle at 35% 35%,
-            #fffef1 0 55%,
-            #e7e1bd 56% 100%
+            circle at 38% 42%,
+            #fffde8 0 53%,
+            #e8e2bf 54% 100%
         );
     box-shadow:
-        0 0 35px rgba(255,226,130,.55);
+        0 0 40px rgba(255,226,130,.6);
     position: relative;
     overflow: hidden;
 }
 .moonImage:after {
     content: "";
     position: absolute;
-    width: 220px;
-    height: 220px;
-    left: 58px;
-    top: -3px;
+    width: 230px;
+    height: 230px;
+    left: 72px;
+    top: -5px;
     border-radius: 50%;
-    background:
-        #35254d;
-}
-.virgoSymbol {
-    font-size: 130px;
-    margin:
-        20px 0;
-    color: #8c5583;
+    background: #35254d;
 }
 .meaningCard h3 {
     color: #633d62;
     font-size: 28px;
-    margin:
-        15px 0 10px;
+    margin: 15px 0 10px;
 }
 .meaningCard p {
     line-height: 1.7;
-    max-width: 600px;
-    margin: auto;
+    max-width: 620px;
+    margin: 12px auto;
     font-size: 17px;
+}
+.traits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+.trait {
+    background: #ead2e3;
+    color: #633d62;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
 }
 /* =========================
    WORLD FACTS
 ========================= */
 .worldFact {
-    background:
-        #fff4df;
+    background: #fff4df;
     border-left:
         7px solid #e2b75e;
     border-radius: 15px;
     padding: 20px;
     margin: 18px 0;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.08);
 }
 .worldFact h3 {
     margin-top: 0;
@@ -563,32 +588,13 @@ h1 {
     line-height: 1.65;
 }
 /* =========================
-   CLOSE
-========================= */
-.closeButton {
-    display: block;
-    margin:
-        25px auto 0;
-    padding:
-        12px 25px;
-    border: none;
-    border-radius: 25px;
-    background: #dca8cb;
-    color: #39263a;
-    font-family: Georgia, serif;
-    font-weight: bold;
-    cursor: pointer;
-}
-/* =========================
-   FOOTER
+   BACK
 ========================= */
 .back {
     display: block;
     width: fit-content;
-    margin:
-        35px auto 0;
-    padding:
-        13px 25px;
+    margin: 35px auto 0;
+    padding: 13px 25px;
     border-radius: 30px;
     background: #f0c76a;
     color: #3b293d;
@@ -606,54 +612,81 @@ h1 {
         padding-top: 25px;
     }
     .cake {
-        min-height: 240px;
+        height: 330px;
     }
     .candles {
-        bottom: 160px;
-        gap: 8px;
+        left: 4%;
+        right: 4%;
+        bottom: 225px;
+        gap: 4px;
     }
     .candle {
-        width: 35px;
-        height: 82px;
+        width: 42px;
+        height: 90px;
+        font-size: 21px;
     }
     .flame {
-        width: 20px;
-        height: 28px;
+        width: 21px;
+        height: 29px;
+    }
+    .candleLabel {
+        font-size: 11px;
+        max-width: 75px;
     }
     .cakeTop {
-        bottom: 90px;
-        height: 90px;
+        left: 6%;
+        right: 6%;
+        bottom: 125px;
+        height: 95px;
     }
     .cakeBottom {
-        height: 110px;
+        left: 2%;
+        right: 2%;
+        height: 130px;
+    }
+    .cakeBottom:after {
+        font-size: 20px;
+        letter-spacing: 6px;
     }
     .section {
-        padding: 22px 17px;
+        padding: 24px 17px;
     }
     .celebrityImage,
     .meaningImage {
         width: 190px;
-        height: 220px;
+        height: 225px;
+    }
+    .virgoImage,
+    .moonImage {
+        width: 190px;
+        height: 190px;
+    }
+    .moonImage:after {
+        width: 190px;
+        height: 190px;
+        left: 60px;
     }
 }
 </style>
 </head>
 <body>
-<!-- CONFETTI -->
+<!-- =========================
+     CONFETTI
+========================= -->
 <div class="confetti">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 </div>
 <!-- BALLOONS -->
 <div class="balloon balloon1"></div>
@@ -675,9 +708,9 @@ h1 {
 </p>
 </header>
 <div class="instructions">
-<strong>
-    Pick a candle. Obviously.
-</strong>
+    <strong>
+        Pick a candle. Obviously.
+    </strong>
 </div>
 <!-- =========================
      CAKE
@@ -685,34 +718,62 @@ h1 {
 <div class="cakeArea">
 <div class="cake">
 <div class="candles">
-<div class="candleWrap">
-<div class="flame">🔥</div>
-
-1
-
-</button>
-</div>
-<div class="candleWrap">
-<div class="flame">🔥</div>
-
-2
-
-</button>
-</div>
-<div class="candleWrap">
-<div class="flame">🔥</div>
-
-3
-
-</button>
-</div>
-<div class="candleWrap">
-<div class="flame">🔥</div>
-
-4
-
-</button>
-</div>
+    <!-- CANDLE 1 -->
+    <div class="candleWrap">
+        <div class="flame">🔥</div>
+        <button
+            class="candle candle1"
+            type="button"
+            onclick="openSection('famous')"
+            aria-label="Famous birthdays">
+            1
+        </button>
+        <div class="candleLabel">
+            Famous birthdays
+        </div>
+    </div>
+    <!-- CANDLE 2 -->
+    <div class="candleWrap">
+        <div class="flame">🔥</div>
+        <button
+            class="candle candle2"
+            type="button"
+            onclick="openSection('meaning')"
+            aria-label="What your birthday says about you">
+            2
+        </button>
+        <div class="candleLabel">
+            Your birthday
+        </div>
+    </div>
+    <!-- CANDLE 3 -->
+    <div class="candleWrap">
+        <div class="flame">🔥</div>
+        <button
+            class="candle candle3"
+            type="button"
+            onclick="openSection('world')"
+            aria-label="Birthday traditions around the world">
+            3
+        </button>
+        <div class="candleLabel">
+            Around the world
+        </div>
+    </div>
+    <!-- CANDLE 4 -->
+    <div class="candleWrap">
+        <div class="flame">🔥</div>
+        <button
+            class="candle candle4"
+            type="button"
+            onclick="openSection('day')"
+            aria-label="On this day">
+            4
+        </button>
+        <div class="candleLabel">
+            On this day
+        </div>
+    </div>
 </div>
 <div class="cakeTop"></div>
 <div class="cakeBottom"></div>
@@ -721,335 +782,435 @@ h1 {
 <!-- =========================
      FAMOUS BIRTHDAYS
 ========================= -->
-<section
-id="famous"
-class="section">
+<section id="famous" class="section">
 <h2 class="sectionTitle">
-🎂 Famous Birthdays
+    🎂 Famous Birthdays
 </h2>
-<div
-class="celebrityCard active">
+<!-- MICHAEL -->
+<div class="celebrityCard active">
+<img
+    src="michael-emerson.avif"
+    alt="Michael Emerson"
+    class="celebrityImage">
 <h3>
-Michael Emerson
+    Michael Emerson
 </h3>
 <p>
-Oh hey, look. It's that one guy from <em>Lost</em>.
-You know. The guy who somehow managed to make
-being extremely unsettling look like a full-time job.
+    Oh hey, look. It's that one guy from
+    <em>Lost</em>.
+    You know. The guy who somehow managed to make
+    looking deeply suspicious into an entire career.
 </p>
+<div class="slideCount">
+    1 / 4
 </div>
-<div class="celebrityCard">
-<h3>
-NileRed
-</h3>
-<p>
-This guy makes hot sauce out of plastic gloves.
-I don't really know what else needs to be said.
-Chemistry has officially gone too far.
-</p>
 </div>
+<!-- NILERED -->
 <div class="celebrityCard">
+<img
+    src="nilered.jpeg"
+    alt="NileRed"
+    class="celebrityImage">
 <h3>
-Dean-Charles Chapman
+    NileRed
 </h3>
 <p>
-The guy from <em>Game of Thrones</em> who had
-the absolute misfortune of being a Lannister.
-Probably not the birthday experience he was hoping for.
+    Hey, this guy makes hot sauce out of plastic
+    gloves. At some point you just have to stop
+    asking questions and accept that chemistry has
+    gone completely off the rails.
 </p>
+<div class="slideCount">
+    2 / 4
 </div>
+</div>
+<!-- DEAN -->
 <div class="celebrityCard">
+<img
+    src="dean-charles-chapman.avif"
+    alt="Dean-Charles Chapman"
+    class="celebrityImage">
 <h3>
-Elizabeth I
+    Dean-Charles Chapman
 </h3>
 <p>
-Elizabeth I was born on September 7, 1533.
-She eventually became Queen of England and ruled
-for 44 years. So, basically, she had a pretty
-productive birthday.
+    The fat from <em>Game of Thrones</em>.
+    Well... technically Tommen Baratheon.
+    Which means he spent a significant portion
+    of his childhood being surrounded by people
+    having the absolute worst family meetings.
 </p>
+<div class="slideCount">
+    3 / 4
+</div>
+</div>
+<!-- ELIZABETH -->
+<div class="celebrityCard">
+<img
+    src="elizabeth-i.avif"
+    alt="Elizabeth I"
+    class="celebrityImage">
+<h3>
+    Elizabeth I
+</h3>
+<p>
+    Elizabeth I was born on September 7, 1533.
+    She eventually became Queen of England,
+    ruled for 44 years, and somehow turned
+    having an extremely complicated family tree
+    into a full-time job.
+</p>
+<div class="slideCount">
+    4 / 4
+</div>
 </div>
 <div class="slideControls">
-<button onclick="changeCelebrity(-1)">
-← Previous
+<button
+    type="button"
+    onclick="changeCelebrity(-1)">
+    ← Previous
 </button>
-<button onclick="changeCelebrity(1)">
-Next →
+<button
+    type="button"
+    onclick="changeCelebrity(1)">
+    Next →
 </button>
 </div>
 
-Put the cake away
-
-</button>
+🎂 Put the cake away
 </section>
 <!-- =========================
-     MEANING
+     YOUR BIRTHDAY
 ========================= -->
-<section
-id="meaning"
-class="section">
+<section id="meaning" class="section">
 <h2 class="sectionTitle">
-✨ What Your Birthday Says About You
+    ✨ What Your Birthday Says About You
 </h2>
 <!-- VIRGO -->
 <div class="meaningCard active">
-<div class="virgoSymbol">
-♍
+<div class="virgoImage">
+    ♍
 </div>
 <h3>
-You're a Virgo
+    You're a Virgo
 </h3>
 <p>
-September 7 falls under Virgo, which is traditionally
-associated with being observant, practical, organised,
-analytical and slightly too good at noticing things
-other people missed.
+    September 7 falls under Virgo, traditionally
+    associated with being observant, practical,
+    analytical and organised.
 </p>
 <p>
-The stereotypical Virgo is the person who says
-“I don't care” and then spends 25 minutes fixing
-something nobody asked them to fix.
+    In other words: you're probably the person
+    who notices that something is slightly wrong
+    and then absolutely cannot leave it alone.
 </p>
+<div class="traits">
+    <div class="trait">Observant</div>
+    <div class="trait">Practical</div>
+    <div class="trait">Analytical</div>
+    <div class="trait">Organised</div>
+    <div class="trait">Detail-oriented</div>
+    <div class="trait">Perfectionist-ish</div>
+</div>
 </div>
 <!-- GEMSTONE -->
 <div class="meaningCard">
+<img
+    src="gemstone.jpeg"
+    alt="September sapphire birthstone"
+    class="meaningImage">
 <h3>
-Your Birthstone: Sapphire
+    Your Birthstone: Sapphire
 </h3>
 <p>
-September's traditional birthstone is sapphire.
-It is associated with wisdom, sincerity, loyalty
-and good fortune.
+    September's traditional birthstone is
+    <strong>sapphire</strong>.
 </p>
 <p>
-Also, it's extremely pretty, which is arguably
-the most important qualification for a gemstone.
+    Sapphire has traditionally been associated
+    with wisdom, sincerity, loyalty and good
+    fortune.
+</p>
+<p>
+    Also, it's extremely pretty, which is arguably
+    the most important qualification for a gemstone.
 </p>
 </div>
 <!-- FLOWER -->
 <div class="meaningCard">
+<img
+    src="flower.jpg"
+    alt="September birth flower"
+    class="meaningImage">
 <h3>
-Your Birth Flower
+    Your Birth Flower
 </h3>
 <p>
-September is commonly associated with the
-morning glory and aster.
-Morning glories are linked with affection,
-while asters have traditionally been associated
-with love and patience.
+    September is commonly associated with the
+    <strong>aster</strong> and
+    <strong>morning glory</strong>.
 </p>
 <p>
-Basically: pretty flowers with suspiciously
-specific emotional responsibilities.
+    Asters have traditionally been associated
+    with love, patience and wisdom, while morning
+    glories are often linked with affection.
+</p>
+<p>
+    Basically: beautiful flowers with suspiciously
+    specific emotional responsibilities.
 </p>
 </div>
 <!-- MOON -->
 <div class="meaningCard">
 <div class="moonImage"></div>
 <h3>
-Your Moon Phase
+    Your Moon Phase
 </h3>
 <p>
-On September 7, 2003, the Moon was a
-<strong>waxing gibbous</strong>, around
-<strong>89% illuminated</strong>.
+    On <strong>September 7, 2003</strong>, the Moon
+    was a <strong>waxing gibbous</strong>, roughly
+    89% illuminated.
 </p>
 <p>
-So the Moon was basically almost full and
-showing off. Very dramatic.
+    So the Moon was basically almost full and
+    showing off.
 </p>
 </div>
 <!-- HOROSCOPE -->
 <div class="meaningCard">
-<div class="virgoSymbol">
-🔮
+<div class="virgoImage">
+    🔮
 </div>
 <h3>
-Your Completely Scientific Horoscope
+    Your Completely Scientific Horoscope
 </h3>
 <p>
-Today you will notice something slightly wrong
-with something that everyone else thinks is fine.
-You will fix it.
-Nobody will notice.
-You will pretend this doesn't annoy you.
+    Today you will encounter a problem that
+    technically isn't your problem.
 </p>
 <p>
-Later, you will make an unnecessarily specific
-decision about something that absolutely did not
-require that much thought.
-Congratulations. You're a Virgo.
+    You will fix it anyway.
+</p>
+<p>
+    Someone will then say,
+    "Oh, I didn't even notice that."
+</p>
+<p>
+    You will stare at them for three seconds
+    longer than necessary.
+</p>
+<p>
+    Later, an extremely minor inconvenience
+    will happen and you will immediately decide
+    that this is somehow a sign from the universe.
+</p>
+<p>
+    It isn't.
+    But you're going to analyse it anyway.
 </p>
 </div>
 <div class="slideControls">
-<button onclick="changeMeaning(-1)">
-← Previous
+<button
+    type="button"
+    onclick="changeMeaning(-1)">
+    ← Previous
 </button>
-<button onclick="changeMeaning(1)">
-Next →
+<button
+    type="button"
+    onclick="changeMeaning(1)">
+    Next →
 </button>
 </div>
 
-Back to the cake
-
-</button>
+🎂 Back to the cake
 </section>
 <!-- =========================
      AROUND THE WORLD
 ========================= -->
-<section
-id="world"
-class="section">
+<section id="world" class="section">
 <h2 class="sectionTitle">
-🌎 Birthday Traditions That Are Actually Weird
+    🌎 Birthday Traditions That Are Actually Weird
 </h2>
 <div class="worldFact">
 <h3>
-🇧🇷 Brazil — Cake, but make it personal
+    🇧🇷 Brazil — Choose your favourite
 </h3>
 <p>
-In a Brazilian birthday tradition, the birthday
-person may give the first slice of cake to someone
-especially important to them. Which sounds sweet
-until you realise you're standing there having to
-publicly decide who your favourite person is.
+    In a Brazilian birthday tradition, the birthday
+    person may give the first slice of cake to someone
+    especially important to them.
+</p>
+<p>
+    Which sounds lovely until you're suddenly standing
+    there having to publicly decide who your favourite
+    person is.
 </p>
 </div>
 <div class="worldFact">
 <h3>
-🇲🇽 Mexico — Your face belongs in the cake
+    🇲🇽 Mexico — The cake fights back
 </h3>
 <p>
-In Mexico, there's a tradition called
-<strong>la mordida</strong> where the birthday person
-takes the first bite of cake and may get pushed
-face-first into it by everyone else.
-So yes, the cake is technically a dessert
-and a trap.
+    In Mexico, there's a tradition called
+    <strong>la mordida</strong>, where the birthday
+    person takes the first bite of cake and may then
+    be pushed face-first into it.
+</p>
+<p>
+    So the cake is both dessert and an ambush.
 </p>
 </div>
 <div class="worldFact">
 <h3>
-🇨🇦 Canada — Grease the nose
+    🇨🇦 Canada — Weaponised butter
 </h3>
 <p>
-In parts of Atlantic Canada, a birthday tradition
-involves sneaking butter onto the birthday person's
-nose. The idea is that the slippery nose makes it
-harder for bad luck to get hold of them.
-Which is apparently a perfectly normal thing to do.
+    In parts of Atlantic Canada, a birthday tradition
+    involves putting butter on the birthday person's
+    nose.
+</p>
+<p>
+    Apparently a slippery nose makes it harder for
+    bad luck to get hold of you.
+    This is somehow considered a reasonable solution.
 </p>
 </div>
 <div class="worldFact">
 <h3>
-🇭🇺 Hungary — Your ears are getting involved
+    🇭🇺 Hungary — PAY THE EAR TAX
 </h3>
 <p>
-A Hungarian birthday tradition involves pulling
-the birthday person's earlobes while wishing them
-a long life. The traditional sentiment basically
-wishes for their ears to eventually reach their
-ankles.
+    A Hungarian birthday tradition involves pulling
+    the birthday person's earlobes while wishing them
+    a long life.
+</p>
+<p>
+    The traditional sentiment even involves wishing
+    that their ears will eventually reach their ankles.
 </p>
 </div>
 <div class="worldFact">
 <h3>
-🇨🇳 China — Do not break the noodle
+    🇨🇳 China — One noodle. Do not break it.
 </h3>
 <p>
-Long noodles are eaten for birthdays because they
-symbolise longevity. The idea is to eat the noodle
-without cutting or breaking it.
-So apparently your lifespan can be represented
-by one extremely inconvenient noodle.
+    Long noodles are eaten for birthdays because they
+    symbolise longevity.
+</p>
+<p>
+    The idea is to eat the noodle without cutting or
+    breaking it.
+</p>
+<p>
+    So apparently your lifespan can be represented by
+    one extremely inconvenient noodle.
 </p>
 </div>
 <div class="worldFact">
 <h3>
-🇩🇪 Germany — Don't wish too early
+    🇩🇰 Denmark — Prepare for the flag apocalypse
 </h3>
 <p>
-In Germany, traditionally wishing someone a happy
-birthday before their actual birthday is considered
-bad luck.
-So if you're the kind of person who gets annoyed
-when people celebrate too early, Germany has your back.
+    Danish birthday celebrations are often decorated
+    with lots of Danish flags.
+</p>
+<p>
+    So if you walked into a Danish birthday party
+    without knowing what was happening, you might
+    reasonably assume you'd accidentally entered
+    a very enthusiastic national celebration.
+</p>
+</div>
+<div class="worldFact">
+<h3>
+    🇰🇷 South Korea — Seaweed soup birthday
+</h3>
+<p>
+    In South Korea, birthday celebrations traditionally
+    involve miyeok-guk, a seaweed soup.
+</p>
+<p>
+    It is associated with the care mothers receive
+    after giving birth, making it one of the few
+    birthday traditions where everyone is basically
+    reminded that Mum did most of the work.
 </p>
 </div>
 
-Back to the cake
-
-</button>
+🎂 Back to the cake
 </section>
 <!-- =========================
      ON THIS DAY
 ========================= -->
-<section
-id="day"
-class="section">
+<section id="day" class="section">
 <h2 class="sectionTitle">
-📅 September 7 — On This Day
+    📅 September 7 — On This Day
 </h2>
 <div class="dayFact">
 <h3>
-🇧🇷 Brazil became independent
+    🇧🇷 Brazil declared independence
 </h3>
 <p>
-On September 7, 1822, Pedro declared Brazil's
-independence from Portugal. September 7 is now
-Brazil's Independence Day.
+    On September 7, 1822, Pedro declared Brazil's
+    independence from Portugal.
+    September 7 is now Brazil's Independence Day.
 </p>
 </div>
 <div class="dayFact">
 <h3>
-🗽 “Uncle Sam” appeared in print
+    🗽 Uncle Sam appeared in print
 </h3>
 <p>
-On September 7, 1813, the nickname “Uncle Sam”
-was used in print in the Troy Post in connection
-with the War of 1812.
+    On September 7, 1813, the nickname
+    "Uncle Sam" appeared in print in the
+    Troy Post in connection with the War of 1812.
 </p>
 </div>
 <div class="dayFact">
 <h3>
-✈️ A very early aircraft milestone
+    ✈️ Santos-Dumont takes flight
 </h3>
 <p>
-On September 7, 1906, Alberto Santos-Dumont
-successfully flew his 14-bis aircraft at
-Bagatelle in France.
+    On September 7, 1906, Brazilian aviation pioneer
+    Alberto Santos-Dumont successfully flew his
+    14-bis aircraft at Bagatelle in France.
 </p>
 </div>
 <div class="dayFact">
 <h3>
-🎨 The Mona Lisa briefly caused a ridiculous mystery
+    🎨 The Mona Lisa mystery gets messy
 </h3>
 <p>
-In 1911, Guillaume Apollinaire was arrested on
-suspicion of involvement in the theft of the
-Mona Lisa. He hadn't actually stolen it.
-The painting had disappeared from the Louvre
-just weeks earlier.
+    In 1911, Guillaume Apollinaire was arrested on
+    suspicion of involvement in the theft of the
+    Mona Lisa.
+</p>
+<p>
+    He hadn't actually stolen it.
+    The painting had disappeared from the Louvre
+    only weeks earlier.
 </p>
 </div>
 <div class="dayFact">
 <h3>
-🌙 And then there's you
+    🌙 And then there's you
 </h3>
 <p>
-September 7, 2003 was a Sunday.
-The Moon was waxing gibbous, and you were
-apparently busy entering the world.
+    September 7, 2003 was a Sunday.
+</p>
+<p>
+    The Moon was waxing gibbous, the world continued
+    doing its thing, and you were apparently busy
+    arriving.
 </p>
 </div>
 
-Back to the cake
-
-</button>
+🎂 Back to the cake
 </section>
-
+<!-- =========================
+     RETURN TO FOREST
+========================= -->
 🌲 Return to the Forest
-
 </a>
 </div>
 <script>
@@ -1062,15 +1223,18 @@ function openSection(id) {
     sections.forEach(function(section) {
         section.classList.remove("active");
     });
-    document
-        .getElementById(id)
-        .classList.add("active");
-    document
-        .getElementById(id)
-        .scrollIntoView({
+    const selected =
+        document.getElementById(id);
+    if (!selected) {
+        return;
+    }
+    selected.classList.add("active");
+    setTimeout(function() {
+        selected.scrollIntoView({
             behavior: "smooth",
             block: "start"
         });
+    }, 50);
 }
 function closeSections() {
     document
@@ -1088,58 +1252,44 @@ function closeSections() {
 ========================= */
 let celebrityIndex = 0;
 const celebrities =
-    document.querySelectorAll(
-        ".celebrityCard"
-    );
+    document.querySelectorAll(".celebrityCard");
+function showCelebrity(index) {
+    celebrities.forEach(function(card) {
+        card.classList.remove("active");
+    });
+    celebrities[index].classList.add("active");
+}
 function changeCelebrity(direction) {
-    celebrities[
-        celebrityIndex
-    ].classList.remove("active");
     celebrityIndex += direction;
-    if (
-        celebrityIndex >=
-        celebrities.length
-    ) {
+    if (celebrityIndex >= celebrities.length) {
         celebrityIndex = 0;
     }
-    if (
-        celebrityIndex < 0
-    ) {
-        celebrityIndex =
-            celebrities.length - 1;
+    if (celebrityIndex < 0) {
+        celebrityIndex = celebrities.length - 1;
     }
-    celebrities[
-        celebrityIndex
-    ].classList.add("active");
+    showCelebrity(celebrityIndex);
 }
 /* =========================
    MEANING SLIDES
 ========================= */
 let meaningIndex = 0;
 const meaningCards =
-    document.querySelectorAll(
-        ".meaningCard"
-    );
+    document.querySelectorAll(".meaningCard");
+function showMeaning(index) {
+    meaningCards.forEach(function(card) {
+        card.classList.remove("active");
+    });
+    meaningCards[index].classList.add("active");
+}
 function changeMeaning(direction) {
-    meaningCards[
-        meaningIndex
-    ].classList.remove("active");
     meaningIndex += direction;
-    if (
-        meaningIndex >=
-        meaningCards.length
-    ) {
+    if (meaningIndex >= meaningCards.length) {
         meaningIndex = 0;
     }
-    if (
-        meaningIndex < 0
-    ) {
-        meaningIndex =
-            meaningCards.length - 1;
+    if (meaningIndex < 0) {
+        meaningIndex = meaningCards.length - 1;
     }
-    meaningCards[
-        meaningIndex
-    ].classList.add("active");
+    showMeaning(meaningIndex);
 }
 </script>
 </body>
