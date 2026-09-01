@@ -590,6 +590,61 @@ h1 {
 
 
 /* -------------------------
+   CAT PAW CURSOR TRAIL
+------------------------- */
+
+.paw-print {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-15deg)
+        scale(.8);
+
+    animation:
+        pawFade 1s ease-out forwards;
+
+}
+
+@keyframes pawFade {
+
+    0% {
+
+        opacity: .9;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(-15deg)
+            scale(.8);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(15deg)
+            scale(1.15);
+
+    }
+
+}
+
+
+/* -------------------------
    MOBILE
 ------------------------- */
 
@@ -898,31 +953,72 @@ h1 {
     </section>
 
 </main>
-/* =========================
+
+
+<script>
+
+/* -------------------------
    CAT PAW CURSOR TRAIL
-========================= */
+------------------------- */
 
-.paw-print {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 22px;
-    transform: translate(-50%, -50%) rotate(-15deg);
-    opacity: 0;
-    animation: pawFade 1s ease-out forwards;
-}
+let lastPawTime = 0;
 
-@keyframes pawFade {
-    0% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) rotate(-15deg) scale(0.8);
+document.addEventListener("mousemove", function(event) {
+
+    const now = Date.now();
+
+    /* Prevent hundreds of paw prints being created every second */
+    if (now - lastPawTime < 90) {
+        return;
     }
 
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) rotate(15deg) scale(1.15);
+    lastPawTime = now;
+
+    const paw = document.createElement("div");
+
+    paw.className = "paw-print";
+
+    paw.textContent = "🐾";
+
+    paw.style.left = event.clientX + "px";
+    paw.style.top = event.clientY + "px";
+
+    /*
+       Alternate the paw angle so it looks
+       more like a little animal walking.
+    */
+    if (Math.random() > 0.5) {
+        paw.style.transform =
+            "translate(-50%, -50%) rotate(15deg) scale(.8)";
+    } else {
+        paw.style.transform =
+            "translate(-50%, -50%) rotate(-15deg) scale(.8)";
     }
-}
+
+    document.body.appendChild(paw);
+
+    /*
+       Remove each paw after its animation finishes
+       so the page doesn't slowly fill with elements.
+    */
+    setTimeout(function() {
+        paw.remove();
+    }, 1000);
+
+});
+
+
+/* -------------------------
+   TOUCH DEVICES
+------------------------- */
+
+/*
+   Cursor trails don't make sense on phones/tablets,
+   so nothing is created from touch events.
+*/
+
+</script>
+
 
 </body>
 
