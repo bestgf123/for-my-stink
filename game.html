@@ -2,257 +2,439 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Mr Tapus's Mission 🐈</title>
 
+
 <style>
+
 
 * {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
+
     font-family: Georgia, serif;
+
     text-align: center;
+
     background: #b9e5f5;
+
     color: #24442b;
+
 }
+
 
 h1 {
+
     margin: 12px 0 3px;
+
     color: #315c38;
+
     font-size: clamp(30px, 6vw, 48px);
+
 }
+
 
 .instructions {
+
     margin: 4px 15px 8px;
+
     color: #416047;
+
 }
+
 
 #hud {
+
     margin: 8px;
+
     font-weight: bold;
+
     color: #315c38;
+
 }
 
+
+/* GAME WINDOW */
+
 #game {
+
     position: relative;
+
     width: 95vw;
+
     max-width: 950px;
+
     height: 520px;
+
     margin: auto;
+
     overflow: hidden;
+
     border: 4px solid #6d8b4e;
+
     border-radius: 22px;
-    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.25);
+
     background: #8ed0ee;
+
 }
 
 
 /* SKY */
 
 .sky {
+
     position: absolute;
+
     inset: 0;
+
     background:
         linear-gradient(
-            #7bc7ed 0%,
-            #bce8f5 68%,
+            #72c4eb 0%,
+            #c8edf7 68%,
             #b8d98d 68%,
             #82ad61 100%
         );
+
 }
 
 
 /* SUN */
 
 .sun {
+
     position: absolute;
-    top: 22px;
+
+    top: 18px;
+
     right: 45px;
-    font-size: 65px;
+
+    font-size: 70px;
+
     z-index: 1;
+
 }
 
 
 /* CLOUDS */
 
 .cloud {
+
     position: absolute;
+
     font-size: 48px;
+
     opacity: .85;
+
 }
+
 
 .cloud1 {
+
     top: 55px;
+
     left: 100px;
+
 }
+
 
 .cloud2 {
+
     top: 105px;
+
     left: 520px;
+
 }
+
 
 .cloud3 {
+
     top: 35px;
+
     left: 750px;
-}
 
-
-/* BACKGROUND FLOWERS */
-
-.flowerBush {
-    position: absolute;
-    bottom: 115px;
-    font-size: 42px;
-    white-space: nowrap;
-    z-index: 2;
-}
-
-.fb1 {
-    left: 60px;
-}
-
-.fb2 {
-    left: 330px;
-}
-
-.fb3 {
-    left: 650px;
-}
-
-
-/* BACKGROUND TREES */
-
-.tree {
-    position: absolute;
-    bottom: 105px;
-    font-size: 75px;
-    z-index: 2;
-}
-
-.tree1 {
-    left: 5px;
-}
-
-.tree2 {
-    left: 190px;
-}
-
-.tree3 {
-    left: 470px;
-}
-
-.tree4 {
-    right: 5px;
 }
 
 
 /* WORLD */
 
 #world {
+
     position: absolute;
+
     left: 0;
+
     top: 0;
-    width: 4200px;
+
+    width: 5000px;
+
     height: 100%;
-    transition: left .05s linear;
+
+}
+
+
+/* FLOWER BUSHES */
+
+.flowerBush {
+
+    position: absolute;
+
+    bottom: 115px;
+
+    font-size: 45px;
+
+    white-space: nowrap;
+
+    z-index: 2;
+
+}
+
+
+.fb1 {
+    left: 70px;
+}
+
+.fb2 {
+    left: 500px;
+}
+
+.fb3 {
+    left: 1100px;
+}
+
+.fb4 {
+    left: 1750px;
+}
+
+.fb5 {
+    left: 2450px;
+}
+
+.fb6 {
+    left: 3200px;
+}
+
+.fb7 {
+    left: 3900px;
+}
+
+
+/* TREES */
+
+.tree {
+
+    position: absolute;
+
+    bottom: 105px;
+
+    font-size: 78px;
+
+    z-index: 2;
+
+}
+
+
+.tree1 {
+    left: 0;
+}
+
+.tree2 {
+    left: 350px;
+}
+
+.tree3 {
+    left: 850px;
+}
+
+.tree4 {
+    left: 1450px;
+}
+
+.tree5 {
+    left: 2100px;
+}
+
+.tree6 {
+    left: 2800px;
+}
+
+.tree7 {
+    left: 3500px;
+}
+
+.tree8 {
+    left: 4300px;
 }
 
 
 /* GROUND */
 
 .ground {
+
     position: absolute;
-    bottom: 0;
+
     left: 0;
-    width: 4200px;
+
+    bottom: 0;
+
+    width: 5000px;
+
     height: 105px;
+
     background:
         linear-gradient(
             #72a74d 0 12px,
             #4f873d 12px 100%
         );
+
     z-index: 3;
+
 }
 
 
 /* PLAYER */
 
 #player {
+
     position: absolute;
-    width: 72px;
-    height: 72px;
+
+    width: 100px;
+
+    height: 100px;
+
     z-index: 10;
+
 }
+
 
 #player img {
+
     width: 100%;
+
     height: 100%;
+
     object-fit: contain;
+
 }
+
+
+/* WALKING */
 
 .walking {
-    animation: bob .32s infinite alternate;
+
+    animation:
+        bob .32s infinite alternate;
+
 }
 
+
 @keyframes bob {
+
     from {
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
+
     }
 
     to {
-        transform: translateY(-4px);
+
+        transform:
+            translateY(-5px);
+
     }
+
 }
+
+
+/* SITTING */
 
 .sitting {
+
     animation: none;
+
 }
 
 
-/* GRASS PATCHES */
+/* GRASS */
 
 .grass {
+
     position: absolute;
+
     bottom: 105px;
-    width: 100px;
-    height: 48px;
+
+    width: 115px;
+
+    height: 55px;
+
+    font-size: 50px;
+
     z-index: 7;
-    font-size: 46px;
+
 }
 
 
 /* SOFAS */
 
 .sofa {
+
     position: absolute;
-    bottom: 100px;
-    font-size: 65px;
+
+    bottom: 98px;
+
+    font-size: 70px;
+
     z-index: 7;
+
 }
 
 
 /* BEES */
 
 .bee {
+
     position: absolute;
-    font-size: 34px;
+
+    font-size: 36px;
+
     z-index: 8;
-    animation: buzz 1s infinite alternate ease-in-out;
+
+    animation:
+        buzz 1s infinite alternate ease-in-out;
+
 }
+
 
 @keyframes buzz {
 
     from {
-        transform: translateY(0) rotate(-4deg);
+
+        transform:
+            translateY(0)
+            rotate(-4deg);
+
     }
 
     to {
-        transform: translateY(-13px) rotate(4deg);
+
+        transform:
+            translateY(-14px)
+            rotate(4deg);
+
     }
 
 }
@@ -261,123 +443,201 @@ h1 {
 /* PRINCESS */
 
 #princess {
+
     position: absolute;
-    left: 3970px;
+
+    left: 4770px;
+
     bottom: 105px;
-    width: 110px;
-    height: 110px;
+
+    width: 150px;
+
+    height: 150px;
+
     z-index: 9;
+
 }
 
+
 #princess img {
+
     width: 100%;
+
     height: 100%;
+
     object-fit: contain;
+
 }
 
 
 /* POPUP */
 
 #popup {
+
     display: none;
+
     position: absolute;
+
     inset: 0;
+
     z-index: 50;
-    background: rgba(255,255,255,.92);
+
+    background:
+        rgba(255,255,255,.94);
+
     align-items: center;
+
     justify-content: center;
+
     flex-direction: column;
+
     padding: 30px;
+
 }
+
 
 #popup h2 {
+
     color: #315c38;
+
     font-size: 32px;
+
     max-width: 650px;
+
 }
+
 
 #popup p {
+
     max-width: 600px;
+
     line-height: 1.6;
+
+    font-size: 18px;
+
 }
+
+
+.popupButtons {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+}
+
 
 #popup button {
+
     border: none;
+
     border-radius: 25px;
-    padding: 13px 28px;
+
+    padding: 13px 25px;
+
     background: #d5b65a;
+
     color: #243b27;
+
     font-family: Georgia, serif;
+
     font-weight: bold;
+
     cursor: pointer;
+
     font-size: 16px;
+
 }
 
 
-/* END SCREEN */
+/* ENDING */
 
 #ending {
+
     display: none;
+
     position: absolute;
+
     inset: 0;
+
     z-index: 60;
-    background: rgba(255,255,255,.95);
+
+    background:
+        rgba(255,255,255,.96);
+
     align-items: center;
+
     justify-content: center;
+
     flex-direction: column;
+
     padding: 25px;
+
 }
+
 
 #ending h2 {
+
     color: #315c38;
+
     font-size: 35px;
+
 }
+
 
 #ending p {
+
     font-size: 19px;
+
     line-height: 1.6;
+
 }
+
 
 #ending img {
-    width: 130px;
-    height: 130px;
+
+    width: 150px;
+
+    height: 150px;
+
     object-fit: contain;
+
 }
+
 
 #ending button {
+
     border: none;
+
     border-radius: 25px;
+
     padding: 13px 28px;
+
     background: #d5b65a;
+
     font-family: Georgia, serif;
+
     font-weight: bold;
+
     cursor: pointer;
+
 }
+
 
 .back {
+
     display: inline-block;
+
     margin: 12px;
+
     color: #315c38;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    #game {
-        height: 470px;
-    }
-
-    .tree {
-        font-size: 58px;
-    }
-
-    .flowerBush {
-        font-size: 32px;
-    }
 
 }
+
 
 </style>
 
@@ -393,307 +653,429 @@ h1 {
 
 
 <p class="instructions">
-Use <b>← →</b> to move &nbsp; | &nbsp;
-<b>SPACE</b> to jump
+
+Use <b>← →</b> to move
+&nbsp; | &nbsp;
+<b>↑</b> to jump
+
 </p>
 
 
 <div id="hud">
-🐝 Bumble Bees: <span id="beeCount">0</span>
+
+🐝 Bumble Bees:
+<span id="beeCount">0</span>
+
+&nbsp;&nbsp;
+
+💚 Mission continues!
+
 </div>
 
 
 <div id="game">
 
 
-    <div class="sky"></div>
+<div class="sky"></div>
 
 
-    <div class="sun">
-        ☀️
-    </div>
+<div class="sun">
+☀️
+</div>
 
 
-    <div class="cloud cloud1">
-        ☁️
-    </div>
+<div class="cloud cloud1">
+☁️
+</div>
 
-    <div class="cloud cloud2">
-        ☁️
-    </div>
+<div class="cloud cloud2">
+☁️
+</div>
 
-    <div class="cloud cloud3">
-        ☁️
-    </div>
+<div class="cloud cloud3">
+☁️
+</div>
 
 
-    <div id="world">
+<div id="world">
 
 
-        <!-- BACKGROUND -->
+<!-- FLOWERS -->
 
-        <div class="flowerBush fb1">
-            🌼🌸🌷🌼
-        </div>
 
-        <div class="flowerBush fb2">
-            🌸🌼🌷🌸
-        </div>
+<div class="flowerBush fb1">
+🌼🌸🌷🌼
+</div>
 
-        <div class="flowerBush fb3">
-            🌷🌼🌸🌼
-        </div>
+<div class="flowerBush fb2">
+🌸🌼🌷🌸
+</div>
 
+<div class="flowerBush fb3">
+🌷🌼🌸🌼
+</div>
 
-        <div class="tree tree1">
-            🌳
-        </div>
+<div class="flowerBush fb4">
+🌼🌷🌸🌼
+</div>
 
-        <div class="tree tree2">
-            🌲
-        </div>
+<div class="flowerBush fb5">
+🌸🌼🌷🌸
+</div>
 
-        <div class="tree tree3">
-            🌳
-        </div>
+<div class="flowerBush fb6">
+🌷🌼🌸🌼
+</div>
 
-        <div class="tree tree4">
-            🌲
-        </div>
+<div class="flowerBush fb7">
+🌼🌸🌷🌼
+</div>
 
 
-        <!-- PLAYER -->
+<!-- TREES -->
 
-        <div id="player" class="walking">
 
-            <img
-                src="tapus-walking.png"
-                alt="Mr Tapus"
-            >
+<div class="tree tree1">
+🌳
+</div>
 
-        </div>
+<div class="tree tree2">
+🌲
+</div>
 
+<div class="tree tree3">
+🌳
+</div>
 
-        <!-- GRASS -->
+<div class="tree tree4">
+🌲
+</div>
 
-        <div
-            class="grass"
-            style="left:650px;"
-            data-x="650">
+<div class="tree tree5">
+🌳
+</div>
 
-            🌿🌿🌿
+<div class="tree tree6">
+🌲
+</div>
 
-        </div>
+<div class="tree tree7">
+🌳
+</div>
 
+<div class="tree tree8">
+🌲
+</div>
 
-        <div
-            class="grass"
-            style="left:1250px;"
-            data-x="1250">
 
-            🌿🌿🌿
+<!-- MR TAPUS -->
 
-        </div>
 
+<div id="player"
+class="walking">
 
-        <div
-            class="grass"
-            style="left:1900px;"
-            data-x="1900">
+<img
+src="tapus-walking.png"
+alt="Mr Tapus"
+>
 
-            🌿🌿🌿
+</div>
 
-        </div>
 
+<!-- GRASS PATCHES -->
 
-        <div
-            class="grass"
-            style="left:2650px;"
-            data-x="2650">
 
-            🌿🌿🌿
+<div
+class="grass"
+style="left:650px"
+data-x="650">
 
-        </div>
+🌿🌿🌿
 
+</div>
 
-        <div
-            class="grass"
-            style="left:3350px;"
-            data-x="3350">
 
-            🌿🌿🌿
+<div
+class="grass"
+style="left:1400px"
+data-x="1400">
 
-        </div>
+🌿🌿🌿
 
+</div>
 
-        <!-- SOFAS -->
 
-        <div
-            class="sofa"
-            style="left:980px;"
-            data-x="980">
+<div
+class="grass"
+style="left:2050px"
+data-x="2050">
 
-            🛋️
+🌿🌿🌿
 
-        </div>
+</div>
 
 
-        <div
-            class="sofa"
-            style="left:2350px;"
-            data-x="2350">
+<div
+class="grass"
+style="left:2800px"
+data-x="2800">
 
-            🛋️
+🌿🌿🌿
 
-        </div>
+</div>
 
 
-        <div
-            class="sofa"
-            style="left:3150px;"
-            data-x="3150">
+<div
+class="grass"
+style="left:3550px"
+data-x="3550">
 
-            🛋️
+🌿🌿🌿
 
-        </div>
+</div>
 
 
-        <!-- BEES -->
+<div
+class="grass"
+style="left:4200px"
+data-x="4200">
 
-        <div
-            class="bee"
-            style="left:400px; bottom:230px;"
-            data-x="400">
+🌿🌿🌿
 
-            🐝
+</div>
 
-        </div>
 
+<!-- SOFAS -->
 
-        <div
-            class="bee"
-            style="left:780px; bottom:260px;"
-            data-x="780">
 
-            🐝
+<div
+class="sofa"
+style="left:1050px"
+data-x="1050">
 
-        </div>
+🛋️
 
+</div>
 
-        <div
-            class="bee"
-            style="left:1500px; bottom:210px;"
-            data-x="1500">
 
-            🐝
+<div
+class="sofa"
+style="left:2450px"
+data-x="2450">
 
-        </div>
+🛋️
 
+</div>
 
-        <div
-            class="bee"
-            style="left:2150px; bottom:275px;"
-            data-x="2150">
 
-            🐝
+<div
+class="sofa"
+style="left:3250px"
+data-x="3250">
 
-        </div>
+🛋️
 
+</div>
 
-        <div
-            class="bee"
-            style="left:2850px; bottom:220px;"
-            data-x="2850">
 
-            🐝
+<div
+class="sofa"
+style="left:4450px"
+data-x="4450">
 
-        </div>
+🛋️
 
+</div>
 
-        <div
-            class="bee"
-            style="left:3650px; bottom:270px;"
-            data-x="3650">
 
-            🐝
+<!-- BEES -->
 
-        </div>
 
+<div
+class="bee"
+style="left:350px; bottom:230px"
+data-x="350">
 
-        <!-- PRINCESS -->
+🐝
 
-        <div id="princess">
+</div>
 
-            <img
-                src="princess-sitting.png"
-                alt="The Princess"
-            >
 
-        </div>
+<div
+class="bee"
+style="left:850px; bottom:250px"
+data-x="850">
 
+🐝
 
-        <div class="ground"></div>
+</div>
 
 
-    </div>
+<div
+class="bee"
+style="left:1550px; bottom:230px"
+data-x="1550">
 
+🐝
 
-    <!-- POPUP -->
+</div>
 
-    <div id="popup">
 
-        <h2 id="popupTitle"></h2>
+<div
+class="bee"
+style="left:2200px; bottom:270px"
+data-x="2200">
 
-        <p id="popupText"></p>
+🐝
 
-        <button onclick="closePopup()">
-            Continue Mission
-        </button>
+</div>
 
-    </div>
 
+<div
+class="bee"
+style="left:2900px; bottom:240px"
+data-x="2900">
 
-    <!-- ENDING -->
+🐝
 
-    <div id="ending">
+</div>
 
-        <img
-            id="endingImage"
-            src="princess-screaming.png"
-            alt="The Princess"
-        >
 
-        <h2>
-            👑 MR TAPUS FOUND THE PRINCESS!
-        </h2>
+<div
+class="bee"
+style="left:3700px; bottom:260px"
+data-x="3700">
 
-        <p>
-            Mission accomplished.
+🐝
 
-            <br><br>
+</div>
 
-            The Princess has noticed him.
 
-            <br><br>
+<div
+class="bee"
+style="left:4600px; bottom:250px"
+data-x="4600">
 
-            😱🐈💨
-        </p>
+🐝
 
-        <button onclick="location.reload()">
-            Play Again
-        </button>
+</div>
 
-    </div>
+
+<!-- PRINCESS -->
+
+
+<div id="princess">
+
+<img
+src="princess-sitting.png"
+alt="The Princess"
+>
+
+</div>
+
+
+<div class="ground"></div>
+
+
+</div>
+
+
+<!-- POPUP -->
+
+
+<div id="popup">
+
+
+<h2 id="popupTitle"></h2>
+
+
+<p id="popupText"></p>
+
+
+<div class="popupButtons">
+
+
+<button
+id="mainButton"
+onclick="popupAction()">
+
+Continue
+
+</button>
+
+
+<button
+id="beeButton"
+onclick="useBee()"
+style="display:none">
+
+🐝 Use a Bumble Bee
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ENDING -->
+
+
+<div id="ending">
+
+
+<img
+src="princess-screaming.png"
+alt="The Princess"
+>
+
+
+<h2>
+👑 MR TAPUS FOUND THE PRINCESS!
+</h2>
+
+
+<p>
+
+Mission accomplished.
+
+<br><br>
+
+The Princess has noticed him.
+
+<br><br>
+
+😱🐈💨
+
+<br><br>
+
+Bumble bees collected:
+<span id="finalBees">0</span>
+
+</p>
+
+
+<button
+onclick="location.reload()">
+
+Play Again
+
+</button>
+
+
+</div>
 
 
 </div>
 
 
 <a
-    class="back"
-    href="forest.html">
+class="back"
+href="forest.html">
 
-    🌲 Return to the Forest
+🌲 Return to the Forest
 
 </a>
 
@@ -719,14 +1101,23 @@ document.getElementById("popupTitle");
 const popupText =
 document.getElementById("popupText");
 
+const mainButton =
+document.getElementById("mainButton");
+
+const beeButton =
+document.getElementById("beeButton");
+
 const ending =
 document.getElementById("ending");
 
 const beeCount =
 document.getElementById("beeCount");
 
+const finalBees =
+document.getElementById("finalBees");
 
-let playerX = 80;
+
+let playerX = 100;
 
 let playerY = 0;
 
@@ -739,6 +1130,8 @@ let cameraX = 0;
 let bees = 0;
 
 let gamePaused = false;
+
+let popupType = "";
 
 let keys = {};
 
@@ -753,315 +1146,591 @@ const beeElements =
 document.querySelectorAll(".bee");
 
 
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        keys[event.key] = true;
-
-        if (
-            event.code === "Space" &&
-            !jumping &&
-            !gamePaused
-        ) {
-
-            velocityY = 14;
-
-            jumping = true;
-
-        }
-
-    }
-);
+/* CONTROLS */
 
 
 document.addEventListener(
-    "keyup",
-    function(event) {
-
-        keys[event.key] = false;
-
-    }
-);
+"keydown",
+function(event) {
 
 
-function showPopup(title, text) {
+keys[event.key] = true;
 
-    gamePaused = true;
 
-    popupTitle.innerText = title;
+if (
 
-    popupText.innerText = text;
+event.key === "ArrowUp" &&
 
-    popup.style.display = "flex";
+!jumping &&
+
+!gamePaused
+
+) {
+
+
+velocityY = 15;
+
+jumping = true;
+
 
 }
+
+
+});
+
+
+document.addEventListener(
+"keyup",
+function(event) {
+
+keys[event.key] = false;
+
+});
+
+
+/* POPUP */
+
+
+function showPopup(
+title,
+text,
+type
+) {
+
+
+gamePaused = true;
+
+popupType = type;
+
+
+popupTitle.innerText =
+title;
+
+popupText.innerText =
+text;
+
+
+popup.style.display =
+"flex";
+
+
+if (type === "grass") {
+
+
+mainButton.innerText =
+"Okay, I'll jump!";
+
+beeButton.style.display =
+"none";
+
+
+}
+
+
+if (type === "sofa") {
+
+
+mainButton.innerText =
+"Give up 😭";
+
+beeButton.style.display =
+bees > 0
+? "inline-block"
+: "none";
+
+
+}
+
+
+}
+
+
+/* POPUP BUTTON */
+
+
+function popupAction() {
+
+
+if (popupType === "grass") {
+
+
+closePopup();
+
+
+}
+
+
+else if (popupType === "sofa") {
+
+
+if (bees <= 0) {
+
+
+location.reload();
+
+
+}
+
+
+}
+
+
+}
+
+
+/* CLOSE */
 
 
 function closePopup() {
 
-    popup.style.display = "none";
 
-    gamePaused = false;
+popup.style.display =
+"none";
+
+
+gamePaused = false;
+
+popupType = "";
+
 
 }
 
 
+/* USE BEE */
+
+
+function useBee() {
+
+
+if (bees <= 0) {
+
+return;
+
+}
+
+
+bees--;
+
+beeCount.innerText =
+bees;
+
+
+popup.style.display =
+"none";
+
+
+gamePaused = false;
+
+
+player.classList.remove(
+"sitting"
+);
+
+player.classList.add(
+"walking"
+);
+
+
+player.innerHTML = `
+
+<img
+src="tapus-walking.png"
+alt="Mr Tapus"
+>
+
+`;
+
+
+}
+
+
+/* DISTANCE */
+
+
 function distanceFrom(element) {
 
-    const obstacleX =
-        parseInt(element.dataset.x);
 
-    return Math.abs(
-        playerX - obstacleX
-    );
+const obstacleX =
+parseInt(
+element.dataset.x
+);
+
+
+return Math.abs(
+playerX - obstacleX
+);
+
 
 }
 
 
 /* GRASS */
 
+
 function checkGrass() {
 
-    grass.forEach(function(item) {
 
-        if (
-            distanceFrom(item) < 65 &&
-            playerY < 35
-        ) {
+grass.forEach(
+function(item) {
 
-            if (
-                playerX <
-                parseInt(item.dataset.x)
-            ) {
 
-                playerX =
-                    parseInt(item.dataset.x) - 70;
+if (
 
-                showPopup(
-                    "🌿 Oh no!",
-                    "Mr Tapus has encountered a patch of grass! He must jump over it if he wants to continue his mission."
-                );
+distanceFrom(item) < 70 &&
 
-            }
+playerY < 35
 
-        }
+) {
 
-    });
+
+playerX =
+parseInt(
+item.dataset.x
+) - 75;
+
+
+showPopup(
+
+"🌿 Oh no!",
+
+"Mr Tapus has encountered a patch of grass! He can't go any further until he jumps over it.",
+
+"grass"
+
+);
+
 
 }
 
 
-/* SOFAS */
+});
+
+
+}
+
+
+/* SOFA */
+
 
 function checkSofas() {
 
-    sofas.forEach(function(item) {
 
-        if (
-            distanceFrom(item) < 65 &&
-            playerY < 40
-        ) {
+sofas.forEach(
+function(item) {
 
-            playerX =
-                parseInt(item.dataset.x) - 70;
 
-            gamePaused = true;
+if (
 
-            player.classList.remove("walking");
+distanceFrom(item) < 75 &&
 
-            player.classList.add("sitting");
+playerY < 40
 
-            player.innerHTML = `
-                <img
-                    src="tapus-sitting.png"
-                    alt="Mr Tapus sitting"
-                >
-            `;
+) {
 
-            popupTitle.innerText =
-                "🛋️ Mission Failed!";
 
-            popupText.innerText =
-                "Mr Tapus has found a cozy lil nook and got distracted, he failed his mission.";
+playerX =
+parseInt(
+item.dataset.x
+) - 75;
 
-            popup.style.display =
-                "flex";
 
-            popup.querySelector("button").innerText =
-                "Try Again";
+gamePaused = true;
 
-            popup.querySelector("button").onclick =
-                function() {
 
-                    location.reload();
+player.classList.remove(
+"walking"
+);
 
-                };
+player.classList.add(
+"sitting"
+);
 
-        }
 
-    });
+player.innerHTML = `
+
+<img
+src="tapus-sitting.png"
+alt="Mr Tapus sitting"
+>
+
+`;
+
+
+popupTitle.innerText =
+"🛋️ Cozy Nook Alert!";
+
+
+popupText.innerText =
+
+"Mr Tapus has found a cozy lil nook and got distracted. He failed his mission.";
+
+
+popup.style.display =
+"flex";
+
+
+popupType =
+"sofa";
+
+
+mainButton.innerText =
+"Give up 😭";
+
+
+if (bees > 0) {
+
+
+beeButton.style.display =
+"inline-block";
+
+
+}
+
+
+}
+
+
+});
+
 
 }
 
 
 /* BEES */
 
+
 function checkBees() {
 
-    beeElements.forEach(function(bee) {
 
-        if (
-            bee.style.display !== "none" &&
-            distanceFrom(bee) < 60 &&
-            Math.abs(
-                playerY -
-                (parseInt(bee.style.bottom) - 105)
-            ) < 80
-        ) {
+beeElements.forEach(
+function(bee) {
 
-            bee.style.display =
-                "none";
 
-            bees++;
+if (
 
-            beeCount.innerText =
-                bees;
+bee.style.display !== "none" &&
 
-        }
+distanceFrom(bee) < 65 &&
 
-    });
+Math.abs(
+
+playerY -
+
+(
+parseInt(
+bee.style.bottom
+) - 105
+)
+
+) < 90
+
+) {
+
+
+bee.style.display =
+"none";
+
+
+bees++;
+
+
+beeCount.innerText =
+bees;
+
+
+}
+
+
+});
+
 
 }
 
 
 /* CAMERA */
 
+
 function updateCamera() {
 
-    const desiredCamera =
-        playerX - game.clientWidth * .35;
 
-    cameraX =
-        Math.max(
-            0,
-            Math.min(
-                desiredCamera,
-                4200 - game.clientWidth
-            )
-        );
+const desiredCamera =
 
-    world.style.left =
-        -cameraX + "px";
+playerX -
+game.clientWidth * .35;
+
+
+cameraX =
+
+Math.max(
+
+0,
+
+Math.min(
+
+desiredCamera,
+
+5000 -
+game.clientWidth
+
+)
+
+);
+
+
+world.style.left =
+
+-cameraX + "px";
+
 
 }
 
 
-/* END */
+/* PRINCESS */
+
 
 function checkPrincess() {
 
-    if (playerX > 3890) {
 
-        gamePaused = true;
+if (playerX > 4680) {
 
-        ending.style.display =
-            "flex";
 
-    }
+gamePaused = true;
+
+
+finalBees.innerText =
+bees;
+
+
+ending.style.display =
+"flex";
+
+
+}
+
 
 }
 
 
 /* GAME LOOP */
 
+
 function gameLoop() {
 
-    if (!gamePaused) {
+
+if (!gamePaused) {
 
 
-        /* MOVEMENT */
-
-        if (keys["ArrowRight"]) {
-
-            playerX += 5;
-
-        }
+/* MOVEMENT */
 
 
-        if (keys["ArrowLeft"]) {
-
-            playerX -= 5;
-
-        }
+if (keys["ArrowRight"]) {
 
 
-        /* BOUNDARIES */
-
-        if (playerX < 0) {
-
-            playerX = 0;
-
-        }
+playerX += 4;
 
 
-        if (playerX > 4050) {
-
-            playerX = 4050;
-
-        }
+}
 
 
-        /* GRAVITY */
-
-        velocityY -= .7;
-
-        playerY += velocityY;
+if (keys["ArrowLeft"]) {
 
 
-        /* GROUND */
-
-        if (playerY <= 0) {
-
-            playerY = 0;
-
-            velocityY = 0;
-
-            jumping = false;
-
-        }
+playerX -= 4;
 
 
-        /* PLAYER POSITION */
-
-        player.style.left =
-            playerX + "px";
-
-        player.style.bottom =
-            (105 + playerY) + "px";
+}
 
 
-        checkGrass();
-
-        checkSofas();
-
-        checkBees();
-
-        checkPrincess();
-
-        updateCamera();
-
-    }
+/* LIMITS */
 
 
-    requestAnimationFrame(
-        gameLoop
-    );
+if (playerX < 0) {
+
+
+playerX = 0;
+
+
+}
+
+
+if (playerX > 4850) {
+
+
+playerX = 4850;
+
+
+}
+
+
+/* GRAVITY */
+
+
+velocityY -= .7;
+
+
+playerY += velocityY;
+
+
+/* GROUND */
+
+
+if (playerY <= 0) {
+
+
+playerY = 0;
+
+
+velocityY = 0;
+
+
+jumping = false;
+
+
+}
+
+
+/* PLAYER */
+
+
+player.style.left =
+playerX + "px";
+
+
+player.style.bottom =
+(105 + playerY) + "px";
+
+
+/* CHECK THINGS */
+
+
+checkGrass();
+
+checkSofas();
+
+checkBees();
+
+checkPrincess();
+
+
+/* CAMERA */
+
+
+updateCamera();
+
+
+}
+
+
+requestAnimationFrame(
+gameLoop
+);
+
 
 }
 
 
 gameLoop();
+
 
 </script>
 
