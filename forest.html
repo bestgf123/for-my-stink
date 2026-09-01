@@ -1,89 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The Birthday Forest 🌿</title>
+
 <style>
+
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     min-height: 100vh;
     font-family: Georgia, serif;
     color: #f8f0d8;
+
     background:
         radial-gradient(circle at 50% 5%, #49684b 0%, #25472f 35%, #10291b 100%);
+
     overflow-x: hidden;
     transition: background 1s ease;
 }
+
 body.dayMode {
     background:
         radial-gradient(circle at 50% 5%, #a8d98d 0%, #4f8b54 40%, #24472d 100%);
 }
+
+
 /* -------------------------
    SKY
 ------------------------- */
+
 .sky {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
 }
+
 .star {
     position: absolute;
     color: #f6df91;
     animation: twinkle 3s infinite ease-in-out;
 }
+
 .star:nth-child(1) {
     top: 8%;
     left: 12%;
     font-size: 18px;
 }
+
 .star:nth-child(2) {
     top: 13%;
     right: 15%;
     font-size: 25px;
     animation-delay: 1s;
 }
+
 .star:nth-child(3) {
     top: 30%;
     left: 7%;
     animation-delay: 2s;
 }
+
 .star:nth-child(4) {
     top: 45%;
     right: 8%;
     animation-delay: .5s;
 }
+
 .star:nth-child(5) {
     top: 70%;
     left: 10%;
     font-size: 22px;
     animation-delay: 1.5s;
 }
+
 .star:nth-child(6) {
     top: 82%;
     right: 12%;
     animation-delay: 2s;
 }
+
 body.dayMode .star {
     opacity: 0;
 }
+
 @keyframes twinkle {
+
     0%,100% {
         opacity: .25;
         transform: scale(.8);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.25);
     }
+
 }
+
+
 /* -------------------------
    MAIN
 ------------------------- */
+
 .forest {
     position: relative;
     z-index: 1;
@@ -92,29 +118,38 @@ body.dayMode .star {
     padding: 45px 20px 120px;
     text-align: center;
 }
+
+
 /* -------------------------
    HEADER
 ------------------------- */
+
 .moon {
     font-size: 65px;
     animation: float 4s ease-in-out infinite;
     cursor: pointer;
     user-select: none;
 }
+
 @keyframes float {
+
     0%,100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-8px);
     }
+
 }
+
 h1 {
     margin: 5px 0;
     font-size: clamp(45px, 8vw, 75px);
     color: #f5e9c5;
     text-shadow: 0 5px 20px rgba(0,0,0,.4);
 }
+
 .intro {
     max-width: 650px;
     margin: 15px auto 25px;
@@ -122,44 +157,69 @@ h1 {
     color: #ded7bd;
     font-style: italic;
 }
+
+
 /* -------------------------
    DAY/NIGHT BUTTON
 ------------------------- */
+
 .modeButton {
     border: none;
     border-radius: 30px;
     padding: 11px 20px;
     margin-bottom: 18px;
+
     background: rgba(245,233,197,.15);
     border: 1px solid rgba(245,233,197,.4);
+
     color: #f8f0d8;
+
     font-family: Georgia, serif;
     font-weight: bold;
+
     cursor: pointer;
+
     transition: .3s;
 }
+
 .modeButton:hover {
     transform: translateY(-3px);
     background: rgba(245,233,197,.25);
 }
+
+
 /* -------------------------
    DISCOVERY COUNTER
 ------------------------- */
+
 .discoveryCounter {
+
     display: inline-block;
+
     margin: 5px auto 25px;
+
     padding: 12px 22px;
+
     border-radius: 30px;
+
     background: rgba(20,35,24,.55);
+
     border: 1px solid rgba(246,223,145,.5);
+
     color: #f6df91;
+
     font-size: 15px;
+
     box-shadow:
         0 8px 20px rgba(0,0,0,.2);
+
 }
+
+
 /* -------------------------
    MAP
 ------------------------- */
+
 .map {
     position: relative;
     width: 100%;
@@ -167,7 +227,9 @@ h1 {
     height: 1450px;
     margin: auto;
     overflow: hidden;
+
     border-radius: 35px;
+
     background:
         radial-gradient(
             ellipse at center,
@@ -175,12 +237,16 @@ h1 {
             rgba(21,55,32,.15) 60%,
             rgba(7,26,16,.5)
         );
+
     border: 2px solid rgba(198,168,91,.55);
+
     box-shadow:
         inset 0 0 80px rgba(0,0,0,.25),
         0 25px 60px rgba(0,0,0,.35);
+
     transition: 1s;
 }
+
 body.dayMode .map {
     background:
         radial-gradient(
@@ -190,9 +256,12 @@ body.dayMode .map {
             rgba(24,65,35,.5)
         );
 }
+
+
 /* -------------------------
    ACTUAL TRAIL
 ------------------------- */
+
 .trail {
     position: absolute;
     width: 100%;
@@ -202,93 +271,142 @@ body.dayMode .map {
     z-index: 1;
     pointer-events: none;
 }
+
 .trail path {
     fill: none;
     stroke: #8c7047;
     stroke-width: 65;
     stroke-linecap: round;
     stroke-linejoin: round;
+
     filter:
         drop-shadow(0 7px 5px rgba(0,0,0,.25));
 }
+
 .trail .inner {
     stroke: #b69a68;
     stroke-width: 48;
     opacity: .9;
 }
+
+
 /* -------------------------
    DESTINATIONS
 ------------------------- */
+
 .destination {
+
     position: absolute;
+
     z-index: 5;
+
     width: 190px;
+
     min-height: 115px;
+
     padding: 15px;
+
     text-decoration: none;
+
     color: #f6efd8;
+
     background: #6f4c2d;
+
     border: 3px solid #3e2919;
+
     border-radius: 12px;
+
     box-shadow:
         0 10px 18px rgba(0,0,0,.4);
+
     transform: rotate(-2deg);
+
     transition: .3s ease;
 }
+
 .destination::before {
+
     content: "";
+
     position: absolute;
+
     width: 8px;
+
     height: 55px;
+
     background: #4b301c;
+
     left: 50%;
+
     bottom: -53px;
+
     transform: translateX(-50%);
+
     z-index: -1;
 }
+
 .destination:hover {
+
     transform:
         scale(1.08)
         rotate(0deg)
         translateY(-5px);
+
     box-shadow:
         0 18px 30px rgba(0,0,0,.5);
 }
+
 .destination h2 {
+
     margin: 4px 0;
+
     font-size: 20px;
+
     color: #f5e4ad;
 }
+
 .destination p {
+
     margin: 4px 0;
+
     font-size: 13px;
+
     line-height: 1.4;
+
     color: #eadfc5;
 }
+
 .icon {
     font-size: 38px;
 }
+
+
 /* -------------------------
    SIGN POSITIONS
 ------------------------- */
+
 .westeros {
     top: 150px;
     left: 9%;
 }
+
 .facts {
     top: 455px;
     right: 7%;
     transform: rotate(2deg);
 }
+
 .game {
     top: 755px;
     left: 8%;
 }
+
 .cats {
     top: 1045px;
     right: 7%;
     transform: rotate(2deg);
 }
+
 .final {
     top: 1280px;
     left: 50%;
@@ -296,851 +414,1324 @@ body.dayMode .map {
     width: 215px;
     background: #4b3825;
 }
+
+
 /* -------------------------
    FOREST DECORATIONS
 ------------------------- */
+
 .tree {
+
     position: absolute;
+
     z-index: 3;
+
     font-size: 65px;
+
     filter:
         drop-shadow(0 7px 4px rgba(0,0,0,.35));
 }
+
 .t1 {
     left: 15px;
     top: 80px;
 }
+
 .t2 {
     right: 15px;
     top: 250px;
 }
+
 .t3 {
     left: 20px;
     top: 500px;
 }
+
 .t4 {
     right: 10px;
     top: 680px;
 }
+
 .t5 {
     left: 10px;
     top: 850px;
 }
+
 .t6 {
     right: 15px;
     top: 1000px;
 }
+
 .t7 {
     left: 20px;
     top: 1210px;
 }
+
 .t8 {
     right: 15px;
     top: 1330px;
 }
+
+
 /* -------------------------
    FLOWERS
 ------------------------- */
+
 .flower {
+
     position: absolute;
+
     z-index: 4;
+
     font-size: 28px;
+
     animation:
         flowerFloat 4s infinite ease-in-out;
 }
+
 .f1 {
     left: 18%;
     top: 320px;
 }
+
 .f2 {
     right: 17%;
     top: 610px;
     animation-delay: 1s;
 }
+
 .f3 {
     left: 20%;
     top: 920px;
     animation-delay: 2s;
 }
+
 .f4 {
     right: 18%;
     top: 1180px;
     animation-delay: .5s;
 }
+
 @keyframes flowerFloat {
+
     0%,100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-6px);
     }
+
 }
+
+
 /* -------------------------
    EXISTING PAW PRINTS
 ------------------------- */
+
 .paws {
+
     position: absolute;
+
     z-index: 4;
+
     font-size: 23px;
+
     letter-spacing: 12px;
+
     opacity: .8;
 }
+
 .paws1 {
     top: 360px;
     left: 44%;
     transform: rotate(25deg);
 }
+
 .paws2 {
     top: 680px;
     left: 45%;
     transform: rotate(-25deg);
 }
+
 .paws3 {
     top: 970px;
     left: 43%;
     transform: rotate(25deg);
 }
+
+
 /* -------------------------
    HIDDEN DISCOVERIES
 ------------------------- */
+
 .discovery {
+
     position: absolute;
+
     z-index: 9;
+
     cursor: pointer;
+
     user-select: none;
+
     transition: .3s ease;
+
     filter:
         drop-shadow(0 5px 4px rgba(0,0,0,.35));
 }
+
 .discovery:hover {
     transform: scale(1.3);
 }
+
 .discovery.found {
     animation: discoveryFound .5s ease;
 }
+
 @keyframes discoveryFound {
+
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.6) rotate(10deg);
     }
+
     100% {
         transform: scale(1);
     }
+
 }
+
 .discoveryCat1 {
     left: 6%;
     top: 390px;
 }
+
 .discoveryCat2 {
     right: 5%;
     top: 875px;
 }
+
 .discoveryCat3 {
     left: 7%;
     top: 1160px;
 }
+
 .discoveryFrog {
     right: 20%;
     top: 250px;
     font-size: 29px;
 }
+
 .discoveryMushroom {
     left: 26%;
     top: 575px;
     font-size: 30px;
 }
+
 .discoveryFox {
     right: 23%;
     top: 790px;
     font-size: 31px;
 }
+
 .discoveryOwl {
     left: 30%;
     top: 1100px;
     font-size: 31px;
 }
+
 .discoveryCake {
     left: 48%;
     top: 1220px;
     font-size: 32px;
 }
+
+
 /* -------------------------
-   FIREARLIES
+   FIREFLIES
 ------------------------- */
+
 .fireflies {
     position: absolute;
     inset: 0;
     z-index: 2;
     pointer-events: none;
 }
+
 .firefly {
+
     position: absolute;
+
     width: 6px;
     height: 6px;
+
     border-radius: 50%;
+
     background: #ffe98a;
+
     box-shadow:
         0 0 12px 4px rgba(255,229,120,.7);
+
     animation:
         fireflyFloat 4s ease-in-out infinite;
 }
+
 .firefly:nth-child(1) {
     left: 25%;
     top: 18%;
     animation-delay: 0s;
 }
+
 .firefly:nth-child(2) {
     left: 70%;
     top: 27%;
     animation-delay: 1s;
 }
+
 .firefly:nth-child(3) {
     left: 37%;
     top: 43%;
     animation-delay: 2s;
 }
+
 .firefly:nth-child(4) {
     left: 77%;
     top: 58%;
     animation-delay: .5s;
 }
+
 .firefly:nth-child(5) {
     left: 24%;
     top: 70%;
     animation-delay: 1.5s;
 }
+
 .firefly:nth-child(6) {
     left: 61%;
     top: 82%;
     animation-delay: 2.5s;
 }
+
 @keyframes fireflyFloat {
+
     0%,100% {
         opacity: .15;
         transform: translate(0,0);
     }
+
     50% {
         opacity: 1;
         transform: translate(12px,-18px);
     }
+
 }
+
 body.dayMode .fireflies {
     opacity: .25;
 }
+
+
 /* -------------------------
    WANDERING OWL
 ------------------------- */
+
 .wanderingOwl {
+
     position: fixed;
+
     right: -80px;
+
     top: 20%;
+
     z-index: 20;
+
     font-size: 42px;
-    pointer-events: none;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+
     opacity: 0;
+
 }
+
 .wanderingOwl.fly {
+
     animation:
         owlFly 8s linear forwards;
 }
+
+.wanderingOwl.found {
+    animation: owlFound .6s ease;
+}
+
 @keyframes owlFly {
+
     0% {
         right: -80px;
         opacity: 0;
         transform: translateY(0);
     }
+
     10% {
         opacity: 1;
     }
+
     50% {
         transform: translateY(-70px);
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         right: 110%;
         opacity: 0;
         transform: translateY(30px);
     }
+
 }
+
+@keyframes owlFound {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.6) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
 /* -------------------------
    WRONG WAY SIGN
 ------------------------- */
+
 .wrongWay {
+
     position: absolute;
+
     z-index: 7;
+
     top: 605px;
+
     left: 7%;
+
     width: 150px;
+
     padding: 12px;
+
     background: #765332;
+
     border: 3px solid #3d2718;
+
     border-radius: 8px;
+
     color: #f6e8bd;
+
     font-size: 13px;
+
     transform: rotate(-8deg);
+
     cursor: pointer;
+
     box-shadow:
         0 8px 15px rgba(0,0,0,.35);
+
     transition: .3s;
 }
+
 .wrongWay:hover {
+
     transform:
         rotate(-3deg)
         scale(1.08);
+
 }
+
+
 /* -------------------------
    POPUP
 ------------------------- */
+
 .discoveryPopup {
+
     position: fixed;
+
     left: 50%;
+
     bottom: 30px;
+
     transform:
         translateX(-50%)
         translateY(120px);
+
     z-index: 10000;
+
     max-width: 90%;
+
     padding: 15px 23px;
+
     border-radius: 25px;
+
     background: #f5e9c5;
+
     color: #352b25;
+
     border: 3px solid #c7a75c;
+
     box-shadow:
         0 12px 30px rgba(0,0,0,.4);
+
     opacity: 0;
+
     transition:
         opacity .3s ease,
         transform .3s ease;
+
     pointer-events: none;
+
     font-weight: bold;
 }
+
 .discoveryPopup.show {
+
     opacity: 1;
+
     transform:
         translateX(-50%)
         translateY(0);
 }
+
+
 /* -------------------------
    CAT PAW CURSOR TRAIL
 ------------------------- */
+
 .paw-print {
+
     position: fixed;
+
     pointer-events: none;
+
     z-index: 9999;
+
     font-size: 21px;
+
     line-height: 1;
+
     opacity: 0;
+
     animation:
         pawFade 900ms ease-out forwards;
+
 }
+
 @keyframes pawFade {
+
     0% {
+
         opacity: .9;
+
         transform:
             translate(-50%, -50%)
             rotate(-18deg)
             scale(.65);
+
     }
+
     100% {
+
         opacity: 0;
+
         transform:
             translate(-50%, -50%)
             rotate(18deg)
             scale(1.05);
+
     }
+
 }
+
+
 /* -------------------------
    MOBILE
 ------------------------- */
+
 @media (max-width: 700px) {
+
     .map {
         height: 1550px;
     }
+
     .destination {
         width: 160px;
     }
+
     .destination h2 {
         font-size: 17px;
     }
+
     .destination p {
         font-size: 11px;
     }
+
     .icon {
         font-size: 32px;
     }
+
     .westeros {
         left: 3%;
     }
+
     .facts {
         right: 3%;
     }
+
     .game {
         left: 3%;
     }
+
     .cats {
         right: 3%;
     }
+
     .wrongWay {
         left: 3%;
         width: 125px;
         font-size: 11px;
     }
+
     .discoveryFrog {
         right: 13%;
     }
+
     .discoveryMushroom {
         left: 18%;
     }
+
     .discoveryFox {
         right: 12%;
     }
+
 }
+
 </style>
 </head>
+
+
 <body>
+
+
 <!-- STARS -->
+
 <div class="sky">
-<div class="star">✦</div>
-<div class="star">✧</div>
-<div class="star">✦</div>
-<div class="star">✧</div>
-<div class="star">✦</div>
-<div class="star">✧</div>
+
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+
 </div>
+
+
 <div
     class="wanderingOwl"
-    id="wanderingOwl">
+    id="wanderingOwl"
+    title="A mysterious owl...">
     🦉
 </div>
+
+
 <div
     class="discoveryPopup"
     id="discoveryPopup">
 </div>
+
+
 <main class="forest">
-<div
-    class="moon"
-    id="moonButton"
-    title="Change the forest">
-    🌙
-</div>
-<h1>
-    The Birthday Forest
-</h1>
-<p class="intro">
-    Follow the trails, brave the unknown,
-    and see what you discover along the way...
-</p>
-<button
-    class="modeButton"
-    id="modeButton">
-    ☀️ Enter Daytime
-</button>
-<div
-    class="discoveryCounter"
-    id="discoveryCounter">
-    🌿 Secrets discovered: 0 / 8
-</div>
-<section class="map">
-    <!-- FIRELIES -->
-    <div class="fireflies">
-        <span class="firefly"></span>
-        <span class="firefly"></span>
-        <span class="firefly"></span>
-        <span class="firefly"></span>
-        <span class="firefly"></span>
-        <span class="firefly"></span>
-    </div>
-    <!-- TREES -->
-    <div class="tree t1">🌲</div>
-    <div class="tree t2">🌳</div>
-    <div class="tree t3">🌲</div>
-    <div class="tree t4">🌳</div>
-    <div class="tree t5">🌲</div>
-    <div class="tree t6">🌳</div>
-    <div class="tree t7">🌲</div>
-    <div class="tree t8">🌲</div>
-    <!-- REAL CURVED TRAIL -->
-    <svg
-        class="trail"
-        viewBox="0 0 850 1450"
-        preserveAspectRatio="none">
-        <path
-            d="
-            M425 70
-            C300 170,
-            520 260,
-            430 360
-            C340 460,
-            570 520,
-            425 650
-            C280 780,
-            550 850,
-            430 960
-            C330 1060,
-            560 1130,
-            425 1250
-            C400 1300,
-            425 1360,
-            425 1400
-            "
-        />
-        <path
-            class="inner"
-            d="
-            M425 70
-            C300 170,
-            520 260,
-            430 360
-            C340 460,
-            570 520,
-            425 650
-            C280 780,
-            550 850,
-            430 960
-            C330 1060,
-            560 1130,
-            425 1250
-            C400 1300,
-            425 1360,
-            425 1400
-            "
-        />
-    </svg>
-    <!-- WESTEROS -->
-    <a
-        href="quiz.html"
-        class="destination westeros">
-        <div class="icon">🐉</div>
-        <h2>
-            The Westeros Trail
-        </h2>
-        <p>
-            Find out how cool you are!
-        </p>
-    </a>
-    <!-- FACTS -->
-    <a
-        href="facts.html"
-        class="destination facts">
-        <div class="icon">⭐</div>
-        <h2>
-            Birthday Facts
-        </h2>
-        <p>
-            Follow this trail for weird and wonderful knowledge.
-        </p>
-    </a>
-    <!-- GAME -->
-    <a
-        href="game.html"
-        class="destination game">
-        <div class="icon">🎮</div>
-        <h2>
-            The Adventures of Mr Tapus
-        </h2>
-        <p>
-            Jump, explore, and be an absolute menace.
-        </p>
-    </a>
-    <!-- CATS -->
-    <a
-        href="cats.html"
-        class="destination cats">
-        <div class="icon">🐈</div>
-        <h2>
-            Cat Trail
-        </h2>
-        <p>
-            Something furry is definitely hiding nearby...
-        </p>
-    </a>
-    <!-- FINAL -->
-    <a
-        href="secret.html"
-        class="destination final">
-        <div class="icon">🎁</div>
-        <h2>
-            The Final Gift
-        </h2>
-        <p>
-            Something special waits beyond this point.
-        </p>
-        <p>
-            🔒
-        </p>
-    </a>
-    <!-- FLOWERS -->
-    <div class="flower f1">🌼</div>
-    <div class="flower f2">🌸</div>
-    <div class="flower f3">🌷</div>
-    <div class="flower f4">🌼</div>
-    <!-- EXISTING PAWS -->
-    <div class="paws paws1">
-        🐾 🐾
-    </div>
-    <div class="paws paws2">
-        🐾 🐾
-    </div>
-    <div class="paws paws3">
-        🐾 🐾
-    </div>
-    <!-- HIDDEN DISCOVERIES -->
+
+
     <div
-        class="discovery discoveryCat1"
-        data-message="You found a secret cat. Obviously it lives here now."
-        title="Secret cat">
-        🐈
+        class="moon"
+        id="moonButton"
+        title="Change the forest">
+        🌙
     </div>
+
+
+    <h1>
+        The Birthday Forest
+    </h1>
+
+
+    <p class="intro">
+        Follow the trails, brave the unknown,
+        and see what you discover along the way...
+    </p>
+
+
+    <button
+        class="modeButton"
+        id="modeButton">
+        ☀️ Enter Daytime
+    </button>
+
+
     <div
-        class="discovery discoveryCat2"
-        data-message="A black cat! This feels suspiciously important."
-        title="Secret cat">
-        🐈‍⬛
+        class="discoveryCounter"
+        id="discoveryCounter">
+        🌿 Secrets discovered: 0 / 8
     </div>
-    <div
-        class="discovery discoveryCat3"
-        data-message="pspspspspsps... you found me."
-        title="Secret cat">
-        🐱
-    </div>
-    <div
-        class="discovery discoveryFrog"
-        data-message="You found a frog. He has absolutely nothing to say."
-        title="Frog">
-        🐸
-    </div>
-    <div
-        class="discovery discoveryMushroom"
-        data-message="You found a suspicious mushroom. I would not eat it."
-        title="Suspicious mushroom">
-        🍄
-    </div>
-    <div
-        class="discovery discoveryFox"
-        data-message="A fox! He saw you. He judged you. He left."
-        title="Fox">
-        🦊
-    </div>
-    <div
-        class="discovery discoveryOwl"
-        data-message="You found an owl. He knows something. He won't tell you."
-        title="Owl">
-        🦉
-    </div>
-    <div
-        class="discovery discoveryCake"
-        data-message="WHY IS THERE A CAKE IN THE FOREST?"
-        title="Suspicious cake">
-        🎂
-    </div>
-    <!-- WRONG WAY -->
-    <div
-        class="wrongWay"
-        id="wrongWay">
-        ⚠️ WRONG WAY
-        <br><br>
-        Definitely don't click this.
-    </div>
-</section>
+
+
+    <section class="map">
+
+
+        <!-- FIREFLIES -->
+
+        <div class="fireflies">
+
+            <span class="firefly"></span>
+            <span class="firefly"></span>
+            <span class="firefly"></span>
+            <span class="firefly"></span>
+            <span class="firefly"></span>
+            <span class="firefly"></span>
+
+        </div>
+
+
+        <!-- TREES -->
+
+        <div class="tree t1">🌲</div>
+        <div class="tree t2">🌳</div>
+        <div class="tree t3">🌲</div>
+        <div class="tree t4">🌳</div>
+        <div class="tree t5">🌲</div>
+        <div class="tree t6">🌳</div>
+        <div class="tree t7">🌲</div>
+        <div class="tree t8">🌲</div>
+
+
+        <!-- REAL CURVED TRAIL -->
+
+        <svg
+            class="trail"
+            viewBox="0 0 850 1450"
+            preserveAspectRatio="none">
+
+            <path
+                d="
+                M425 70
+                C300 170,
+                520 260,
+                430 360
+                C340 460,
+                570 520,
+                425 650
+                C280 780,
+                550 850,
+                430 960
+                C330 1060,
+                560 1130,
+                425 1250
+                C400 1300,
+                425 1360,
+                425 1400
+                "
+            />
+
+            <path
+                class="inner"
+                d="
+                M425 70
+                C300 170,
+                520 260,
+                430 360
+                C340 460,
+                570 520,
+                425 650
+                C280 780,
+                550 850,
+                430 960
+                C330 1060,
+                560 1130,
+                425 1250
+                C400 1300,
+                425 1360,
+                425 1400
+                "
+            />
+
+        </svg>
+
+
+        <!-- WESTEROS -->
+
+        <a
+            href="quiz.html"
+            class="destination westeros">
+
+            <div class="icon">🐉</div>
+
+            <h2>
+                The Westeros Trail
+            </h2>
+
+            <p>
+                Find out how cool you are!
+            </p>
+
+        </a>
+
+
+        <!-- FACTS -->
+
+        <a
+            href="facts.html"
+            class="destination facts">
+
+            <div class="icon">⭐</div>
+
+            <h2>
+                Birthday Facts
+            </h2>
+
+            <p>
+                Follow this trail for weird and wonderful knowledge.
+            </p>
+
+        </a>
+
+
+        <!-- GAME -->
+
+        <a
+            href="game.html"
+            class="destination game">
+
+            <div class="icon">🎮</div>
+
+            <h2>
+                The Adventures of Mr Tapus
+            </h2>
+
+            <p>
+                Jump, explore, and be an absolute menace.
+            </p>
+
+        </a>
+
+
+        <!-- CATS -->
+
+        <a
+            href="cats.html"
+            class="destination cats">
+
+            <div class="icon">🐈</div>
+
+            <h2>
+                Cat Trail
+            </h2>
+
+            <p>
+                Something furry is definitely hiding nearby...
+            </p>
+
+        </a>
+
+
+        <!-- FINAL -->
+
+        <a
+            href="secret.html"
+            class="destination final">
+
+            <div class="icon">🎁</div>
+
+            <h2>
+                The Final Gift
+            </h2>
+
+            <p>
+                Something special waits beyond this point.
+            </p>
+
+            <p>
+                🔒
+            </p>
+
+        </a>
+
+
+        <!-- FLOWERS -->
+
+        <div class="flower f1">🌼</div>
+        <div class="flower f2">🌸</div>
+        <div class="flower f3">🌷</div>
+        <div class="flower f4">🌼</div>
+
+
+        <!-- EXISTING PAWS -->
+
+        <div class="paws paws1">
+            🐾 🐾
+        </div>
+
+        <div class="paws paws2">
+            🐾 🐾
+        </div>
+
+        <div class="paws paws3">
+            🐾 🐾
+        </div>
+
+
+        <!-- HIDDEN DISCOVERIES -->
+
+        <div
+            class="discovery discoveryCat1"
+            data-message="You found a secret cat. Obviously it lives here now."
+            title="Secret cat">
+            🐈
+        </div>
+
+
+        <div
+            class="discovery discoveryCat2"
+            data-message="A black cat! This feels suspiciously important."
+            title="Secret cat">
+            🐈‍⬛
+        </div>
+
+
+        <div
+            class="discovery discoveryCat3"
+            data-message="pspspspspsps... you found me."
+            title="Secret cat">
+            🐱
+        </div>
+
+
+        <div
+            class="discovery discoveryFrog"
+            data-message="You found a frog. He has absolutely nothing to say."
+            title="Frog">
+            🐸
+        </div>
+
+
+        <div
+            class="discovery discoveryMushroom"
+            data-message="You found a suspicious mushroom. I would not eat it."
+            title="Suspicious mushroom">
+            🍄
+        </div>
+
+
+        <div
+            class="discovery discoveryFox"
+            data-message="A fox! He saw you. He judged you. He left."
+            title="Fox">
+            🦊
+        </div>
+
+
+        <div
+            class="discovery discoveryOwl"
+            data-message="You found an owl. He knows something. He won't tell you."
+            title="Owl">
+            🦉
+        </div>
+
+
+        <div
+            class="discovery discoveryCake"
+            data-message="WHY IS THERE A CAKE IN THE FOREST?"
+            title="Suspicious cake">
+            🎂
+        </div>
+
+
+        <!-- WRONG WAY -->
+
+        <div
+            class="wrongWay"
+            id="wrongWay">
+
+            ⚠️ WRONG WAY
+
+            <br><br>
+
+            Definitely don't click this.
+
+        </div>
+
+
+    </section>
+
 </main>
+
+
 <script>
+
+
 /* -------------------------
    CAT PAW CURSOR TRAIL
 ------------------------- */
+
 let lastPawTime = 0;
 let pawSide = 0;
+
 document.addEventListener(
     "mousemove",
     function(event) {
+
         const now = Date.now();
+
         if (now - lastPawTime < 100) {
             return;
         }
+
         lastPawTime = now;
+
         const paw =
             document.createElement("div");
+
         paw.className = "paw-print";
+
         paw.textContent = "🐾";
+
         paw.style.left =
             event.clientX + "px";
+
         paw.style.top =
             event.clientY + "px";
+
+
         if (pawSide === 0) {
+
             paw.style.transform =
                 "translate(-50%, -50%) rotate(-20deg) scale(.7)";
+
             pawSide = 1;
+
         } else {
+
             paw.style.transform =
                 "translate(-50%, -50%) rotate(20deg) scale(.7)";
+
             pawSide = 0;
+
         }
+
+
         document.body.appendChild(paw);
+
+
         setTimeout(
             function() {
                 paw.remove();
             },
             900
         );
+
     }
 );
+
+
 /* -------------------------
    DISCOVERY SYSTEM
 ------------------------- */
+
 const discoveries =
     document.querySelectorAll(".discovery");
+
 const counter =
     document.getElementById("discoveryCounter");
+
 const popup =
     document.getElementById("discoveryPopup");
+
 let discovered =
     new Set();
+
+
 discoveries.forEach(
     function(item, index) {
+
         item.addEventListener(
             "click",
             function() {
+
                 if (
                     !discovered.has(index)
                 ) {
+
                     discovered.add(index);
+
                     item.classList.add("found");
+
                     counter.textContent =
                         "🌿 Secrets discovered: " +
                         discovered.size +
                         " / 8";
+
                 }
+
+
                 popup.textContent =
                     item.dataset.message;
+
                 popup.classList.add("show");
+
+
                 setTimeout(
                     function() {
+
                         popup.classList.remove(
                             "show"
                         );
+
                     },
                     2800
                 );
+
             }
         );
+
     }
 );
+
+
 /* -------------------------
    WRONG WAY SIGN
 ------------------------- */
+
 document
     .getElementById("wrongWay")
     .addEventListener(
         "click",
         function() {
+
             popup.textContent =
                 "You have successfully gone the wrong way. Congratulations.";
+
             popup.classList.add("show");
+
             setTimeout(
                 function() {
+
                     popup.classList.remove(
                         "show"
                     );
+
                 },
                 3000
             );
+
         }
     );
+
+
 /* -------------------------
    DAY / NIGHT MODE
 ------------------------- */
+
 const modeButton =
     document.getElementById("modeButton");
+
 const moonButton =
     document.getElementById("moonButton");
+
+
 function toggleDayNight() {
+
     document.body.classList.toggle(
         "dayMode"
     );
+
+
     if (
         document.body.classList.contains(
             "dayMode"
         )
     ) {
+
         modeButton.textContent =
             "🌙 Return to Night";
+
         moonButton.textContent =
             "☀️";
+
     } else {
+
         modeButton.textContent =
             "☀️ Enter Daytime";
+
         moonButton.textContent =
             "🌙";
+
     }
+
 }
+
+
 modeButton.addEventListener(
     "click",
     toggleDayNight
 );
+
 moonButton.addEventListener(
     "click",
     toggleDayNight
 );
+
+
 /* -------------------------
-   WANDERING OWL
+   WANDERING OWL — SECRET #8
 ------------------------- */
+
 const owl =
     document.getElementById(
         "wanderingOwl"
     );
-let finalMessageShown = false;
+
+
+let owlFound =
+    false;
+
+
 function sendOwl() {
+
+    if (owlFound) {
+        return;
+    }
+
     owl.classList.remove("fly");
+
     void owl.offsetWidth;
+
     owl.classList.add("fly");
+
 }
+
+
+/* -------------------------
+   CLICK WANDERING OWL
+------------------------- */
+
 owl.addEventListener(
-    "animationend",
+    "click",
     function() {
+
+        if (owlFound) {
+            return;
+        }
+
+
         /*
-           The wandering owl does NOT count
-           as a secret.
-           It only activates the final message
-           after all 8 discoveries have been found.
+           The wandering owl is Secret #8.
+
+           The other 7 secrets must already
+           have been discovered before the owl
+           can complete the forest.
         */
-        if (
-            discovered.size === 8 &&
-            !finalMessageShown
-        ) {
-            finalMessageShown = true;
+
+        if (discovered.size < 7) {
+
             popup.textContent =
-                "You have befriended all the creatures of the forest. They wish you well in your adventure.";
+                "The owl looks at you knowingly. There are still creatures waiting to be found...";
+
             popup.classList.add("show");
+
             setTimeout(
                 function() {
+
                     popup.classList.remove(
                         "show"
                     );
+
                 },
-                6000
+                3500
             );
+
+            return;
         }
+
+
+        /*
+           All 7 other secrets have been found.
+           The wandering owl becomes Secret #8.
+        */
+
+        owlFound = true;
+
+        owl.classList.remove("fly");
+
+        owl.classList.add("found");
+
+        discovered.add("wanderingOwl");
+
+        counter.textContent =
+            "🌿 Secrets discovered: 8 / 8";
+
+
+        popup.textContent =
+            "You have befriended all the creatures of the forest. They wish you well in your adventure.";
+
+        popup.classList.add("show");
+
+
+        setTimeout(
+            function() {
+
+                popup.classList.remove(
+                    "show"
+                );
+
+            },
+            6000
+        );
+
     }
 );
+
+
+/* -------------------------
+   OWL FLIGHT
+------------------------- */
+
 setTimeout(
     sendOwl,
     5000
 );
+
+
 setInterval(
-    function() {
-        /*
-           Keep the owl flying around
-           until the final secret is complete.
-        */
-        if (!finalMessageShown) {
-            sendOwl();
-        }
-    },
+    sendOwl,
     18000
 );
+
+
 </script>
+
+
 </body>
+
 </html>
