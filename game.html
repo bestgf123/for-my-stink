@@ -42,9 +42,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    GAME
-========================== */
+========================= */
 
 #game {
     position: relative;
@@ -57,16 +57,15 @@ h1 {
     border: 4px solid #6d8b4e;
     border-radius: 22px;
 
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.25);
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
 
     background: #8ed0ee;
 }
 
 
-/* ==========================
+/* =========================
    SKY
-========================== */
+========================= */
 
 .sky {
     position: absolute;
@@ -114,9 +113,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    WORLD
-========================== */
+========================= */
 
 #world {
     position: absolute;
@@ -130,9 +129,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    TREES
-========================== */
+========================= */
 
 .tree {
     position: absolute;
@@ -153,9 +152,9 @@ h1 {
 .tree10 { left: 5800px; }
 
 
-/* ==========================
+/* =========================
    FLOWERS
-========================== */
+========================= */
 
 .flowerBush {
     position: absolute;
@@ -176,13 +175,12 @@ h1 {
 .fb9 { left: 5500px; }
 
 
-/* ==========================
+/* =========================
    GROUND
-========================== */
+========================= */
 
 .ground {
     position: absolute;
-
     left: 0;
     bottom: 0;
 
@@ -199,9 +197,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    TAPUS
-========================== */
+========================= */
 
 #player {
     position: absolute;
@@ -233,6 +231,7 @@ h1 {
     to {
         transform: translateY(-5px);
     }
+
 }
 
 .sitting {
@@ -240,9 +239,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    GRASS
-========================== */
+========================= */
 
 .grass {
     position: absolute;
@@ -250,12 +249,17 @@ h1 {
     bottom: 105px;
 
     width: 42px;
-    height: 24px;
+    height: 30px;
 
     z-index: 8;
-
-    pointer-events: none;
 }
+
+
+/*
+   The visible grass is decorative.
+   The actual collision is much smaller
+   and is handled by JavaScript.
+*/
 
 .grass::before {
     content: "";
@@ -282,14 +286,12 @@ h1 {
     bottom: 1px;
 
     font-size: 20px;
-
-    line-height: 1;
 }
 
 
-/* ==========================
-   SOFAS
-========================== */
+/* =========================
+   COUCH
+========================= */
 
 .sofa {
     position: absolute;
@@ -302,9 +304,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    BEES
-========================== */
+========================= */
 
 .bee {
     position: absolute;
@@ -333,9 +335,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    PRINCESS
-========================== */
+========================= */
 
 #princess {
 
@@ -359,9 +361,9 @@ h1 {
 }
 
 
-/* ==========================
+/* =========================
    POPUP
-========================== */
+========================= */
 
 #popup {
 
@@ -391,20 +393,14 @@ h1 {
 }
 
 #popup h2 {
-
     margin: 0 0 7px;
-
     color: #315c38;
-
     font-size: 23px;
 }
 
 #popup p {
-
     margin: 0 0 13px;
-
     line-height: 1.45;
-
     font-size: 16px;
 }
 
@@ -430,9 +426,9 @@ h1 {
 }
 
 
-/* ==========================
-   GAME OVER / ENDING
-========================== */
+/* =========================
+   ENDING
+========================= */
 
 #ending {
 
@@ -494,10 +490,6 @@ h1 {
 }
 
 
-/* ==========================
-   BACK
-========================== */
-
 .back {
 
     display: inline-block;
@@ -515,9 +507,7 @@ h1 {
 <body>
 
 
-<h1>
-🐈 Mr Tapus's Mission
-</h1>
+<h1>🐈 Mr Tapus's Mission</h1>
 
 
 <p class="instructions">
@@ -543,7 +533,7 @@ Help him reach the Princess! 👑
 &nbsp;&nbsp; | &nbsp;&nbsp;
 
 👑 Princess:
-<span id="distance">610</span>m away
+<span id="distance">610m away</span>
 
 </div>
 
@@ -731,13 +721,10 @@ alt="The Princess">
 
 <div class="ground"></div>
 
-
 </div>
 
 
-<!-- ==========================
-     POPUP
-========================== -->
+<!-- POPUP -->
 
 <div id="popup">
 
@@ -746,17 +733,13 @@ alt="The Princess">
 <p id="popupText"></p>
 
 <button onclick="resumeGame()">
-
 Continue 🐈
-
 </button>
 
 </div>
 
 
-<!-- ==========================
-     END SCREEN
-========================== -->
+<!-- ENDING -->
 
 <div id="ending">
 
@@ -783,9 +766,7 @@ The Princess has noticed him.
 </p>
 
 <button onclick="location.reload()">
-
 Play Again
-
 </button>
 
 </div>
@@ -806,9 +787,9 @@ href="forest.html">
 <script>
 
 
-/* ==========================
+/* =========================
    ELEMENTS
-========================== */
+========================= */
 
 const game =
 document.getElementById("game");
@@ -849,13 +830,10 @@ document.querySelectorAll(".grass");
 const sofas =
 document.querySelectorAll(".sofa");
 
-const bees =
-document.querySelectorAll(".bee");
 
-
-/* ==========================
-   GAME SETTINGS
-========================== */
+/* =========================
+   SETTINGS
+========================= */
 
 const START_X = 120;
 
@@ -863,14 +841,19 @@ const PRINCESS_X = 6200;
 
 const SPEED = 2.5;
 
-const JUMP_POWER = 16;
 
-const GRAVITY = 0.6;
+/*
+   Bigger jump = easier game.
+*/
+
+const JUMP_POWER = 18;
+
+const GRAVITY = 0.52;
 
 
-/* ==========================
-   GAME VARIABLES
-========================== */
+/* =========================
+   VARIABLES
+========================= */
 
 let playerX = START_X;
 
@@ -888,30 +871,18 @@ let paused = false;
 
 let currentObstacle = null;
 
-
-/*
-   These are the grass patches
-   that Tapus has successfully
-   jumped over.
-*/
-
-const clearedGrass =
-new Set();
+let lastHitObstacle = null;
 
 
-/* ==========================
-   IMAGE FUNCTIONS
-========================== */
+/* =========================
+   IMAGES
+========================= */
 
 function walking() {
 
-    player.classList.remove(
-        "sitting"
-    );
+    player.classList.remove("sitting");
 
-    player.classList.add(
-        "walking"
-    );
+    player.classList.add("walking");
 
     player.innerHTML = `
 
@@ -926,13 +897,9 @@ function walking() {
 
 function sitting() {
 
-    player.classList.remove(
-        "walking"
-    );
+    player.classList.remove("walking");
 
-    player.classList.add(
-        "sitting"
-    );
+    player.classList.add("sitting");
 
     player.innerHTML = `
 
@@ -945,85 +912,110 @@ function sitting() {
 }
 
 
-/* ==========================
+/* =========================
    SPACE
-========================== */
+========================= */
 
 document.addEventListener(
 "keydown",
 function(event) {
 
+    if (event.code !== "Space") {
+        return;
+    }
 
-if (event.code !== "Space") {
-    return;
-}
-
-event.preventDefault();
-
-
-/*
-   If a message is showing,
-   Space continues the game.
-
-   For grass it also jumps.
-*/
-
-if (paused) {
-
-    resumeGame();
-
-    velocityY =
-        JUMP_POWER;
-
-    jumping = true;
-
-    return;
-
-}
+    event.preventDefault();
 
 
-/*
-   Normal jump.
-*/
+    /*
+       If a popup is open,
+       Space continues.
+    */
 
-if (!jumping) {
+    if (paused) {
 
-    velocityY =
-        JUMP_POWER;
+        /*
+           Grass:
+           continue AND jump.
+        */
 
-    jumping = true;
+        if (
+            currentObstacle &&
+            currentObstacle.type === "grass"
+        ) {
 
-}
+            resumeGame();
+
+            velocityY =
+                JUMP_POWER;
+
+            jumping = true;
+
+            return;
+        }
+
+
+        /*
+           Couch:
+           Space simply starts
+           the new attempt.
+        */
+
+        if (
+            currentObstacle &&
+            currentObstacle.type === "sofa"
+        ) {
+
+            continueAfterCouch();
+
+            return;
+        }
+
+    }
+
+
+    /*
+       Normal jump.
+    */
+
+    if (!jumping && !paused) {
+
+        velocityY =
+            JUMP_POWER;
+
+        jumping = true;
+
+    }
 
 });
 
 
-/* ==========================
+/* =========================
    POPUP
-========================== */
+========================= */
 
 function showPopup(
 title,
 message
 ) {
 
-paused = true;
+    paused = true;
 
-popupTitle.innerText =
-title;
+    popupTitle.innerText =
+        title;
 
-popupText.innerText =
-message;
+    popupText.innerText =
+        message;
 
-popup.style.display =
-"block";
+    popup.style.display =
+        "block";
 
 }
 
 
-/* ==========================
+/* =========================
    RESUME
-========================== */
+========================= */
 
 function resumeGame() {
 
@@ -1032,365 +1024,338 @@ function resumeGame() {
 
     paused = false;
 
-    /*
-       The moment the message
-       disappears, Tapus walks again.
-    */
-
     walking();
 
 
     /*
-       Put him immediately before
-       the obstacle that stopped him.
+       For grass, place Tapus
+       just before it.
+
+       He will immediately jump.
     */
 
-    if (currentObstacle) {
+    if (
+        currentObstacle &&
+        currentObstacle.type === "grass"
+    ) {
 
         playerX =
-            currentObstacle.x - 105;
+            currentObstacle.x - 115;
 
     }
 
 }
 
 
-/* ==========================
-   GRASS
-========================== */
+/* =========================
+   GRASS COLLISION
+========================= */
 
 function checkGrass() {
 
 
-grass.forEach(
-function(item) {
+    /*
+       NEVER check grass while
+       Tapus is jumping.
+    */
+
+    if (jumping) {
+        return;
+    }
 
 
-/*
-   Ignore grass already jumped.
-*/
-
-if (
-clearedGrass.has(item)
-) {
-    return;
-}
+    grass.forEach(
+    function(item) {
 
 
-const x =
-Number(item.dataset.x);
+        const x =
+            Number(item.dataset.x);
 
 
-/*
-   Grass only catches Tapus
-   when he is on the ground.
-*/
+        /*
+           VERY SMALL collision box.
 
-const onGround =
-playerY <= 8;
+           Tapus's visual image is large,
+           but only this tiny area
+           counts as hitting grass.
+        */
 
+        const tapusFront =
+            playerX + 72;
 
-/*
-   Small collision area.
-*/
-
-const touchingGrass =
-
-playerX + 95 >= x &&
-
-playerX + 15 <= x + 42;
+        const tapusBack =
+            playerX + 30;
 
 
-if (
-onGround &&
-touchingGrass
-) {
+        const grassLeft =
+            x + 8;
+
+        const grassRight =
+            x + 34;
 
 
-/*
-   Don't repeatedly trigger
-   while the popup is already
-   dealing with this obstacle.
-*/
+        const touching =
 
-if (
-currentObstacle &&
-currentObstacle.element === item
-) {
-    return;
-}
+            tapusFront >= grassLeft &&
+            tapusBack <= grassRight;
 
 
-/*
-   Stop just before grass.
-*/
-
-playerX =
-x - 105;
+        if (!touching) {
+            return;
+        }
 
 
-/*
-   Remember it.
-*/
+        /*
+           Don't hit same obstacle
+           repeatedly.
+        */
 
-currentObstacle = {
-
-    element: item,
-
-    x: x,
-
-    type: "grass"
-
-};
+        if (
+            lastHitObstacle === item
+        ) {
+            return;
+        }
 
 
-/*
-   Tapus sits.
-*/
+        /*
+           Stop Tapus just before
+           the grass.
+        */
 
-sitting();
+        playerX =
+            x - 82;
 
 
-/*
-   MESSAGE EVERY TIME HE HITS GRASS.
-*/
+        currentObstacle = {
 
-showPopup(
+            element: item,
 
-"🌱 Oh no!",
+            x: x,
 
-"Mr Tapus has encountered grass."
+            type: "grass"
 
-);
+        };
 
-}
 
-});
+        lastHitObstacle =
+            item;
+
+
+        sitting();
+
+
+        showPopup(
+
+            "🌱 Oh no!",
+
+            "Mr Tapus has encountered grass."
+
+        );
+
+    });
 
 }
 
 
-/* ==========================
-   GRASS SUCCESS
-========================== */
+/* =========================
+   CLEAR GRASS
+========================= */
 
-function checkGrassSuccess() {
+function clearGrass() {
 
 
-if (!currentObstacle) {
-    return;
+    if (!currentObstacle) {
+        return;
+    }
+
+
+    if (
+        currentObstacle.type !== "grass"
+    ) {
+        return;
+    }
+
+
+    const x =
+        currentObstacle.x;
+
+
+    /*
+       Once Tapus is safely past
+       the grass while airborne,
+       it is officially cleared.
+    */
+
+    if (
+
+        jumping &&
+
+        playerY > 20 &&
+
+        playerX > x + 50
+
+    ) {
+
+        currentObstacle =
+            null;
+
+        lastHitObstacle =
+            null;
+
+    }
+
 }
 
 
-if (
-currentObstacle.type !== "grass"
-) {
-    return;
-}
-
-
-const x =
-currentObstacle.x;
-
-
-/*
-   Once he is airborne and
-   clearly beyond the grass,
-   mark it as completed.
-*/
-
-if (
-
-jumping &&
-
-playerY > 35 &&
-
-playerX > x + 55
-
-) {
-
-clearedGrass.add(
-currentObstacle.element
-);
-
-currentObstacle =
-null;
-
-}
-
-}
-
-
-/* ==========================
-   COUCH
-========================== */
+/* =========================
+   COUCH COLLISION
+========================= */
 
 function checkSofas() {
 
 
-sofas.forEach(
-function(item) {
+    /*
+       A couch can ONLY catch
+       Tapus while he is standing.
+
+       If he is even slightly
+       airborne, he goes over it.
+    */
+
+    if (jumping) {
+        return;
+    }
 
 
-const x =
-Number(item.dataset.x);
+    sofas.forEach(
+    function(item) {
 
 
-const onGround =
-playerY <= 8;
+        const x =
+            Number(item.dataset.x);
 
 
-const touchingSofa =
+        /*
+           Very narrow collision.
 
-playerX + 100 >= x &&
+           Only the front of Tapus
+           has to reach the couch.
+        */
 
-playerX + 15 <= x + 70;
-
-
-if (
-onGround &&
-touchingSofa
-) {
+        const tapusFront =
+            playerX + 75;
 
 
-/*
-   Don't trigger the same
-   sofa repeatedly.
-*/
+        const sofaLeft =
+            x + 12;
 
-if (
-currentObstacle &&
-currentObstacle.element === item
-) {
-    return;
-}
+        const sofaRight =
+            x + 62;
 
 
-currentObstacle = {
+        const touching =
 
-    element: item,
-
-    x: x,
-
-    type: "sofa"
-
-};
+            tapusFront >= sofaLeft &&
+            playerX + 45 <= sofaRight;
 
 
-/*
-   Lose ONE bee/life.
-*/
-
-lives--;
-
-livesDisplay.innerText =
-lives;
+        if (!touching) {
+            return;
+        }
 
 
-/*
-   Tapus sits.
-*/
-
-sitting();
-
-
-/*
-   No lives left?
-*/
-
-if (lives <= 0) {
-
-    gameOver();
-
-    return;
-
-}
+        if (
+            lastHitObstacle === item
+        ) {
+            return;
+        }
 
 
-/*
-   Otherwise he gets sent
-   all the way back to the start.
-*/
-
-showPopup(
-
-"🛋️ Oh no!",
-
-"Mr Tapus has found a cozy lil nook and got distracted, he failed his mission! A bee has been used to get him back on track."
-
-);
-
-}
-
-});
-
-}
+        lastHitObstacle =
+            item;
 
 
-/* ==========================
-   SEND TAPUS TO START
-========================== */
+        currentObstacle = {
 
-function sendToStart() {
+            element: item,
 
+            x: x,
 
-/*
-   Put him back at beginning.
-*/
+            type: "sofa"
 
-playerX =
-START_X;
-
-playerY =
-0;
-
-velocityY =
-0;
-
-jumping =
-false;
-
-cameraX =
-0;
+        };
 
 
-/*
-   Clear current obstacle.
-*/
+        /*
+           Lose a bee/life.
+        */
 
-currentObstacle =
-null;
+        lives--;
 
-
-/*
-   Back to walking.
-*/
-
-walking();
+        livesDisplay.innerText =
+            lives;
 
 
-/*
-   Move camera back.
-*/
-
-world.style.left =
-"0px";
+        sitting();
 
 
-/*
-   Update countdown.
-*/
+        /*
+           If no lives remain,
+           mission failed.
+        */
 
-updateDistance();
+        if (lives <= 0) {
+
+            gameOver();
+
+            return;
+
+        }
+
+
+        /*
+           Send him back to start.
+        */
+
+        playerX =
+            START_X;
+
+        playerY =
+            0;
+
+        velocityY =
+            0;
+
+        jumping =
+            false;
+
+
+        cameraX =
+            0;
+
+        world.style.left =
+            "0px";
+
+
+        showPopup(
+
+            "🛋️ Oh no!",
+
+            "Mr Tapus has found a cozy lil nook and got distracted, he failed his mission! You lost a 🐝 life."
+
+        );
+
+    });
 
 }
 
 
-/* ==========================
-   CONTINUE AFTER COUCH
-========================== */
+/* =========================
+   SPACE AFTER COUCH
+========================= */
 
 function continueAfterCouch() {
+
 
     popup.style.display =
         "none";
@@ -1398,314 +1363,261 @@ function continueAfterCouch() {
     paused =
         false;
 
-    sendToStart();
+    currentObstacle =
+        null;
+
+    lastHitObstacle =
+        null;
+
+    walking();
 
 }
 
 
-/* ==========================
-   BEES
-========================== */
-
-function checkBees() {
-
-
-bees.forEach(
-function(bee) {
-
-
-if (
-bee.style.display === "none"
-) {
-    return;
-}
-
-
-const x =
-Number(bee.dataset.x);
-
-
-/*
-   Bee can be collected while
-   jumping or running.
-*/
-
-if (
-
-Math.abs(
-playerX - x
-) < 75 &&
-
-Math.abs(
-playerY -
-(
-Number(
-bee.style.bottom
-.replace("px","")
-) - 105
-)
-) < 115
-
-) {
-
-
-bee.style.display =
-"none";
-
-}
-
-});
-
-}
-
-
-/* ==========================
+/* =========================
    CAMERA
-========================== */
+========================= */
 
 function updateCamera() {
 
 
-cameraX =
-Math.max(
+    cameraX =
+        Math.max(
 
-0,
+            0,
 
-Math.min(
+            Math.min(
 
-playerX -
-game.clientWidth * .30,
+                playerX -
+                game.clientWidth * .30,
 
-6500 -
-game.clientWidth
+                6500 -
+                game.clientWidth
 
-)
+            )
 
-);
+        );
 
 
-world.style.left =
--cameraX + "px";
+    world.style.left =
+        -cameraX + "px";
 
 }
 
 
-/* ==========================
+/* =========================
    DISTANCE COUNTDOWN
-========================== */
+========================= */
 
 function updateDistance() {
 
 
-/*
-   Distance from Tapus to Princess.
-*/
+    const remaining =
 
-const remaining =
-Math.max(
+        Math.max(
 
-0,
+            0,
 
-Math.ceil(
-(PRINCESS_X - playerX) / 10
-)
+            Math.ceil(
+                (PRINCESS_X - playerX) / 10
+            )
 
-);
+        );
 
 
-distanceDisplay.innerText =
-remaining + "m away";
+    distanceDisplay.innerText =
+        remaining + "m away";
 
 }
 
 
-/* ==========================
+/* =========================
    GAME OVER
-========================== */
+========================= */
 
 function gameOver() {
 
 
-paused = true;
+    paused = true;
 
-popup.style.display =
-"none";
-
-
-endingTitle.innerText =
-"🐝 Oh no!";
+    popup.style.display =
+        "none";
 
 
-endingText.innerHTML = `
+    endingTitle.innerText =
+        "🐝 Oh no!";
 
-Mr Tapus has run out of bees!
 
-<br><br>
+    endingText.innerHTML = `
 
-He couldn't resist the cozy couches...
+        Mr Tapus has run out of bees!
 
-<br><br>
+        <br><br>
 
-His mission has failed. 🐈💤
+        He couldn't resist the cozy couches...
 
-`;
+        <br><br>
 
-ending.style.display =
-"flex";
+        His mission has failed. 🐈💤
+
+    `;
+
+
+    ending.style.display =
+        "flex";
 
 }
 
 
-/* ==========================
+/* =========================
    PRINCESS
-========================== */
+========================= */
 
 function checkPrincess() {
 
 
-if (
-playerX >= PRINCESS_X
-) {
+    if (
+        playerX >= PRINCESS_X
+    ) {
 
 
-paused =
-true;
+        paused =
+            true;
 
 
-distanceDisplay.innerText =
-"0m away";
+        distanceDisplay.innerText =
+            "0m away";
 
 
-endingTitle.innerText =
-"👑 MR TAPUS FOUND THE PRINCESS!";
+        endingTitle.innerText =
+            "👑 MR TAPUS FOUND THE PRINCESS!";
 
 
-endingText.innerHTML = `
+        endingText.innerHTML = `
 
-Mission accomplished!
+            Mission accomplished!
 
-<br><br>
+            <br><br>
 
-The Princess has noticed him.
+            The Princess has noticed him.
 
-<br><br>
+            <br><br>
 
-😱🐈💨
+            😱🐈💨
 
-`;
+        `;
 
 
-ending.style.display =
-"flex";
+        ending.style.display =
+            "flex";
+
+    }
 
 }
 
-}
 
-
-/* ==========================
-   UPDATE PLAYER
-========================== */
+/* =========================
+   PLAYER DISPLAY
+========================= */
 
 function updatePlayer() {
 
 
-player.style.left =
-playerX + "px";
+    player.style.left =
+        playerX + "px";
 
-player.style.bottom =
-(105 + playerY) + "px";
+
+    player.style.bottom =
+        (105 + playerY) + "px";
 
 }
 
 
-/* ==========================
+/* =========================
    GAME LOOP
-========================== */
+========================= */
 
 function gameLoop() {
 
 
-if (!paused) {
+    if (!paused) {
 
 
-/*
-   AUTOMATIC RUNNING
-*/
+        /*
+           AUTOMATIC RUNNING
+        */
 
-playerX +=
-SPEED;
-
-
-/*
-   GRAVITY
-*/
-
-velocityY -=
-GRAVITY;
-
-playerY +=
-velocityY;
+        playerX +=
+            SPEED;
 
 
-/*
-   GROUND
-*/
+        /*
+           GRAVITY
+        */
 
-if (
-playerY <= 0
-) {
+        velocityY -=
+            GRAVITY;
 
-playerY =
-0;
-
-velocityY =
-0;
-
-jumping =
-false;
-
-}
+        playerY +=
+            velocityY;
 
 
-/*
-   OBSTACLES
-*/
+        /*
+           GROUND
+        */
 
-checkGrass();
+        if (
+            playerY <= 0
+        ) {
 
-checkGrassSuccess();
+            playerY =
+                0;
 
-checkSofas();
+            velocityY =
+                0;
 
-checkBees();
+            jumping =
+                false;
 
-checkPrincess();
-
-
-/*
-   DISPLAY
-*/
-
-updatePlayer();
-
-updateCamera();
-
-updateDistance();
-
-}
+        }
 
 
-requestAnimationFrame(
-gameLoop
-);
+        /*
+           CHECK EVERYTHING
+        */
+
+        checkGrass();
+
+        clearGrass();
+
+        checkSofas();
+
+        checkPrincess();
+
+
+        /*
+           UPDATE DISPLAY
+        */
+
+        updatePlayer();
+
+        updateCamera();
+
+        updateDistance();
+
+    }
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
 
-/* ==========================
-   START GAME
-========================== */
+/* =========================
+   START
+========================= */
 
 walking();
 
