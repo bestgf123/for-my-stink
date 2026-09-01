@@ -48,7 +48,7 @@ h1 {
 
 
 /* =========================
-   GAME WINDOW
+   GAME
 ========================= */
 
 #game {
@@ -57,6 +57,7 @@ h1 {
     max-width: 950px;
     height: 520px;
     margin: auto;
+
     overflow: hidden;
 
     border: 4px solid #6d8b4e;
@@ -93,7 +94,9 @@ h1 {
     position: absolute;
     top: 18px;
     right: 45px;
+
     font-size: 70px;
+
     z-index: 1;
 }
 
@@ -102,8 +105,12 @@ h1 {
 
 .cloud {
     position: absolute;
+
     font-size: 48px;
+
     opacity: .85;
+
+    z-index: 1;
 }
 
 .cloud1 {
@@ -128,16 +135,17 @@ h1 {
 
 #world {
     position: absolute;
+
     left: 0;
     top: 0;
 
-    width: 5000px;
+    width: 6000px;
     height: 100%;
 }
 
 
 /* =========================
-   WILDFLOWERS
+   FLOWERS
 ========================= */
 
 .flowerBush {
@@ -159,6 +167,8 @@ h1 {
 .fb5 { left: 2450px; }
 .fb6 { left: 3200px; }
 .fb7 { left: 3900px; }
+.fb8 { left: 4700px; }
+.fb9 { left: 5500px; }
 
 
 /* =========================
@@ -183,6 +193,8 @@ h1 {
 .tree6 { left: 2800px; }
 .tree7 { left: 3500px; }
 .tree8 { left: 4300px; }
+.tree9 { left: 5100px; }
+.tree10 { left: 5800px; }
 
 
 /* =========================
@@ -190,12 +202,13 @@ h1 {
 ========================= */
 
 .ground {
+
     position: absolute;
 
     left: 0;
     bottom: 0;
 
-    width: 5000px;
+    width: 6000px;
     height: 105px;
 
     background:
@@ -209,7 +222,7 @@ h1 {
 
 
 /* =========================
-   MR TAPUS
+   PLAYER
 ========================= */
 
 #player {
@@ -232,12 +245,11 @@ h1 {
 }
 
 
-/* WALKING */
-
 .walking {
 
     animation:
         bob .32s infinite alternate;
+
 }
 
 
@@ -252,13 +264,14 @@ h1 {
         transform:
             translateY(-5px);
     }
+
 }
 
 
-/* SITTING */
-
 .sitting {
+
     animation: none;
+
 }
 
 
@@ -272,14 +285,14 @@ h1 {
 
     bottom: 105px;
 
-    width: 120px;
-    height: 65px;
+    width: 130px;
+    height: 70px;
 
     z-index: 7;
 }
 
 
-/* Main grass mound */
+/* grassy mound */
 
 .grass::before {
 
@@ -287,35 +300,35 @@ h1 {
 
     position: absolute;
 
-    left: 8px;
+    left: 7px;
     bottom: 0;
 
-    width: 105px;
-    height: 28px;
+    width: 115px;
+    height: 32px;
 
-    background: #4f873d;
+    background: #4d853d;
 
     border-radius:
-        55% 55% 20% 20%;
+        60% 60% 20% 20%;
 
 }
 
 
-/* Grass blades */
+/* blades */
 
 .grass::after {
 
     content:
-        "⌁ ︵ ⌁ ︵ ⌁ ︵ ⌁";
+        "⌁ ︵ ⌁ ︵ ⌁ ︵ ⌁ ︵";
 
     position: absolute;
 
     left: 0;
-    bottom: 12px;
+    bottom: 13px;
 
-    width: 120px;
+    width: 130px;
 
-    font-size: 30px;
+    font-size: 31px;
 
     font-weight: bold;
 
@@ -325,6 +338,7 @@ h1 {
 
     transform:
         rotate(-2deg);
+
 }
 
 
@@ -341,6 +355,7 @@ h1 {
     font-size: 70px;
 
     z-index: 7;
+
 }
 
 
@@ -358,6 +373,7 @@ h1 {
 
     animation:
         buzz 1s infinite alternate ease-in-out;
+
 }
 
 
@@ -390,7 +406,7 @@ h1 {
 
     position: absolute;
 
-    left: 4770px;
+    left: 5700px;
 
     bottom: 105px;
 
@@ -398,6 +414,7 @@ h1 {
     height: 180px;
 
     z-index: 9;
+
 }
 
 
@@ -407,6 +424,7 @@ h1 {
     height: 100%;
 
     object-fit: contain;
+
 }
 
 
@@ -425,7 +443,7 @@ h1 {
     z-index: 50;
 
     background:
-        rgba(255,255,255,.94);
+        rgba(255,255,255,.95);
 
     align-items: center;
 
@@ -434,6 +452,7 @@ h1 {
     flex-direction: column;
 
     padding: 30px;
+
 }
 
 
@@ -444,16 +463,18 @@ h1 {
     font-size: 32px;
 
     max-width: 650px;
+
 }
 
 
 #popup p {
 
-    max-width: 600px;
+    max-width: 620px;
 
     line-height: 1.6;
 
     font-size: 18px;
+
 }
 
 
@@ -466,6 +487,7 @@ h1 {
     flex-wrap: wrap;
 
     justify-content: center;
+
 }
 
 
@@ -488,6 +510,7 @@ h1 {
     cursor: pointer;
 
     font-size: 16px;
+
 }
 
 
@@ -515,6 +538,7 @@ h1 {
     flex-direction: column;
 
     padding: 25px;
+
 }
 
 
@@ -523,6 +547,7 @@ h1 {
     color: #315c38;
 
     font-size: 35px;
+
 }
 
 
@@ -531,6 +556,7 @@ h1 {
     font-size: 19px;
 
     line-height: 1.6;
+
 }
 
 
@@ -540,6 +566,7 @@ h1 {
     height: 180px;
 
     object-fit: contain;
+
 }
 
 
@@ -558,10 +585,9 @@ h1 {
     font-weight: bold;
 
     cursor: pointer;
+
 }
 
-
-/* BACK LINK */
 
 .back {
 
@@ -570,10 +596,13 @@ h1 {
     margin: 12px;
 
     color: #315c38;
+
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 600px) {
 
@@ -587,6 +616,11 @@ h1 {
 
     .flowerBush {
         font-size: 32px;
+    }
+
+    #player {
+        width: 115px;
+        height: 115px;
     }
 
 }
@@ -606,9 +640,10 @@ h1 {
 
 <p class="instructions">
 
-Use <b>← →</b> to move
-&nbsp; | &nbsp;
-<b>↑</b> to jump
+Mr Tapus runs automatically!
+<br>
+
+<b>SPACE</b> = Jump
 
 </p>
 
@@ -617,6 +652,11 @@ Use <b>← →</b> to move
 
 🐝 Bumble Bees:
 <span id="beeCount">0</span>
+
+&nbsp;&nbsp; | &nbsp;&nbsp;
+
+🏃 Mission distance:
+<span id="distance">0</span>m
 
 </div>
 
@@ -681,43 +721,39 @@ Use <b>← →</b> to move
 🌼🌸🌷🌼
 </div>
 
+<div class="flowerBush fb8">
+🌸🌷🌼🌸
+</div>
+
+<div class="flowerBush fb9">
+🌼🌷🌸🌼
+</div>
+
 
 <!-- =====================
      TREES
 ===================== -->
 
 
-<div class="tree tree1">
-🌳
-</div>
+<div class="tree tree1">🌳</div>
 
-<div class="tree tree2">
-🌲
-</div>
+<div class="tree tree2">🌲</div>
 
-<div class="tree tree3">
-🌳
-</div>
+<div class="tree tree3">🌳</div>
 
-<div class="tree tree4">
-🌲
-</div>
+<div class="tree tree4">🌲</div>
 
-<div class="tree tree5">
-🌳
-</div>
+<div class="tree tree5">🌳</div>
 
-<div class="tree tree6">
-🌲
-</div>
+<div class="tree tree6">🌲</div>
 
-<div class="tree tree7">
-🌳
-</div>
+<div class="tree tree7">🌳</div>
 
-<div class="tree tree8">
-🌲
-</div>
+<div class="tree tree8">🌲</div>
+
+<div class="tree tree9">🌳</div>
+
+<div class="tree tree10">🌲</div>
 
 
 <!-- =====================
@@ -737,42 +773,35 @@ alt="Mr Tapus">
 
 
 <!-- =====================
-     GRASS PATCHES
+     GRASS
 ===================== -->
 
 
 <div
 class="grass"
-style="left:650px"
-data-x="650">
+style="left:850px"
+data-x="850">
 </div>
 
 
 <div
 class="grass"
-style="left:1400px"
-data-x="1400">
+style="left:1650px"
+data-x="1650">
 </div>
 
 
 <div
 class="grass"
-style="left:2050px"
-data-x="2050">
+style="left:2500px"
+data-x="2500">
 </div>
 
 
 <div
 class="grass"
-style="left:2800px"
-data-x="2800">
-</div>
-
-
-<div
-class="grass"
-style="left:3550px"
-data-x="3550">
+style="left:3350px"
+data-x="3350">
 </div>
 
 
@@ -783,6 +812,13 @@ data-x="4200">
 </div>
 
 
+<div
+class="grass"
+style="left:5050px"
+data-x="5050">
+</div>
+
+
 <!-- =====================
      SOFAS
 ===================== -->
@@ -790,8 +826,8 @@ data-x="4200">
 
 <div
 class="sofa"
-style="left:1050px"
-data-x="1050">
+style="left:1250px"
+data-x="1250">
 
 🛋️
 
@@ -800,8 +836,8 @@ data-x="1050">
 
 <div
 class="sofa"
-style="left:2450px"
-data-x="2450">
+style="left:2100px"
+data-x="2100">
 
 🛋️
 
@@ -810,8 +846,8 @@ data-x="2450">
 
 <div
 class="sofa"
-style="left:3250px"
-data-x="3250">
+style="left:2950px"
+data-x="2950">
 
 🛋️
 
@@ -820,8 +856,28 @@ data-x="3250">
 
 <div
 class="sofa"
-style="left:4450px"
-data-x="4450">
+style="left:3800px"
+data-x="3800">
+
+🛋️
+
+</div>
+
+
+<div
+class="sofa"
+style="left:4650px"
+data-x="4650">
+
+🛋️
+
+</div>
+
+
+<div
+class="sofa"
+style="left:5400px"
+data-x="5400">
 
 🛋️
 
@@ -835,8 +891,8 @@ data-x="4450">
 
 <div
 class="bee"
-style="left:350px; bottom:230px"
-data-x="350">
+style="left:500px; bottom:230px"
+data-x="500">
 
 🐝
 
@@ -845,8 +901,8 @@ data-x="350">
 
 <div
 class="bee"
-style="left:850px; bottom:250px"
-data-x="850">
+style="left:1050px; bottom:255px"
+data-x="1050">
 
 🐝
 
@@ -855,8 +911,8 @@ data-x="850">
 
 <div
 class="bee"
-style="left:1550px; bottom:230px"
-data-x="1550">
+style="left:1850px; bottom:230px"
+data-x="1850">
 
 🐝
 
@@ -865,8 +921,8 @@ data-x="1550">
 
 <div
 class="bee"
-style="left:2200px; bottom:270px"
-data-x="2200">
+style="left:2700px; bottom:265px"
+data-x="2700">
 
 🐝
 
@@ -875,8 +931,8 @@ data-x="2200">
 
 <div
 class="bee"
-style="left:2900px; bottom:240px"
-data-x="2900">
+style="left:3500px; bottom:235px"
+data-x="3500">
 
 🐝
 
@@ -885,8 +941,8 @@ data-x="2900">
 
 <div
 class="bee"
-style="left:3700px; bottom:260px"
-data-x="3700">
+style="left:4350px; bottom:265px"
+data-x="4350">
 
 🐝
 
@@ -895,8 +951,8 @@ data-x="3700">
 
 <div
 class="bee"
-style="left:4600px; bottom:250px"
-data-x="4600">
+style="left:5200px; bottom:235px"
+data-x="5200">
 
 🐝
 
@@ -987,7 +1043,7 @@ alt="The Princess">
 
 <p>
 
-Mission accomplished.
+Mission accomplished!
 
 <br><br>
 
@@ -1061,13 +1117,26 @@ document.getElementById("ending");
 const beeCount =
 document.getElementById("beeCount");
 
+const distanceDisplay =
+document.getElementById("distance");
+
+
+const grass =
+document.querySelectorAll(".grass");
+
+const sofas =
+document.querySelectorAll(".sofa");
+
+const beeElements =
+document.querySelectorAll(".bee");
+
 
 /* =========================
    GAME VARIABLES
 ========================= */
 
 
-let playerX = 100;
+let playerX = 120;
 
 let playerY = 0;
 
@@ -1083,17 +1152,32 @@ let gamePaused = false;
 
 let popupType = "";
 
+let firstGrassMessageShown = false;
+
 let keys = {};
 
 
-const grass =
-document.querySelectorAll(".grass");
+/*
+   Automatic running speed.
+   This is deliberately fairly slow
+   so the game is not frustrating.
+*/
 
-const sofas =
-document.querySelectorAll(".sofa");
+const RUN_SPEED = 2.7;
 
-const beeElements =
-document.querySelectorAll(".bee");
+
+/*
+   Jump strength.
+*/
+
+const JUMP_POWER = 14;
+
+
+/*
+   Gravity.
+*/
+
+const GRAVITY = 0.65;
 
 
 /* =========================
@@ -1106,12 +1190,32 @@ document.addEventListener(
 function(event) {
 
 
+/*
+   Prevent the space bar from
+   scrolling the webpage.
+*/
+
+if (
+event.code === "Space" ||
+event.key === "ArrowLeft" ||
+event.key === "ArrowRight"
+) {
+
+event.preventDefault();
+
+}
+
+
 keys[event.key] = true;
 
 
+/*
+   SPACE = JUMP
+*/
+
 if (
 
-event.key === "ArrowUp" &&
+event.code === "Space" &&
 
 !jumping &&
 
@@ -1119,11 +1223,11 @@ event.key === "ArrowUp" &&
 
 ) {
 
+velocityY =
+JUMP_POWER;
 
-velocityY = 15;
-
-jumping = true;
-
+jumping =
+true;
 
 }
 
@@ -1171,7 +1275,8 @@ if (type === "grass") {
 
 
 mainButton.innerText =
-"🐈 Get up, Tapus!";
+"🐈 Okay, Tapus";
+
 
 beeButton.style.display =
 "none";
@@ -1207,6 +1312,14 @@ bees > 0
 function popupAction() {
 
 
+/*
+   Grass:
+   Only show the explanation once.
+
+   After that the game doesn't
+   interrupt the player again.
+*/
+
 if (popupType === "grass") {
 
 
@@ -1237,8 +1350,16 @@ closePopup();
 else if (popupType === "sofa") {
 
 
+/*
+   If there is no bee,
+   the mission is over.
+*/
+
+if (bees <= 0) {
+
 location.reload();
 
+}
 
 }
 
@@ -1258,9 +1379,11 @@ popup.style.display =
 "none";
 
 
-gamePaused = false;
+gamePaused =
+false;
 
-popupType = "";
+popupType =
+"";
 
 
 }
@@ -1283,17 +1406,13 @@ return;
 
 bees--;
 
-
 beeCount.innerText =
 bees;
 
 
-popup.style.display =
-"none";
-
-
-gamePaused = false;
-
+/*
+   Wake Tapus up.
+*/
 
 player.classList.remove(
 "sitting"
@@ -1312,6 +1431,16 @@ alt="Mr Tapus">
 
 `;
 
+
+/*
+   Move him slightly
+   away from the sofa.
+*/
+
+playerX += 80;
+
+
+closePopup();
 
 }
 
@@ -1334,12 +1463,11 @@ return Math.abs(
 playerX - obstacleX
 );
 
-
 }
 
 
 /* =========================
-   GRASS
+   GRASS COLLISION
 ========================= */
 
 
@@ -1350,20 +1478,54 @@ grass.forEach(
 function(item) {
 
 
+const obstacleX =
+parseInt(item.dataset.x);
+
+
+/*
+   Only trigger when Tapus
+   is approaching the grass.
+
+   If he has jumped over it,
+   nothing happens.
+*/
+
 if (
 
-distanceFrom(item) < 90 &&
+playerX >= obstacleX - 90 &&
 
-playerY < 50
+playerX <= obstacleX + 30 &&
+
+playerY < 55
 
 ) {
 
 
-playerX =
-parseInt(
-item.dataset.x
-) - 100;
+/*
+   Stop him directly before
+   the grass.
+*/
 
+playerX =
+obstacleX - 100;
+
+
+/*
+   First grass:
+   show the funny message.
+*/
+
+if (!firstGrassMessageShown) {
+
+
+firstGrassMessageShown = true;
+
+
+/*
+   Stop automatic running
+   temporarily so the player
+   can understand what happened.
+*/
 
 player.classList.remove(
 "walking"
@@ -1387,11 +1549,14 @@ showPopup(
 
 "🌿 Oh no!",
 
-"Mr Tapus has encountered a patch of grass! He's stopped for a little sit-down. He'll have to get himself together if he wants to continue his mission.",
+"Mr Tapus does NOT like grass. He absolutely refuses to go over it. You'll have to back him up and then jump over the patch!",
 
 "grass"
 
 );
+
+
+}
 
 
 }
@@ -1403,7 +1568,7 @@ showPopup(
 
 
 /* =========================
-   SOFAS
+   SOFA COLLISION
 ========================= */
 
 
@@ -1414,19 +1579,28 @@ sofas.forEach(
 function(item) {
 
 
+const obstacleX =
+parseInt(item.dataset.x);
+
+
+/*
+   Only trigger if Tapus
+   actually reaches the sofa.
+*/
+
 if (
 
-distanceFrom(item) < 95 &&
+playerX >= obstacleX - 100 &&
 
-playerY < 55
+playerX <= obstacleX + 35 &&
+
+playerY < 60
 
 ) {
 
 
 playerX =
-parseInt(
-item.dataset.x
-) - 100;
+obstacleX - 105;
 
 
 player.classList.remove(
@@ -1451,7 +1625,7 @@ showPopup(
 
 "🛋️ Cozy lil nook detected!",
 
-"Mr Tapus has found a cozy lil nook and got distracted. He failed his mission.",
+"Mr Tapus has found a cozy lil nook and got distracted, he failed his mission.",
 
 "sofa"
 
@@ -1494,7 +1668,7 @@ bee.style.bottom
 ) - 105
 )
 
-) < 100
+) < 105
 
 ) {
 
@@ -1509,8 +1683,8 @@ bees++;
 beeCount.innerText =
 bees;
 
-
 }
+
 
 });
 
@@ -1526,10 +1700,16 @@ bees;
 function updateCamera() {
 
 
+/*
+   Keep Tapus around the left
+   third of the screen while
+   the world scrolls.
+*/
+
 const desiredCamera =
 
 playerX -
-game.clientWidth * .35;
+game.clientWidth * .32;
 
 
 cameraX =
@@ -1542,7 +1722,7 @@ Math.min(
 
 desiredCamera,
 
-5000 -
+6000 -
 game.clientWidth
 
 )
@@ -1559,6 +1739,27 @@ world.style.left =
 
 
 /* =========================
+   DISTANCE DISPLAY
+========================= */
+
+
+function updateDistance() {
+
+
+const meters =
+
+Math.floor(
+playerX / 10
+);
+
+
+distanceDisplay.innerText =
+meters;
+
+}
+
+
+/* =========================
    PRINCESS
 ========================= */
 
@@ -1566,7 +1767,7 @@ world.style.left =
 function checkPrincess() {
 
 
-if (playerX > 4650) {
+if (playerX >= 5600) {
 
 
 gamePaused = true;
@@ -1592,29 +1793,43 @@ function gameLoop() {
 if (!gamePaused) {
 
 
-/* MOVE RIGHT */
+/*
+   AUTOMATIC FORWARD RUNNING
+*/
 
-if (
-keys["ArrowRight"]
-) {
-
-playerX += 4;
-
-}
+playerX += RUN_SPEED;
 
 
-/* MOVE LEFT */
+/*
+   Optional backwards movement.
 
-if (
-keys["ArrowLeft"]
-) {
+   This is useful when Tapus reaches
+   grass and needs to get some distance
+   before jumping.
+*/
+
+if (keys["ArrowLeft"]) {
 
 playerX -= 4;
 
 }
 
 
-/* LIMIT */
+/*
+   Small amount of forward control
+   if the player presses right.
+*/
+
+if (keys["ArrowRight"]) {
+
+playerX += 1.5;
+
+}
+
+
+/*
+   Don't let Tapus leave the world.
+*/
 
 if (playerX < 0) {
 
@@ -1623,21 +1838,25 @@ playerX = 0;
 }
 
 
-if (playerX > 4850) {
+if (playerX > 5850) {
 
-playerX = 4850;
+playerX = 5850;
 
 }
 
 
-/* GRAVITY */
+/*
+   GRAVITY
+*/
 
-velocityY -= .7;
+velocityY -= GRAVITY;
 
 playerY += velocityY;
 
 
-/* GROUND */
+/*
+   GROUND
+*/
 
 if (playerY <= 0) {
 
@@ -1650,17 +1869,20 @@ jumping = false;
 }
 
 
-/* PLAYER POSITION */
+/*
+   PLAYER POSITION
+*/
 
 player.style.left =
 playerX + "px";
-
 
 player.style.bottom =
 (105 + playerY) + "px";
 
 
-/* CHECK OBJECTS */
+/*
+   CHECK OBJECTS
+*/
 
 checkGrass();
 
@@ -1671,9 +1893,18 @@ checkBees();
 checkPrincess();
 
 
-/* CAMERA */
+/*
+   CAMERA
+*/
 
 updateCamera();
+
+
+/*
+   DISTANCE
+*/
+
+updateDistance();
 
 
 }
@@ -1683,11 +1914,12 @@ requestAnimationFrame(
 gameLoop
 );
 
-
 }
 
 
-/* START */
+/* =========================
+   START GAME
+========================= */
 
 gameLoop();
 
