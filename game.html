@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -231,7 +230,6 @@ h1 {
     to {
         transform: translateY(-5px);
     }
-
 }
 
 .sitting {
@@ -253,13 +251,6 @@ h1 {
 
     z-index: 8;
 }
-
-
-/*
-   The visible grass is decorative.
-   The actual collision is much smaller
-   and is handled by JavaScript.
-*/
 
 .grass::before {
     content: "";
@@ -290,7 +281,7 @@ h1 {
 
 
 /* =========================
-   COUCH
+   COUCHES
 ========================= */
 
 .sofa {
@@ -313,10 +304,14 @@ h1 {
 
     font-size: 36px;
 
-    z-index: 9;
+    z-index: 15;
 
     animation:
         buzz 1s infinite alternate ease-in-out;
+
+    transition:
+        opacity .2s,
+        transform .2s;
 }
 
 @keyframes buzz {
@@ -332,6 +327,11 @@ h1 {
             translateY(-14px)
             rotate(4deg);
     }
+}
+
+.bee.collected {
+    opacity: 0;
+    pointer-events: none;
 }
 
 
@@ -393,14 +393,20 @@ h1 {
 }
 
 #popup h2 {
+
     margin: 0 0 7px;
+
     color: #315c38;
+
     font-size: 23px;
 }
 
 #popup p {
+
     margin: 0 0 13px;
+
     line-height: 1.45;
+
     font-size: 16px;
 }
 
@@ -533,7 +539,7 @@ Help him reach the Princess! 👑
 &nbsp;&nbsp; | &nbsp;&nbsp;
 
 👑 Princess:
-<span id="distance">610m away</span>
+<span id="distance">608m away</span>
 
 </div>
 
@@ -591,7 +597,9 @@ alt="Mr Tapus">
 </div>
 
 
-<!-- GRASS -->
+<!-- =====================
+     GRASS
+===================== -->
 
 <div class="grass"
 data-x="900"
@@ -624,7 +632,9 @@ style="left:5350px">
 </div>
 
 
-<!-- COUCHES -->
+<!-- =====================
+     COUCHES
+===================== -->
 
 <div class="sofa"
 data-x="1350"
@@ -663,47 +673,49 @@ style="left:5750px">
 </div>
 
 
-<!-- BEES -->
+<!-- =====================
+     BEES
+===================== -->
 
 <div class="bee"
 data-x="550"
-style="left:550px; bottom:235px">
+style="left:550px; bottom:245px">
 🐝
 </div>
 
 <div class="bee"
 data-x="1150"
-style="left:1150px; bottom:260px">
+style="left:1150px; bottom:275px">
 🐝
 </div>
 
 <div class="bee"
 data-x="1950"
-style="left:1950px; bottom:245px">
+style="left:1950px; bottom:255px">
 🐝
 </div>
 
 <div class="bee"
 data-x="2850"
-style="left:2850px; bottom:270px">
+style="left:2850px; bottom:280px">
 🐝
 </div>
 
 <div class="bee"
 data-x="3750"
-style="left:3750px; bottom:245px">
+style="left:3750px; bottom:255px">
 🐝
 </div>
 
 <div class="bee"
 data-x="4650"
-style="left:4650px; bottom:270px">
+style="left:4650px; bottom:280px">
 🐝
 </div>
 
 <div class="bee"
 data-x="5500"
-style="left:5500px; bottom:245px">
+style="left:5500px; bottom:255px">
 🐝
 </div>
 
@@ -724,7 +736,9 @@ alt="The Princess">
 </div>
 
 
-<!-- POPUP -->
+<!-- =====================
+     POPUP
+===================== -->
 
 <div id="popup">
 
@@ -739,7 +753,9 @@ Continue 🐈
 </div>
 
 
-<!-- ENDING -->
+<!-- =====================
+     ENDING
+===================== -->
 
 <div id="ending">
 
@@ -830,6 +846,9 @@ document.querySelectorAll(".grass");
 const sofas =
 document.querySelectorAll(".sofa");
 
+const bees =
+document.querySelectorAll(".bee");
+
 
 /* =========================
    SETTINGS
@@ -843,12 +862,23 @@ const SPEED = 2.5;
 
 
 /*
-   Bigger jump = easier game.
+   Natural jump.
+
+   This is deliberately
+   much lower than the previous
+   version.
 */
 
-const JUMP_POWER = 18;
+const JUMP_POWER = 13.5;
 
-const GRAVITY = 0.52;
+const GRAVITY = 0.58;
+
+
+/*
+   Maximum lives.
+*/
+
+const MAX_LIVES = 3;
 
 
 /* =========================
@@ -928,15 +958,15 @@ function(event) {
 
 
     /*
-       If a popup is open,
-       Space continues.
+       Space while popup is open.
     */
 
     if (paused) {
 
+
         /*
            Grass:
-           continue AND jump.
+           close message and jump.
         */
 
         if (
@@ -949,16 +979,17 @@ function(event) {
             velocityY =
                 JUMP_POWER;
 
-            jumping = true;
+            jumping =
+                true;
 
             return;
+
         }
 
 
         /*
            Couch:
-           Space simply starts
-           the new attempt.
+           begin again.
         */
 
         if (
@@ -969,6 +1000,7 @@ function(event) {
             continueAfterCouch();
 
             return;
+
         }
 
     }
@@ -978,12 +1010,16 @@ function(event) {
        Normal jump.
     */
 
-    if (!jumping && !paused) {
+    if (
+        !jumping &&
+        !paused
+    ) {
 
         velocityY =
             JUMP_POWER;
 
-        jumping = true;
+        jumping =
+            true;
 
     }
 
@@ -1028,10 +1064,8 @@ function resumeGame() {
 
 
     /*
-       For grass, place Tapus
-       just before it.
-
-       He will immediately jump.
+       Put Tapus just before
+       the grass.
     */
 
     if (
@@ -1040,7 +1074,7 @@ function resumeGame() {
     ) {
 
         playerX =
-            currentObstacle.x - 115;
+            currentObstacle.x - 82;
 
     }
 
@@ -1048,15 +1082,15 @@ function resumeGame() {
 
 
 /* =========================
-   GRASS COLLISION
+   GRASS
 ========================= */
 
 function checkGrass() {
 
 
     /*
-       NEVER check grass while
-       Tapus is jumping.
+       Grass cannot hit Tapus
+       while he is in the air.
     */
 
     if (jumping) {
@@ -1073,25 +1107,24 @@ function checkGrass() {
 
 
         /*
-           VERY SMALL collision box.
+           Tiny collision zone.
 
-           Tapus's visual image is large,
-           but only this tiny area
-           counts as hitting grass.
+           This is MUCH smaller
+           than the actual picture.
         */
 
-        const tapusFront =
-            playerX + 72;
-
-        const tapusBack =
-            playerX + 30;
-
-
         const grassLeft =
-            x + 8;
+            x + 10;
 
         const grassRight =
-            x + 34;
+            x + 32;
+
+
+        const tapusFront =
+            playerX + 70;
+
+        const tapusBack =
+            playerX + 35;
 
 
         const touching =
@@ -1105,22 +1138,12 @@ function checkGrass() {
         }
 
 
-        /*
-           Don't hit same obstacle
-           repeatedly.
-        */
-
         if (
             lastHitObstacle === item
         ) {
             return;
         }
 
-
-        /*
-           Stop Tapus just before
-           the grass.
-        */
 
         playerX =
             x - 82;
@@ -1158,7 +1181,7 @@ function checkGrass() {
 
 
 /* =========================
-   CLEAR GRASS
+   GRASS CLEARED
 ========================= */
 
 function clearGrass() {
@@ -1181,18 +1204,18 @@ function clearGrass() {
 
 
     /*
-       Once Tapus is safely past
-       the grass while airborne,
-       it is officially cleared.
+       Once he is safely beyond
+       the grass in the air,
+       clear the obstacle.
     */
 
     if (
 
         jumping &&
 
-        playerY > 20 &&
+        playerY > 25 &&
 
-        playerX > x + 50
+        playerX > x + 45
 
     ) {
 
@@ -1208,18 +1231,15 @@ function clearGrass() {
 
 
 /* =========================
-   COUCH COLLISION
+   COUCHES
 ========================= */
 
 function checkSofas() {
 
 
     /*
-       A couch can ONLY catch
-       Tapus while he is standing.
-
-       If he is even slightly
-       airborne, he goes over it.
+       Couch only catches Tapus
+       while he is on the ground.
     */
 
     if (jumping) {
@@ -1236,27 +1256,28 @@ function checkSofas() {
 
 
         /*
-           Very narrow collision.
-
-           Only the front of Tapus
-           has to reach the couch.
+           Small collision area.
         */
 
-        const tapusFront =
-            playerX + 75;
-
-
         const sofaLeft =
-            x + 12;
+            x + 15;
 
         const sofaRight =
-            x + 62;
+            x + 60;
+
+
+        const tapusFront =
+            playerX + 72;
+
+
+        const tapusBack =
+            playerX + 40;
 
 
         const touching =
 
             tapusFront >= sofaLeft &&
-            playerX + 45 <= sofaRight;
+            tapusBack <= sofaRight;
 
 
         if (!touching) {
@@ -1287,7 +1308,7 @@ function checkSofas() {
 
 
         /*
-           Lose a bee/life.
+           Lose a life.
         */
 
         lives--;
@@ -1300,8 +1321,7 @@ function checkSofas() {
 
 
         /*
-           If no lives remain,
-           mission failed.
+           No lives left.
         */
 
         if (lives <= 0) {
@@ -1314,7 +1334,8 @@ function checkSofas() {
 
 
         /*
-           Send him back to start.
+           Send Tapus back
+           to the beginning.
         */
 
         playerX =
@@ -1328,7 +1349,6 @@ function checkSofas() {
 
         jumping =
             false;
-
 
         cameraX =
             0;
@@ -1351,11 +1371,10 @@ function checkSofas() {
 
 
 /* =========================
-   SPACE AFTER COUCH
+   COUCH CONTINUE
 ========================= */
 
 function continueAfterCouch() {
-
 
     popup.style.display =
         "none";
@@ -1370,6 +1389,128 @@ function continueAfterCouch() {
         null;
 
     walking();
+
+}
+
+
+/* =========================
+   BEE COLLECTION
+========================= */
+
+function checkBees() {
+
+
+    bees.forEach(
+    function(bee) {
+
+
+        /*
+           Already collected?
+        */
+
+        if (
+            bee.classList.contains("collected")
+        ) {
+            return;
+        }
+
+
+        const x =
+            Number(bee.dataset.x);
+
+
+        /*
+           Bee's vertical position.
+
+           Because bottom is measured
+           from the ground.
+        */
+
+        const beeBottom =
+            parseFloat(
+                bee.style.bottom
+            );
+
+
+        /*
+           Convert bee position into
+           the same coordinate system
+           as Tapus.
+        */
+
+        const beeY =
+            beeBottom - 105;
+
+
+        /*
+           Horizontal distance.
+        */
+
+        const horizontalDistance =
+            Math.abs(
+                playerX + 55 - x
+            );
+
+
+        /*
+           Vertical distance.
+        */
+
+        const verticalDistance =
+            Math.abs(
+                playerY + 55 - beeY
+            );
+
+
+        /*
+           Collection radius.
+
+           This makes bees easy to grab
+           without requiring perfect timing.
+        */
+
+        if (
+
+            horizontalDistance < 80 &&
+
+            verticalDistance < 90
+
+        ) {
+
+
+            /*
+               Don't allow more than
+               three lives.
+            */
+
+            if (lives >= MAX_LIVES) {
+
+                return;
+
+            }
+
+
+            /*
+               Collect bee.
+            */
+
+            bee.classList.add(
+                "collected"
+            );
+
+
+            /*
+               Add a life.
+            */
+
+            lives++;
+
+            livesDisplay.innerText =
+                lives;
+
+        }
+
+    });
 
 }
 
@@ -1406,7 +1547,7 @@ function updateCamera() {
 
 
 /* =========================
-   DISTANCE COUNTDOWN
+   DISTANCE
 ========================= */
 
 function updateDistance() {
@@ -1438,7 +1579,8 @@ function updateDistance() {
 function gameOver() {
 
 
-    paused = true;
+    paused =
+        true;
 
     popup.style.display =
         "none";
@@ -1517,15 +1659,13 @@ function checkPrincess() {
 
 
 /* =========================
-   PLAYER DISPLAY
+   PLAYER
 ========================= */
 
 function updatePlayer() {
 
-
     player.style.left =
         playerX + "px";
-
 
     player.style.bottom =
         (105 + playerY) + "px";
@@ -1544,7 +1684,7 @@ function gameLoop() {
 
 
         /*
-           AUTOMATIC RUNNING
+           Automatic running.
         */
 
         playerX +=
@@ -1552,7 +1692,7 @@ function gameLoop() {
 
 
         /*
-           GRAVITY
+           Gravity.
         */
 
         velocityY -=
@@ -1563,7 +1703,7 @@ function gameLoop() {
 
 
         /*
-           GROUND
+           Ground.
         */
 
         if (
@@ -1583,7 +1723,7 @@ function gameLoop() {
 
 
         /*
-           CHECK EVERYTHING
+           Check obstacles.
         */
 
         checkGrass();
@@ -1592,11 +1732,13 @@ function gameLoop() {
 
         checkSofas();
 
+        checkBees();
+
         checkPrincess();
 
 
         /*
-           UPDATE DISPLAY
+           Update display.
         */
 
         updatePlayer();
