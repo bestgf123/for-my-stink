@@ -1,550 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>The Birthday Forest 🌿</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-
-            font-family: Georgia, serif;
-
-            background:
-                radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08) 0 2px, transparent 3px),
-                radial-gradient(circle at 80% 15%, rgba(255,255,255,0.07) 0 2px, transparent 3px),
-                radial-gradient(circle at 60% 75%, rgba(255,255,255,0.06) 0 2px, transparent 3px),
-                #173d2b;
-
-            color: #f8f1dc;
-
-            overflow-x: hidden;
-        }
-
-        /* -------------------- */
-        /* STARS                 */
-        /* -------------------- */
-
-        .stars {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            color: #f5df91;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-
-        .star:nth-child(1) {
-            top: 8%;
-            left: 12%;
-            font-size: 18px;
-        }
-
-        .star:nth-child(2) {
-            top: 17%;
-            right: 16%;
-            font-size: 25px;
-            animation-delay: 1s;
-        }
-
-        .star:nth-child(3) {
-            top: 42%;
-            left: 7%;
-            font-size: 14px;
-            animation-delay: 2s;
-        }
-
-        .star:nth-child(4) {
-            top: 55%;
-            right: 9%;
-            font-size: 20px;
-            animation-delay: 0.5s;
-        }
-
-        .star:nth-child(5) {
-            top: 80%;
-            left: 18%;
-            font-size: 16px;
-            animation-delay: 1.5s;
-        }
-
-        .star:nth-child(6) {
-            top: 72%;
-            right: 25%;
-            font-size: 13px;
-            animation-delay: 2.5s;
-        }
-
-        @keyframes twinkle {
-
-            0%, 100% {
-                opacity: 0.25;
-                transform: scale(0.8);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-
-        }
-
-        /* -------------------- */
-        /* MAIN CONTAINER        */
-        /* -------------------- */
-
-        .forest {
-            position: relative;
-            z-index: 1;
-
-            width: min(1100px, 92%);
-
-            margin: auto;
-
-            padding: 70px 0 100px;
-
-            text-align: center;
-        }
-
-        /* -------------------- */
-        /* HEADER                */
-        /* -------------------- */
-
-        .header {
-            margin-bottom: 55px;
-        }
-
-        .moon {
-            font-size: 55px;
-
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%, 100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-
-        }
-
-        .header p {
-            margin: 10px 0;
-
-            color: #d9d1b5;
-
-            font-style: italic;
-
-            font-size: 19px;
-        }
-
-        h1 {
-            margin: 10px 0;
-
-            font-size: clamp(42px, 8vw, 70px);
-
-            color: #f7edc9;
-        }
-
-        .intro {
-            max-width: 650px;
-
-            margin: 20px auto;
-
-            line-height: 1.7;
-
-            color: #e4ddc7;
-
-            font-size: 17px;
-        }
-
-        /* -------------------- */
-        /* PATH                  */
-        /* -------------------- */
-
-        .path {
-            position: relative;
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 30px;
-
-            max-width: 850px;
-
-            margin: auto;
-        }
-
-        /* -------------------- */
-        /* DESTINATION CARDS     */
-        /* -------------------- */
-
-        .destination {
-
-            position: relative;
-
-            min-height: 210px;
-
-            padding: 35px 25px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-
-            align-items: center;
-
-            text-decoration: none;
-
-            color: #243d2c;
-
-            background: #f5efd9;
-
-            border: 2px solid #c7aa5d;
-
-            border-radius: 22px;
-
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-        .destination:hover {
-
-            transform: translateY(-8px) rotate(-1deg);
-
-            box-shadow: 0 22px 45px rgba(0,0,0,0.35);
-        }
-
-        .destination:nth-child(even):hover {
-
-            transform: translateY(-8px) rotate(1deg);
-        }
-
-        .icon {
-
-            font-size: 52px;
-
-            margin-bottom: 12px;
-        }
-
-        .destination h2 {
-
-            margin: 5px 0 8px;
-
-            font-size: 25px;
-
-            color: #214a32;
-        }
-
-        .destination p {
-
-            margin: 0;
-
-            line-height: 1.5;
-
-            font-size: 15px;
-
-            color: #53604e;
-        }
-
-        /* -------------------- */
-        /* SPECIAL CARDS         */
-        /* -------------------- */
-
-        .game {
-
-            background:
-                linear-gradient(
-                    rgba(245,239,217,0.95),
-                    rgba(245,239,217,0.95)
-                ),
-                #294d35;
-        }
-
-        .got {
-
-            background:
-                linear-gradient(
-                    rgba(245,239,217,0.95),
-                    rgba(245,239,217,0.95)
-                ),
-                #402f2c;
-        }
-
-        .facts {
-
-            background:
-                linear-gradient(
-                    rgba(245,239,217,0.95),
-                    rgba(245,239,217,0.95)
-                ),
-                #4d5933;
-        }
-
-        .cat-card {
-
-            background:
-                linear-gradient(
-                    rgba(245,239,217,0.95),
-                    rgba(245,239,217,0.95)
-                ),
-                #364e3b;
-        }
-
-        /* -------------------- */
-        /* LOCKED FINAL GIFT     */
-        /* -------------------- */
-
-        .final {
-
-            grid-column: 1 / -1;
-
-            max-width: 500px;
-
-            width: 100%;
-
-            justify-self: center;
-
-            background: #203b2b;
-
-            color: #f7edc9;
-
-            border-color: #d6b95f;
-        }
-
-        .final h2 {
-
-            color: #f7edc9;
-        }
-
-        .final p {
-
-            color: #d9d1b5;
-        }
-
-        .lock {
-
-            font-size: 25px;
-
-            margin-top: 12px;
-        }
-
-        /* -------------------- */
-        /* DECORATIONS           */
-        /* -------------------- */
-
-        .flower {
-
-            position: absolute;
-
-            font-size: 25px;
-
-            pointer-events: none;
-        }
-
-        .flower.one {
-            top: 28%;
-            left: 1%;
-        }
-
-        .flower.two {
-            top: 48%;
-            right: 1%;
-        }
-
-        .flower.three {
-            bottom: 12%;
-            left: 5%;
-        }
-
-        .flower.four {
-            bottom: 4%;
-            right: 5%;
-        }
-
-        /* -------------------- */
-        /* MOBILE                */
-        /* -------------------- */
-
-        @media (max-width: 700px) {
-
-            .path {
-                grid-template-columns: 1fr;
-            }
-
-            .final {
-                grid-column: auto;
-            }
-
-            .forest {
-                padding-top: 45px;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Birthday Forest 🌿</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    color: #f7efd5;
+    background:
+        radial-gradient(circle at 50% 0%, #355d43 0%, #173d2b 45%, #0d2619 100%);
+    overflow-x: hidden;
+}
+
+/* NIGHT SKY */
+
+.sky {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    color: #f6df91;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+.s1 { top: 8%; left: 12%; }
+.s2 { top: 15%; right: 17%; font-size: 24px; animation-delay: 1s; }
+.s3 { top: 31%; left: 6%; animation-delay: 2s; }
+.s4 { top: 42%; right: 8%; font-size: 14px; animation-delay: .5s; }
+.s5 { top: 65%; left: 13%; animation-delay: 1.5s; }
+.s6 { top: 78%; right: 14%; font-size: 23px; animation-delay: 2.5s; }
+.s7 { top: 88%; left: 45%; animation-delay: .8s; }
+
+@keyframes twinkle {
+    0%,100% {
+        opacity: .25;
+        transform: scale(.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* FOREST */
+
+.forest {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: auto;
+    padding: 45px 20px 120px;
+    text-align: center;
+}
+
+/* TREES */
+
+.tree {
+    position: absolute;
+    font-size: 70px;
+    opacity: .85;
+    pointer-events: none;
+}
+
+.tree1 { left: -5px; top: 250px; }
+.tree2 { right: -5px; top: 390px; }
+.tree3 { left: 15px; top: 700px; }
+.tree4 { right: 10px; top: 900px; }
+.tree5 { left: -10px; top: 1120px; }
+.tree6 { right: -5px; top: 1280px; }
+
+/* HEADER */
+
+.moon {
+    font-size: 65px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-9px); }
+}
+
+h1 {
+    margin: 5px 0;
+    font-size: clamp(45px, 8vw, 75px);
+    color: #f5e8bd;
+    text-shadow: 0 4px 15px rgba(0,0,0,.35);
+}
+
+.intro {
+    max-width: 650px;
+    margin: 15px auto 45px;
+    line-height: 1.7;
+    color: #ded7bd;
+    font-style: italic;
+}
+
+/* MAP */
+
+.map {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    min-height: 1450px;
+    margin: auto;
+}
+
+/* Winding paths */
+
+.path {
+    position: absolute;
+    width: 120px;
+    height: 300px;
+    border-left: 35px solid rgba(188, 157, 94, .45);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+    z-index: -1;
+}
+
+.path1 {
+    left: 42%;
+    top: 160px;
+    height: 350px;
+}
+
+.path2 {
+    left: 48%;
+    top: 440px;
+    height: 360px;
+    transform: rotate(18deg);
+}
+
+.path3 {
+    left: 42%;
+    top: 730px;
+    height: 360px;
+    transform: rotate(-15deg);
+}
+
+.path4 {
+    left: 48%;
+    top: 1020px;
+    height: 350px;
+    transform: rotate(15deg);
+}
+
+/* DESTINATIONS */
+
+.destination {
+    position: absolute;
+    width: 245px;
+    min-height: 175px;
+    padding: 25px 20px;
+
+    background: #f4ecd5;
+    color: #263c2c;
+
+    border: 3px solid #c5a95d;
+    border-radius: 18px;
+
+    text-decoration: none;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,.35);
+
+    transition: .3s ease;
+}
+
+.destination:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 22px 45px rgba(0,0,0,.45);
+}
+
+.destination h2 {
+    margin: 7px 0;
+    color: #214a32;
+    font-size: 23px;
+}
+
+.destination p {
+    margin: 0;
+    line-height: 1.45;
+    font-size: 14px;
+}
+
+.icon {
+    font-size: 48px;
+}
+
+/* POSITIONS */
+
+.westeros {
+    top: 120px;
+    left: 5%;
+}
+
+.facts {
+    top: 410px;
+    right: 4%;
+}
+
+.game {
+    top: 700px;
+    left: 5%;
+}
+
+.cats {
+    top: 990px;
+    right: 4%;
+}
+
+.final {
+    top: 1280px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #203b2b;
+    color: #f7efd5;
+}
+
+.final h2 {
+    color: #f4dfa0;
+}
+
+.final p {
+    color: #d8d0b5;
+}
+
+/* SIGN POSTS */
+
+.sign {
+    position: absolute;
+    font-size: 17px;
+    color: #4a301c;
+    background: #b98c52;
+    padding: 12px 18px;
+    border: 3px solid #704d2c;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0,0,0,.3);
+    transform: rotate(-4deg);
+}
+
+.sign1 {
+    top: 300px;
+    left: 42%;
+}
+
+.sign2 {
+    top: 590px;
+    right: 35%;
+    transform: rotate(4deg);
+}
+
+.sign3 {
+    top: 880px;
+    left: 35%;
+    transform: rotate(-3deg);
+}
+
+.sign4 {
+    top: 1170px;
+    right: 32%;
+    transform: rotate(3deg);
+}
+
+/* FLOWERS */
+
+.flower {
+    position: absolute;
+    font-size: 28px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.f1 { top: 250px; right: 18%; }
+.f2 { top: 530px; left: 15%; animation-delay: 1s; }
+.f3 { top: 820px; right: 15%; animation-delay: 2s; }
+.f4 { top: 1110px; left: 18%; animation-delay: .5s; }
+
+/* PAW PRINTS */
+
+.paws {
+    position: absolute;
+    font-size: 22px;
+    letter-spacing: 15px;
+    opacity: .7;
+}
+
+.paws1 {
+    top: 640px;
+    left: 40%;
+    transform: rotate(25deg);
+}
+
+.paws2 {
+    top: 1180px;
+    left: 42%;
+    transform: rotate(-20deg);
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .map {
+        min-height: 1650px;
+    }
+
+    .destination {
+        width: 220px;
+    }
+
+    .westeros {
+        left: 0;
+    }
+
+    .facts {
+        right: 0;
+    }
+
+    .game {
+        left: 0;
+    }
+
+    .cats {
+        right: 0;
+    }
+
+    .sign {
+        display: none;
+    }
+
+    .tree {
+        font-size: 50px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Stars -->
+<div class="sky">
+    <div class="star s1">✦</div>
+    <div class="star s2">✧</div>
+    <div class="star s3">✦</div>
+    <div class="star s4">✧</div>
+    <div class="star s5">✦</div>
+    <div class="star s6">✧</div>
+    <div class="star s7">✦</div>
+</div>
 
-    <div class="stars">
+<main class="forest">
 
-        <div class="star">✦</div>
-        <div class="star">✧</div>
-        <div class="star">✦</div>
-        <div class="star">✧</div>
-        <div class="star">✦</div>
-        <div class="star">✧</div>
+    <div class="tree tree1">🌲</div>
+    <div class="tree tree2">🌲</div>
+    <div class="tree tree3">🌳</div>
+    <div class="tree tree4">🌲</div>
+    <div class="tree tree5">🌳</div>
+    <div class="tree tree6">🌲</div>
 
-    </div>
+    <div class="moon">🌙</div>
 
+    <h1>The Birthday Forest</h1>
 
-    <!-- Decorative flowers -->
+    <p class="intro">
+        The forest has many paths, Stink...
+        Choose your adventure carefully.
+        You never know what—or who—you might find along the way.
+    </p>
 
-    <div class="flower one">🌼</div>
-    <div class="flower two">🌸</div>
-    <div class="flower three">🌿</div>
-    <div class="flower four">🌷</div>
+    <section class="map">
 
+        <!-- Winding trails -->
 
-    <!-- Main forest -->
+        <div class="path path1"></div>
+        <div class="path path2"></div>
+        <div class="path path3"></div>
+        <div class="path path4"></div>
 
-    <main class="forest">
+        <!-- Westeros -->
 
-        <header class="header">
+        <a href="quiz.html" class="destination westeros">
 
-            <div class="moon">🌙</div>
+            <div class="icon">🐉</div>
 
-            <p>Welcome, brave little creature...</p>
+            <h2>The Westeros Trail</h2>
 
-            <h1>The Birthday Forest</h1>
-
-            <p class="intro">
-                A strange and wonderful forest has appeared
-                in honour of one very important person.
-                Choose a path below and see where it leads.
+            <p>
+                Brave the realm of dragons,
+                kings and questionable decisions.
             </p>
 
-        </header>
+        </a>
 
+        <!-- Facts -->
 
-        <!-- Paths -->
+        <a href="facts.html" class="destination facts">
 
-        <section class="path">
+            <div class="icon">⭐</div>
 
+            <h2>The Strange Facts Trail</h2>
 
-            <!-- Platform game -->
+            <p>
+                Discover weird birthday facts,
+                bizarre traditions and useless knowledge.
+            </p>
 
-            <a href="game.html" class="destination game">
+        </a>
 
-                <div class="icon">🎮</div>
+        <!-- Game -->
 
-                <h2>The Birthday Quest</h2>
+        <a href="game.html" class="destination game">
 
-                <p>
-                    A dangerous journey through the forest.
-                    Jump, collect stars, and find the birthday treasure.
-                </p>
+            <div class="icon">🎮</div>
 
-            </a>
+            <h2>The Birthday Quest</h2>
 
+            <p>
+                Jump, explore, collect stars
+                and find the birthday treasure.
+            </p>
 
-            <!-- GOT quiz -->
+        </a>
 
-            <a href="quiz.html" class="destination got">
+        <!-- Cats -->
 
-                <div class="icon">🐉</div>
+        <a href="cats.html" class="destination cats">
 
-                <h2>The Realm of Westeros</h2>
+            <div class="icon">🐈</div>
 
-                <p>
-                    Test your knowledge of Game of Thrones.
-                    Winter is coming...
-                </p>
+            <h2>The Cat Trail</h2>
 
-            </a>
+            <p>
+                Follow the paw prints.
+                Something furry is hiding nearby...
+            </p>
 
+        </a>
 
-            <!-- Birthday facts -->
+        <!-- Final -->
 
-            <a href="facts.html" class="destination facts">
+        <a href="secret.html" class="destination final">
 
-                <div class="icon">⭐</div>
+            <div class="icon">🎁</div>
 
-                <h2>The Book of Strange Facts</h2>
+            <h2>The Final Gift</h2>
 
-                <p>
-                    Weird, wonderful, ridiculous and
-                    surprisingly interesting birthday facts.
-                </p>
+            <p>
+                Something very special is waiting
+                at the end of the forest.
+            </p>
 
-            </a>
+            <p>🔒</p>
 
+        </a>
 
-            <!-- Cat section -->
+        <!-- Signposts -->
 
-            <a href="cats.html" class="destination cat-card">
+        <div class="sign sign1">🐉 Westeros →</div>
+        <div class="sign sign2">⭐ Facts ←</div>
+        <div class="sign sign3">🎮 Quest →</div>
+        <div class="sign sign4">🐈 Cats ←</div>
 
-                <div class="icon">🐈</div>
+        <!-- Flowers -->
 
-                <h2>The Cat's Secret</h2>
+        <div class="flower f1">🌼</div>
+        <div class="flower f2">🌸</div>
+        <div class="flower f3">🌷</div>
+        <div class="flower f4">🌼</div>
 
-                <p>
-                    There are creatures hiding somewhere in this forest.
-                    You should probably investigate.
-                </p>
+        <!-- Paw prints -->
 
-            </a>
+        <div class="paws paws1">🐾 🐾</div>
+        <div class="paws paws2">🐾 🐾</div>
 
+    </section>
 
-            <!-- Final surprise -->
-
-            <a href="secret.html" class="destination final">
-
-                <div class="icon">🎁</div>
-
-                <h2>The Final Gift</h2>
-
-                <p>
-                    Something is waiting at the end...
-                </p>
-
-                <div class="lock">
-                    🔒
-                </div>
-
-            </a>
-
-        </section>
-
-    </main>
+</main>
 
 </body>
 </html>
