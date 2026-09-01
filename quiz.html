@@ -41,19 +41,72 @@ body {
 
 
 /* =========================
+   MUSIC BUTTON
+========================= */
+
+#musicButton {
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 1000;
+
+    width: auto;
+
+    padding: 10px 16px;
+
+    border: 1px solid #a58d50;
+    border-radius: 25px;
+
+    background: rgba(20,25,20,.88);
+
+    color: #e7ce86;
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.45);
+
+    transition:
+        background .2s,
+        transform .2s;
+}
+
+#musicButton:hover {
+
+    background:
+        rgba(55,60,48,.95);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================
    BACKGROUND
 ========================= */
 
 .world-background {
     position: fixed;
     inset: 0;
+
     overflow: hidden;
+
     pointer-events: none;
+
     z-index: -10;
 }
 
 .moon {
     position: absolute;
+
     top: 7vh;
     right: 10vw;
 
@@ -72,8 +125,11 @@ body {
 
 .cloud {
     position: absolute;
+
     color: rgba(235,242,237,.16);
+
     font-size: 75px;
+
     white-space: nowrap;
 }
 
@@ -94,7 +150,9 @@ body {
 
 .dragon {
     position: absolute;
+
     font-size: 100px;
+
     opacity: .38;
 
     filter:
@@ -106,27 +164,37 @@ body {
 .dragon1 {
     top: 11%;
     left: 13%;
-    transform: rotate(-8deg);
+
+    transform:
+        rotate(-8deg);
 }
 
 .dragon2 {
     top: 25%;
     right: 4%;
+
     font-size: 75px;
+
     transform:
         scaleX(-1)
         rotate(-5deg);
+
     opacity: .28;
 }
 
 
-/* Weirwood */
+/* =========================
+   WEIRWOOD
+========================= */
 
 .weirwood {
     position: absolute;
+
     bottom: 4%;
+
     width: 190px;
     height: 330px;
+
     opacity: .42;
 }
 
@@ -134,6 +202,7 @@ body {
     content: "";
 
     position: absolute;
+
     bottom: 0;
     left: 70px;
 
@@ -156,6 +225,7 @@ body {
     content: "";
 
     position: absolute;
+
     top: 30px;
     left: 0;
 
@@ -191,20 +261,28 @@ body {
 
 .tree2 {
     left: 29%;
-    transform: scale(.72);
+
+    transform:
+        scale(.72);
+
     opacity: .27;
 }
 
 .tree3 {
     right: -30px;
-    transform: scale(.9);
+
+    transform:
+        scale(.9);
 }
 
 
-/* Raven */
+/* =========================
+   RAVEN
+========================= */
 
 .raven {
     position: absolute;
+
     top: 31%;
     left: 5%;
 
@@ -217,14 +295,18 @@ body {
             0 5px 8px rgba(0,0,0,.7)
         );
 
-    transform: rotate(-8deg);
+    transform:
+        rotate(-8deg);
 }
 
 
-/* Wolf */
+/* =========================
+   WOLF
+========================= */
 
 .wolf {
     position: absolute;
+
     bottom: 8%;
     left: 8%;
 
@@ -240,7 +322,9 @@ body {
 }
 
 
-/* Red Keep */
+/* =========================
+   RED KEEP
+========================= */
 
 .red-keep {
     position: absolute;
@@ -256,6 +340,7 @@ body {
 
 .keep-tower {
     position: absolute;
+
     bottom: 0;
 
     width: 65px;
@@ -277,6 +362,7 @@ body {
     content: "";
 
     position: absolute;
+
     top: -24px;
     left: -10px;
 
@@ -307,10 +393,13 @@ body {
 }
 
 
-/* Fire */
+/* =========================
+   FIRE
+========================= */
 
 .fire {
     position: absolute;
+
     bottom: 3%;
     right: 31%;
 
@@ -358,6 +447,7 @@ body {
 
 .header {
     text-align: center;
+
     margin-bottom: 25px;
 }
 
@@ -384,6 +474,7 @@ h1 {
 
 .subtitle {
     color: #eee5ca;
+
     line-height: 1.6;
 
     font-size: 17px;
@@ -462,17 +553,22 @@ h1 {
 
 #nightmareBanner h2 {
     margin: 0 0 7px;
+
     color: #e6b96b;
 }
 
 #nightmareBanner p {
     margin: 0;
+
     color: #f0ded0;
+
     line-height: 1.5;
 }
 
 
-/* Question */
+/* =========================
+   QUESTION
+========================= */
 
 .question {
     display: none;
@@ -501,12 +597,14 @@ h1 {
 
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform:
+            translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
@@ -532,7 +630,9 @@ h1 {
 }
 
 
-/* Answers */
+/* =========================
+   ANSWERS
+========================= */
 
 .answer {
     width: 100%;
@@ -583,7 +683,9 @@ h1 {
 }
 
 
-/* Feedback */
+/* =========================
+   FEEDBACK
+========================= */
 
 .feedback {
     display: none;
@@ -616,7 +718,9 @@ h1 {
 }
 
 
-/* Next */
+/* =========================
+   NEXT
+========================= */
 
 .next {
     display: none;
@@ -649,7 +753,9 @@ h1 {
 }
 
 
-/* Result */
+/* =========================
+   RESULT
+========================= */
 
 #result {
     display: none;
@@ -675,18 +781,23 @@ h1 {
 
 #result h2 {
     color: #776331;
+
     font-size: 29px;
+
     margin: 12px 0;
 }
 
 .finalScore {
     font-size: 22px;
+
     font-weight: bold;
+
     color: #315a35;
 }
 
 #resultText {
     line-height: 1.6;
+
     font-size: 17px;
 }
 
@@ -725,7 +836,9 @@ h1 {
 }
 
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 600px) {
 
@@ -759,6 +872,7 @@ h1 {
 
     .wolf {
         left: -20px;
+
         font-size: 75px;
     }
 
@@ -770,6 +884,15 @@ h1 {
         padding: 23px 18px;
     }
 
+    #musicButton {
+        top: 10px;
+        right: 10px;
+
+        padding: 8px 12px;
+
+        font-size: 12px;
+    }
+
 }
 
 </style>
@@ -779,6 +902,32 @@ h1 {
 
 <body>
 
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<audio id="bgMusic" loop>
+
+    <source
+        src="westeros-music.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<button
+    id="musicButton"
+    onclick="toggleMusic()">
+
+    🎵 Music
+
+</button>
+
+
+<!-- =========================
+     BACKGROUND
+========================= -->
 
 <div class="world-background">
 
@@ -834,6 +983,10 @@ h1 {
 
 </div>
 
+
+<!-- =========================
+     QUIZ
+========================= -->
 
 <div class="quiz">
 
@@ -908,7 +1061,7 @@ h1 {
 
 
 <!-- =====================================================
-     QUESTION 1
+     QUESTIONS
 ===================================================== -->
 
 <div class="question active"
@@ -947,8 +1100,6 @@ Next Question →
 </div>
 
 
-<!-- 2 -->
-
 <div class="question"
 data-answer="Meraxes">
 
@@ -986,8 +1137,6 @@ Next Question →
 </div>
 
 
-<!-- 3 -->
-
 <div class="question"
 data-answer="Silverwing">
 
@@ -1023,8 +1172,6 @@ Next Question →
 
 </div>
 
-
-<!-- 4 -->
 
 <div class="question"
 data-answer="The Hammer of the Waters">
@@ -1063,8 +1210,6 @@ Next Question →
 </div>
 
 
-<!-- 5 -->
-
 <div class="question"
 data-answer="Aegon II">
 
@@ -1101,8 +1246,6 @@ Next Question →
 
 </div>
 
-
-<!-- 6 -->
 
 <div class="question"
 data-answer="Cregan Stark">
@@ -1141,8 +1284,6 @@ Next Question →
 </div>
 
 
-<!-- 7 -->
-
 <div class="question"
 data-answer="Oldtown">
 
@@ -1178,8 +1319,6 @@ Next Question →
 
 </div>
 
-
-<!-- 8 -->
 
 <div class="question"
 data-answer="Harren Hoare">
@@ -1218,8 +1357,6 @@ Next Question →
 </div>
 
 
-<!-- 9 -->
-
 <div class="question"
 data-answer="Dark Sister">
 
@@ -1257,8 +1394,6 @@ Next Question →
 </div>
 
 
-<!-- 10 -->
-
 <div class="question"
 data-answer="The Doom of Valyria">
 
@@ -1294,8 +1429,6 @@ Next Question →
 
 </div>
 
-
-<!-- 11 -->
 
 <div class="question"
 data-answer="Daeron II">
@@ -1333,8 +1466,6 @@ Next Question →
 </div>
 
 
-<!-- 12 -->
-
 <div class="question"
 data-answer="Aegor Rivers">
 
@@ -1370,8 +1501,6 @@ Next Question →
 
 </div>
 
-
-<!-- 13 -->
 
 <div class="question"
 data-answer="Brynden Rivers">
@@ -1409,8 +1538,6 @@ Next Question →
 </div>
 
 
-<!-- 14 -->
-
 <div class="question"
 data-answer="The Mander">
 
@@ -1446,8 +1573,6 @@ Next Question →
 
 </div>
 
-
-<!-- 15 -->
 
 <div class="question"
 data-answer="The Night's King">
@@ -1487,8 +1612,6 @@ Next Question →
 </div>
 
 
-<!-- 16 -->
-
 <div class="question"
 data-answer="Dawn">
 
@@ -1525,8 +1648,6 @@ Next Question →
 
 </div>
 
-
-<!-- 17 -->
 
 <div class="question"
 data-answer="The First Blackfyre Rebellion">
@@ -1565,8 +1686,6 @@ Next Question →
 </div>
 
 
-<!-- 18 -->
-
 <div class="question"
 data-answer="Maegor I">
 
@@ -1602,8 +1721,6 @@ Next Question →
 
 </div>
 
-
-<!-- 19 -->
 
 <div class="question"
 data-answer="The Golden Company">
@@ -1642,8 +1759,6 @@ Next Question →
 </div>
 
 
-<!-- 20 -->
-
 <div class="question"
 data-answer="The Black Dread">
 
@@ -1680,12 +1795,8 @@ Enter the Nightmare Round ☠️
 </div>
 
 
-<!-- =====================================================
-     NIGHTMARE ROUND
-===================================================== -->
+<!-- NIGHTMARE -->
 
-
-<!-- 21 -->
 
 <div class="question"
 data-answer="Septon Barth">
@@ -1725,8 +1836,6 @@ Next Nightmare Question →
 </div>
 
 
-<!-- 22 -->
-
 <div class="question"
 data-answer="Nagga">
 
@@ -1763,8 +1872,6 @@ Next Nightmare Question →
 
 </div>
 
-
-<!-- 23 -->
 
 <div class="question"
 data-answer="The Rat Cook">
@@ -1803,8 +1910,6 @@ Next Nightmare Question →
 </div>
 
 
-<!-- 24 -->
-
 <div class="question"
 data-answer="Sheepstealer">
 
@@ -1841,8 +1946,6 @@ Final Nightmare Question →
 
 </div>
 
-
-<!-- 25 -->
 
 <div class="question"
 data-answer="The Blackfyres">
@@ -1881,9 +1984,7 @@ Reveal Final Result 👑
 </div>
 
 
-<!-- =====================================================
-     RESULT
-===================================================== -->
+<!-- RESULT -->
 
 <div id="result">
 
@@ -1929,6 +2030,9 @@ href="forest.html">
 
 <script>
 
+/* =========================
+   QUIZ
+========================= */
 
 let score = 0;
 
@@ -1953,20 +2057,31 @@ function answer(button) {
 
     answered = true;
 
+
+    /* Start music on first user interaction */
+
+    startMusic();
+
+
     const question =
         button.closest(".question");
+
 
     const correctAnswer =
         question.dataset.answer;
 
+
     const selectedAnswer =
         button.innerText.trim();
+
 
     const buttons =
         question.querySelectorAll(".answer");
 
+
     const feedback =
         question.querySelector(".feedback");
+
 
     const next =
         question.querySelector(".next");
@@ -1989,12 +2104,15 @@ function answer(button) {
         scoreDisplay.innerText =
             score;
 
+
         button.classList.add(
             "correct"
         );
 
+
         feedback.innerText =
             "✓ Correct. The lore is strong with you.";
+
 
         feedback.classList.add(
             "correctText"
@@ -2028,6 +2146,7 @@ function answer(button) {
         feedback.innerText =
             "✗ Nope. The correct answer was " +
             correctAnswer + ".";
+
 
         feedback.classList.add(
             "incorrectText"
@@ -2118,6 +2237,7 @@ function showResult() {
             "resultTitle"
         );
 
+
     const text =
         document.getElementById(
             "resultText"
@@ -2129,6 +2249,7 @@ function showResult() {
         title.innerText =
             "🐉 THE CITADEL HAS SURRENDERED";
 
+
         text.innerText =
             "25 out of 25. Absolutely absurd. The Maesters have officially run out of questions.";
 
@@ -2138,6 +2259,7 @@ function showResult() {
 
         title.innerText =
             "👑 Archmaester of Westeros";
+
 
         text.innerText =
             "You have reached the point where your friends probably regret asking you a lore question.";
@@ -2149,6 +2271,7 @@ function showResult() {
         title.innerText =
             "🐉 Dragonlord Scholar";
 
+
         text.innerText =
             "That is an outrageous amount of Westerosi knowledge.";
 
@@ -2158,6 +2281,7 @@ function showResult() {
 
         title.innerText =
             "📜 Keeper of the Archives";
+
 
         text.innerText =
             "Very impressive. You clearly know your way around the deeper lore.";
@@ -2169,6 +2293,7 @@ function showResult() {
         title.innerText =
             "⚔️ Seasoned Lorekeeper";
 
+
         text.innerText =
             "Pretty damn good. But the Nightmare Round found a few things hiding in the archives.";
 
@@ -2178,6 +2303,7 @@ function showResult() {
 
         title.innerText =
             "🐺 Promising Squire";
+
 
         text.innerText =
             "You know Westeros, but there are still a few dusty books left to read.";
@@ -2189,10 +2315,16 @@ function showResult() {
         title.innerText =
             "🐌 You Know Nothing, Stink";
 
+
         text.innerText =
             "The Citadel recommends starting with the family tree and working outward.";
 
     }
+
+
+    /* Fade music out when quiz finishes */
+
+    fadeMusicOut();
 
 
     window.scrollTo({
@@ -2212,6 +2344,199 @@ function restartQuiz() {
 
 }
 
+
+/* =========================
+   MUSIC SYSTEM
+========================= */
+
+const music =
+    document.getElementById("bgMusic");
+
+
+const musicButton =
+    document.getElementById("musicButton");
+
+
+const targetVolume = 0.35;
+
+
+let fadeTimer = null;
+
+let musicStarted = false;
+
+
+/*
+   Start the music after the first
+   answer is clicked.
+*/
+
+function startMusic() {
+
+    if (musicStarted) {
+        return;
+    }
+
+
+    musicStarted = true;
+
+
+    clearInterval(fadeTimer);
+
+
+    music.volume = 0;
+
+
+    music.play()
+        .then(function() {
+
+            musicButton.innerText =
+                "🔊 Music On";
+
+
+            fadeTimer =
+                setInterval(function() {
+
+                    if (
+                        music.volume <
+                        targetVolume
+                    ) {
+
+                        music.volume =
+                            Math.min(
+                                music.volume + 0.02,
+                                targetVolume
+                            );
+
+                    }
+
+                    else {
+
+                        clearInterval(
+                            fadeTimer
+                        );
+
+                    }
+
+                }, 100);
+
+        })
+
+        .catch(function() {
+
+            musicStarted = false;
+
+            musicButton.innerText =
+                "🎵 Music";
+
+        });
+
+}
+
+
+/*
+   Manual music toggle.
+*/
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        musicStarted = true;
+
+        clearInterval(fadeTimer);
+
+        music.volume = 0;
+
+
+        music.play()
+            .then(function() {
+
+                musicButton.innerText =
+                    "🔊 Music On";
+
+
+                fadeTimer =
+                    setInterval(function() {
+
+                        if (
+                            music.volume <
+                            targetVolume
+                        ) {
+
+                            music.volume =
+                                Math.min(
+                                    music.volume + 0.02,
+                                    targetVolume
+                                );
+
+                        }
+
+                        else {
+
+                            clearInterval(
+                                fadeTimer
+                            );
+
+                        }
+
+                    }, 100);
+
+            });
+
+    }
+
+    else {
+
+        fadeMusicOut();
+
+    }
+
+}
+
+
+/*
+   Smoothly fade music out.
+*/
+
+function fadeMusicOut() {
+
+    clearInterval(fadeTimer);
+
+
+    fadeTimer =
+        setInterval(function() {
+
+            if (
+                music.volume > 0.02
+            ) {
+
+                music.volume =
+                    Math.max(
+                        music.volume - 0.02,
+                        0
+                    );
+
+            }
+
+            else {
+
+                music.volume = 0;
+
+                music.pause();
+
+                clearInterval(
+                    fadeTimer
+                );
+
+
+                musicButton.innerText =
+                    "🎵 Music";
+
+            }
+
+        }, 100);
+
+}
 
 </script>
 
