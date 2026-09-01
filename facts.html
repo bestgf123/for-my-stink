@@ -1,1163 +1,2160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Things 🎂</title>
+
+<title>Birthday Headquarters 🎂</title>
+
 <style>
+
 * {
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 body {
     margin: 0;
     min-height: 100vh;
     font-family: Georgia, serif;
-    color: #4a3025;
+
+    color: #56384b;
+
     background:
-        radial-gradient(circle at 50% 0%, #fff9df 0%, #ffd9df 38%, #e8b8c9 100%);
+        radial-gradient(circle at 15% 10%, #fff7fa 0%, transparent 28%),
+        radial-gradient(circle at 85% 15%, #fff3c9 0%, transparent 30%),
+        linear-gradient(
+            180deg,
+            #f7c5d7 0%,
+            #f8d8bd 48%,
+            #efb8ca 100%
+        );
+
     overflow-x: hidden;
 }
-/* =========================
+
+
+/* =====================================================
    CONFETTI
-========================= */
-.confetti {
+===================================================== */
+
+#confetti {
     position: fixed;
-    top: -20px;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -30px;
     width: 9px;
     height: 15px;
-    z-index: 50;
-    pointer-events: none;
-    animation: fall linear forwards;
+    animation: confettiFall linear forwards;
 }
-@keyframes fall {
+
+@keyframes confettiFall {
+
     0% {
         transform:
-            translateY(-20px)
+            translateY(-30px)
             rotate(0deg);
-        opacity: 1;
     }
+
     100% {
         transform:
             translateY(110vh)
             rotate(720deg);
-        opacity: .8;
     }
 }
-/* =========================
+
+
+/* =====================================================
    BALLOONS
-========================= */
+===================================================== */
+
 .balloon {
     position: fixed;
-    font-size: 70px;
-    z-index: 1;
+
+    width: 58px;
+    height: 73px;
+
+    border-radius:
+        50% 50% 48% 48%;
+
+    opacity: .65;
+
+    z-index: 0;
+
     pointer-events: none;
-    animation: balloonFloat 5s ease-in-out infinite;
+
+    animation:
+        balloonFloat 5s ease-in-out infinite;
 }
-.balloon.one {
-    left: 2%;
-    top: 15%;
+
+.balloon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+    height: 120px;
+
+    top: 70px;
+    left: 29px;
+
+    background: rgba(80,40,60,.3);
 }
-.balloon.two {
-    right: 2%;
-    top: 23%;
+
+.balloon1 {
+    left: 3%;
+    top: 20%;
+    background: #e998b2;
+}
+
+.balloon2 {
+    right: 4%;
+    top: 28%;
+    background: #f2c867;
     animation-delay: 1s;
 }
-.balloon.three {
+
+.balloon3 {
     left: 5%;
     bottom: 12%;
+    background: #a9c7e6;
     animation-delay: 2s;
 }
-.balloon.four {
-    right: 5%;
-    bottom: 8%;
+
+.balloon4 {
+    right: 7%;
+    bottom: 15%;
+    background: #c8a6d8;
     animation-delay: 3s;
 }
+
 @keyframes balloonFloat {
+
     0%,100% {
-        transform: translateY(0) rotate(-4deg);
+        transform:
+            translateY(0)
+            rotate(-3deg);
     }
+
     50% {
-        transform: translateY(-18px) rotate(4deg);
+        transform:
+            translateY(-15px)
+            rotate(4deg);
     }
 }
-/* =========================
+
+
+/* =====================================================
    MAIN
-========================= */
+===================================================== */
+
 .container {
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 18px 80px;
     position: relative;
     z-index: 2;
-}
-header {
-    text-align: center;
-}
-header h1 {
-    font-size: clamp(42px, 9vw, 75px);
-    margin: 10px 0 5px;
-    color: #8b3f57;
-    text-shadow: 0 4px 0 #fff;
-}
-header p {
-    font-size: 18px;
-    color: #704b42;
-}
-/* =========================
-   GIANT CAKE
-========================= */
-.cake-area {
-    min-height: 690px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-.cake {
-    position: relative;
-    width: min(760px, 94vw);
-    height: 610px;
-    margin-top: 20px;
-}
-/* cake layers */
-.cake-bottom {
-    position: absolute;
-    bottom: 40px;
-    left: 5%;
-    width: 90%;
-    height: 185px;
-    background:
-        linear-gradient(
-            #9d4f59,
-            #c16d79
-        );
-    border-radius: 25px 25px 45px 45px;
-    border: 7px solid #743b46;
-    box-shadow:
-        inset 0 -20px 0 rgba(90,30,40,.18),
-        0 20px 35px rgba(100,50,50,.3);
-}
-.cake-middle {
-    position: absolute;
-    bottom: 185px;
-    left: 12%;
-    width: 76%;
-    height: 155px;
-    background:
-        linear-gradient(
-            #ffe5df,
-            #ffd0d0
-        );
-    border-radius: 25px 25px 30px 30px;
-    border: 7px solid #b86f77;
-}
-.cake-top {
-    position: absolute;
-    bottom: 320px;
-    left: 19%;
-    width: 62%;
-    height: 125px;
-    background:
-        linear-gradient(
-            #fff6d7,
-            #f9dfb5
-        );
-    border-radius: 50% 50% 22px 22px;
-    border: 7px solid #b98967;
-    box-shadow:
-        0 10px 0 rgba(160,100,70,.15);
-}
-/* icing */
-.icing {
-    position: absolute;
-    bottom: 415px;
-    left: 19%;
-    width: 62%;
-    height: 55px;
-    background: #fff7ee;
-    border-radius: 50%;
-    border-bottom:
-        10px dotted #e9a0b2;
-}
-/* sprinkles */
-.sprinkle {
-    position: absolute;
-    width: 15px;
-    height: 6px;
-    border-radius: 5px;
-    background: #d95b72;
-    transform: rotate(25deg);
-}
-.s1 { left: 27%; bottom: 450px; }
-.s2 { left: 38%; bottom: 425px; transform: rotate(-20deg); }
-.s3 { left: 52%; bottom: 452px; transform: rotate(45deg); }
-.s4 { left: 63%; bottom: 430px; transform: rotate(-30deg); }
-.s5 { left: 45%; bottom: 470px; transform: rotate(15deg); }
-/* =========================
-   CANDLES
-========================= */
-.candle {
-    position: absolute;
-    bottom: 445px;
-    width: 42px;
-    height: 115px;
-    background:
-        repeating-linear-gradient(
-            45deg,
-            #f7a9ba 0 12px,
-            #fff2d7 12px 24px
-        );
-    border-radius: 8px;
-    border: 3px solid #a95e70;
-    cursor: pointer;
-    box-shadow:
-        0 6px 10px rgba(0,0,0,.2);
-    transition: transform .2s;
-}
-.candle:hover {
-    transform: translateY(-8px) scale(1.05);
-}
-.candle::before {
-    content: "🔥";
-    position: absolute;
-    top: -52px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 45px;
-    animation: flame 1s ease-in-out infinite alternate;
-}
-@keyframes flame {
-    from {
-        transform:
-            translateX(-50%)
-            scale(.9);
-    }
-    to {
-        transform:
-            translateX(-50%)
-            scale(1.08);
-    }
-}
-.candle1 {
-    left: 25%;
-}
-.candle2 {
-    left: 38%;
-}
-.candle3 {
-    left: 51%;
-}
-.candle4 {
-    left: 64%;
-}
-/* candle labels */
-.candle-label {
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-    font-weight: bold;
-    color: #704b42;
-    white-space: nowrap;
-}
-/* =========================
-   SECTIONS
-========================= */
-.section {
-    display: none;
-    background:
-        rgba(255,249,235,.96);
-    border:
-        3px solid #d49a9d;
-    border-radius: 28px;
-    padding: 30px;
-    margin: 30px auto;
-    max-width: 900px;
-    box-shadow:
-        0 15px 40px rgba(90,45,50,.25);
-    animation: sectionIn .35s ease;
-}
-.section.active {
-    display: block;
-}
-@keyframes sectionIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.section h2 {
-    text-align: center;
-    color: #8b3f57;
-    font-size: 32px;
-    margin-top: 0;
-}
-.section-intro {
-    text-align: center;
-    line-height: 1.6;
-}
-/* =========================
-   FLASHCARDS
-========================= */
-.card-area {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.card {
-    flex: 1;
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf3,
-            #ffe9e7
-        );
-    border-radius: 22px;
-    border: 2px solid #d8a2a4;
-    padding: 25px;
-    min-height: 440px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow:
-        0 12px 25px rgba(90,45,50,.18);
-}
-.card img {
-    width: 210px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 18px;
-    border: 5px solid white;
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.18);
-    margin-bottom: 15px;
-}
-.card h3 {
-    color: #8b3f57;
-    font-size: 26px;
-    margin: 8px;
-}
-.card p {
-    line-height: 1.55;
-    max-width: 600px;
-}
-.nav-button {
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background: #c46d7e;
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.nav-button:hover {
-    background: #a85064;
-}
-/* =========================
-   WORLD MAP
-========================= */
-.map-wrap {
-    position: relative;
+
     width: 100%;
-    max-width: 850px;
-    margin: 25px auto;
-    background:
-        #d9f0e8;
-    border-radius: 22px;
-    padding: 20px;
-    overflow: hidden;
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding:
+        25px 18px 80px;
 }
-.map {
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.party-hat {
+    font-size: 70px;
+
+    animation:
+        wobble 3s ease-in-out infinite;
+}
+
+@keyframes wobble {
+
+    0%,100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(6deg);
+    }
+}
+
+h1 {
+    margin: 5px 0;
+
+    font-size:
+        clamp(42px, 9vw, 75px);
+
+    color: #8c3e5c;
+
+    text-shadow:
+        0 3px 0 white,
+        0 7px 15px rgba(70,30,50,.2);
+}
+
+.subtitle {
+    max-width: 650px;
+
+    margin:
+        10px auto 25px;
+
+    line-height: 1.6;
+
+    font-size: 18px;
+
+    color: #71495d;
+}
+
+
+/* =====================================================
+   CAKE AREA
+===================================================== */
+
+.cake-area {
+
     position: relative;
-    height: 390px;
-    border-radius: 15px;
+
+    width: 100%;
+
+    min-height: 700px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    margin-bottom: 70px;
+}
+
+
+/* Plate */
+
+.plate {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    width: min(850px, 94vw);
+
+    height: 65px;
+
+    border-radius: 50%;
+
     background:
-        #9dd2c0;
-}
-/* intentionally stylised continents */
-.continent {
-    position: absolute;
-    background: #f4e2bd;
-    border: 2px solid #c29b6b;
-    opacity: .95;
-}
-.north-america {
-    width: 180px;
-    height: 135px;
-    left: 9%;
-    top: 22%;
-    border-radius: 55% 35% 45% 30%;
-    transform: rotate(-15deg);
-}
-.south-america {
-    width: 90px;
-    height: 180px;
-    left: 29%;
-    top: 51%;
-    border-radius: 45% 55% 35% 55%;
-    transform: rotate(12deg);
-}
-.europe {
-    width: 105px;
-    height: 65px;
-    left: 49%;
-    top: 27%;
-    border-radius: 50%;
-}
-.africa {
-    width: 120px;
-    height: 180px;
-    left: 50%;
-    top: 39%;
-    border-radius: 45% 55% 40% 50%;
-}
-.asia {
-    width: 250px;
-    height: 135px;
-    left: 58%;
-    top: 23%;
-    border-radius: 40% 55% 45% 35%;
-}
-.australia {
-    width: 100px;
-    height: 65px;
-    right: 10%;
-    bottom: 18%;
-    border-radius: 50%;
-}
-/* map pins */
-.map-pin {
-    position: absolute;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 3px solid white;
-    background: #c65d72;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
+        linear-gradient(
+            #fff,
+            #e9d9df
+        );
+
     box-shadow:
-        0 4px 10px rgba(0,0,0,.25);
+        0 15px 30px rgba(70,30,50,.25);
+}
+
+
+/* Giant cake */
+
+.cake {
+
+    position: relative;
+
+    width: min(760px, 88vw);
+
+    height: 480px;
+
+    z-index: 2;
+}
+
+
+/* Bottom layer */
+
+.cake-bottom {
+
+    position: absolute;
+
+    left: 2%;
+    bottom: 50px;
+
+    width: 96%;
+    height: 175px;
+
+    border-radius:
+        28px 28px 38px 38px;
+
+    background:
+        linear-gradient(
+            #f09ab3,
+            #d96f91
+        );
+
+    border:
+        6px solid #fff4f6;
+
+    box-shadow:
+        inset 0 -20px rgba(110,40,70,.1),
+        0 15px 25px rgba(70,30,50,.25);
+}
+
+
+/* Middle */
+
+.cake-middle {
+
+    position: absolute;
+
+    left: 10%;
+    bottom: 205px;
+
+    width: 80%;
+    height: 145px;
+
+    border-radius:
+        28px 28px 32px 32px;
+
+    background:
+        linear-gradient(
+            #ffe5ed,
+            #f4b8cc
+        );
+
+    border:
+        6px solid white;
+
+    box-shadow:
+        0 8px 15px rgba(70,30,50,.15);
+}
+
+
+/* Top */
+
+.cake-top {
+
+    position: absolute;
+
+    left: 18%;
+    bottom: 330px;
+
+    width: 64%;
+    height: 115px;
+
+    border-radius:
+        50% 50% 25px 25px;
+
+    background:
+        #fff6ea;
+
+    border:
+        6px solid white;
+
+    box-shadow:
+        0 10px 20px rgba(70,30,50,.18);
+}
+
+
+/* Frosting */
+
+.frosting {
+
+    position: absolute;
+
+    left: 20%;
+    bottom: 360px;
+
+    width: 60%;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 7px #efd8e0;
+}
+
+
+/* Sprinkles */
+
+.sprinkles {
+
+    position: absolute;
+
+    left: 27%;
+    bottom: 375px;
+
+    width: 46%;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    letter-spacing: 9px;
+
     z-index: 5;
 }
-.map-pin:hover {
-    transform: scale(1.15);
+
+
+/* Decorations */
+
+.decoration {
+    position: absolute;
+
+    font-size: 35px;
+
+    z-index: 6;
 }
-.pin-brazil {
-    left: 31%;
-    top: 64%;
+
+.decoration1 {
+    left: 13%;
+    bottom: 100px;
 }
-.pin-germany {
-    left: 51%;
-    top: 30%;
+
+.decoration2 {
+    right: 13%;
+    bottom: 100px;
 }
-.pin-japan {
-    right: 10%;
-    top: 34%;
+
+.decoration3 {
+    left: 27%;
+    bottom: 230px;
 }
-.pin-south-korea {
-    right: 17%;
-    top: 40%;
+
+.decoration4 {
+    right: 27%;
+    bottom: 230px;
 }
-.pin-mexico {
-    left: 17%;
-    top: 42%;
-}
-.pin-india {
-    left: 69%;
-    top: 48%;
-}
-.map-fact {
-    margin-top: 20px;
-    background: #fff7e7;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    min-height: 85px;
-    line-height: 1.55;
-}
-/* =========================
-   MEANING CARDS
-========================= */
-.meaning-card img {
-    width: 190px;
-    height: 190px;
-    object-fit: contain;
-    border-radius: 20px;
-    background: white;
-}
-.traits {
+
+
+/* =====================================================
+   CANDLES
+===================================================== */
+
+.candles {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 405px;
+
+    transform:
+        translateX(-50%);
+
+    width: 75%;
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 9px;
-    margin-top: 15px;
+
+    justify-content:
+        space-around;
+
+    z-index: 20;
 }
-.trait {
-    background: #f2c3ce;
-    padding: 8px 13px;
-    border-radius: 20px;
-}
-/* =========================
-   HOROSCOPE
-========================= */
-.horoscope {
-    text-align: center;
+
+.candle {
+    position: relative;
+
+    width: 48px;
+    height: 130px;
+
+    border-radius: 9px;
+
     background:
-        linear-gradient(
+        repeating-linear-gradient(
             135deg,
-            #503b68,
-            #8d5676
+            white 0 11px,
+            #e99ab2 11px 22px
         );
-    color: #fff8ef;
-    border-radius: 25px;
-    padding: 35px;
+
+    border:
+        3px solid white;
+
     box-shadow:
-        0 12px 30px rgba(70,40,80,.3);
+        0 5px 10px rgba(60,30,40,.2);
 }
-.horoscope h3 {
-    font-size: 34px;
-    color: #ffe7a5;
+
+
+/* Flame */
+
+.flame {
+
+    position: absolute;
+
+    top: -58px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 34px;
+    height: 48px;
+
+    border: none;
+
+    cursor: pointer;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #fff06a 0 25%,
+            #ffb52e 26% 48%,
+            #ff7043 49% 68%,
+            transparent 69%
+        );
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    animation:
+        flame .7s infinite alternate;
+
+    filter:
+        drop-shadow(
+            0 0 12px rgba(255,130,20,.75)
+        );
 }
-.horoscope p {
-    font-size: 18px;
-    line-height: 1.7;
+
+.flame:hover {
+    transform:
+        translateX(-50%)
+        scale(1.25);
 }
-/* =========================
-   HISTORY
-========================= */
-.history {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-    gap: 18px;
+
+@keyframes flame {
+
+    from {
+        transform:
+            translateX(-50%)
+            scale(.9)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.08)
+            rotate(3deg);
+    }
 }
-.history-card {
-    background: #fff4df;
-    padding: 20px;
-    border-radius: 18px;
-    border: 2px solid #e0b4a8;
+
+
+/* Labels */
+
+.candle-labels {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 315px;
+
+    transform:
+        translateX(-50%);
+
+    width: 78%;
+
+    display: flex;
+
+    justify-content:
+        space-around;
+
+    z-index: 30;
+
+    text-align: center;
 }
-.history-card h3 {
-    color: #8b3f57;
+
+.candle-label {
+
+    width: 22%;
+
+    font-size: 14px;
+
+    line-height: 1.3;
+
+    font-weight: bold;
+
+    color: #713b54;
 }
-/* =========================
-   BACK BUTTON
-========================= */
-.back {
-    display: block;
-    width: fit-content;
-    margin: 30px auto 0;
-    padding: 14px 28px;
-    background: #8b3f57;
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section {
+
+    margin:
+        100px auto;
+
+    scroll-margin-top: 25px;
+}
+
+.section-title {
+
+    text-align: center;
+
+    color: #8c3e5c;
+
+    font-size:
+        clamp(32px, 7vw, 52px);
+
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+
+    max-width: 650px;
+
+    margin:
+        0 auto 30px;
+
+    text-align: center;
+
+    color: #70485b;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   FAMOUS BIRTHDAYS
+===================================================== */
+
+.card {
+
+    max-width: 720px;
+
+    margin: auto;
+
+    background:
+        rgba(255,250,247,.97);
+
+    border:
+        5px solid white;
+
+    border-radius: 28px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 18px 40px rgba(70,30,50,.22);
+
+    text-align: center;
+}
+
+.person-image {
+
+    width: 100%;
+
+    height: 390px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    background: #eee0e5;
+}
+
+.person-name {
+
+    color: #8c3e5c;
+
+    font-size: 31px;
+
+    margin:
+        18px 0 5px;
+}
+
+.person-date {
+
+    color: #ad657e;
+
     font-weight: bold;
 }
-.back:hover {
-    background: #6f2e44;
+
+.person-joke {
+
+    font-size: 19px;
+
+    line-height: 1.6;
+
+    min-height: 90px;
+
+    color: #5b3c4d;
 }
-/* =========================
+
+.controls {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+.control-button {
+
+    width: 52px;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #d988a3;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+.control-button:hover {
+    background: #b96481;
+    transform: scale(1.08);
+}
+
+.counter {
+
+    margin-top: 13px;
+
+    color: #906074;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   MEANING
+===================================================== */
+
+.meaning-card {
+
+    display: none;
+
+    max-width: 720px;
+
+    margin: auto;
+
+    background:
+        rgba(255,250,247,.97);
+
+    border:
+        5px solid white;
+
+    border-radius: 28px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 18px 40px rgba(70,30,50,.2);
+}
+
+.meaning-card.active {
+
+    display: block;
+
+    animation:
+        appear .35s ease;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(0);
+    }
+}
+
+.meaning-image {
+
+    width: 230px;
+    height: 230px;
+
+    object-fit: cover;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 18px rgba(70,30,50,.18);
+}
+
+.meaning-emoji {
+
+    font-size: 130px;
+
+    margin:
+        10px 0 20px;
+}
+
+.meaning-card h3 {
+
+    color: #8c3e5c;
+
+    font-size: 29px;
+}
+
+.meaning-card p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #604153;
+}
+
+.traits {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+.trait {
+
+    padding:
+        8px 13px;
+
+    border-radius: 20px;
+
+    background: #f4dce5;
+
+    color: #743c55;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   WORLD FACTS
+===================================================== */
+
+.world-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.world-card {
+
+    background:
+        rgba(255,250,247,.97);
+
+    border:
+        4px solid white;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 12px 25px rgba(70,30,50,.17);
+}
+
+.flag {
+
+    font-size: 45px;
+}
+
+.world-card h3 {
+
+    color: #8c3e5c;
+
+    font-size: 23px;
+}
+
+.world-card p {
+
+    color: #604153;
+
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   ON THIS DAY
+===================================================== */
+
+.history-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.history-card {
+
+    background:
+        rgba(255,250,247,.97);
+
+    border:
+        4px solid white;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 12px 25px rgba(70,30,50,.17);
+}
+
+.history-year {
+
+    color: #b06a82;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.history-card h3 {
+
+    color: #8c3e5c;
+
+    font-size: 22px;
+}
+
+.history-card p {
+
+    color: #604153;
+
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.back {
+
+    display: block;
+
+    width: fit-content;
+
+    margin:
+        55px auto 0;
+
+    padding:
+        14px 28px;
+
+    border-radius: 30px;
+
+    background: #8c3e5c;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
    MOBILE
-========================= */
-@media (max-width: 650px) {
+===================================================== */
+
+@media (max-width: 700px) {
+
     .cake-area {
         min-height: 570px;
     }
+
     .cake {
-        transform: scale(.76);
-        transform-origin: center top;
-        height: 500px;
+        transform:
+            scale(.72);
+
+        transform-origin:
+            bottom center;
     }
-    .balloon {
-        font-size: 45px;
+
+    .candles {
+        width: 82%;
     }
-    .section {
-        padding: 20px 15px;
+
+    .candle-labels {
+        width: 100%;
+        bottom: 290px;
     }
-    .card-area {
-        gap: 5px;
+
+    .candle-label {
+        font-size: 10px;
     }
-    .nav-button {
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
+
+    .world-grid,
+    .history-grid {
+        grid-template-columns: 1fr;
     }
-    .card {
-        min-height: 390px;
-        padding: 15px 8px;
-    }
-    .card img {
-        width: 150px;
-        height: 190px;
-    }
-    .map {
+
+    .person-image {
         height: 300px;
     }
+
+    .balloon {
+        transform: scale(.7);
+    }
+
 }
+
 </style>
+
 </head>
+
+
 <body>
-<!-- BALLOONS -->
-<div class="balloon one">🎈</div>
-<div class="balloon two">🎈</div>
-<div class="balloon three">🎈</div>
-<div class="balloon four">🎈</div>
+
+
+<!-- =====================================================
+     CONFETTI
+===================================================== -->
+
+<div id="confetti"></div>
+
+
+<!-- =====================================================
+     BALLOONS
+===================================================== -->
+
+<div class="balloon balloon1"></div>
+<div class="balloon balloon2"></div>
+<div class="balloon balloon3"></div>
+<div class="balloon balloon4"></div>
+
+
 <div class="container">
-<header>
-<div style="font-size:60px;">
-    🎉🎂🎉
-</div>
-<h1>
-    Birthday Things
-</h1>
-<p>
-    A completely unnecessary investigation
-    into the fact that you were born.
-</p>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="party-hat">
+        🥳
+    </div>
+
+    <h1>
+        Birthday Headquarters
+    </h1>
+
+    <p class="subtitle">
+
+        September 7, 2003.
+
+        <br>
+
+        One birthday. Four candles.
+        An unreasonable amount of completely
+        unnecessary information.
+
+    </p>
+
 </header>
-<!-- =========================
-     CAKE
-========================= -->
+
+
+<!-- =====================================================
+     GIANT CAKE
+===================================================== -->
+
 <div class="cake-area">
-<div class="cake">
-<div class="cake-bottom"></div>
-<div class="cake-middle"></div>
-<div class="cake-top"></div>
-<div class="icing"></div>
-<div class="sprinkle s1"></div>
-<div class="sprinkle s2"></div>
-<div class="sprinkle s3"></div>
-<div class="sprinkle s4"></div>
-<div class="sprinkle s5"></div>
-<!-- CANDLES -->
-<div
-class="candle candle1"
-onclick="openSection('famous')">
-<span class="candle-label">
-Famous people
-</span>
+
+    <div class="plate"></div>
+
+    <div class="cake">
+
+        <div class="cake-bottom"></div>
+
+        <div class="cake-middle"></div>
+
+        <div class="cake-top"></div>
+
+        <div class="frosting"></div>
+
+        <div class="sprinkles">
+            • • • • • •
+        </div>
+
+        <div class="decoration decoration1">
+            🍓
+        </div>
+
+        <div class="decoration decoration2">
+            🍓
+        </div>
+
+        <div class="decoration decoration3">
+            🧁
+        </div>
+
+        <div class="decoration decoration4">
+            🧁
+        </div>
+
+
+        <!-- FOUR CANDLES -->
+
+        <div class="candles">
+
+            <div class="candle">
+
+                <button
+                    class="flame"
+                    onclick="goTo('famous')">
+                </button>
+
+            </div>
+
+
+            <div class="candle">
+
+                <button
+                    class="flame"
+                    onclick="goTo('meaning')">
+                </button>
+
+            </div>
+
+
+            <div class="candle">
+
+                <button
+                    class="flame"
+                    onclick="goTo('world')">
+                </button>
+
+            </div>
+
+
+            <div class="candle">
+
+                <button
+                    class="flame"
+                    onclick="goTo('history')">
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="candle-labels">
+
+            <div class="candle-label">
+                🎬<br>
+                Famous<br>
+                Birthdays
+            </div>
+
+            <div class="candle-label">
+                💎<br>
+                Your<br>
+                Birthday
+            </div>
+
+            <div class="candle-label">
+                🌎<br>
+                Birthday<br>
+                Madness
+            </div>
+
+            <div class="candle-label">
+                📜<br>
+                On This<br>
+                Day
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<div
-class="candle candle2"
-onclick="openSection('world')">
-<span class="candle-label">
-Around the world
-</span>
-</div>
-<div
-class="candle candle3"
-onclick="openSection('meaning')">
-<span class="candle-label">
-Your birthday
-</span>
-</div>
-<div
-class="candle candle4"
-onclick="openSection('today')">
-<span class="candle-label">
-September 7
-</span>
-</div>
-</div>
-</div>
-<!-- =========================
-     FAMOUS BIRTHDAYS
-========================= -->
+
+
+<!-- =====================================================
+     CANDLE ONE — FAMOUS BIRTHDAYS
+===================================================== -->
+
 <section
-id="famous"
-class="section">
-<h2>
-🎂 Famous Birthday People
-</h2>
-<p class="section-intro">
-Apparently you share your birthday with some
-rather random people.
-</p>
-<div class="card-area">
+    class="section"
+    id="famous">
 
-‹
-<div class="card">
-<h3 id="famousName">
-Michael Emerson
-</h3>
-<p id="famousText">
-Oh hey look. It's that one guy from Lost.
-You know. The extremely suspicious guy who
-always looked like he knew something you didn't.
-</p>
-</div>
+    <h2 class="section-title">
+        Famous Birthday
+    </h2>
 
-›
-</div>
+    <p class="section-subtitle">
+        September 7 has produced some genuinely
+        interesting people.
+    </p>
+
+
+    <div class="card">
+
+        <img
+            id="personImage"
+            class="person-image"
+            src="images/michael-emerson.jpg"
+            alt="Michael Emerson">
+
+        <h3
+            id="personName"
+            class="person-name">
+            Michael Emerson
+        </h3>
+
+        <div
+            id="personDate"
+            class="person-date">
+            Born September 7, 1954
+        </div>
+
+        <p
+            id="personJoke"
+            class="person-joke">
+
+            Oh hey, look.
+            It's that one guy from Lost.
+
+        </p>
+
+
+        <div class="controls">
+
+            <button
+                class="control-button"
+                onclick="previousPerson()">
+                ←
+            </button>
+
+            <button
+                class="control-button"
+                onclick="nextPerson()">
+                →
+            </button>
+
+        </div>
+
+        <div
+            id="personCounter"
+            class="counter">
+            1 / 4
+        </div>
+
+    </div>
+
 </section>
-<!-- =========================
-     WORLD
-========================= -->
+
+
+<!-- =====================================================
+     CANDLE TWO — YOUR BIRTHDAY
+===================================================== -->
+
 <section
-id="world"
-class="section">
-<h2>
-🌍 Birthday Traditions That Got Weird
-</h2>
-<p class="section-intro">
-Click a country. Some places take birthdays
-very seriously. Other places apparently wake
-up and choose chaos.
-</p>
-<div class="map-wrap">
-<div class="map">
-<div class="continent north-america"></div>
-<div class="continent south-america"></div>
-<div class="continent europe"></div>
-<div class="continent africa"></div>
-<div class="continent asia"></div>
-<div class="continent australia"></div>
+    class="section"
+    id="meaning">
 
-🇧🇷
-🇩🇪
-🇯🇵
-🇰🇷
-🇲🇽
-🇮🇳
-</div>
-<div
-id="mapFact"
-class="map-fact">
+    <h2 class="section-title">
+        What Your Birthday Says About You
+    </h2>
 
-🌎 Pick a country and see what
-birthday nonsense is waiting there.
+    <p class="section-subtitle">
+        Some of this is astronomy, some is tradition,
+        and some is basically the universe gossiping.
+    </p>
 
-</div>
-</div>
+
+    <!-- Virgo -->
+
+    <div
+        class="meaning-card active">
+
+        <div class="meaning-emoji">
+            ♍
+        </div>
+
+        <h3>
+            You're a Virgo
+        </h3>
+
+        <p>
+
+            September 7 falls under Virgo.
+
+            Traditionally, Virgo is associated with
+            being observant, practical, analytical,
+            organised and ridiculously good at noticing
+            things everyone else missed.
+
+        </p>
+
+        <div class="traits">
+
+            <span class="trait">Observant</span>
+            <span class="trait">Analytical</span>
+            <span class="trait">Practical</span>
+            <span class="trait">Organised</span>
+            <span class="trait">Detail-obsessed</span>
+            <span class="trait">Quietly judging</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Sapphire -->
+
+    <div class="meaning-card">
+
+        <div class="meaning-emoji">
+            💎
+        </div>
+
+        <h3>
+            Your Birthstone: Sapphire
+        </h3>
+
+        <p>
+
+            September's traditional birthstone is
+            sapphire.
+
+            Sapphire is a variety of corundum and is
+            famous for its blue colour, although sapphires
+            can occur in other colours too.
+
+            Traditionally, sapphire has been associated
+            with wisdom, sincerity and protection.
+
+        </p>
+
+    </div>
+
+
+    <!-- Flower -->
+
+    <div class="meaning-card">
+
+        <div class="meaning-emoji">
+            🌸
+        </div>
+
+        <h3>
+            Your Birthday Flower: Aster
+        </h3>
+
+        <p>
+
+            Aster is one of the traditional September
+            birth flowers.
+
+            The name comes from the Greek word for
+            "star", because the flower's shape resembles
+            a little star.
+
+            Traditionally, asters have been associated
+            with love, wisdom and faith.
+
+        </p>
+
+    </div>
+
+
+    <!-- Moon -->
+
+    <div class="meaning-card">
+
+        <div class="meaning-emoji">
+            🌔
+        </div>
+
+        <h3>
+            Your Moon: Waxing Gibbous
+        </h3>
+
+        <p>
+
+            On September 7, 2003, the Moon was a
+            <strong>Waxing Gibbous</strong>.
+
+            It was roughly 90% illuminated and was
+            getting very close to the Full Moon,
+            which occurred on September 10.
+
+        </p>
+
+        <p>
+
+            In moon-lore, a waxing gibbous is often
+            associated with growth, momentum and
+            getting very close to the thing you want.
+
+        </p>
+
+    </div>
+
+
+    <!-- Horoscope -->
+
+    <div class="meaning-card">
+
+        <div class="meaning-emoji">
+            🔮
+        </div>
+
+        <h3>
+            Your Extremely Scientific Horoscope
+        </h3>
+
+        <p>
+
+            Today the planets have reviewed your
+            paperwork and decided that you are
+            <strong>allowed to have a snack</strong>.
+
+            Mercury is in retrograde, Mars is
+            suspiciously staring at you, and Saturn
+            has absolutely no idea what you're doing.
+
+        </p>
+
+        <p>
+
+            Your lucky activity:
+
+            <strong>
+                opening the fridge, forgetting why,
+                then checking again five minutes later.
+            </strong>
+
+        </p>
+
+    </div>
+
+
+    <div class="controls">
+
+        <button
+            class="control-button"
+            onclick="previousMeaning()">
+            ←
+        </button>
+
+        <button
+            class="control-button"
+            onclick="nextMeaning()">
+            →
+        </button>
+
+    </div>
+
+    <div
+        id="meaningCounter"
+        class="counter">
+        1 / 5
+    </div>
+
 </section>
-<!-- =========================
-     BIRTHDAY MEANING
-========================= -->
+
+
+<!-- =====================================================
+     CANDLE THREE — WORLD
+===================================================== -->
+
 <section
-id="meaning"
-class="section">
-<h2>
-✨ What Your Birthday Means
-</h2>
-<p class="section-intro">
-Click through the cards to discover the completely
-unscientific but extremely fun things associated
-with September 7.
-</p>
-<div class="card-area">
+    class="section"
+    id="world">
 
-‹
-<div class="card meaning-card">
-<h3 id="meaningTitle">
-Your birthstone: Sapphire
-</h3>
-<p id="meaningText">
-Sapphire is the traditional September birthstone.
-It is associated with wisdom, sincerity, loyalty
-and protection. In other words: apparently you
-were issued a tiny blue security system at birth.
-</p>
-<div
-id="traits"
-class="traits">
-</div>
-</div>
+    <h2 class="section-title">
+        Birthday Madness Around the World
+    </h2>
 
-›
-</div>
+    <p class="section-subtitle">
+        Because apparently saying "happy birthday"
+        normally was never enough.
+    </p>
+
+
+    <div class="world-grid">
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇧🇷
+            </div>
+
+            <h3>
+                Brazil
+            </h3>
+
+            <p>
+
+                In some Brazilian birthday traditions,
+                the birthday person can have their
+                earlobes pulled once for every year
+                they've been alive.
+
+                Congratulations: your birthday has
+                become a physical endurance event.
+
+            </p>
+
+        </div>
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇩🇰
+            </div>
+
+            <h3>
+                Denmark
+            </h3>
+
+            <p>
+
+                Danish birthday traditions can involve
+                putting a flag outside the home.
+
+                So instead of wondering whether someone
+                is having a birthday, Denmark basically
+                puts up a giant spoiler.
+
+            </p>
+
+        </div>
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇯🇲
+            </div>
+
+            <h3>
+                Jamaica
+            </h3>
+
+            <p>
+
+                One Jamaican birthday tradition involves
+                covering the birthday person in flour.
+
+                Imagine waking up excited for cake and
+                discovering that your friends have chosen
+                violence.
+
+            </p>
+
+        </div>
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇲🇽
+            </div>
+
+            <h3>
+                Mexico
+            </h3>
+
+            <p>
+
+                The piñata turns birthday celebrations
+                into a bizarre combination of party,
+                treasure hunt and controlled destruction.
+
+                Hit the colourful object until sweets
+                fall from the sky.
+
+            </p>
+
+        </div>
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇦🇷
+            </div>
+
+            <h3>
+                Argentina
+            </h3>
+
+            <p>
+
+                Birthday celebrations can involve
+                throwing flour and sometimes eggs at
+                the birthday person.
+
+                Basically, cake is optional.
+                Getting covered in kitchen ingredients
+                is not.
+
+            </p>
+
+        </div>
+
+
+        <div class="world-card">
+
+            <div class="flag">
+                🇰🇷
+            </div>
+
+            <h3>
+                South Korea
+            </h3>
+
+            <p>
+
+                Seaweed soup is traditionally associated
+                with birthdays.
+
+                So while everyone else is thinking
+                "birthday cake", someone has decided
+                "excellent, soup".
+
+            </p>
+
+        </div>
+
+
+    </div>
+
 </section>
-<!-- =========================
-     HOROSCOPE
-========================= -->
+
+
+<!-- =====================================================
+     CANDLE FOUR — ON THIS DAY
+===================================================== -->
+
 <section
-id="horoscope"
-class="section">
-<h2>
-🔮 Today's Completely Unreliable Horoscope
-</h2>
-<div class="horoscope">
-<h3>
-♍ Virgo
-</h3>
-<p>
-Today the universe has reviewed your paperwork
-and decided that you are technically allowed
-to have cake.
-</p>
-<p>
-A suspiciously specific opportunity will appear
-before you. It may involve snacks. It may involve
-someone asking you to fix something they broke.
-You will pretend to be annoyed while secretly
-enjoying being right.
-</p>
-<p>
-<strong>
-Lucky object:
-</strong>
-a spoon that has no business being this large.
-</p>
-<p>
-<strong>
-Cosmic warning:
-</strong>
-Do not start reorganising anything at 2:13 a.m.
-The universe has not asked for a spreadsheet.
-</p>
-</div>
+    class="section"
+    id="history">
+
+    <h2 class="section-title">
+        On This Day
+    </h2>
+
+    <p class="section-subtitle">
+        September 7 has had a surprisingly chaotic
+        history.
+    </p>
+
+
+    <div class="history-grid">
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1822
+            </div>
+
+            <h3>
+                Brazil declares independence
+            </h3>
+
+            <p>
+
+                Pedro, the Prince Regent of Brazil,
+                declared independence from Portugal.
+
+                September 7 is now celebrated as
+                Brazil's Independence Day.
+
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1921
+            </div>
+
+            <h3>
+                The first Miss America pageant
+            </h3>
+
+            <p>
+
+                The first Miss America competition
+                was held in Atlantic City.
+
+                Which means your birthday shares
+                a date with the beginning of a very
+                long-running American tradition.
+
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1923
+            </div>
+
+            <h3>
+                INTERPOL is founded
+            </h3>
+
+            <p>
+
+                The organisation that eventually became
+                INTERPOL was established in 1923.
+
+                So technically, September 7 has
+                international detective energy.
+
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1940
+            </div>
+
+            <h3>
+                The Blitz begins
+            </h3>
+
+            <p>
+
+                Nazi Germany began a major bombing
+                campaign against Britain during the
+                Second World War.
+
+                This is one of the more serious events
+                associated with the date.
+
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1963
+            </div>
+
+            <h3>
+                The Pro Football Hall of Fame opens
+            </h3>
+
+            <p>
+
+                The Pro Football Hall of Fame opened
+                in Canton, Ohio.
+
+                We're leaving the sports statistics
+                out of this page, but the building
+                apparently deserves a birthday mention.
+
+            </p>
+
+        </div>
+
+
+        <div class="history-card">
+
+            <div class="history-year">
+                1996
+            </div>
+
+            <h3>
+                Tupac is shot in Las Vegas
+            </h3>
+
+            <p>
+
+                On September 7, 1996, Tupac Shakur
+                was shot in Las Vegas.
+
+                He died six days later.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
 </section>
-<!-- =========================
-     SEPTEMBER 7
-========================= -->
-<section
-id="today"
-class="section">
-<h2>
-📅 September 7
-</h2>
-<div class="history">
-<div class="history-card">
-<h3>
-👑 1533
-</h3>
-<p>
-Elizabeth I was born on September 7, 1533,
-at Greenwich. She would eventually become one
-of England's most famous monarchs.
-</p>
-</div>
-<div class="history-card">
-<h3>
-🌙 2004
-</h3>
-<p>
-Your September 7, 2004 birthday happened under
-a <strong>waning gibbous Moon</strong> — meaning
-the Moon was more than half illuminated, but
-heading toward the last quarter.
-</p>
-</div>
-<div class="history-card">
-<h3>
-🎬 1997
-</h3>
-<p>
-Dean-Charles Chapman was born on September 7,
-1997. Yes, Tommen Baratheon himself shares
-the birthday.
-</p>
-</div>
-<div class="history-card">
-<h3>
-📺 1954
-</h3>
-<p>
-Michael Emerson was born on September 7, 1954.
-So September 7 apparently has a habit of
-producing people who look like they know
-something important.
-</p>
-</div>
-</div>
-</section>
-<!-- =========================
-     HOROSCOPE BUTTON
-========================= -->
 
-🔮 See Your Ridiculous Horoscope
 
-</button>
+<a
+    class="back"
+    href="forest.html">
 
-🌲 Return to the Forest
+    🌲 Return to the Forest
 
 </a>
+
+
 </div>
+
+
 <script>
-/* =========================
+
+/* =====================================================
    CONFETTI
-========================= */
-function makeConfetti() {
-    const pieces = [
-        "#e56b7c",
-        "#f4c95d",
-        "#6ea8a0",
-        "#8c6bb1",
-        "#ef9a4f",
-        "#7a9e58"
-    ];
+===================================================== */
+
+const confettiContainer =
+    document.getElementById("confetti");
+
+const confettiColors = [
+    "#e989a7",
+    "#f4c85b",
+    "#8eb6d8",
+    "#b99ad1",
+    "#8fc6a5",
+    "#f29b73"
+];
+
+function createConfetti() {
+
     for (
         let i = 0;
-        i < 90;
+        i < 100;
         i++
     ) {
+
         const piece =
             document.createElement("div");
+
         piece.className =
-            "confetti";
+            "confetti-piece";
+
         piece.style.left =
-            Math.random() * 100 + "vw";
+            Math.random() * 100 + "%";
+
         piece.style.background =
-            pieces[
+            confettiColors[
                 Math.floor(
                     Math.random() *
-                    pieces.length
+                    confettiColors.length
                 )
             ];
+
         piece.style.animationDuration =
             (3 + Math.random() * 5) + "s";
+
         piece.style.animationDelay =
-            (Math.random() * 3) + "s";
+            Math.random() * 2 + "s";
+
         piece.style.transform =
             "rotate(" +
             Math.random() * 360 +
             "deg)";
-        document.body.appendChild(piece);
-        setTimeout(function() {
-            piece.remove();
-        }, 9000);
+
+        confettiContainer.appendChild(piece);
+
     }
+
 }
-makeConfetti();
-/* =========================
-   SECTIONS
-========================= */
-function openSection(id) {
-    document.querySelectorAll(
-        ".section"
-    ).forEach(function(section) {
-        section.classList.remove(
-            "active"
-        );
+
+createConfetti();
+
+
+/* =====================================================
+   CANDLE NAVIGATION
+===================================================== */
+
+function goTo(id) {
+
+    const section =
+        document.getElementById(id);
+
+    section.scrollIntoView({
+        behavior: "smooth"
     });
-    document.getElementById(id)
-        .classList.add("active");
-    document.getElementById(id)
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+
 }
-/* =========================
+
+
+/* =====================================================
    FAMOUS PEOPLE
-========================= */
-const famousCards = [
+===================================================== */
+
+const people = [
+
     {
         name:
-        "Michael Emerson",
+            "Michael Emerson",
+
+        date:
+            "Born September 7, 1954",
+
         image:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Michael_Emerson_2013.jpg",
-        text:
-        "Oh hey look. It's that one guy from Lost. You know. The extremely suspicious guy who always looked like he knew something you didn't."
+            "images/michael-emerson.jpg",
+
+        joke:
+            "Oh hey, look. It's that one guy from Lost."
     },
+
     {
         name:
-        "NileRed",
+            "NileRed",
+
+        date:
+            "Born September 7, 1991",
+
         image:
-        "https://upload.wikimedia.org/wikipedia/commons/3/3f/NileRed.jpg",
-        text:
-        "Hey, this guy makes chemistry videos and once decided that turning plastic gloves into hot sauce was a perfectly reasonable use of an afternoon."
+            "images/nilered.jpg",
+
+        joke:
+            "Hey, this is the guy who makes hot sauce out of plastic gloves and somehow makes chemistry look like a completely reasonable hobby."
     },
+
     {
         name:
-        "Dean-Charles Chapman",
+            "Dean-Charles Chapman",
+
+        date:
+            "Born September 7, 1997",
+
         image:
-        "https://upload.wikimedia.org/wikipedia/commons/5/5d/Dean-Charles_Chapman_2019.png",
-        text:
-        "Ah yes. Tommen. The king whose greatest contribution to Westeros was proving that sitting on a chair can somehow be an entire political career."
+            "images/dean-charles-chapman.jpg",
+
+        joke:
+            "The kid who somehow got promoted from Tommen Baratheon to having an extremely complicated Wikipedia page."
     },
+
     {
         name:
-        "Elizabeth I",
+            "Elizabeth I",
+
+        date:
+            "Born September 7, 1533",
+
         image:
-        "https://upload.wikimedia.org/wikipedia/commons/9/9d/Elizabeth_I_Darnley_portrait.jpg",
-        text:
-        "Oh, just Elizabeth I. She was born on your birthday, became queen, survived an alarming amount of Tudor nonsense and somehow turned being unmarried into an entire political brand."
+            "images/elizabeth-i.jpg",
+
+        joke:
+            "She ruled England, never married, survived multiple assassination plots and somehow managed to make being dramatically dressed part of government policy."
     }
+
 ];
-let famousIndex = 0;
-function updateFamous() {
-    const card =
-        famousCards[famousIndex];
+
+let personIndex = 0;
+
+
+function showPerson() {
+
+    const person =
+        people[personIndex];
+
     document.getElementById(
-        "famousImage"
-    ).src = card.image;
+        "personImage"
+    ).src =
+        person.image;
+
     document.getElementById(
-        "famousName"
-    ).innerText = card.name;
+        "personImage"
+    ).alt =
+        person.name;
+
     document.getElementById(
-        "famousText"
-    ).innerText = card.text;
-}
-function changeCard(section,type) {
-    if (
-        section === "famous"
-    ) {
-        famousIndex += type;
-        if (
-            famousIndex < 0
-        ) {
-            famousIndex =
-                famousCards.length - 1;
-        }
-        if (
-            famousIndex >=
-            famousCards.length
-        ) {
-            famousIndex = 0;
-        }
-        updateFamous();
-    }
-    if (
-        section === "meaning"
-    ) {
-        meaningIndex += type;
-        if (
-            meaningIndex < 0
-        ) {
-            meaningIndex =
-                meaningCards.length - 1;
-        }
-        if (
-            meaningIndex >=
-            meaningCards.length
-        ) {
-            meaningIndex = 0;
-        }
-        updateMeaning();
-    }
-}
-/* =========================
-   WORLD FACTS
-========================= */
-const worldFacts = {
-    brazil:
-    "🇧🇷 Brazil: In some Brazilian birthday traditions, the birthday person may get a very enthusiastic face shoved into the birthday cake. Apparently eating cake wasn't dramatic enough.",
-    germany:
-    "🇩🇪 Germany: Traditionally, unmarried adults who reach certain milestone birthdays can end up with public teasing rituals involving sweeping or cleaning — because apparently romance is best encouraged through unpaid municipal labour.",
-    japan:
-    "🇯🇵 Japan: Coming-of-age celebrations are treated as major milestones, with special ceremonies and formal clothing. Basically: congratulations, you have unlocked a new character outfit.",
-    korea:
-    "🇰🇷 South Korea: Traditionally, a baby's first birthday is a huge celebration called dol. The child may be presented with objects representing different possible futures. No pressure, tiny human.",
-    mexico:
-    "🇲🇽 Mexico: The piñata is strongly associated with celebrations, and birthday parties can involve the classic combination of blindfold + stick + suspended object. A surprisingly chaotic birthday technology.",
-    india:
-    "🇮🇳 India: Birthday celebrations can include feeding the birthday person the first bite of cake or sweets — a much nicer strategy than the countries that apparently use birthdays as an excuse to publicly humiliate you."
-};
-function showWorldFact(country) {
-    document.getElementById(
-        "mapFact"
+        "personName"
     ).innerText =
-        worldFacts[country];
+        person.name;
+
+    document.getElementById(
+        "personDate"
+    ).innerText =
+        person.date;
+
+    document.getElementById(
+        "personJoke"
+    ).innerText =
+        person.joke;
+
+    document.getElementById(
+        "personCounter"
+    ).innerText =
+        (personIndex + 1) +
+        " / " +
+        people.length;
+
 }
-/* =========================
-   MEANING CARDS
-========================= */
-const meaningCards = [
-    {
-        title:
-        "Your birthstone: Sapphire",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/6/6b/Sapphire_Gem.JPG",
-        text:
-        "Sapphire is the traditional September birthstone. It is associated with wisdom, sincerity, loyalty and protection. Basically, you were issued a tiny blue security system at birth.",
-        traits:
-        []
-    },
-    {
-        title:
-        "Your zodiac sign: Virgo ♍",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/4/4e/Virgo_symbol.svg",
-        text:
-        "September 7 falls under Virgo. Astrology traditionally associates Virgo with practicality, attention to detail, organisation and an analytical mind.",
-        traits:
-        [
-            "Observant",
-            "Practical",
-            "Analytical",
-            "Organised",
-            "Helpful",
-            "Perfectionist",
-            "Quietly Judgemental"
-        ]
-    },
-    {
-        title:
-        "Your birth flower: Aster",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/5/5f/Aster_amellus_1.jpg",
-        text:
-        "The aster is commonly listed as one of September's birth flowers. It is traditionally associated with love, wisdom, faith and patience.",
-        traits:
-        []
-    },
-    {
-        title:
-        "Your birthday Moon",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/8/85/Waning_gibbous_moon.jpg",
-        text:
-        "On September 7, 2004, the Moon was in a waning gibbous phase. More than half illuminated, but gradually shrinking toward the last quarter.",
-        traits:
-        [
-            "Reflective",
-            "Almost-full",
-            "Slightly dramatic",
-            "Cosmically suspicious"
-        ]
+
+
+function nextPerson() {
+
+    personIndex++;
+
+    if (
+        personIndex >=
+        people.length
+    ) {
+
+        personIndex = 0;
+
     }
-];
+
+    showPerson();
+
+}
+
+
+function previousPerson() {
+
+    personIndex--;
+
+    if (
+        personIndex < 0
+    ) {
+
+        personIndex =
+            people.length - 1;
+
+    }
+
+    showPerson();
+
+}
+
+
+/* =====================================================
+   BIRTHDAY MEANING CARDS
+===================================================== */
+
+const meaningCards =
+    document.querySelectorAll(
+        ".meaning-card"
+    );
+
 let meaningIndex = 0;
-function updateMeaning() {
-    const card =
-        meaningCards[meaningIndex];
-    document.getElementById(
-        "meaningImage"
-    ).src = card.image;
-    document.getElementById(
-        "meaningTitle"
-    ).innerText = card.title;
-    document.getElementById(
-        "meaningText"
-    ).innerText = card.text;
-    const traits =
-        document.getElementById(
-            "traits"
-        );
-    traits.innerHTML = "";
-    card.traits.forEach(
-        function(trait) {
-            const span =
-                document.createElement(
-                    "span"
-                );
-            span.className =
-                "trait";
-            span.innerText =
-                trait;
-            traits.appendChild(
-                span
+
+
+function showMeaning() {
+
+    meaningCards.forEach(
+        function(card, index) {
+
+            card.classList.toggle(
+                "active",
+                index === meaningIndex
             );
+
         }
     );
+
+    document.getElementById(
+        "meaningCounter"
+    ).innerText =
+        (meaningIndex + 1) +
+        " / " +
+        meaningCards.length;
+
 }
-updateFamous();
-updateMeaning();
+
+
+function nextMeaning() {
+
+    meaningIndex++;
+
+    if (
+        meaningIndex >=
+        meaningCards.length
+    ) {
+
+        meaningIndex = 0;
+
+    }
+
+    showMeaning();
+
+}
+
+
+function previousMeaning() {
+
+    meaningIndex--;
+
+    if (
+        meaningIndex < 0
+    ) {
+
+        meaningIndex =
+            meaningCards.length - 1;
+
+    }
+
+    showMeaning();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+showPerson();
+showMeaning();
+
 </script>
+
+
 </body>
+
 </html>
