@@ -1,303 +1,1386 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Strange Birthday Facts ⭐</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Magic 🎂</title>
 <style>
-
+/* =====================================================
+   RESET
+===================================================== */
 * {
     box-sizing: border-box;
 }
-
+html {
+    scroll-behavior: smooth;
+}
 body {
-
     margin: 0;
-
     min-height: 100vh;
-
     font-family: Georgia, serif;
-
+    color: #5a3c45;
     background:
         radial-gradient(
-            circle at top,
-            #48694c,
-            #1b3927 55%,
-            #0c2115
+            circle at 50% -10%,
+            #fffdf5 0%,
+            #ffeef4 35%,
+            #f8d9e4 72%,
+            #edbfd0 100%
         );
-
-    color: #f5edd6;
-
-    padding: 40px 20px;
-
+    overflow-x: hidden;
 }
-
-.container {
-
-    max-width: 800px;
-
-    margin: auto;
-
-    text-align: center;
-
+/* =====================================================
+   CONFETTI
+===================================================== */
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
 }
-
-.moon {
-
-    font-size: 60px;
-
-    animation: float 4s ease-in-out infinite;
-
+.confetti {
+    position: absolute;
+    top: -30px;
+    width: 9px;
+    height: 16px;
+    border-radius: 3px;
+    animation:
+        fall linear infinite;
+    opacity: .9;
 }
-
-@keyframes float {
-
-    0%,100% {
-        transform: translateY(0);
+@keyframes fall {
+    0% {
+        transform:
+            translateY(-30px)
+            rotate(0deg);
     }
-
-    50% {
-        transform: translateY(-8px);
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
     }
-
 }
-
-h1 {
-
-    font-size: clamp(40px, 8vw, 65px);
-
-    color: #f2df9e;
-
-    margin: 10px 0;
-
-}
-
-.subtitle {
-
-    color: #d7d0b7;
-
-    font-style: italic;
-
-    margin-bottom: 40px;
-
-}
-
-.fact {
-
-    background: #f4ecd5;
-
-    color: #26382a;
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    margin: 25px 0;
-
-    border: 2px solid #c5a95d;
-
+/* =====================================================
+   BALLOONS
+===================================================== */
+.balloon {
+    position: fixed;
+    width: 75px;
+    height: 92px;
+    border-radius:
+        50% 50% 47% 47%;
+    z-index: 2;
+    pointer-events: none;
     box-shadow:
-        0 12px 30px rgba(0,0,0,.3);
-
-    text-align: left;
-
-    transition: .3s;
-
+        inset -12px -10px 20px rgba(0,0,0,.08),
+        0 8px 15px rgba(0,0,0,.12);
+    animation:
+        balloonFloat 4s ease-in-out infinite;
 }
-
-.fact:hover {
-
+.balloon:after {
+    content: "";
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    width: 1px;
+    height: 48px;
+    background: #876a71;
+}
+.balloon:before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid currentColor;
+}
+.balloon1 {
+    top: 12%;
+    left: 4%;
+    background: #f29bb4;
+    color: #f29bb4;
+}
+.balloon2 {
+    top: 25%;
+    left: 9%;
+    background: #f6c85f;
+    color: #f6c85f;
+    animation-delay: .8s;
+}
+.balloon3 {
+    top: 10%;
+    right: 5%;
+    background: #a9d9e8;
+    color: #a9d9e8;
+    animation-delay: 1.2s;
+}
+.balloon4 {
+    top: 30%;
+    right: 10%;
+    background: #c8a5df;
+    color: #c8a5df;
+    animation-delay: .4s;
+}
+@keyframes balloonFloat {
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+    50% {
+        transform:
+            translateY(-13px)
+            rotate(3deg);
+    }
+}
+/* =====================================================
+   STREAMERS
+===================================================== */
+.streamer {
+    position: fixed;
+    top: -10px;
+    width: 20px;
+    height: 210px;
+    border-radius: 50%;
+    opacity: .7;
+    z-index: 1;
+    pointer-events: none;
     transform:
-        translateY(-5px)
-        rotate(-1deg);
-
+        rotate(15deg);
 }
-
-.fact-number {
-
-    font-size: 14px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
-
-    color: #71865d;
-
+.streamer1 {
+    left: 20%;
+    background: #ef9eb8;
 }
-
-.fact h2 {
-
-    color: #285337;
-
-    margin: 8px 0 12px;
-
+.streamer2 {
+    left: 72%;
+    background: #9fcfe0;
+    transform: rotate(-15deg);
 }
-
-.fact p {
-
+.streamer3 {
+    left: 82%;
+    background: #d5b16c;
+    transform: rotate(20deg);
+}
+/* =====================================================
+   MAIN
+===================================================== */
+.container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    padding:
+        40px 20px 80px;
+    text-align: center;
+}
+/* =====================================================
+   HEADER
+===================================================== */
+.party-hat {
+    font-size: 65px;
+    animation:
+        hatWiggle 2.5s ease-in-out infinite;
+}
+@keyframes hatWiggle {
+    0%,100% {
+        transform: rotate(-4deg);
+    }
+    50% {
+        transform: rotate(4deg);
+    }
+}
+h1 {
+    margin:
+        5px 0 8px;
+    font-size:
+        clamp(42px, 9vw, 72px);
+    color: #c45d79;
+    text-shadow:
+        0 3px 0 #fff,
+        0 5px 12px rgba(130,70,90,.2);
+}
+.subtitle {
+    max-width: 650px;
+    margin:
+        0 auto 30px;
+    color: #76555f;
+    font-size: 18px;
     line-height: 1.6;
-
 }
-
-.back {
-
+/* =====================================================
+   BIRTHDAY LABEL
+===================================================== */
+.date-badge {
     display: inline-block;
-
-    margin-top: 25px;
-
-    padding: 13px 25px;
-
+    padding:
+        10px 24px;
     border-radius: 30px;
-
-    background: #c5a95d;
-
-    color: #1d321f;
-
-    text-decoration: none;
-
+    background: #fff8df;
+    border:
+        2px solid #e2bf67;
+    color: #9a6c28;
     font-weight: bold;
-
+    box-shadow:
+        0 6px 18px rgba(100,60,50,.12);
+    margin-bottom: 25px;
 }
-
+/* =====================================================
+   CAKE AREA
+===================================================== */
+.cake-area {
+    position: relative;
+    min-height: 620px;
+    margin:
+        20px auto 30px;
+    max-width: 850px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+/* cake plate */
+.plate {
+    position: absolute;
+    bottom: 35px;
+    width: 650px;
+    height: 55px;
+    border-radius: 50%;
+    background:
+        linear-gradient(
+            #fff,
+            #e5cfd6
+        );
+    box-shadow:
+        0 15px 25px rgba(100,60,70,.2);
+}
+/* cake */
+.cake {
+    position: relative;
+    width: 500px;
+    height: 350px;
+    z-index: 3;
+}
+/* bottom cake */
+.cake-bottom {
+    position: absolute;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 440px;
+    height: 155px;
+    border-radius:
+        25px 25px 35px 35px;
+    background:
+        linear-gradient(
+            90deg,
+            #e7a7ba,
+            #f7cbd7,
+            #e7a7ba
+        );
+    border:
+        4px solid #d88da6;
+    box-shadow:
+        inset 0 -20px 0 rgba(255,255,255,.18),
+        0 12px 20px rgba(100,50,70,.2);
+}
+/* icing */
+.icing {
+    position: absolute;
+    top: -20px;
+    left: -4px;
+    width: calc(100% + 8px);
+    height: 55px;
+    background: #fff8f3;
+    border-radius:
+        50% 50% 25px 25px;
+    border:
+        3px solid #efd7d2;
+}
+.icing:after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 27px;
+    width: 30px;
+    height: 28px;
+    border-radius: 0 0 50% 50%;
+    background: #fff8f3;
+    box-shadow:
+        85px 5px 0 #fff8f3,
+        170px -2px 0 #fff8f3,
+        260px 6px 0 #fff8f3,
+        345px -1px 0 #fff8f3;
+}
+/* middle cake */
+.cake-middle {
+    position: absolute;
+    bottom: 205px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    height: 110px;
+    border-radius:
+        24px 24px 20px 20px;
+    background:
+        linear-gradient(
+            90deg,
+            #f2bfce,
+            #ffe0e8,
+            #f2bfce
+        );
+    border:
+        4px solid #df9db2;
+}
+/* top */
+.cake-top {
+    position: absolute;
+    bottom: 290px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 90px;
+    border-radius: 50%;
+    background:
+        linear-gradient(
+            #fff1f3,
+            #f6cbd7
+        );
+    border:
+        4px solid #df9db2;
+}
+/* cake decorations */
+.sprinkle {
+    position: absolute;
+    width: 14px;
+    height: 5px;
+    border-radius: 5px;
+    transform: rotate(30deg);
+    background: #d66b89;
+}
+.s1 { left: 20%; bottom: 145px; }
+.s2 { left: 40%; bottom: 110px; transform: rotate(-25deg); background:#d9ad4e; }
+.s3 { left: 62%; bottom: 150px; transform: rotate(20deg); background:#8cb7c5; }
+.s4 { left: 78%; bottom: 115px; transform: rotate(-20deg); background:#b18ac8; }
+.s5 { left: 30%; bottom: 230px; transform: rotate(-15deg); background:#d9ad4e; }
+.s6 { left: 56%; bottom: 220px; transform: rotate(30deg); background:#d66b89; }
+/* =====================================================
+   CANDLES
+===================================================== */
+.candle {
+    position: absolute;
+    bottom: 365px;
+    width: 34px;
+    height: 105px;
+    border-radius:
+        8px 8px 4px 4px;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff,
+            #fff 9px,
+            #ef9bb5 9px,
+            #ef9bb5 18px
+        );
+    border:
+        2px solid #d8849e;
+    cursor: pointer;
+    z-index: 10;
+    transition:
+        transform .2s;
+}
+.candle:hover {
+    transform:
+        translateY(-8px)
+        scale(1.08);
+}
+/* wick */
+.candle:before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    width: 3px;
+    height: 15px;
+    background: #4c3431;
+    transform: translateX(-50%);
+}
+/* flame */
+.flame {
+    position: absolute;
+    top: -57px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 43px;
+    filter:
+        drop-shadow(
+            0 0 10px rgba(255,180,60,.8)
+        );
+    animation:
+        flameFlicker .8s infinite alternate;
+}
+@keyframes flameFlicker {
+    from {
+        transform:
+            translateX(-50%)
+            scale(.92);
+    }
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.08);
+    }
+}
+/* four special candles */
+.candle1 {
+    left: 17%;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff,
+            #fff 9px,
+            #e889a8 9px,
+            #e889a8 18px
+        );
+}
+.candle2 {
+    left: 39%;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff,
+            #fff 9px,
+            #8fc7d6 9px,
+            #8fc7d6 18px
+        );
+}
+.candle3 {
+    left: 61%;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff,
+            #fff 9px,
+            #c2a0d7 9px,
+            #c2a0d7 18px
+        );
+}
+.candle4 {
+    left: 83%;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff,
+            #fff 9px,
+            #e0b65d 9px,
+            #e0b65d 18px
+        );
+}
+/* decorative candles */
+.decorative-candle {
+    position: absolute;
+    bottom: 360px;
+    width: 20px;
+    height: 75px;
+    border-radius: 6px;
+    background: #f0ca70;
+    opacity: .9;
+}
+.dc1 { left: 28%; }
+.dc2 { left: 50%; }
+.dc3 { left: 72%; }
+/* candle labels */
+.candle-label {
+    position: absolute;
+    top: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #855463;
+    pointer-events: none;
+}
+/* =====================================================
+   SECTION PANELS
+===================================================== */
+.section {
+    display: none;
+    max-width: 850px;
+    margin:
+        30px auto;
+    padding:
+        30px 25px;
+    background:
+        rgba(255,249,243,.97);
+    border:
+        3px solid #e2b7c5;
+    border-radius: 25px;
+    box-shadow:
+        0 15px 35px rgba(100,50,70,.2);
+    animation:
+        panelAppear .4s ease;
+}
+.section.active {
+    display: block;
+}
+@keyframes panelAppear {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+.section h2 {
+    color: #c45d79;
+    font-size:
+        clamp(27px, 6vw, 40px);
+    margin-top: 0;
+}
+.section-intro {
+    color: #76555f;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+/* =====================================================
+   CELEBRITY CARDS
+===================================================== */
+.celebs {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 18px;
+}
+.celebrity {
+    background: #fff;
+    border:
+        2px solid #ecd4dc;
+    border-radius: 18px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow:
+        0 7px 18px rgba(100,50,70,.1);
+}
+.celebrity img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+    background:
+        linear-gradient(
+            135deg,
+            #f6d5df,
+            #d9e8ec
+        );
+}
+.celebrity-info {
+    padding: 17px;
+}
+.celebrity h3 {
+    margin:
+        0 0 6px;
+    color: #a34f69;
+}
+.celebrity p {
+    margin: 5px 0;
+    line-height: 1.5;
+    color: #684e56;
+}
+.year {
+    font-size: 13px;
+    color: #a47b85;
+    font-weight: bold;
+}
+/* =====================================================
+   FACT CARDS
+===================================================== */
+.fact-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 18px;
+}
+.fact-card {
+    padding: 22px;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #fff5f7
+        );
+    border:
+        2px solid #ecd4dc;
+    text-align: left;
+}
+.fact-card .emoji {
+    font-size: 38px;
+}
+.fact-card h3 {
+    color: #a34f69;
+    margin:
+        10px 0;
+}
+.fact-card p {
+    line-height: 1.55;
+    color: #684e56;
+}
+/* =====================================================
+   MEANING CARDS
+===================================================== */
+.meaning-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+    gap: 18px;
+}
+.meaning-card {
+    padding: 24px;
+    border-radius: 20px;
+    background:
+        #fff;
+    border:
+        2px solid #ead2da;
+}
+.meaning-icon {
+    font-size: 45px;
+}
+.meaning-card h3 {
+    color: #b15872;
+    margin:
+        8px 0;
+}
+.meaning-card p {
+    line-height: 1.55;
+    color: #684e56;
+}
+/* =====================================================
+   HISTORY TIMELINE
+===================================================== */
+.timeline {
+    text-align: left;
+    max-width: 700px;
+    margin: auto;
+}
+.timeline-item {
+    position: relative;
+    padding:
+        0 0 25px 30px;
+    border-left:
+        3px solid #dfafbe;
+}
+.timeline-item:last-child {
+    border-left-color: transparent;
+}
+.timeline-item:before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #d76e8b;
+    border:
+        3px solid #fff;
+}
+.timeline-year {
+    color: #b15872;
+    font-weight: bold;
+    font-size: 18px;
+}
+.timeline-item h3 {
+    margin:
+        5px 0;
+    color: #68434e;
+}
+.timeline-item p {
+    margin: 0;
+    line-height: 1.5;
+    color: #76555f;
+}
+/* =====================================================
+   BACK TO CAKE
+===================================================== */
+.back-cake {
+    display: inline-block;
+    margin-top: 25px;
+    padding:
+        13px 25px;
+    border: none;
+    border-radius: 30px;
+    background:
+        #d76e8b;
+    color: white;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow:
+        0 6px 15px rgba(150,70,90,.2);
+}
+.back-cake:hover {
+    background: #c45d79;
+}
+/* =====================================================
+   FOOTER
+===================================================== */
+.footer {
+    margin-top: 30px;
+    color: #86646d;
+    line-height: 1.6;
+}
+.forest {
+    display: inline-block;
+    margin-top: 12px;
+    color: #865265;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* =====================================================
+   MOBILE
+===================================================== */
+@media (max-width: 700px) {
+    .balloon {
+        transform: scale(.65);
+    }
+    .balloon2,
+    .balloon4 {
+        display: none;
+    }
+    .cake-area {
+        min-height: 520px;
+        transform:
+            scale(.78);
+        transform-origin:
+            top center;
+        margin-bottom:
+            -80px;
+    }
+    .plate {
+        width: 580px;
+    }
+    .celebs,
+    .fact-grid,
+    .meaning-grid {
+        grid-template-columns: 1fr;
+    }
+    .section {
+        padding:
+            25px 17px;
+    }
+}
 </style>
-
 </head>
-
-
 <body>
-
-
-<div class="container">
-
-
-    <div class="moon">
-        ⭐
-    </div>
-
-
-    <h1>
-        The Strange Facts Trail
-    </h1>
-
-
-    <p class="subtitle">
-        A collection of completely unnecessary
-        information you absolutely need to know.
-    </p>
-
-
-    <div class="fact">
-
-        <div class="fact-number">
-            🌿 Fact I
-        </div>
-
-        <h2>
-            Birthday candles have a very old history
-        </h2>
-
-        <p>
-            Birthday candle traditions go back centuries,
-            with candles becoming closely associated with
-            birthday celebrations in Europe.
-        </p>
-
-    </div>
-
-
-    <div class="fact">
-
-        <div class="fact-number">
-            🌙 Fact II
-        </div>
-
-        <h2>
-            Your birthday has a probability
-        </h2>
-
-        <p>
-            Statistically, some calendar birthdays are
-            much more common than others because of
-            how births are distributed throughout the year.
-        </p>
-
-    </div>
-
-
-    <div class="fact">
-
-        <div class="fact-number">
-            🐈 Fact III
-        </div>
-
-        <h2>
-            Cats have been worshipped
-        </h2>
-
-        <p>
-            Ancient Egyptians famously associated cats
-            with protection and several important deities.
-        </p>
-
-    </div>
-
-
-    <div class="fact">
-
-        <div class="fact-number">
-            🌎 Fact IV
-        </div>
-
-        <h2>
-            There are some seriously strange birthday traditions
-        </h2>
-
-        <p>
-            Around the world, birthday celebrations can
-            involve everything from special foods to
-            elaborate rituals and unusual games.
-        </p>
-
-    </div>
-
-
-    <div class="fact">
-
-        <div class="fact-number">
-            ⭐ Fact V
-        </div>
-
-        <h2>
-            Here's your most important fact
-        </h2>
-
-        <p>
-            You are officially required to have a very
-            good birthday because someone went to a
-            suspicious amount of effort to make you this website.
-        </p>
-
-    </div>
-
-
-    <a
-        class="back"
-        href="forest.html">
-
-        🌲 Return to the Forest
-
-    </a>
-
-
+<!-- =====================================================
+     CONFETTI
+===================================================== -->
+<div class="confetti-container">
+<span class="confetti" style="left:3%;animation-duration:5s;animation-delay:0s;background:#e889a8;"></span>
+<span class="confetti" style="left:8%;animation-duration:7s;animation-delay:1s;background:#e0b65d;"></span>
+<span class="confetti" style="left:14%;animation-duration:6s;animation-delay:2s;background:#8fc7d6;"></span>
+<span class="confetti" style="left:20%;animation-duration:8s;animation-delay:.5s;background:#c2a0d7;"></span>
+<span class="confetti" style="left:27%;animation-duration:5.5s;animation-delay:1.5s;background:#e889a8;"></span>
+<span class="confetti" style="left:34%;animation-duration:7.5s;animation-delay:3s;background:#e0b65d;"></span>
+<span class="confetti" style="left:41%;animation-duration:6.5s;animation-delay:.8s;background:#8fc7d6;"></span>
+<span class="confetti" style="left:48%;animation-duration:8s;animation-delay:2.2s;background:#c2a0d7;"></span>
+<span class="confetti" style="left:55%;animation-duration:5.8s;animation-delay:1.2s;background:#e889a8;"></span>
+<span class="confetti" style="left:62%;animation-duration:7s;animation-delay:2.8s;background:#e0b65d;"></span>
+<span class="confetti" style="left:69%;animation-duration:6s;animation-delay:.3s;background:#8fc7d6;"></span>
+<span class="confetti" style="left:76%;animation-duration:8s;animation-delay:1.8s;background:#c2a0d7;"></span>
+<span class="confetti" style="left:83%;animation-duration:5.5s;animation-delay:2.5s;background:#e889a8;"></span>
+<span class="confetti" style="left:90%;animation-duration:7.2s;animation-delay:.7s;background:#e0b65d;"></span>
+<span class="confetti" style="left:96%;animation-duration:6.8s;animation-delay:3.2s;background:#8fc7d6;"></span>
 </div>
-
-
+<!-- BALLOONS -->
+<div class="balloon balloon1"></div>
+<div class="balloon balloon2"></div>
+<div class="balloon balloon3"></div>
+<div class="balloon balloon4"></div>
+<div class="streamer streamer1"></div>
+<div class="streamer streamer2"></div>
+<div class="streamer streamer3"></div>
+<!-- =====================================================
+     MAIN
+===================================================== -->
+<div class="container">
+<div class="party-hat">
+    🥳
+</div>
+<h1>
+    Happy Birthday!
+</h1>
+<p class="subtitle">
+    Welcome to the extremely unnecessary,
+    slightly ridiculous birthday archive.
+    <br>
+    <strong>
+        Pick a candle and see where it takes you.
+    </strong>
+</p>
+<div class="date-badge">
+    🎂 September 7 🎂
+</div>
+<!-- =================================================
+     CAKE
+================================================= -->
+<div class="cake-area">
+    <div class="plate"></div>
+    <div class="cake">
+        <!-- SPECIAL CANDLE 1 -->
+        <div
+            class="candle candle1"
+            onclick="openSection('famous')">
+            <div class="flame">
+                🔥
+            </div>
+            <div class="candle-label">
+                Famous Birthdays
+            </div>
+        </div>
+        <!-- SPECIAL CANDLE 2 -->
+        <div
+            class="candle candle2"
+            onclick="openSection('world')">
+            <div class="flame">
+                🔥
+            </div>
+            <div class="candle-label">
+                Around the World
+            </div>
+        </div>
+        <!-- SPECIAL CANDLE 3 -->
+        <div
+            class="candle candle3"
+            onclick="openSection('meaning')">
+            <div class="flame">
+                🔥
+            </div>
+            <div class="candle-label">
+                Birthday Meaning
+            </div>
+        </div>
+        <!-- SPECIAL CANDLE 4 -->
+        <div
+            class="candle candle4"
+            onclick="openSection('history')">
+            <div class="flame">
+                🔥
+            </div>
+            <div class="candle-label">
+                On This Day
+            </div>
+        </div>
+        <!-- DECORATIVE CANDLES -->
+        <div class="decorative-candle dc1"></div>
+        <div class="decorative-candle dc2"></div>
+        <div class="decorative-candle dc3"></div>
+        <!-- TOP -->
+        <div class="cake-top"></div>
+        <!-- MIDDLE -->
+        <div class="cake-middle"></div>
+        <!-- BOTTOM -->
+        <div class="cake-bottom">
+            <div class="icing"></div>
+        </div>
+        <!-- SPRINKLES -->
+        <div class="sprinkle s1"></div>
+        <div class="sprinkle s2"></div>
+        <div class="sprinkle s3"></div>
+        <div class="sprinkle s4"></div>
+        <div class="sprinkle s5"></div>
+        <div class="sprinkle s6"></div>
+    </div>
+</div>
+<!-- =================================================
+     FAMOUS BIRTHDAYS
+================================================= -->
+<section
+    id="famous"
+    class="section">
+    <h2>
+        🌟 Famous September 7 Birthdays
+    </h2>
+    <p class="section-intro">
+        Apparently September 7 has a habit of producing
+        some rather interesting people.
+    </p>
+    <div class="celebs">
+        <div class="celebrity">
+            <img
+                src="https://en.wikipedia.org/wiki/Special:Redirect/file/Elizabeth_I_in_coronation_robes.jpg"
+                alt="Elizabeth I">
+            <div class="celebrity-info">
+                <h3>
+                    Elizabeth I
+                </h3>
+                <div class="year">
+                    Born 1533
+                </div>
+                <p>
+                    Queen of England and Ireland from 1558
+                    until her death in 1603. She was the
+                    daughter of Henry VIII and Anne Boleyn.
+                </p>
+            </div>
+        </div>
+        <div class="celebrity">
+            <img
+                src="https://en.wikipedia.org/wiki/Special:Redirect/file/Michael_Emerson.jpg"
+                alt="Michael Emerson">
+            <div class="celebrity-info">
+                <h3>
+                    Michael Emerson
+                </h3>
+                <div class="year">
+                    Born 1954
+                </div>
+                <p>
+                    Actor best known for playing Benjamin Linus
+                    in <em>Lost</em>. He was born on September 7,
+                    1954.
+                </p>
+            </div>
+        </div>
+        <div class="celebrity">
+            <img
+                src="https://en.wikipedia.org/wiki/Special:Redirect/file/NileRed.jpg"
+                alt="NileRed">
+            <div class="celebrity-info">
+                <h3>
+                    NileRed
+                </h3>
+                <div class="year">
+                    Born 1991
+                </div>
+                <p>
+                    Canadian chemist and science YouTuber
+                    Nigel Braun, known for his entertaining
+                    chemistry experiments and explanations.
+                </p>
+            </div>
+        </div>
+        <div class="celebrity">
+            <img
+                src="https://en.wikipedia.org/wiki/Special:Redirect/file/Dean-Charles_Chapman_2019.png"
+                alt="Dean-Charles Chapman">
+            <div class="celebrity-info">
+                <h3>
+                    Dean-Charles Chapman
+                </h3>
+                <div class="year">
+                    Born 1997
+                </div>
+                <p>
+                    English actor who played Tommen Baratheon
+                    in <em>Game of Thrones</em>. He was born
+                    on September 7, 1997.
+                </p>
+            </div>
+        </div>
+    </div>
+    <button
+        class="back-cake"
+        onclick="backToCake()">
+        🎂 Back to the Cake
+    </button>
+</section>
+<!-- =================================================
+     WORLD
+================================================= -->
+<section
+    id="world"
+    class="section">
+    <h2>
+        🌎 Birthday Traditions Around the World
+    </h2>
+    <p class="section-intro">
+        Because apparently there is no single correct
+        way to celebrate surviving another year.
+    </p>
+    <div class="fact-grid">
+        <div class="fact-card">
+            <div class="emoji">
+                🇲🇽
+            </div>
+            <h3>
+                Mexico
+            </h3>
+            <p>
+                Birthday celebrations can feature piñatas,
+                and <em>Las Mañanitas</em> is traditionally
+                sung around birthdays. Some celebrations
+                also include the famous cake-face tradition.
+            </p>
+        </div>
+        <div class="fact-card">
+            <div class="emoji">
+                🇩🇪
+            </div>
+            <h3>
+                Germany
+            </h3>
+            <p>
+                A common superstition says that wishing
+                someone a happy birthday before the actual
+                day brings bad luck. So September 6?
+                Absolutely not.
+            </p>
+        </div>
+        <div class="fact-card">
+            <div class="emoji">
+                🇨🇳
+            </div>
+            <h3>
+                China
+            </h3>
+            <p>
+                Birthday celebrations may include long
+                noodles associated with longevity. The idea
+                is to symbolize a long life.
+            </p>
+        </div>
+        <div class="fact-card">
+            <div class="emoji">
+                🇧🇷
+            </div>
+            <h3>
+                Brazil
+            </h3>
+            <p>
+                In some Brazilian birthday traditions,
+                the first slice of birthday cake is given
+                to the person the birthday celebrant considers
+                especially loved or important.
+            </p>
+        </div>
+        <div class="fact-card">
+            <div class="emoji">
+                🇦🇺
+            </div>
+            <h3>
+                Australia
+            </h3>
+            <p>
+                Fairy bread — buttered white bread covered
+                in colourful sprinkles — is a classic
+                Australian children's party food.
+            </p>
+        </div>
+        <div class="fact-card">
+            <div class="emoji">
+                🇨🇦
+            </div>
+            <h3>
+                Canada
+            </h3>
+            <p>
+                Some Canadian birthday traditions involve
+                putting butter on the birthday person's nose
+                as a playful superstition intended to ward
+                off bad luck.
+            </p>
+        </div>
+    </div>
+    <button
+        class="back-cake"
+        onclick="backToCake()">
+        🎂 Back to the Cake
+    </button>
+</section>
+<!-- =================================================
+     MEANING
+================================================= -->
+<section
+    id="meaning"
+    class="section">
+    <h2>
+        ✨ What September 7 Means
+    </h2>
+    <p class="section-intro">
+        A completely unofficial cosmic birthday dossier.
+        Take the symbolism seriously if you want.
+        Ignore it if you don't.
+    </p>
+    <div class="meaning-grid">
+        <div class="meaning-card">
+            <div class="meaning-icon">
+                ♍
+            </div>
+            <h3>
+                Zodiac: Virgo
+            </h3>
+            <p>
+                September 7 falls under Virgo in the
+                Western zodiac. Virgo is an earth sign
+                traditionally associated with Mercury.
+            </p>
+        </div>
+        <div class="meaning-card">
+            <div class="meaning-icon">
+                💙
+            </div>
+            <h3>
+                Birthstone: Sapphire
+            </h3>
+            <p>
+                Sapphire is one of September's traditional
+                birthstones. Its most famous variety is
+                blue, although sapphires can occur in
+                several colours.
+            </p>
+        </div>
+        <div class="meaning-card">
+            <div class="meaning-icon">
+                🌸
+            </div>
+            <h3>
+                Birth Flowers
+            </h3>
+            <p>
+                September's traditional birth flowers are
+                the aster and morning glory. Asters are
+                associated with love and wisdom in some
+                flower symbolism traditions.
+            </p>
+        </div>
+        <div class="meaning-card">
+            <div class="meaning-icon">
+                🌍
+            </div>
+            <h3>
+                Your Date
+            </h3>
+            <p>
+                September 7 sits firmly in Virgo season,
+                roughly two weeks before the zodiac shifts
+                to Libra.
+            </p>
+        </div>
+    </div>
+    <button
+        class="back-cake"
+        onclick="backToCake()">
+        🎂 Back to the Cake
+    </button>
+</section>
+<!-- =================================================
+     ON THIS DAY
+================================================= -->
+<section
+    id="history"
+    class="section">
+    <h2>
+        📜 September 7: On This Day
+    </h2>
+    <p class="section-intro">
+        Your birthday apparently has quite a lot going on
+        historically.
+    </p>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1533
+            </div>
+            <h3>
+                Elizabeth I was born
+            </h3>
+            <p>
+                Elizabeth I was born at Greenwich Palace
+                on September 7, 1533.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1776
+            </div>
+            <h3>
+                A submarine attacked a warship
+            </h3>
+            <p>
+                The American submarine Turtle attempted
+                to attach a time bomb to a British warship
+                in New York Harbor. It is generally regarded
+                as the first submarine attack in warfare.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1813
+            </div>
+            <h3>
+                "Uncle Sam" appeared in print
+            </h3>
+            <p>
+                The nickname "Uncle Sam" was printed in
+                the Troy Post in New York during the
+                War of 1812 era.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1927
+            </div>
+            <h3>
+                Electronic television took a huge step forward
+            </h3>
+            <p>
+                Philo Farnsworth successfully demonstrated
+                his image dissector, an important milestone
+                in the development of fully electronic television.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1936
+            </div>
+            <h3>
+                The last known thylacine died
+            </h3>
+            <p>
+                The last known thylacine, commonly called the
+                Tasmanian tiger, died in captivity at Hobart Zoo
+                in Tasmania.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1940
+            </div>
+            <h3>
+                The Blitz began
+            </h3>
+            <p>
+                German bombing of London and other British
+                cities intensified on September 7, beginning
+                the period commonly known as the Blitz.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-year">
+                1963
+            </div>
+            <h3>
+                The Pro Football Hall of Fame opened
+            </h3>
+            <p>
+                The Pro Football Hall of Fame opened in
+                Canton, Ohio, with 17 charter members.
+            </p>
+        </div>
+    </div>
+    <button
+        class="back-cake"
+        onclick="backToCake()">
+        🎂 Back to the Cake
+    </button>
+</section>
+<!-- =================================================
+     FOOTER
+================================================= -->
+<div class="footer">
+    🎈 Four candles. Four rabbit holes.
+    Absolutely no useful information guaranteed.
+    <br>
+    <a
+        class="forest"
+        href="forest.html">
+        🌲 Return to the Forest
+    </a>
+</div>
+</div>
+<script>
+/* =====================================================
+   SECTION NAVIGATION
+===================================================== */
+function openSection(sectionId) {
+    const sections =
+        document.querySelectorAll(".section");
+    sections.forEach(function(section) {
+        section.classList.remove("active");
+    });
+    const selected =
+        document.getElementById(sectionId);
+    selected.classList.add("active");
+    setTimeout(function() {
+        selected.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 50);
+}
+function backToCake() {
+    const sections =
+        document.querySelectorAll(".section");
+    sections.forEach(function(section) {
+        section.classList.remove("active");
+    });
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+/* =====================================================
+   EXTRA CONFETTI BURST WHEN A CANDLE IS CLICKED
+===================================================== */
+function createBurst() {
+    const container =
+        document.querySelector(".confetti-container");
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+        const piece =
+            document.createElement("span");
+        piece.className =
+            "confetti";
+        piece.style.left =
+            (45 + Math.random() * 10) + "%";
+        piece.style.animationDuration =
+            (2 + Math.random() * 2) + "s";
+        piece.style.animationDelay =
+            "0s";
+        const colours = [
+            "#e889a8",
+            "#e0b65d",
+            "#8fc7d6",
+            "#c2a0d7"
+        ];
+        piece.style.background =
+            colours[
+                Math.floor(
+                    Math.random() * colours.length
+                )
+            ];
+        container.appendChild(piece);
+        setTimeout(function() {
+            piece.remove();
+        }, 4500);
+    }
+}
+/* Add burst to candle clicks */
+document
+    .querySelectorAll(".candle")
+    .forEach(function(candle) {
+        candle.addEventListener(
+            "click",
+            createBurst
+        );
+    });
+</script>
 </body>
-
 </html>
