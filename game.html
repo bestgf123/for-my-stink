@@ -280,15 +280,48 @@ h1 {
 ========================= */
 
 .grass {
+    position: absolute;
+    bottom: 105px;
+    width: 85px;
+    height: 42px;
+    z-index: 7;
+}
+
+.grass::before {
+    content: "";
 
     position: absolute;
 
-    bottom: 105px;
+    left: 5px;
+    bottom: 0;
 
-    width: 130px;
-    height: 70px;
+    width: 75px;
+    height: 18px;
 
-    z-index: 7;
+    background: #4d853d;
+
+    border-radius: 60% 60% 25% 25%;
+}
+
+.grass::after {
+    content: "︵⌁︵⌁︵⌁";
+
+    position: absolute;
+
+    left: 2px;
+    bottom: 8px;
+
+    width: 82px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #356b35;
+
+    letter-spacing: -4px;
+
+    transform: rotate(-2deg);
 }
 
 
@@ -1491,13 +1524,9 @@ parseInt(item.dataset.x);
 */
 
 if (
-
-playerX >= obstacleX - 90 &&
-
-playerX <= obstacleX + 30 &&
-
-playerY < 55
-
+    playerX >= obstacleX - 75 &&
+    playerX <= obstacleX + 25 &&
+    playerY < 35
 ) {
 
 
