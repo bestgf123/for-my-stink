@@ -1,193 +1,2450 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Realm of Westeros</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 30px 20px;
-            background: #1c2d22;
-            color: #f5efd9;
-            font-family: Georgia, serif;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .quiz {
-            max-width: 700px;
-            margin: auto;
-        }
+<title>The Citadel Archives</title>
 
-        h1 {
-            font-size: 45px;
-            color: #e7ce86;
-        }
+<style>
 
-        .question {
-            background: #f5efd9;
-            color: #263628;
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 18px;
-        }
+/* =========================================================
+   GENERAL
+========================================================= */
 
-        button {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 13px;
-            border-radius: 10px;
-            border: 1px solid #a58d50;
-            background: white;
-            font-family: Georgia, serif;
-            font-size: 16px;
-            cursor: pointer;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        button:hover {
-            background: #e5ddc4;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        #result {
-            display: none;
-            background: #f5efd9;
-            color: #263628;
-            padding: 30px;
-            border-radius: 18px;
-            margin-top: 30px;
-        }
+body {
 
-        a {
-            color: #f5efd9;
-        }
-    </style>
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    font-family: Georgia, serif;
+
+    color: #f5efd9;
+
+    background:
+        linear-gradient(
+            rgba(7,12,10,.42),
+            rgba(7,12,10,.78)
+        ),
+        linear-gradient(
+            180deg,
+            #172d3a 0%,
+            #243d36 45%,
+            #101b16 100%
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.world-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: -10;
+
+}
+
+.moon {
+
+    position: absolute;
+
+    top: 7vh;
+    right: 10vw;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #f3edcf;
+
+    box-shadow:
+        0 0 35px rgba(255,245,190,.55);
+
+    opacity: .85;
+
+}
+
+
+/* clouds */
+
+.cloud {
+
+    position: absolute;
+
+    color: rgba(235,242,237,.18);
+
+    font-size: 75px;
+
+    white-space: nowrap;
+
+}
+
+.cloud1 {
+    top: 8%;
+    left: 5%;
+}
+
+.cloud2 {
+    top: 17%;
+    left: 48%;
+}
+
+.cloud3 {
+    top: 4%;
+    left: 75%;
+}
+
+
+/* dragons */
+
+.dragon {
+
+    position: absolute;
+
+    font-size: 100px;
+
+    opacity: .42;
+
+    filter:
+        drop-shadow(
+            0 8px 10px rgba(0,0,0,.6)
+        );
+
+}
+
+.dragon1 {
+
+    top: 11%;
+
+    left: 13%;
+
+    transform:
+        rotate(-8deg);
+
+}
+
+.dragon2 {
+
+    top: 25%;
+
+    right: 4%;
+
+    font-size: 75px;
+
+    transform:
+        scaleX(-1)
+        rotate(-5deg);
+
+    opacity: .32;
+
+}
+
+
+/* =========================================================
+   WEIRWOOD TREES
+========================================================= */
+
+.weirwood {
+
+    position: absolute;
+
+    bottom: 4%;
+
+    width: 190px;
+
+    height: 330px;
+
+    opacity: .48;
+
+}
+
+.weirwood:before {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 70px;
+
+    width: 45px;
+
+    height: 245px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c6bda1,
+            #e1d9bd,
+            #aaa184
+        );
+
+    border-radius:
+        50% 50% 15% 15%;
+
+}
+
+.weirwood:after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 30px;
+
+    left: 0;
+
+    width: 190px;
+
+    height: 160px;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 50%,
+            #8f2730 0 32%,
+            transparent 33%
+        ),
+
+        radial-gradient(
+            ellipse at 20% 45%,
+            #a52f38 0 20%,
+            transparent 21%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 40%,
+            #7d2029 0 22%,
+            transparent 23%
+        );
+
+    border-radius: 50%;
+
+}
+
+.tree1 {
+    left: -20px;
+}
+
+.tree2 {
+
+    left: 29%;
+
+    transform: scale(.72);
+
+    opacity: .3;
+
+}
+
+.tree3 {
+
+    right: -30px;
+
+    transform: scale(.9);
+
+}
+
+
+/* raven */
+
+.raven {
+
+    position: absolute;
+
+    top: 31%;
+
+    left: 5%;
+
+    font-size: 80px;
+
+    opacity: .55;
+
+    filter:
+        drop-shadow(
+            0 5px 8px rgba(0,0,0,.7)
+        );
+
+    transform:
+        rotate(-8deg);
+
+}
+
+
+/* direwolf */
+
+.wolf {
+
+    position: absolute;
+
+    bottom: 8%;
+
+    left: 8%;
+
+    font-size: 100px;
+
+    opacity: .27;
+
+    filter:
+        grayscale(1)
+        drop-shadow(
+            0 5px 8px rgba(0,0,0,.8)
+        );
+
+}
+
+
+/* =========================================================
+   RED KEEP
+========================================================= */
+
+.red-keep {
+
+    position: absolute;
+
+    right: 5%;
+
+    bottom: 12%;
+
+    width: 250px;
+
+    height: 190px;
+
+    opacity: .42;
+
+}
+
+.keep-tower {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 65px;
+
+    height: 150px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #291d1c,
+            #5b3430,
+            #241a19
+        );
+
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+}
+
+.keep-tower:before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -24px;
+
+    left: -10px;
+
+    width: 85px;
+
+    height: 30px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #2b1b1a 0 15px,
+            transparent 15px 25px
+        );
+
+}
+
+.tower1 {
+    left: 20px;
+    height: 115px;
+}
+
+.tower2 {
+    left: 92px;
+    height: 175px;
+}
+
+.tower3 {
+    left: 165px;
+    height: 125px;
+}
+
+
+/* =========================================================
+   FIRE
+========================================================= */
+
+.fire {
+
+    position: absolute;
+
+    bottom: 3%;
+
+    right: 31%;
+
+    font-size: 65px;
+
+    opacity: .55;
+
+    filter:
+        drop-shadow(
+            0 0 18px rgba(255,100,30,.65)
+        );
+
+    animation:
+        flicker 1s infinite alternate;
+
+}
+
+@keyframes flicker {
+
+    from {
+        transform: scale(.95);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+
+}
+
+
+/* =========================================================
+   MAIN QUIZ
+========================================================= */
+
+.quiz {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    padding: 30px 15px 60px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+.book {
+
+    font-size: 62px;
+
+    filter:
+        drop-shadow(
+            0 4px 6px rgba(0,0,0,.7)
+        );
+
+}
+
+h1 {
+
+    margin: 4px 0;
+
+    font-size:
+        clamp(32px, 8vw, 50px);
+
+    color: #e7ce86;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.8);
+
+}
+
+.subtitle {
+
+    color: #eee5ca;
+
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.warning {
+
+    background:
+        rgba(20,20,15,.76);
+
+    border:
+        1px solid #a58d50;
+
+    border-radius: 15px;
+
+    padding: 13px 16px;
+
+    margin-bottom: 20px;
+
+    color: #e7ce86;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,.35);
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+#scoreboard {
+
+    display: inline-block;
+
+    padding: 9px 20px;
+
+    margin-bottom: 20px;
+
+    border:
+        1px solid #a58d50;
+
+    border-radius: 25px;
+
+    background:
+        rgba(15,20,16,.75);
+
+    color: #e7ce86;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================================
+   NIGHTMARE BANNER
+========================================================= */
+
+#nightmareBanner {
+
+    display: none;
+
+    margin-bottom: 20px;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid #9c3030;
+
+    background:
+        rgba(55,12,12,.88);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.5);
+
+}
+
+#nightmareBanner h2 {
+
+    margin: 0 0 7px;
+
+    color: #e6b96b;
+
+}
+
+#nightmareBanner p {
+
+    margin: 0;
+
+    color: #f0ded0;
+
+}
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+.question {
+
+    display: none;
+
+    background:
+        rgba(248,243,221,.97);
+
+    color: #263628;
+
+    padding: 29px 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.5);
+
+    animation:
+        appear .3s ease;
+
+}
+
+.question.active {
+    display: block;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.questionNumber {
+
+    color: #776331;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+.question h2 {
+
+    font-size: 21px;
+
+    line-height: 1.45;
+
+    margin:
+        13px 0 23px;
+
+}
+
+
+/* =========================================================
+   ANSWERS
+========================================================= */
+
+.answer {
+
+    width: 100%;
+
+    margin: 10px 0;
+
+    padding: 14px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid #b9a875;
+
+    background: white;
+
+    color: #263628;
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s,
+        background .15s;
+
+}
+
+.answer:hover:not(:disabled) {
+
+    background: #e5ddc4;
+
+    transform:
+        translateY(-2px);
+
+}
+
+.answer:disabled {
+    cursor: default;
+}
+
+.correct {
+
+    background:
+        #b8d4b5 !important;
+
+}
+
+.incorrect {
+
+    background:
+        #d9aaa4 !important;
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.feedback {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 11px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    line-height: 1.45;
+
+}
+
+.feedback.correctText {
+
+    display: block;
+
+    color: #315a35;
+
+    background: #e0eedc;
+
+}
+
+.feedback.incorrectText {
+
+    display: block;
+
+    color: #743d38;
+
+    background: #f1dfdc;
+
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.next {
+
+    display: none;
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #d5b65a;
+
+    color: #263628;
+
+    font-family: Georgia, serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.next:hover {
+
+    background:
+        #e3c76e;
+
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+#result {
+
+    display: none;
+
+    background:
+        rgba(248,243,221,.98);
+
+    color: #263628;
+
+    padding: 35px 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.5);
+
+}
+
+.resultIcon {
+    font-size: 60px;
+}
+
+#result h2 {
+
+    color: #776331;
+
+    font-size: 29px;
+
+    margin: 12px 0;
+
+}
+
+.finalScore {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #315a35;
+
+}
+
+#resultText {
+
+    line-height: 1.6;
+
+    font-size: 17px;
+
+}
+
+
+/* buttons */
+
+.restart {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #d5b65a;
+
+    color: #263628;
+
+    font-family: Georgia, serif;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.forest {
+
+    display: block;
+
+    margin-top: 18px;
+
+    color: #315a35;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .dragon {
+        font-size: 65px;
+    }
+
+    .dragon2 {
+        display: none;
+    }
+
+    .red-keep {
+
+        right: -70px;
+
+        transform:
+            scale(.7);
+
+        transform-origin:
+            bottom right;
+
+    }
+
+    .weirwood {
+
+        transform:
+            scale(.7);
+
+        transform-origin:
+            bottom left;
+
+    }
+
+    .tree2 {
+        display: none;
+    }
+
+    .wolf {
+
+        left: -20px;
+
+        font-size: 75px;
+
+    }
+
+    .raven {
+        font-size: 55px;
+    }
+
+    .question {
+        padding: 23px 18px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="quiz">
 
-    <div style="font-size:60px;">🐉</div>
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
 
-    <h1>The Realm of Westeros</h1>
+<div class="world-background">
 
-    <p>How well do you know Game of Thrones?</p>
+    <div class="moon"></div>
+
+    <div class="cloud cloud1">
+        ☁️ ☁️
+    </div>
+
+    <div class="cloud cloud2">
+        ☁️
+    </div>
+
+    <div class="cloud cloud3">
+        ☁️ ☁️
+    </div>
 
 
-    <div class="question">
+    <div class="dragon dragon1">
+        🐉
+    </div>
 
-        <h2>1. What is Jon Snow's direwolf called?</h2>
+    <div class="dragon dragon2">
+        🐉
+    </div>
 
-        <button onclick="answer(this, false)">Grey Wind</button>
-        <button onclick="answer(this, true)">Ghost</button>
-        <button onclick="answer(this, false)">Summer</button>
-        <button onclick="answer(this, false)">Nymeria</button>
+
+    <div class="weirwood tree1"></div>
+
+    <div class="weirwood tree2"></div>
+
+    <div class="weirwood tree3"></div>
+
+
+    <div class="raven">
+        🐦‍⬛
+    </div>
+
+
+    <div class="wolf">
+        🐺
+    </div>
+
+
+    <div class="red-keep">
+
+        <div class="keep-tower tower1"></div>
+
+        <div class="keep-tower tower2"></div>
+
+        <div class="keep-tower tower3"></div>
 
     </div>
 
 
-    <div class="question">
-
-        <h2>2. What is Arya Stark's sword called?</h2>
-
-        <button onclick="answer(this, false)">Longclaw</button>
-        <button onclick="answer(this, true)">Needle</button>
-        <button onclick="answer(this, false)">Ice</button>
-        <button onclick="answer(this, false)">Heartsbane</button>
-
-    </div>
-
-
-    <div class="question">
-
-        <h2>3. What is the capital of the Seven Kingdoms?</h2>
-
-        <button onclick="answer(this, true)">King's Landing</button>
-        <button onclick="answer(this, false)">Winterfell</button>
-        <button onclick="answer(this, false)">Dragonstone</button>
-        <button onclick="answer(this, false)">The Eyrie</button>
-
-    </div>
-
-
-    <div id="result">
-
-        <h2 id="resultTitle"></h2>
-
-        <p id="resultText"></p>
-
-        <a href="forest.html">🌲 Return to the Forest</a>
-
+    <div class="fire">
+        🔥
     </div>
 
 </div>
 
 
+
+<!-- =========================================================
+     QUIZ
+========================================================= -->
+
+<div class="quiz">
+
+
+<header class="header">
+
+    <div class="book">
+        📜
+    </div>
+
+    <h1>
+        The Citadel Archives
+    </h1>
+
+    <p class="subtitle">
+
+        A test for someone who thinks they know
+        the Seven Kingdoms.
+
+        <br>
+
+        <strong>
+            This is not a TV quiz.
+        </strong>
+
+    </p>
+
+</header>
+
+
+<div class="warning">
+
+    ⚠️ <strong>Maester's Warning:</strong>
+
+    This quiz assumes knowledge of the wider
+    ASOIAF universe, not merely the television series.
+
+</div>
+
+
+<div id="scoreboard">
+
+    📜 Lore Score:
+
+    <span id="score">0</span>
+
+    &nbsp; / &nbsp;
+
+    25
+
+</div>
+
+
+<div id="nightmareBanner">
+
+    <h2>
+        ☠️ THE NIGHTMARE ROUND
+    </h2>
+
+    <p>
+        You survived the ordinary archives.
+        These questions are for people who have
+        no sensible reason to know this much.
+    </p>
+
+</div>
+
+
+
+<!-- =========================================================
+     QUESTIONS 1–20
+========================================================= -->
+
+
+<div class="question active"
+data-answer="Visenya Targaryen">
+
+<div class="questionNumber">
+Question 1 of 25
+</div>
+
+<h2>
+Which of Aegon the Conqueror's sister-wives rode Vhagar?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Rhaenys Targaryen
+</button>
+
+<button class="answer" onclick="answer(this)">
+Visenya Targaryen
+</button>
+
+<button class="answer" onclick="answer(this)">
+Rhaena Targaryen
+</button>
+
+<button class="answer" onclick="answer(this)">
+Alyssa Targaryen
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Meraxes">
+
+<div class="questionNumber">
+Question 2 of 25
+</div>
+
+<h2>
+Which of Aegon's original three dragons was killed in Dorne?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Balerion
+</button>
+
+<button class="answer" onclick="answer(this)">
+Vhagar
+</button>
+
+<button class="answer" onclick="answer(this)">
+Meraxes
+</button>
+
+<button class="answer" onclick="answer(this)">
+Quicksilver
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Silverwing">
+
+<div class="questionNumber">
+Question 3 of 25
+</div>
+
+<h2>
+Which dragon did Queen Alysanne Targaryen ride?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Dreamfyre
+</button>
+
+<button class="answer" onclick="answer(this)">
+Silverwing
+</button>
+
+<button class="answer" onclick="answer(this)">
+Moondancer
+</button>
+
+<button class="answer" onclick="answer(this)">
+Morning
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Hammer of the Waters">
+
+<div class="questionNumber">
+Question 4 of 25
+</div>
+
+<h2>
+According to legend, what did the Children of the Forest use
+in an attempt to destroy the Arm of Dorne?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Horn of Winter
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Hammer of the Waters
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Hammers of Valyria
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Red Stone
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Aegon II">
+
+<div class="questionNumber">
+Question 5 of 25
+</div>
+
+<h2>
+Which claimant was crowned king after the Greens
+took King's Landing during the Dance of the Dragons?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Aegon II
+</button>
+
+<button class="answer" onclick="answer(this)">
+Aegon III
+</button>
+
+<button class="answer" onclick="answer(this)">
+Daeron I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Viserys II
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Cregan Stark">
+
+<div class="questionNumber">
+Question 6 of 25
+</div>
+
+<h2>
+Which Stark lord brought the Winter Wolves south
+and later served as Hand during the end of the Dance?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Rickon Stark
+</button>
+
+<button class="answer" onclick="answer(this)">
+Cregan Stark
+</button>
+
+<button class="answer" onclick="answer(this)">
+Rodrik Stark
+</button>
+
+<button class="answer" onclick="answer(this)">
+Brandon Stark
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Oldtown">
+
+<div class="questionNumber">
+Question 7 of 25
+</div>
+
+<h2>
+Where is the Citadel located?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Gulltown
+</button>
+
+<button class="answer" onclick="answer(this)">
+Oldtown
+</button>
+
+<button class="answer" onclick="answer(this)">
+Lannisport
+</button>
+
+<button class="answer" onclick="answer(this)">
+Highgarden
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Harren Hoare">
+
+<div class="questionNumber">
+Question 8 of 25
+</div>
+
+<h2>
+Who was the last King of the Isles and the Rivers
+of House Hoare?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Harren Hoare
+</button>
+
+<button class="answer" onclick="answer(this)">
+Harwyn Hoare
+</button>
+
+<button class="answer" onclick="answer(this)">
+Harlon Hoare
+</button>
+
+<button class="answer" onclick="answer(this)">
+Qhorwyn Hoare
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Dark Sister">
+
+<div class="questionNumber">
+Question 9 of 25
+</div>
+
+<h2>
+Which Valyrian steel sword was wielded by Daemon Targaryen?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Blackfyre
+</button>
+
+<button class="answer" onclick="answer(this)">
+Dark Sister
+</button>
+
+<button class="answer" onclick="answer(this)">
+Heartsbane
+</button>
+
+<button class="answer" onclick="answer(this)">
+Lady Forlorn
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Doom of Valyria">
+
+<div class="questionNumber">
+Question 10 of 25
+</div>
+
+<h2>
+What catastrophe destroyed the Valyrian Freehold?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Long Night
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Doom of Valyria
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Century of Blood
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Great Burning
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Daeron II">
+
+<div class="questionNumber">
+Question 11 of 25
+</div>
+
+<h2>
+Which king was known as Daeron the Good and ruled
+during the First Blackfyre Rebellion?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Daeron II
+</button>
+
+<button class="answer" onclick="answer(this)">
+Daeron I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Maekar I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Aegon V
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Aegor Rivers">
+
+<div class="questionNumber">
+Question 12 of 25
+</div>
+
+<h2>
+Which Great Bastard of Aegon IV was known as Bittersteel?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Brynden Rivers
+</button>
+
+<button class="answer" onclick="answer(this)">
+Aegor Rivers
+</button>
+
+<button class="answer" onclick="answer(this)">
+Daemon Blackfyre
+</button>
+
+<button class="answer" onclick="answer(this)">
+Haegon Blackfyre
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Brynden Rivers">
+
+<div class="questionNumber">
+Question 13 of 25
+</div>
+
+<h2>
+Which Great Bastard of Aegon IV was known as Bloodraven?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Aegor Rivers
+</button>
+
+<button class="answer" onclick="answer(this)">
+Brynden Rivers
+</button>
+
+<button class="answer" onclick="answer(this)">
+Daemon Blackfyre
+</button>
+
+<button class="answer" onclick="answer(this)">
+Haegon Blackfyre
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Mander">
+
+<div class="questionNumber">
+Question 14 of 25
+</div>
+
+<h2>
+Which major river flows through the Reach and past Highgarden?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Trident
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Blackwater Rush
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Mander
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Greenblood
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Night's King">
+
+<div class="questionNumber">
+Question 15 of 25
+</div>
+
+<h2>
+According to Night's Watch legend, who ruled from the Nightfort
+after taking an Other as his bride?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Night's King
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Last Hero
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Night's Watch King
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Ice King
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="House Dayne">
+
+<div class="questionNumber">
+Question 16 of 25
+</div>
+
+<h2>
+Which house is associated with Starfall,
+the Sword of the Morning, and Dawn?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+House Hightower
+</button>
+
+<button class="answer" onclick="answer(this)">
+House Dayne
+</button>
+
+<button class="answer" onclick="answer(this)">
+House Royce
+</button>
+
+<button class="answer" onclick="answer(this)">
+House Tarly
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Blackfyre Rebellion">
+
+<div class="questionNumber">
+Question 17 of 25
+</div>
+
+<h2>
+What conflict began when Daemon Blackfyre claimed
+the Iron Throne against his half-brother Daeron II?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The War of the Ninepenny Kings
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Blackfyre Rebellion
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Dance of the Dragons
+</button>
+
+<button class="answer" onclick="answer(this)">
+The First Dornish War
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Maegor I">
+
+<div class="questionNumber">
+Question 18 of 25
+</div>
+
+<h2>
+Which Targaryen king is remembered as Maegor the Cruel?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Maegor I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Aenys I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Maekar I
+</button>
+
+<button class="answer" onclick="answer(this)">
+Aegon II
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Golden Company">
+
+<div class="questionNumber">
+Question 19 of 25
+</div>
+
+<h2>
+Which famous sellsword company was founded by Aegor Rivers?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Second Sons
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Brave Companions
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Golden Company
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Stormcrows
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Black Dread">
+
+<div class="questionNumber">
+Question 20 of 25
+</div>
+
+<h2>
+What was Balerion's famous epithet?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Black Dread
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Blood Wyrm
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Black Terror
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Shadow Wing
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Enter the Nightmare Round ☠️
+</button>
+
+</div>
+
+
+
+<!-- =========================================================
+     NIGHTMARE ROUND
+========================================================= -->
+
+
+<div class="question"
+data-answer="Septon Barth">
+
+<div class="questionNumber">
+Nightmare Round — Question 21 of 25
+</div>
+
+<h2>
+Which Hand of the King was famous for his learning and
+for writing works concerning dragons, magic and the nature
+of the world?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Septon Barth
+</button>
+
+<button class="answer" onclick="answer(this)">
+Grand Maester Pycelle
+</button>
+
+<button class="answer" onclick="answer(this)">
+Maester Aemon
+</button>
+
+<button class="answer" onclick="answer(this)">
+Archmaester Marwyn
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Nightmare Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Nagga">
+
+<div class="questionNumber">
+Nightmare Round — Question 22 of 25
+</div>
+
+<h2>
+According to the legends of the Ironborn, what was the name
+of the enormous sea creature whose bones were said to form
+the Grey King's hall?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Leviathan
+</button>
+
+<button class="answer" onclick="answer(this)">
+Nagga
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Sea Dragon
+</button>
+
+<button class="answer" onclick="answer(this)">
+Stormbringer
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Nightmare Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Rat Cook">
+
+<div class="questionNumber">
+Nightmare Round — Question 23 of 25
+</div>
+
+<h2>
+Which legendary Night's Watch figure was transformed by
+the gods into a giant white rat after murdering a guest?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Rat Cook
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Night's King
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Last Hero
+</button>
+
+<button class="answer" onclick="answer(this)">
+The White Cook
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Next Nightmare Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="Morning">
+
+<div class="questionNumber">
+Nightmare Round — Question 24 of 25
+</div>
+
+<h2>
+Which dragon was ridden by Rhaena Targaryen,
+the daughter of Daemon Targaryen and Laena Velaryon?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+Morning
+</button>
+
+<button class="answer" onclick="answer(this)">
+Dreamfyre
+</button>
+
+<button class="answer" onclick="answer(this)">
+Moondancer
+</button>
+
+<button class="answer" onclick="answer(this)">
+Tyraxes
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Final Question →
+</button>
+
+</div>
+
+
+
+<div class="question"
+data-answer="The Blackfyre line">
+
+<div class="questionNumber">
+Nightmare Round — Question 25 of 25
+</div>
+
+<h2>
+The Golden Company was founded primarily by followers
+of which defeated dynastic line?
+</h2>
+
+<button class="answer" onclick="answer(this)">
+The Hoare line
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Blackfyre line
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Baratheon line
+</button>
+
+<button class="answer" onclick="answer(this)">
+The Arryn line
+</button>
+
+<div class="feedback"></div>
+
+<button class="next" onclick="nextQuestion()">
+Reveal Final Result 👑
+</button>
+
+</div>
+
+
+
+<!-- =========================================================
+     RESULT
+========================================================= -->
+
+<div id="result">
+
+<div class="resultIcon">
+👑
+</div>
+
+<h2 id="resultTitle"></h2>
+
+<p class="finalScore">
+
+You scored
+
+<span id="finalScore">
+0
+</span>
+
+out of 25.
+
+</p>
+
+<p id="resultText"></p>
+
+
+<button
+class="restart"
+onclick="restartQuiz()">
+
+Attempt the Archives Again
+
+</button>
+
+
+<a
+class="forest"
+href="forest.html">
+
+🌲 Return to the Forest
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
 <script>
 
-    let score = 0;
-    let answered = 0;
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-    function answer(button, correct) {
+let score = 0;
 
-        const question = button.parentElement;
+let currentQuestion = 0;
 
-        if (question.dataset.done) {
-            return;
-        }
+let answered = false;
 
-        question.dataset.done = "yes";
 
-        answered++;
+const questions =
+document.querySelectorAll(".question");
 
-        if (correct) {
-            button.style.background = "#b8d4b5";
-            score++;
-        } else {
-            button.style.background = "#d9aaa4";
-        }
 
-        const buttons = question.querySelectorAll("button");
+const scoreDisplay =
+document.getElementById("score");
 
-        buttons.forEach(function(btn) {
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+function answer(button) {
+
+
+    if (answered) {
+        return;
+    }
+
+
+    answered = true;
+
+
+    const question =
+        button.closest(".question");
+
+
+    const correctAnswer =
+        question.dataset.answer;
+
+
+    const selectedAnswer =
+        button.innerText.trim();
+
+
+    const buttons =
+        question.querySelectorAll(".answer");
+
+
+    const feedback =
+        question.querySelector(".feedback");
+
+
+    const next =
+        question.querySelector(".next");
+
+
+    buttons.forEach(
+        function(btn) {
+
             btn.disabled = true;
-        });
 
-        if (answered === 3) {
-            showResult();
         }
+    );
+
+
+    if (
+        selectedAnswer ===
+        correctAnswer
+    ) {
+
+
+        score++;
+
+
+        scoreDisplay.innerText =
+            score;
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        feedback.innerText =
+            "✓ Correct. The archives approve.";
+
+        feedback.classList.add(
+            "correctText"
+        );
+
+
+    }
+
+    else {
+
+
+        button.classList.add(
+            "incorrect"
+        );
+
+
+        buttons.forEach(
+            function(btn) {
+
+                if (
+                    btn.innerText.trim() ===
+                    correctAnswer
+                ) {
+
+                    btn.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+        feedback.innerText =
+            "✗ Incorrect. The answer was " +
+            correctAnswer + ".";
+
+
+        feedback.classList.add(
+            "incorrectText"
+        );
+
     }
 
 
-    function showResult() {
+    next.style.display =
+        "block";
 
-        const result = document.getElementById("result");
-        const title = document.getElementById("resultTitle");
-        const text = document.getElementById("resultText");
+}
 
-        result.style.display = "block";
 
-        if (score === 3) {
+/* =========================================================
+   NEXT QUESTION
+========================================================= */
 
-            title.innerHTML = "👑 The King of Westeros!";
-            text.innerHTML = "Perfect score. The Iron Throne is yours.";
+function nextQuestion() {
 
-        } else if (score === 2) {
 
-            title.innerHTML = "🐺 A Worthy Stark";
-            text.innerHTML = "Not bad, Stink. You might survive the North.";
+    questions[
+        currentQuestion
+    ].classList.remove(
+        "active"
+    );
 
-        } else {
 
-            title.innerHTML = "🐌 You Know Nothing, Stink";
-            text.innerHTML = "The Maesters are concerned.";
+    currentQuestion++;
 
-        }
+
+    /* Nightmare round begins */
+
+    if (
+        currentQuestion === 20
+    ) {
+
+        document.getElementById(
+            "nightmareBanner"
+        ).style.display =
+            "block";
+
     }
+
+
+    /* Finished */
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        showResult();
+
+        return;
+
+    }
+
+
+    questions[
+        currentQuestion
+    ].classList.add(
+        "active"
+    );
+
+
+    answered =
+        false;
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   FINAL RESULT
+========================================================= */
+
+function showResult() {
+
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "finalScore"
+    ).innerText =
+        score;
+
+
+    const title =
+        document.getElementById(
+            "resultTitle"
+        );
+
+
+    const text =
+        document.getElementById(
+            "resultText"
+        );
+
+
+    if (score === 25) {
+
+        title.innerText =
+            "🐉 THE CITADEL HAS SURRENDERED";
+
+        text.innerText =
+            "25 out of 25. There is genuinely nothing left to test. The Archmaesters have asked you to stop answering their questions and start writing them.";
+
+    }
+
+    else if (score >= 22) {
+
+        title.innerText =
+            "👑 Archmaester of Westeros";
+
+        text.innerText =
+            "Absolutely ridiculous. You survived the Nightmare Round with almost nothing escaping your memory.";
+
+    }
+
+    else if (score >= 19) {
+
+        title.innerText =
+            "🐉 Dragonlord Scholar";
+
+        text.innerText =
+            "An extraordinary result. You clearly know far more than the average person should reasonably know about Westerosi history.";
+
+    }
+
+    else if (score >= 15) {
+
+        title.innerText =
+            "📜 Keeper of the Archives";
+
+        text.innerText =
+            "Very impressive. You know the books, the histories and enough obscure lore to make a Maester nervous.";
+
+    }
+
+    else if (score >= 11) {
+
+        title.innerText =
+            "⚔️ Seasoned Lorekeeper";
+
+        text.innerText =
+            "A respectable performance. You know Westeros well, although the Nightmare Round found a few cracks.";
+
+    }
+
+    else if (score >= 7) {
+
+        title.innerText =
+            "🐺 A Promising Squire";
+
+        text.innerText =
+            "You know your Westeros, but the Citadel archives have humbled you.";
+
+    }
+
+    else {
+
+        title.innerText =
+            "🐌 You Know Nothing, Stink";
+
+        text.innerText =
+            "The Maesters have reviewed your results and recommend that you begin with the family trees before attempting the archives again.";
+
+    }
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartQuiz() {
+
+    location.reload();
+
+}
 
 </script>
 
+
 </body>
+
 </html>
