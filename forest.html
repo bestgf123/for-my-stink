@@ -898,7 +898,31 @@ h1 {
     </section>
 
 </main>
+/* =========================
+   CAT PAW CURSOR TRAIL
+========================= */
 
+.paw-print {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 22px;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    opacity: 0;
+    animation: pawFade 1s ease-out forwards;
+}
+
+@keyframes pawFade {
+    0% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) rotate(-15deg) scale(0.8);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(15deg) scale(1.15);
+    }
+}
 
 </body>
 
