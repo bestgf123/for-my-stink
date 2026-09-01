@@ -3,16 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Stink ❤️</title>
+
+    <title>The Birthday Forest 🌿</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+
+            font-family: Georgia, serif;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0 2px, transparent 3px),
+                radial-gradient(circle at 80% 30%, rgba(255,255,255,0.08) 0 2px, transparent 3px),
+                radial-gradient(circle at 50% 70%, rgba(255,255,255,0.06) 0 2px, transparent 3px),
+                #173d2b;
+
+            color: #f8f1dc;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        /* Little stars */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            color: #f5df91;
+            font-size: 18px;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        .star:nth-child(1) {
+            top: 12%;
+            left: 15%;
+        }
+
+        .star:nth-child(2) {
+            top: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3) {
+            top: 70%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .star:nth-child(4) {
+            top: 75%;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .star:nth-child(5) {
+            top: 35%;
+            left: 8%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes twinkle {
+
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+
+        }
+
+        /* Main entrance */
+
+        .entrance {
+            width: min(90%, 750px);
+
+            padding: 60px 35px;
+
+            background: rgba(245, 239, 216, 0.96);
+
+            color: #234432;
+
+            border: 3px solid #c6a85b;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.35);
+
+            position: relative;
+
+            animation: appear 1.5s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* Decorative corners */
+
+        .branch {
+            position: absolute;
+            font-size: 55px;
+        }
+
+        .branch.top-left {
+            top: -25px;
+            left: -15px;
+        }
+
+        .branch.top-right {
+            top: -25px;
+            right: -15px;
+            transform: scaleX(-1);
+        }
+
+        .branch.bottom-left {
+            bottom: -25px;
+            left: -15px;
+            transform: scaleY(-1);
+        }
+
+        .branch.bottom-right {
+            bottom: -25px;
+            right: -15px;
+            transform: rotate(180deg);
+        }
+
+        .cat {
+            font-size: 65px;
+            margin-bottom: 10px;
+
+            animation: floatCat 3s infinite ease-in-out;
+        }
+
+        @keyframes floatCat {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+        }
+
+        .subtitle {
+            font-size: 22px;
+            font-style: italic;
+
+            margin-bottom: 10px;
+
+            color: #536d57;
+        }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 72px);
+
+            margin: 10px 0;
+
+            color: #173d2b;
+
+            letter-spacing: 1px;
+        }
+
+        .description {
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            max-width: 550px;
+
+            margin: 20px auto;
+        }
+
+        .enter-button {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 16px 35px;
+
+            border-radius: 40px;
+
+            border: 2px solid #b59445;
+
+            background: #234f37;
+
+            color: #fff8df;
+
+            font-family: Georgia, serif;
+
+            font-size: 19px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+        }
+
+        .enter-button:hover {
+
+            background: #c6a85b;
+
+            color: #173d2b;
+
+            transform: translateY(-3px) scale(1.03);
+
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+        }
+
+        .tiny-text {
+
+            margin-top: 25px;
+
+            font-size: 13px;
+
+            opacity: 0.65;
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <h1>Happy Birthday, My Stink ❤️</h1>
+    <!-- Stars -->
 
-    <p>I made something special for you...</p>
+    <div class="stars">
 
-    <button>Start the Adventure ✨</button>
+        <div class="star">✦</div>
+        <div class="star">✧</div>
+        <div class="star">✦</div>
+        <div class="star">✧</div>
+        <div class="star">✦</div>
+
+    </div>
+
+
+    <!-- Main entrance -->
+
+    <main class="entrance">
+
+        <div class="branch top-left">🌿</div>
+        <div class="branch top-right">🌿</div>
+        <div class="branch bottom-left">🌿</div>
+        <div class="branch bottom-right">🌿</div>
+
+        <div class="cat">
+            🐈
+        </div>
+
+        <div class="subtitle">
+            A very important creature has entered the forest…
+        </div>
+
+        <h1>
+            Happy 23rd Birthday<br>
+            
+        </h1>
+
+        <p class="description">
+            Somewhere beyond the trees lies a tiny magical world
+            filled with games, strange facts, questionable trivia,
+            cats, secrets, and other things I thought you might enjoy.
+        </p>
+
+        <button class="enter-button" onclick="enterForest()">
+            🌲 Enter the Forest
+        </button>
+
+        <div class="tiny-text">
+            Proceed with caution. There may be woodland creatures.
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function enterForest() {
+
+            alert("The Birthday Forest awaits you... 🌿✨");
+
+        }
+
+    </script>
 
 </body>
 </html>
