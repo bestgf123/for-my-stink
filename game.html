@@ -13,92 +13,68 @@ content="width=device-width, initial-scale=1.0">
 
 <style>
 
+/* =========================
+   GENERAL
+========================= */
 
 * {
     box-sizing: border-box;
 }
 
-
 body {
-
     margin: 0;
-
     font-family: Georgia, serif;
-
     text-align: center;
-
     background: #b9e5f5;
-
     color: #24442b;
-
 }
-
 
 h1 {
-
     margin: 12px 0 3px;
-
     color: #315c38;
-
     font-size: clamp(30px, 6vw, 48px);
-
 }
-
 
 .instructions {
-
     margin: 4px 15px 8px;
-
     color: #416047;
-
 }
-
 
 #hud {
-
     margin: 8px;
-
     font-weight: bold;
-
     color: #315c38;
-
 }
 
 
-/* GAME WINDOW */
+/* =========================
+   GAME WINDOW
+========================= */
 
 #game {
-
     position: relative;
-
     width: 95vw;
-
     max-width: 950px;
-
     height: 520px;
-
     margin: auto;
-
     overflow: hidden;
 
     border: 4px solid #6d8b4e;
-
     border-radius: 22px;
 
     box-shadow:
         0 12px 35px rgba(0,0,0,.25);
 
     background: #8ed0ee;
-
 }
 
 
-/* SKY */
+/* =========================
+   SKY
+========================= */
 
 .sky {
-
     position: absolute;
-
     inset: 0;
 
     background:
@@ -108,88 +84,63 @@ h1 {
             #b8d98d 68%,
             #82ad61 100%
         );
-
 }
 
 
 /* SUN */
 
 .sun {
-
     position: absolute;
-
     top: 18px;
-
     right: 45px;
-
     font-size: 70px;
-
     z-index: 1;
-
 }
 
 
 /* CLOUDS */
 
 .cloud {
-
     position: absolute;
-
     font-size: 48px;
-
     opacity: .85;
-
 }
-
 
 .cloud1 {
-
     top: 55px;
-
     left: 100px;
-
 }
-
 
 .cloud2 {
-
     top: 105px;
-
     left: 520px;
-
 }
-
 
 .cloud3 {
-
     top: 35px;
-
     left: 750px;
-
 }
 
 
-/* WORLD */
+/* =========================
+   WORLD
+========================= */
 
 #world {
-
     position: absolute;
-
     left: 0;
-
     top: 0;
 
     width: 5000px;
-
     height: 100%;
-
 }
 
 
-/* FLOWER BUSHES */
+/* =========================
+   WILDFLOWERS
+========================= */
 
 .flowerBush {
-
     position: absolute;
 
     bottom: 115px;
@@ -199,43 +150,22 @@ h1 {
     white-space: nowrap;
 
     z-index: 2;
-
 }
 
-
-.fb1 {
-    left: 70px;
-}
-
-.fb2 {
-    left: 500px;
-}
-
-.fb3 {
-    left: 1100px;
-}
-
-.fb4 {
-    left: 1750px;
-}
-
-.fb5 {
-    left: 2450px;
-}
-
-.fb6 {
-    left: 3200px;
-}
-
-.fb7 {
-    left: 3900px;
-}
+.fb1 { left: 70px; }
+.fb2 { left: 500px; }
+.fb3 { left: 1100px; }
+.fb4 { left: 1750px; }
+.fb5 { left: 2450px; }
+.fb6 { left: 3200px; }
+.fb7 { left: 3900px; }
 
 
-/* TREES */
+/* =========================
+   TREES
+========================= */
 
 .tree {
-
     position: absolute;
 
     bottom: 105px;
@@ -243,55 +173,29 @@ h1 {
     font-size: 78px;
 
     z-index: 2;
-
 }
 
-
-.tree1 {
-    left: 0;
-}
-
-.tree2 {
-    left: 350px;
-}
-
-.tree3 {
-    left: 850px;
-}
-
-.tree4 {
-    left: 1450px;
-}
-
-.tree5 {
-    left: 2100px;
-}
-
-.tree6 {
-    left: 2800px;
-}
-
-.tree7 {
-    left: 3500px;
-}
-
-.tree8 {
-    left: 4300px;
-}
+.tree1 { left: 0; }
+.tree2 { left: 350px; }
+.tree3 { left: 850px; }
+.tree4 { left: 1450px; }
+.tree5 { left: 2100px; }
+.tree6 { left: 2800px; }
+.tree7 { left: 3500px; }
+.tree8 { left: 4300px; }
 
 
-/* GROUND */
+/* =========================
+   GROUND
+========================= */
 
 .ground {
-
     position: absolute;
 
     left: 0;
-
     bottom: 0;
 
     width: 5000px;
-
     height: 105px;
 
     background:
@@ -301,33 +205,30 @@ h1 {
         );
 
     z-index: 3;
-
 }
 
 
-/* PLAYER */
+/* =========================
+   MR TAPUS
+========================= */
 
 #player {
 
     position: absolute;
 
-    width: 100px;
-
-    height: 100px;
+    width: 130px;
+    height: 130px;
 
     z-index: 10;
-
 }
 
 
 #player img {
 
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
-
 }
 
 
@@ -337,39 +238,33 @@ h1 {
 
     animation:
         bob .32s infinite alternate;
-
 }
 
 
 @keyframes bob {
 
     from {
-
         transform:
             translateY(0);
-
     }
 
     to {
-
         transform:
             translateY(-5px);
-
     }
-
 }
 
 
 /* SITTING */
 
 .sitting {
-
     animation: none;
-
 }
 
 
-/* GRASS */
+/* =========================
+   CUSTOM GRASS
+========================= */
 
 .grass {
 
@@ -377,18 +272,65 @@ h1 {
 
     bottom: 105px;
 
-    width: 115px;
-
-    height: 55px;
-
-    font-size: 50px;
+    width: 120px;
+    height: 65px;
 
     z-index: 7;
+}
+
+
+/* Main grass mound */
+
+.grass::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    bottom: 0;
+
+    width: 105px;
+    height: 28px;
+
+    background: #4f873d;
+
+    border-radius:
+        55% 55% 20% 20%;
 
 }
 
 
-/* SOFAS */
+/* Grass blades */
+
+.grass::after {
+
+    content:
+        "⌁ ︵ ⌁ ︵ ⌁ ︵ ⌁";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 12px;
+
+    width: 120px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #356b35;
+
+    letter-spacing: -5px;
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* =========================
+   SOFAS
+========================= */
 
 .sofa {
 
@@ -399,11 +341,12 @@ h1 {
     font-size: 70px;
 
     z-index: 7;
-
 }
 
 
-/* BEES */
+/* =========================
+   BEES
+========================= */
 
 .bee {
 
@@ -415,7 +358,6 @@ h1 {
 
     animation:
         buzz 1s infinite alternate ease-in-out;
-
 }
 
 
@@ -440,7 +382,9 @@ h1 {
 }
 
 
-/* PRINCESS */
+/* =========================
+   PRINCESS
+========================= */
 
 #princess {
 
@@ -450,27 +394,25 @@ h1 {
 
     bottom: 105px;
 
-    width: 150px;
-
-    height: 150px;
+    width: 180px;
+    height: 180px;
 
     z-index: 9;
-
 }
 
 
 #princess img {
 
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
-
 }
 
 
-/* POPUP */
+/* =========================
+   POPUP
+========================= */
 
 #popup {
 
@@ -492,7 +434,6 @@ h1 {
     flex-direction: column;
 
     padding: 30px;
-
 }
 
 
@@ -503,7 +444,6 @@ h1 {
     font-size: 32px;
 
     max-width: 650px;
-
 }
 
 
@@ -514,7 +454,6 @@ h1 {
     line-height: 1.6;
 
     font-size: 18px;
-
 }
 
 
@@ -527,7 +466,6 @@ h1 {
     flex-wrap: wrap;
 
     justify-content: center;
-
 }
 
 
@@ -550,11 +488,12 @@ h1 {
     cursor: pointer;
 
     font-size: 16px;
-
 }
 
 
-/* ENDING */
+/* =========================
+   ENDING
+========================= */
 
 #ending {
 
@@ -576,7 +515,6 @@ h1 {
     flex-direction: column;
 
     padding: 25px;
-
 }
 
 
@@ -585,7 +523,6 @@ h1 {
     color: #315c38;
 
     font-size: 35px;
-
 }
 
 
@@ -594,18 +531,15 @@ h1 {
     font-size: 19px;
 
     line-height: 1.6;
-
 }
 
 
 #ending img {
 
-    width: 150px;
-
-    height: 150px;
+    width: 180px;
+    height: 180px;
 
     object-fit: contain;
-
 }
 
 
@@ -624,9 +558,10 @@ h1 {
     font-weight: bold;
 
     cursor: pointer;
-
 }
 
+
+/* BACK LINK */
 
 .back {
 
@@ -635,9 +570,26 @@ h1 {
     margin: 12px;
 
     color: #315c38;
-
 }
 
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    #game {
+        height: 470px;
+    }
+
+    .tree {
+        font-size: 58px;
+    }
+
+    .flowerBush {
+        font-size: 32px;
+    }
+
+}
 
 </style>
 
@@ -665,10 +617,6 @@ Use <b>← →</b> to move
 
 🐝 Bumble Bees:
 <span id="beeCount">0</span>
-
-&nbsp;&nbsp;
-
-💚 Mission continues!
 
 </div>
 
@@ -700,7 +648,9 @@ Use <b>← →</b> to move
 <div id="world">
 
 
-<!-- FLOWERS -->
+<!-- =====================
+     FLOWERS
+===================== -->
 
 
 <div class="flowerBush fb1">
@@ -732,7 +682,9 @@ Use <b>← →</b> to move
 </div>
 
 
-<!-- TREES -->
+<!-- =====================
+     TREES
+===================== -->
 
 
 <div class="tree tree1">
@@ -768,30 +720,31 @@ Use <b>← →</b> to move
 </div>
 
 
-<!-- MR TAPUS -->
+<!-- =====================
+     MR TAPUS
+===================== -->
 
 
-<div id="player"
+<div
+id="player"
 class="walking">
 
 <img
 src="tapus-walking.png"
-alt="Mr Tapus"
->
+alt="Mr Tapus">
 
 </div>
 
 
-<!-- GRASS PATCHES -->
+<!-- =====================
+     GRASS PATCHES
+===================== -->
 
 
 <div
 class="grass"
 style="left:650px"
 data-x="650">
-
-🌿🌿🌿
-
 </div>
 
 
@@ -799,9 +752,6 @@ data-x="650">
 class="grass"
 style="left:1400px"
 data-x="1400">
-
-🌿🌿🌿
-
 </div>
 
 
@@ -809,9 +759,6 @@ data-x="1400">
 class="grass"
 style="left:2050px"
 data-x="2050">
-
-🌿🌿🌿
-
 </div>
 
 
@@ -819,9 +766,6 @@ data-x="2050">
 class="grass"
 style="left:2800px"
 data-x="2800">
-
-🌿🌿🌿
-
 </div>
 
 
@@ -829,9 +773,6 @@ data-x="2800">
 class="grass"
 style="left:3550px"
 data-x="3550">
-
-🌿🌿🌿
-
 </div>
 
 
@@ -839,13 +780,12 @@ data-x="3550">
 class="grass"
 style="left:4200px"
 data-x="4200">
-
-🌿🌿🌿
-
 </div>
 
 
-<!-- SOFAS -->
+<!-- =====================
+     SOFAS
+===================== -->
 
 
 <div
@@ -888,7 +828,9 @@ data-x="4450">
 </div>
 
 
-<!-- BEES -->
+<!-- =====================
+     BEES
+===================== -->
 
 
 <div
@@ -961,15 +903,16 @@ data-x="4600">
 </div>
 
 
-<!-- PRINCESS -->
+<!-- =====================
+     PRINCESS
+===================== -->
 
 
 <div id="princess">
 
 <img
 src="princess-sitting.png"
-alt="The Princess"
->
+alt="The Princess">
 
 </div>
 
@@ -980,7 +923,9 @@ alt="The Princess"
 </div>
 
 
-<!-- POPUP -->
+<!-- =====================
+     POPUP
+===================== -->
 
 
 <div id="popup">
@@ -1020,7 +965,9 @@ style="display:none">
 </div>
 
 
-<!-- ENDING -->
+<!-- =====================
+     ENDING
+===================== -->
 
 
 <div id="ending">
@@ -1028,12 +975,13 @@ style="display:none">
 
 <img
 src="princess-screaming.png"
-alt="The Princess"
->
+alt="The Princess">
 
 
 <h2>
+
 👑 MR TAPUS FOUND THE PRINCESS!
+
 </h2>
 
 
@@ -1048,11 +996,6 @@ The Princess has noticed him.
 <br><br>
 
 😱🐈💨
-
-<br><br>
-
-Bumble bees collected:
-<span id="finalBees">0</span>
 
 </p>
 
@@ -1081,6 +1024,11 @@ href="forest.html">
 
 
 <script>
+
+
+/* =========================
+   ELEMENTS
+========================= */
 
 
 const player =
@@ -1113,8 +1061,10 @@ document.getElementById("ending");
 const beeCount =
 document.getElementById("beeCount");
 
-const finalBees =
-document.getElementById("finalBees");
+
+/* =========================
+   GAME VARIABLES
+========================= */
 
 
 let playerX = 100;
@@ -1146,7 +1096,9 @@ const beeElements =
 document.querySelectorAll(".bee");
 
 
-/* CONTROLS */
+/* =========================
+   CONTROLS
+========================= */
 
 
 document.addEventListener(
@@ -1175,7 +1127,6 @@ jumping = true;
 
 }
 
-
 });
 
 
@@ -1188,7 +1139,9 @@ keys[event.key] = false;
 });
 
 
-/* POPUP */
+/* =========================
+   POPUP
+========================= */
 
 
 function showPopup(
@@ -1218,7 +1171,7 @@ if (type === "grass") {
 
 
 mainButton.innerText =
-"Okay, I'll jump!";
+"🐈 Get up, Tapus!";
 
 beeButton.style.display =
 "none";
@@ -1233,7 +1186,9 @@ if (type === "sofa") {
 mainButton.innerText =
 "Give up 😭";
 
+
 beeButton.style.display =
+
 bees > 0
 ? "inline-block"
 : "none";
@@ -1241,17 +1196,36 @@ bees > 0
 
 }
 
-
 }
 
 
-/* POPUP BUTTON */
+/* =========================
+   POPUP ACTION
+========================= */
 
 
 function popupAction() {
 
 
 if (popupType === "grass") {
+
+
+player.classList.remove(
+"sitting"
+);
+
+player.classList.add(
+"walking"
+);
+
+
+player.innerHTML = `
+
+<img
+src="tapus-walking.png"
+alt="Mr Tapus">
+
+`;
 
 
 closePopup();
@@ -1263,9 +1237,6 @@ closePopup();
 else if (popupType === "sofa") {
 
 
-if (bees <= 0) {
-
-
 location.reload();
 
 
@@ -1275,10 +1246,9 @@ location.reload();
 }
 
 
-}
-
-
-/* CLOSE */
+/* =========================
+   CLOSE POPUP
+========================= */
 
 
 function closePopup() {
@@ -1296,7 +1266,9 @@ popupType = "";
 }
 
 
-/* USE BEE */
+/* =========================
+   USE BEE
+========================= */
 
 
 function useBee() {
@@ -1310,6 +1282,7 @@ return;
 
 
 bees--;
+
 
 beeCount.innerText =
 bees;
@@ -1335,8 +1308,7 @@ player.innerHTML = `
 
 <img
 src="tapus-walking.png"
-alt="Mr Tapus"
->
+alt="Mr Tapus">
 
 `;
 
@@ -1344,7 +1316,9 @@ alt="Mr Tapus"
 }
 
 
-/* DISTANCE */
+/* =========================
+   DISTANCE
+========================= */
 
 
 function distanceFrom(element) {
@@ -1364,7 +1338,9 @@ playerX - obstacleX
 }
 
 
-/* GRASS */
+/* =========================
+   GRASS
+========================= */
 
 
 function checkGrass() {
@@ -1376,54 +1352,9 @@ function(item) {
 
 if (
 
-distanceFrom(item) < 70 &&
+distanceFrom(item) < 90 &&
 
-playerY < 35
-
-) {
-
-
-playerX =
-parseInt(
-item.dataset.x
-) - 75;
-
-
-showPopup(
-
-"🌿 Oh no!",
-
-"Mr Tapus has encountered a patch of grass! He can't go any further until he jumps over it.",
-
-"grass"
-
-);
-
-
-}
-
-
-});
-
-
-}
-
-
-/* SOFA */
-
-
-function checkSofas() {
-
-
-sofas.forEach(
-function(item) {
-
-
-if (
-
-distanceFrom(item) < 75 &&
-
-playerY < 40
+playerY < 50
 
 ) {
 
@@ -1431,10 +1362,7 @@ playerY < 40
 playerX =
 parseInt(
 item.dataset.x
-) - 75;
-
-
-gamePaused = true;
+) - 100;
 
 
 player.classList.remove(
@@ -1450,45 +1378,23 @@ player.innerHTML = `
 
 <img
 src="tapus-sitting.png"
-alt="Mr Tapus sitting"
->
+alt="Mr Tapus sitting">
 
 `;
 
 
-popupTitle.innerText =
-"🛋️ Cozy Nook Alert!";
+showPopup(
 
+"🌿 Oh no!",
 
-popupText.innerText =
+"Mr Tapus has encountered a patch of grass! He's stopped for a little sit-down. He'll have to get himself together if he wants to continue his mission.",
 
-"Mr Tapus has found a cozy lil nook and got distracted. He failed his mission.";
+"grass"
 
-
-popup.style.display =
-"flex";
-
-
-popupType =
-"sofa";
-
-
-mainButton.innerText =
-"Give up 😭";
-
-
-if (bees > 0) {
-
-
-beeButton.style.display =
-"inline-block";
+);
 
 
 }
-
-
-}
-
 
 });
 
@@ -1496,7 +1402,73 @@ beeButton.style.display =
 }
 
 
-/* BEES */
+/* =========================
+   SOFAS
+========================= */
+
+
+function checkSofas() {
+
+
+sofas.forEach(
+function(item) {
+
+
+if (
+
+distanceFrom(item) < 95 &&
+
+playerY < 55
+
+) {
+
+
+playerX =
+parseInt(
+item.dataset.x
+) - 100;
+
+
+player.classList.remove(
+"walking"
+);
+
+player.classList.add(
+"sitting"
+);
+
+
+player.innerHTML = `
+
+<img
+src="tapus-sitting.png"
+alt="Mr Tapus sitting">
+
+`;
+
+
+showPopup(
+
+"🛋️ Cozy lil nook detected!",
+
+"Mr Tapus has found a cozy lil nook and got distracted. He failed his mission.",
+
+"sofa"
+
+);
+
+
+}
+
+});
+
+
+}
+
+
+/* =========================
+   BEES
+========================= */
 
 
 function checkBees() {
@@ -1510,7 +1482,7 @@ if (
 
 bee.style.display !== "none" &&
 
-distanceFrom(bee) < 65 &&
+distanceFrom(bee) < 75 &&
 
 Math.abs(
 
@@ -1522,7 +1494,7 @@ bee.style.bottom
 ) - 105
 )
 
-) < 90
+) < 100
 
 ) {
 
@@ -1540,14 +1512,15 @@ bees;
 
 }
 
-
 });
 
 
 }
 
 
-/* CAMERA */
+/* =========================
+   CAMERA
+========================= */
 
 
 function updateCamera() {
@@ -1585,20 +1558,18 @@ world.style.left =
 }
 
 
-/* PRINCESS */
+/* =========================
+   PRINCESS
+========================= */
 
 
 function checkPrincess() {
 
 
-if (playerX > 4680) {
+if (playerX > 4650) {
 
 
 gamePaused = true;
-
-
-finalBees.innerText =
-bees;
 
 
 ending.style.display =
@@ -1607,11 +1578,12 @@ ending.style.display =
 
 }
 
-
 }
 
 
-/* GAME LOOP */
+/* =========================
+   GAME LOOP
+========================= */
 
 
 function gameLoop() {
@@ -1620,77 +1592,65 @@ function gameLoop() {
 if (!gamePaused) {
 
 
-/* MOVEMENT */
+/* MOVE RIGHT */
 
-
-if (keys["ArrowRight"]) {
-
+if (
+keys["ArrowRight"]
+) {
 
 playerX += 4;
 
-
 }
 
 
-if (keys["ArrowLeft"]) {
+/* MOVE LEFT */
 
+if (
+keys["ArrowLeft"]
+) {
 
 playerX -= 4;
 
-
 }
 
 
-/* LIMITS */
-
+/* LIMIT */
 
 if (playerX < 0) {
 
-
 playerX = 0;
-
 
 }
 
 
 if (playerX > 4850) {
 
-
 playerX = 4850;
-
 
 }
 
 
 /* GRAVITY */
 
-
 velocityY -= .7;
-
 
 playerY += velocityY;
 
 
 /* GROUND */
 
-
 if (playerY <= 0) {
-
 
 playerY = 0;
 
-
 velocityY = 0;
 
-
 jumping = false;
-
 
 }
 
 
-/* PLAYER */
-
+/* PLAYER POSITION */
 
 player.style.left =
 playerX + "px";
@@ -1700,8 +1660,7 @@ player.style.bottom =
 (105 + playerY) + "px";
 
 
-/* CHECK THINGS */
-
+/* CHECK OBJECTS */
 
 checkGrass();
 
@@ -1713,7 +1672,6 @@ checkPrincess();
 
 
 /* CAMERA */
-
 
 updateCamera();
 
@@ -1728,6 +1686,8 @@ gameLoop
 
 }
 
+
+/* START */
 
 gameLoop();
 
