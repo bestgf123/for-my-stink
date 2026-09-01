@@ -1343,6 +1343,15 @@ body.dayMode .fireflies {
             title="Suspicious cake">
             🎂
         </div>
+        .discoveryCake {
+    position: absolute;
+    z-index: 4;
+    left: 48%;
+    top: 1220px;
+    font-size: 32px;
+    cursor: help;
+    filter: drop-shadow(0 5px 4px rgba(0,0,0,.35));
+}
 
 
         <!-- WRONG WAY -->
@@ -1589,6 +1598,8 @@ const owl =
         "wanderingOwl"
     );
 
+let finalSecretFound = false;
+
 
 function sendOwl() {
 
@@ -1601,6 +1612,57 @@ function sendOwl() {
 }
 
 
+/*
+   The flying owl is the final secret.
+   When it finishes crossing the page,
+   the eighth discovery is activated.
+*/
+
+owl.addEventListener(
+    "animationend",
+    function() {
+
+        if (finalSecretFound) {
+            return;
+        }
+
+        finalSecretFound = true;
+
+
+        /*
+           The flying owl completes
+           the eighth creature discovery.
+        */
+
+        discovered.add(7);
+
+
+        counter.textContent =
+            "🌿 Secrets discovered: 8 / 8";
+
+
+        popup.textContent =
+            "You have befriended all the creatures of the forest. They wish you well in your adventure";
+
+
+        popup.classList.add("show");
+
+
+        setTimeout(
+            function() {
+
+                popup.classList.remove(
+                    "show"
+                );
+
+            },
+            5000
+        );
+
+    }
+);
+
+
 setTimeout(
     sendOwl,
     5000
@@ -1608,10 +1670,20 @@ setTimeout(
 
 
 setInterval(
-    sendOwl,
+    function() {
+
+        /*
+           Only send the owl again if
+           the final secret hasn't been found.
+        */
+
+        if (!finalSecretFound) {
+            sendOwl();
+        }
+
+    },
     18000
 );
-
 
 </script>
 
