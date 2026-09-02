@@ -895,6 +895,36 @@ h2 {
     background: rgba(255,255,255,0.16);
     transform: translateY(-2px);
 }
+    .home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+#continueAdventure,
+#backToForest {
+    padding: 15px 25px;
+    border: 1px solid #9caf91;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    color: #eee9d8;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#continueAdventure:hover,
+#backToForest:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
+#backToForest {
+    opacity: 0.75;
+}
 </style>
 </head>
 
@@ -1024,9 +1054,16 @@ h2 {
         <strong>Click Continue… if you’re brave enough.</strong>
     </p>
 
-    <button id="continueAdventure" type="button">
-        🐾 Continue
-    </button>
+    <div class="home-buttons">
+        <button id="continueAdventure" type="button">
+            🐾 Continue
+        </button>
+
+        <button id="backToForest" type="button">
+            🌲 Too scary, take me back
+        </button>
+    </div>
+</div>
 </div>
 <div id="game">
 
@@ -3746,14 +3783,23 @@ function restartGame() {
         cozy: 0
     };
 
-   const homeScreen = document.getElementById("homeScreen");
+  const homeScreen = document.getElementById("homeScreen");
 const continueAdventure = document.getElementById("continueAdventure");
+const backToForest = document.getElementById("backToForest");
 
-continueAdventure.addEventListener("click", function() {
+continueAdventure.addEventListener("click", function () {
     homeScreen.style.display = "none";
     showScene("start");
 });
-}
+
+backToForest.addEventListener("click", function () {
+    window.location.href = "forest.html";
+});
+    // =====================================================
+// MYSTERY TRAIL HUD BUTTONS
+// =====================================================
+
+
 
 
 /* =========================================================
@@ -3917,7 +3963,7 @@ function showScene(sceneId) {
    START
    ========================================================= */
 
-showScene("start");
+
     // =====================================================
 // MYSTERY TRAIL HUD BUTTONS
 // =====================================================
