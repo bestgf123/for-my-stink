@@ -967,36 +967,57 @@ h2 {
     font-size: 20px;
 }
 
-.tracker-step {
+/* =====================================================
+   ENDING TRACKER
+   ===================================================== */
+
+.tracker-intro {
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.65;
+    margin: -8px 0 18px;
+}
+
+.ending-tracker {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ending-slot {
+    display: flex;
+    align-items: center;
     gap: 12px;
-    align-items: flex-start;
 
-    padding: 12px 0;
+    padding: 12px 14px;
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
 
-    opacity: 0.4;
+    transition: 0.2s ease;
 }
 
-.tracker-step.completed {
-    opacity: 1;
+.ending-icon {
+    width: 30px;
+    text-align: center;
+    font-size: 20px;
 }
 
-.tracker-step span {
-    font-size: 22px;
-    min-width: 28px;
+.ending-name {
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.65;
 }
 
-.tracker-step strong {
-    display: block;
-    font-size: 15px;
-    margin-bottom: 3px;
-}
+#trackerCount {
+    text-align: center;
+    margin-top: 18px;
+    padding-top: 14px;
 
-.tracker-step small {
-    display: block;
-    line-height: 1.4;
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    font-size: 13px;
     opacity: 0.7;
 }
 </style>
@@ -1093,60 +1114,46 @@ h2 {
 
     <h3>🗺️ Mystery Trail</h3>
 
-    <div class="tracker-step completed">
-        <span>🌲</span>
-        <div>
-            <strong>The Forest</strong>
-            <small>You entered the mysterious woods.</small>
+    <p class="tracker-intro">
+        Discover all six endings.
+    </p>
+
+    <div class="ending-tracker">
+
+        <div class="ending-slot" data-ending="napEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
         </div>
+
+        <div class="ending-slot" data-ending="doorEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
+        </div>
+
+        <div class="ending-slot" data-ending="lostEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
+        </div>
+
+        <div class="ending-slot" data-ending="guardianEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
+        </div>
+
+        <div class="ending-slot" data-ending="hatEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
+        </div>
+
+        <div class="ending-slot" data-ending="witchEnding">
+            <span class="ending-icon">❓</span>
+            <span class="ending-name">Unknown</span>
+        </div>
+
     </div>
 
-    <div class="tracker-step" id="tracker-cottage">
-        <span>🏡</span>
-        <div>
-            <strong>The Cottage</strong>
-            <small>A strange little home in the woods.</small>
-        </div>
-    </div>
-
-    <div class="tracker-step" id="tracker-path">
-        <span>🌿</span>
-        <div>
-            <strong>The Hidden Path</strong>
-            <small>Something is waiting deeper inside.</small>
-        </div>
-    </div>
-
-    <div class="tracker-step" id="tracker-deep">
-        <span>🌲</span>
-        <div>
-            <strong>Deep in the Forest</strong>
-            <small>The mystery grows darker.</small>
-        </div>
-    </div>
-
-    <div class="tracker-step" id="tracker-flower">
-        <span>🌸</span>
-        <div>
-            <strong>The Secret Garden</strong>
-            <small>You discovered something beautiful.</small>
-        </div>
-    </div>
-
-    <div class="tracker-step" id="tracker-witch">
-        <span>🔮</span>
-        <div>
-            <strong>The Witch</strong>
-            <small>Someone knows more than they should.</small>
-        </div>
-    </div>
-
-    <div class="tracker-step" id="tracker-swamp">
-        <span>🌫️</span>
-        <div>
-            <strong>The Swamp</strong>
-            <small>The final part of the trail awaits.</small>
-        </div>
+    <div id="trackerCount">
+        0 / 6 endings discovered
     </div>
 
 </div>
@@ -3905,11 +3912,12 @@ function restartGame() {
    SHOW ENDING
    ========================================================= */
 
-function showEnding(scene) {
+function showEnding(scene, sceneId) {
 
     const traveler =
         getTravelerType();
 
+    saveDiscoveredEnding(sceneId);
     content.innerHTML = `
 
         <div class="ending">
@@ -3986,7 +3994,7 @@ function showScene(sceneId) {
 
     if (scene.ending) {
 
-        showEnding(scene);
+        showEnding(scene, sceneId);
 
         return;
     }
@@ -4212,6 +4220,107 @@ if (trackerButton && trackerPanel) {
         trackerPanel.classList.toggle("open");
     });
 }
+ // =====================================================
+// ENDING TRACKER
+// =====================================================
+
+const endingIds = [
+    "napEnding",
+    "doorEnding",
+    "lostEnding",
+    "guardianEnding",
+    "hatEnding",
+    "witchEnding"
+];
+
+function getDiscoveredEndings() {
+
+    return JSON.parse(
+        localStorage.getItem("mysteryDiscoveredEndings") || "[]"
+    );
+
+}
+
+function saveDiscoveredEnding(endingId) {
+
+    if (!endingId) return;
+
+    const discovered =
+        getDiscoveredEndings();
+
+    if (!discovered.includes(endingId)) {
+
+        discovered.push(endingId);
+
+        localStorage.setItem(
+            "mysteryDiscoveredEndings",
+            JSON.stringify(discovered)
+        );
+
+    }
+
+    updateEndingTracker();
+
+}
+
+function updateEndingTracker() {
+
+    const discovered =
+        getDiscoveredEndings();
+
+    document
+        .querySelectorAll(".ending-slot")
+        .forEach(slot => {
+
+            const endingId =
+                slot.dataset.ending;
+
+            const icon =
+                slot.querySelector(".ending-icon");
+
+            const name =
+                slot.querySelector(".ending-name");
+
+            if (discovered.includes(endingId)) {
+
+                const ending =
+                    scenes[endingId];
+
+                icon.textContent =
+                    ending.icon;
+
+                name.textContent =
+                    ending.title;
+
+                slot.classList.add("discovered");
+
+            } else {
+
+                icon.textContent =
+                    "❓";
+
+                name.textContent =
+                    "Unknown";
+
+                slot.classList.remove("discovered");
+
+            }
+
+        });
+
+    const count =
+        document.getElementById("trackerCount");
+
+    if (count) {
+
+        count.textContent =
+            `${discovered.length} / ${endingIds.length} endings discovered`;
+
+    }
+
+}
+
+updateEndingTracker();
 // =====================================================
 // HOME SCREEN
 // =====================================================
