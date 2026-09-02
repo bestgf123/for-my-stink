@@ -11,8 +11,13 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    min-height: 100%;
+}
+
+body {
     min-height: 100vh;
     font-family: Georgia, serif;
     color: #eee9d8;
@@ -29,7 +34,14 @@ body {
     justify-content: center;
     align-items: center;
     padding: 25px 15px;
+
+    overflow-x: hidden;
 }
+
+
+/* =====================================================
+   GAME
+   ===================================================== */
 
 #game {
     position: relative;
@@ -38,11 +50,12 @@ body {
 
     overflow: hidden;
 
-    border: 3px solid #607b55;
-    border-radius: 30px;
+    border: 1px solid rgba(190, 210, 170, 0.25);
+    border-radius: 24px;
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.45);
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(70, 110, 70, 0.12);
 
     background: #132b20;
 }
@@ -62,23 +75,55 @@ body {
     inset: 0;
 
     background:
-        radial-gradient(circle at 15% 20%,
-            rgba(255,255,255,.08) 0 2px,
-            transparent 3px),
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(210, 230, 150, 0.08),
+            transparent 3%
+        ),
+        radial-gradient(
+            circle at 75% 20%,
+            rgba(210, 230, 150, 0.07),
+            transparent 3%
+        ),
+        radial-gradient(
+            circle at 60% 75%,
+            rgba(210, 230, 150, 0.06),
+            transparent 3%
+        );
 
-        radial-gradient(circle at 75% 30%,
-            rgba(255,255,255,.06) 0 2px,
-            transparent 3px),
-
-        radial-gradient(circle at 45% 75%,
-            rgba(255,255,255,.05) 0 2px,
-            transparent 3px);
-
-    background-size:
-        150px 130px,
-        210px 170px,
-        190px 160px;
+    animation: forestGlow 7s ease-in-out infinite;
 }
+
+#background::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 25%,
+            rgba(0, 15, 7, 0.3) 100%
+        );
+}
+
+@keyframes forestGlow {
+    0%, 100% {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+
+
+/* =====================================================
+   BACKGROUNDS
+   ===================================================== */
 
 .scene-dawn {
     background:
@@ -160,6 +205,11 @@ body {
         );
 }
 
+
+/* =====================================================
+   CONTENT
+   ===================================================== */
+
 #content {
     position: relative;
     z-index: 10;
@@ -172,24 +222,57 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    animation: storyAppear .55s ease;
 }
+
+@keyframes storyAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   TYPOGRAPHY
+   ===================================================== */
 
 .chapter {
     margin-bottom: 10px;
 
     color: #b8c99d;
 
-    font-size: 14px;
-    letter-spacing: 2px;
+    font-size: 12px;
+    letter-spacing: 3px;
     text-transform: uppercase;
+
+    opacity: .8;
 }
 
 .icon {
     font-size: 75px;
     margin-bottom: 10px;
 
+    animation: iconFloat 3.5s ease-in-out infinite;
+
     filter:
-        drop-shadow(0 5px 8px rgba(0,0,0,.3));
+        drop-shadow(0 5px 10px rgba(0,0,0,.35));
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
 }
 
 h1 {
@@ -201,6 +284,10 @@ h1 {
 
     font-size:
         clamp(30px, 6vw, 52px);
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,.5),
+        0 0 18px rgba(210,190,110,.12);
 }
 
 h2 {
@@ -210,6 +297,10 @@ h2 {
 
     font-size: 28px;
     text-align: center;
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,.5),
+        0 0 18px rgba(210,190,110,.12);
 }
 
 .story {
@@ -224,7 +315,15 @@ h2 {
     text-align: center;
 
     color: #eee9d8;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.4);
 }
+
+
+/* =====================================================
+   CHOICES
+   ===================================================== */
 
 .choices {
     width: min(650px, 100%);
@@ -238,6 +337,8 @@ h2 {
 .choice {
     position: relative;
     z-index: 20;
+
+    overflow: hidden;
 
     pointer-events: auto;
 
@@ -262,23 +363,61 @@ h2 {
     cursor: pointer;
 
     transition:
-        transform .15s ease,
-        background .15s ease,
-        border-color .15s ease;
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease,
+        border-color .18s ease;
+}
+
+.choice::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition:
+        left .5s ease;
+}
+
+.choice:hover::before {
+    left: 140%;
 }
 
 .choice:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 
     background:
         rgba(56,79,53,.98);
 
     border-color: #a5b87e;
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.3),
+        0 0 12px rgba(150,180,120,.08);
 }
 
 .choice:active {
     transform: translateY(0);
 }
+
+
+/* =====================================================
+   ENDING
+   ===================================================== */
 
 .ending {
     width: min(650px, 100%);
@@ -316,6 +455,14 @@ h2 {
     font-size: 16px;
 
     cursor: pointer;
+
+    transition: .18s ease;
+}
+
+.ending button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.3);
 }
 
 #travelerResult {
@@ -336,315 +483,282 @@ h2 {
     font-size: 24px;
 }
 
-.back {
-    position: fixed;
 
-    bottom: 15px;
-    left: 15px;
-
-    z-index: 100;
-
-    color: #cbd6b5;
-
-    text-decoration: none;
-
-    font-size: 14px;
-}
-
-.back:hover {
-    color: white;
-}
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 10px;
-        align-items: flex-start;
-    }
-
-    #game {
-        min-height:
-            calc(100vh - 20px);
-    }
-
-    #content {
-        min-height:
-            calc(100vh - 20px);
-
-        padding:
-            35px 18px 65px;
-    }
-
-    .icon {
-        font-size: 60px;
-    }
-
-    .story {
-        font-size: 16px;
-        line-height: 1.65;
-    }
-
-    .choice {
-        font-size: 15px;
-        padding: 14px 15px;
-    }
-}
-    /* =====================================================
-   MYSTERY TRAIL VISUAL UPGRADE
+/* =====================================================
+   HOME SCREEN
    ===================================================== */
 
-* {
-    box-sizing: border-box;
+.homeScreen {
+    width: min(620px, 100%);
+
+    text-align: center;
 }
 
-body {
-    overflow-x: hidden;
+.homeIcon {
+    font-size: 100px;
+
+    margin-bottom: 10px;
+
+    animation:
+        homeFloat 4s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 8px 15px rgba(0,0,0,.4));
 }
 
-/* Give the game a more polished glassy look */
-#game {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(190, 210, 170, 0.25);
-    border-radius: 24px;
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.45),
-        0 0 35px rgba(70, 110, 70, 0.12);
-}
-
-/* Atmospheric layer */
-#background::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(210, 230, 150, 0.08),
-            transparent 3%
-        ),
-        radial-gradient(
-            circle at 75% 20%,
-            rgba(210, 230, 150, 0.07),
-            transparent 3%
-        ),
-        radial-gradient(
-            circle at 60% 75%,
-            rgba(210, 230, 150, 0.06),
-            transparent 3%
-        );
-    animation: forestGlow 7s ease-in-out infinite;
-}
-
-#background::after {
-    content: "";
-    position: absolute;
-    inset: -20%;
-    pointer-events: none;
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 25%,
-            rgba(0, 15, 7, 0.3) 100%
-        );
-}
-
-@keyframes forestGlow {
-    0%, 100% {
-        opacity: 0.55;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.04);
-    }
-}
-
-
-/* Story entrance animation */
-#content {
-    animation: storyAppear 0.55s ease;
-}
-
-@keyframes storyAppear {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* Chapter label */
-.chapter {
-    letter-spacing: 3px;
-    font-size: 12px;
-    opacity: 0.8;
-    text-transform: uppercase;
-}
-
-
-/* Big story icon */
-.icon {
-    animation: iconFloat 3.5s ease-in-out infinite;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.35));
-}
-
-@keyframes iconFloat {
+@keyframes homeFloat {
     0%, 100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-7px);
+        transform: translateY(-8px);
     }
 }
 
-
-/* Title glow */
-h1,
-h2 {
-    text-shadow:
-        0 3px 12px rgba(0,0,0,0.5),
-        0 0 18px rgba(210, 190, 110, 0.12);
+.homeScreen h1 {
+    margin-bottom: 8px;
 }
 
+.homeSubtitle {
+    margin:
+        0 auto 30px;
 
-/* Story text */
-.story {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    max-width: 520px;
+
+    color: #d7d9c6;
+
+    font-size: 17px;
+    line-height: 1.7;
 }
 
+.homeButtons {
+    display: flex;
+    flex-direction: column;
 
-/* Better choice buttons */
-.choice {
+    gap: 12px;
+
+    width: min(430px, 100%);
+
+    margin: 0 auto;
+}
+
+.homeButton {
     position: relative;
-    overflow: hidden;
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease,
-        border-color 0.18s ease;
+    z-index: 20;
+
+    padding: 15px 20px;
+
+    border:
+        2px solid #6c825c;
+
+    border-radius: 16px;
+
+    background:
+        rgba(25,43,31,.9);
+
+    color: #f0ead8;
+
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .18s ease;
 }
 
-.choice::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 80%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.08),
-        transparent
-    );
-    transform: skewX(-20deg);
-    transition: left 0.5s ease;
-}
-
-.choice:hover::before {
-    left: 140%;
-}
-
-.choice:hover {
+.homeButton:hover {
     transform: translateY(-3px);
+
+    background:
+        rgba(56,79,53,.98);
+
+    border-color: #a5b87e;
+
     box-shadow:
-        0 8px 22px rgba(0,0,0,0.3),
-        0 0 12px rgba(150,180,120,0.08);
+        0 8px 22px rgba(0,0,0,.3);
+}
+
+.homeButton.primary {
+    background:
+        rgba(86,101,62,.95);
+
+    border-color: #b0bd83;
+
+    color: #fff7df;
+}
+
+.homeButton:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.homeStatus {
+    margin-top: 22px;
+
+    min-height: 22px;
+
+    color: rgba(238,233,216,.7);
+
+    font-size: 13px;
 }
 
 
-/* Tiny leaf particles */
-.mystery-leaf {
-    position: fixed;
-    z-index: 5;
-    pointer-events: none;
-    opacity: 0.35;
-    font-size: 14px;
-    animation: leafFloat linear infinite;
+/* =====================================================
+   TRAIL TRACKER
+   ===================================================== */
+
+.trailTracker {
+    width: min(680px, 100%);
+
+    text-align: center;
 }
 
-@keyframes leafFloat {
-    from {
-        transform:
-            translateY(105vh)
-            translateX(0)
-            rotate(0deg);
-    }
+.trailCount {
+    margin:
+        5px auto 22px;
 
-    to {
-        transform:
-            translateY(-80px)
-            translateX(80px)
-            rotate(360deg);
-    }
+    padding: 18px;
+
+    border:
+        1px solid rgba(190,210,170,.25);
+
+    border-radius: 18px;
+
+    background:
+        rgba(7,20,12,.55);
+}
+
+.trailCountNumber {
+    color: #e1cf8b;
+
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.trailCountLabel {
+    margin-top: 4px;
+
+    color: #b8c99d;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.trailList {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    max-height: 360px;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
+}
+
+.trailItem {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border:
+        1px solid rgba(180,200,155,.2);
+
+    border-radius: 13px;
+
+    background:
+        rgba(7,20,12,.55);
+
+    text-align: left;
+}
+
+.trailItemIcon {
+    width: 40px;
+
+    text-align: center;
+
+    font-size: 26px;
+}
+
+.trailItemName {
+    flex: 1;
+
+    color: #eee9d8;
+
+    font-size: 15px;
+}
+
+.trailItemNumber {
+    color: #9eae83;
+
+    font-size: 12px;
+}
+
+.trailEmpty {
+    padding: 25px;
+
+    color: rgba(238,233,216,.65);
+
+    line-height: 1.7;
+}
+
+.trailBackButton {
+    position: relative;
+    z-index: 20;
+
+    margin-top: 20px;
+
+    padding: 12px 23px;
+
+    border: 1px solid #788c65;
+
+    border-radius: 20px;
+
+    background:
+        rgba(25,43,31,.9);
+
+    color: #eee9d8;
+
+    font-family: Georgia, serif;
+
+    cursor: pointer;
+}
+
+.trailBackButton:hover {
+    background:
+        rgba(56,79,53,.98);
 }
 
 
-/* Mobile improvements */
-@media (max-width: 600px) {
-
-    #game {
-        width: calc(100% - 16px);
-        border-radius: 18px;
-    }
-
-    #content {
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .story {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-
-    .choice {
-        padding: 14px;
-        font-size: 16px;
-    }
-
-    .icon {
-        font-size: 52px;
-    }
-
-}
-
-
-/* Respect accessibility settings */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-
-}
-    /* =====================================================
+/* =====================================================
    HUD
    ===================================================== */
 
 #mysteryHUD {
     position: fixed;
     z-index: 1000;
+
     top: 10px;
     left: 50%;
+
     transform: translateX(-50%);
 
-    width: min(900px, calc(100% - 20px));
+    width:
+        min(900px, calc(100% - 20px));
 
     display: flex;
+
     justify-content: space-between;
+
     gap: 8px;
 
     pointer-events: none;
@@ -653,62 +767,80 @@ h2 {
 .mysteryHUD-left,
 .mysteryHUD-right {
     display: flex;
+
     gap: 6px;
+
     pointer-events: auto;
 }
 
 #mysteryHUD button {
-    border: 1px solid rgba(180, 200, 155, 0.5);
+    border:
+        1px solid rgba(180,200,155,.5);
+
     border-radius: 12px;
 
     padding: 8px 11px;
 
-    background: rgba(7, 20, 12, 0.88);
+    background:
+        rgba(7,20,12,.88);
+
     color: #eee9d8;
 
     font-family: Georgia, serif;
+
     font-size: 12px;
 
     cursor: pointer;
 
     backdrop-filter: blur(8px);
 
-    transition: 0.18s ease;
+    transition: .18s ease;
 }
 
 #mysteryHUD button:hover {
     transform: translateY(-2px);
-    background: rgba(35, 65, 42, 0.95);
+
+    background:
+        rgba(35,65,42,.95);
 }
 
 #mysteryHUD button:disabled {
-    opacity: 0.35;
+    opacity: .35;
+
     cursor: not-allowed;
+
     transform: none;
 }
 
 
-/* Progress */
+/* =====================================================
+   PROGRESS
+   ===================================================== */
 
 #mysteryProgress {
     position: fixed;
     z-index: 999;
+
     top: 51px;
     left: 50%;
+
     transform: translateX(-50%);
 
-    width: min(460px, calc(100% - 90px));
+    width:
+        min(460px, calc(100% - 90px));
 
     text-align: center;
 }
 
 #mysteryProgressBar {
     height: 4px;
+
     overflow: hidden;
 
     border-radius: 10px;
 
-    background: rgba(255,255,255,0.12);
+    background:
+        rgba(255,255,255,.12);
 }
 
 #mysteryProgressFill {
@@ -719,20 +851,25 @@ h2 {
 
     background: #cbbd7d;
 
-    transition: width 0.5s ease;
+    transition:
+        width .5s ease;
 }
 
 #mysteryProgressText {
     margin-top: 4px;
 
-    color: rgba(238,233,216,0.7);
+    color:
+        rgba(238,233,216,.7);
 
     font-size: 10px;
-    letter-spacing: 0.5px;
+
+    letter-spacing: .5px;
 }
 
 
-/* Panels */
+/* =====================================================
+   PANELS
+   ===================================================== */
 
 .mysteryPanel {
     position: fixed;
@@ -742,14 +879,23 @@ h2 {
 
     width: 250px;
 
+    max-height:
+        calc(100vh - 105px);
+
+    overflow-y: auto;
+
     padding: 18px;
 
-    border: 1px solid #708465;
+    border:
+        1px solid #708465;
+
     border-radius: 17px;
 
-    background: rgba(7,20,12,0.96);
+    background:
+        rgba(7,20,12,.96);
 
-    box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.5);
 
     backdrop-filter: blur(10px);
 
@@ -783,10 +929,160 @@ h2 {
 
     border-radius: 9px;
 
-    background: rgba(255,255,255,0.05);
+    background:
+        rgba(255,255,255,.05);
+
+    opacity: .35;
+
+    transition: .2s ease;
 }
 
+.mysteryItem.found {
+    opacity: 1;
+
+    background:
+        rgba(120,150,100,.15);
+}
+
+.mysteryTrait {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 8px 10px;
+
+    margin: 5px 0;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+.mysteryTrait strong {
+    color: #e2d18e;
+}
+
+
+/* =====================================================
+   BACK LINK
+   ===================================================== */
+
+.back {
+    position: fixed;
+
+    bottom: 15px;
+    left: 15px;
+
+    z-index: 100;
+
+    color: #cbd6b5;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.back:hover {
+    color: white;
+}
+
+
+/* =====================================================
+   LEAVES
+   ===================================================== */
+
+.mystery-leaf {
+    position: fixed;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    opacity: .35;
+
+    font-size: 14px;
+
+    animation:
+        leafFloat linear infinite;
+}
+
+@keyframes leafFloat {
+    from {
+        transform:
+            translateY(105vh)
+            translateX(0)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translateY(-80px)
+            translateX(80px)
+            rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
 @media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+
+        align-items: flex-start;
+    }
+
+    #game {
+        width:
+            calc(100% - 16px);
+
+        min-height:
+            calc(100vh - 20px);
+
+        border-radius: 18px;
+    }
+
+    #content {
+        min-height:
+            calc(100vh - 20px);
+
+        padding:
+            35px 18px 65px;
+    }
+
+    .icon {
+        font-size: 52px;
+    }
+
+    .story {
+        font-size: 16px;
+
+        line-height: 1.7;
+    }
+
+    .choice {
+        padding: 14px;
+
+        font-size: 16px;
+    }
+
+    .homeIcon {
+        font-size: 75px;
+    }
+
+    .homeSubtitle {
+        font-size: 15px;
+    }
+
+    .homeButton {
+        font-size: 15px;
+    }
 
     #mysteryHUD {
         top: 6px;
@@ -794,6 +1090,7 @@ h2 {
 
     #mysteryHUD button {
         padding: 7px 8px;
+
         font-size: 11px;
     }
 
@@ -804,40 +1101,45 @@ h2 {
     .mysteryPanel {
         left: 10px !important;
         right: 10px !important;
+
         width: auto;
     }
 
-}
-    .mysteryTrait {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .trailTracker {
+        padding-top: 10px;
+    }
 
-    padding: 8px 10px;
-    margin: 5px 0;
+    .trailList {
+        max-height: 300px;
+    }
 
-    border-radius: 9px;
-    background: rgba(255,255,255,0.05);
-}
-
-.mysteryTrait strong {
-    color: #e2d18e;
+    .back {
+        display: none;
+    }
 }
 
-.mysteryItem {
-    opacity: 0.35;
-    transition: 0.2s ease;
-}
 
-.mysteryItem.found {
-    opacity: 1;
-    background: rgba(120,150,100,0.15);
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+
+        transition-duration: .01ms !important;
+    }
 }
 </style>
 </head>
 
 <body>
-    <!-- =====================================================
+
+
+<!-- =====================================================
      MYSTERY TRAIL HUD
      ===================================================== -->
 
@@ -873,10 +1175,20 @@ h2 {
             🎒 Bag
         </button>
 
+        <button
+            type="button"
+            id="mysteryTrailsButton">
+            🐾 Trails
+        </button>
+
     </div>
 
 </div>
 
+
+<!-- =====================================================
+     PROGRESS
+     ===================================================== -->
 
 <div id="mysteryProgress">
 
@@ -891,11 +1203,17 @@ h2 {
 </div>
 
 
-<!-- Trait panel -->
+<!-- =====================================================
+     TRAITS PANEL
+     ===================================================== -->
 
-<div id="mysteryTraitsPanel" class="mysteryPanel">
+<div
+    id="mysteryTraitsPanel"
+    class="mysteryPanel">
 
-    <h3>🧠 Your Personality</h3>
+    <h3>
+        🧠 Your Personality
+    </h3>
 
     <p>
         Your choices are shaping who you become.
@@ -908,58 +1226,90 @@ h2 {
 </div>
 
 
-<!-- Inventory panel -->
+<!-- =====================================================
+     BAG PANEL
+     ===================================================== -->
 
-<div id="mysteryBagPanel" class="mysteryPanel">
+<div
+    id="mysteryBagPanel"
+    class="mysteryPanel">
 
-    <h3>🎒 Adventure Bag</h3>
+    <h3>
+        🎒 Adventure Bag
+    </h3>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="note">
         📜 Mysterious Note
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="map">
         🗺️ Forest Map
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="coffee">
         ☕ Forest Coffee
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="biscuit">
         🍪 Guardian Biscuit
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="bell">
         🔔 Witch's Bell
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="flower">
         🌼 Magical Flower
     </div>
 
-    <div class="mysteryItem">
+    <div
+        class="mysteryItem"
+        data-item="hat">
         🎩 Tiny Hat
     </div>
 
 </div>
 
+
+<!-- =====================================================
+     GAME
+     ===================================================== -->
+
 <div id="game">
 
-    <div id="background" class="scene-dawn"></div>
+    <div
+        id="background"
+        class="scene-dawn">
+    </div>
 
     <div id="content"></div>
 
 </div>
 
-<a href="forest.html" class="back">
+
+<a
+    href="forest.html"
+    class="back">
     🌲 Return to the Forest
 </a>
+
 
 <script>
 
 /* =========================================================
-   MYSTERY TRAIL
+   ELEMENTS
    ========================================================= */
 
 const content =
@@ -970,7 +1320,21 @@ const background =
 
 
 /* =========================================================
-   TRAVELER TRAITS
+   STORAGE
+   ========================================================= */
+
+const SAVE_KEY =
+    "mysteryTrailSave";
+
+const TRAILS_KEY =
+    "mysteryTrailCompleted";
+
+const ITEMS_KEY =
+    "mysteryTrailItems";
+
+
+/* =========================================================
+   TRAITS
    ========================================================= */
 
 let traits = {
@@ -983,15 +1347,1925 @@ let traits = {
 };
 
 
+/* =========================================================
+   GAME STATE
+   ========================================================= */
+
+let currentSceneId = "start";
+
+let gameStarted = false;
+
+let previousSceneId = null;
+
+
+/* =========================================================
+   TRAIL / ENDING DATA
+   ========================================================= */
+
+const endingOrder = [
+    "napEnding",
+    "doorEnding",
+    "lostEnding",
+    "guardianEnding",
+    "hatEnding",
+    "witchEnding"
+];
+
+
+const endingNames = {
+
+    napEnding: {
+        icon: "🛏️",
+        name: "The Extremely Well-Rested Ending"
+    },
+
+    doorEnding: {
+        icon: "🚪",
+        name: "The Door Slam Ending"
+    },
+
+    lostEnding: {
+        icon: "🌲",
+        name: "The Lost Ending"
+    },
+
+    guardianEnding: {
+        icon: "🐻",
+        name: "The Forest Friend Ending"
+    },
+
+    hatEnding: {
+        icon: "🎩",
+        name: "The Tiny Hat Ending"
+    },
+
+    witchEnding: {
+        icon: "🧙‍♀️",
+        name: "You Saved the Forest!"
+    }
+
+};
+
+
+/* =========================================================
+   TRAITS
+   ========================================================= */
+
 function addTrait(trait) {
 
     if (
         trait &&
-        Object.prototype.hasOwnProperty.call(traits, trait)
+        Object.prototype.hasOwnProperty.call(
+            traits,
+            trait
+        )
     ) {
         traits[trait]++;
     }
 }
+
+
+/* =========================================================
+   RESET TRAITS
+   ========================================================= */
+
+function resetTraits() {
+
+    traits = {
+        brave: 0,
+        kind: 0,
+        clever: 0,
+        curious: 0,
+        chaotic: 0,
+        cozy: 0
+    };
+
+}
+
+
+/* =========================================================
+   SAVE / LOAD HELPERS
+   ========================================================= */
+
+function getCompletedTrails() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                TRAILS_KEY
+            );
+
+        if (!saved) {
+            return [];
+        }
+
+        const parsed =
+            JSON.parse(saved);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    } catch (error) {
+
+        console.error(
+            "Could not read completed trails:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
+function saveCompletedTrails(trailsList) {
+
+    localStorage.setItem(
+        TRAILS_KEY,
+        JSON.stringify(trailsList)
+    );
+
+}
+
+
+/* =========================================================
+   RECORD ENDING
+   ========================================================= */
+
+function recordEnding(sceneId) {
+
+    if (
+        !endingOrder.includes(sceneId)
+    ) {
+        return;
+    }
+
+    const completed =
+        getCompletedTrails();
+
+    if (
+        !completed.includes(sceneId)
+    ) {
+
+        completed.push(sceneId);
+
+        saveCompletedTrails(
+            completed
+        );
+    }
+
+}
+
+
+/* =========================================================
+   ITEMS
+   ========================================================= */
+
+function getItems() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                ITEMS_KEY
+            );
+
+        if (!saved) {
+            return {};
+        }
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        return {};
+    }
+}
+
+
+function setItem(item) {
+
+    if (!item) {
+        return;
+    }
+
+    const items =
+        getItems();
+
+    items[item] = true;
+
+    localStorage.setItem(
+        ITEMS_KEY,
+        JSON.stringify(items)
+    );
+
+}
+
+
+/* =========================================================
+   DETECT STORY ITEMS
+   ========================================================= */
+
+function detectItems(sceneId) {
+
+    const scene =
+        scenes[sceneId];
+
+    if (!scene) {
+        return;
+    }
+
+    const text =
+        (
+            scene.title +
+            " " +
+            scene.text
+        ).toLowerCase();
+
+
+    if (
+        sceneId === "readNote" ||
+        text.includes("folded note")
+    ) {
+        setItem("note");
+    }
+
+
+    if (
+        sceneId === "searchMap" ||
+        text.includes("hand-drawn map")
+    ) {
+        setItem("map");
+    }
+
+
+    if (
+        sceneId === "coffee" ||
+        sceneId === "coffeeVisitor" ||
+        text.includes("cup of coffee")
+    ) {
+        setItem("coffee");
+    }
+
+
+    if (
+        sceneId === "biscuitGuardian" ||
+        sceneId === "guardianAdvice" ||
+        sceneId === "witchAdvice" ||
+        text.includes("biscuit")
+    ) {
+        setItem("biscuit");
+    }
+
+
+    if (
+        sceneId === "witchTrick" ||
+        sceneId === "bellGuardian" ||
+        text.includes("tiny bell")
+    ) {
+        setItem("bell");
+    }
+
+
+    if (
+        sceneId === "flowerGranted" ||
+        text.includes("magical flower")
+    ) {
+        setItem("flower");
+    }
+
+
+    if (
+        sceneId === "guardianHat" ||
+        sceneId === "hatEnding" ||
+        text.includes("tiny hat")
+    ) {
+        setItem("hat");
+    }
+
+}
+
+
+/* =========================================================
+   SAVE GAME
+   ========================================================= */
+
+function saveGame(showMessage = true) {
+
+    if (!gameStarted) {
+        return;
+    }
+
+    const saveData = {
+
+        sceneId:
+            currentSceneId,
+
+        previousSceneId:
+            previousSceneId,
+
+        traits:
+            { ...traits },
+
+        savedAt:
+            Date.now()
+
+    };
+
+
+    try {
+
+        localStorage.setItem(
+            SAVE_KEY,
+            JSON.stringify(saveData)
+        );
+
+
+        if (showMessage) {
+
+            showTemporaryMessage(
+                "💾 Game saved!"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Could not save game:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD SAVE
+   ========================================================= */
+
+function getSave() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                SAVE_KEY
+            );
+
+        if (!saved) {
+            return null;
+        }
+
+        const data =
+            JSON.parse(saved);
+
+        if (
+            !data ||
+            !data.sceneId ||
+            !scenes[data.sceneId]
+        ) {
+            return null;
+        }
+
+        return data;
+
+    } catch (error) {
+
+        console.error(
+            "Could not load save:",
+            error
+        );
+
+        return null;
+    }
+
+}
+
+
+/* =========================================================
+   DELETE SAVE
+   ========================================================= */
+
+function deleteSave() {
+
+    localStorage.removeItem(
+        SAVE_KEY
+    );
+
+}
+
+
+/* =========================================================
+   TEMPORARY MESSAGE
+   ========================================================= */
+
+function showTemporaryMessage(message) {
+
+    const existing =
+        document.getElementById(
+            "temporaryMessage"
+        );
+
+    if (existing) {
+        existing.remove();
+    }
+
+
+    const box =
+        document.createElement("div");
+
+    box.id =
+        "temporaryMessage";
+
+    box.textContent =
+        message;
+
+    box.style.position =
+        "fixed";
+
+    box.style.left =
+        "50%";
+
+    box.style.bottom =
+        "25px";
+
+    box.style.transform =
+        "translateX(-50%)";
+
+    box.style.zIndex =
+        "5000";
+
+    box.style.padding =
+        "11px 18px";
+
+    box.style.border =
+        "1px solid #899a72";
+
+    box.style.borderRadius =
+        "20px";
+
+    box.style.background =
+        "rgba(7,20,12,.96)";
+
+    box.style.color =
+        "#eee9d8";
+
+    box.style.fontFamily =
+        "Georgia, serif";
+
+    box.style.fontSize =
+        "14px";
+
+    box.style.boxShadow =
+        "0 8px 30px rgba(0,0,0,.35)";
+
+    document.body.appendChild(box);
+
+
+    setTimeout(
+        function() {
+
+            box.style.opacity =
+                "0";
+
+            box.style.transition =
+                "opacity .3s ease";
+
+            setTimeout(
+                function() {
+                    box.remove();
+                },
+                300
+            );
+
+        },
+        1400
+    );
+
+}
+
+
+/* =========================================================
+   TRAVELER TYPE
+   ========================================================= */
+
+function getTravelerType() {
+
+    const entries =
+        Object.entries(traits);
+
+    entries.sort(
+        function(a, b) {
+            return b[1] - a[1];
+        }
+    );
+
+
+    const top =
+        entries[0][0];
+
+
+    const types = {
+
+        brave: {
+            name: "The Fearless Wanderer",
+
+            text:
+                "You charge into strange situations with impressive confidence."
+        },
+
+        kind: {
+            name: "The Gentle Forest Friend",
+
+            text:
+                "You lead with kindness, even when the forest gets weird."
+        },
+
+        clever: {
+            name: "The Clever Pathfinder",
+
+            text:
+                "You prefer a smart solution over a dramatic one."
+        },
+
+        curious: {
+            name: "The Curious Explorer",
+
+            text:
+                "You cannot resist investigating whatever looks mysterious."
+        },
+
+        chaotic: {
+            name: "The Chaotic Little Creature",
+
+            text:
+                "You somehow turn every simple decision into an adventure."
+        },
+
+        cozy: {
+            name: "The Cozy Wanderer",
+
+            text:
+                "You believe every adventure should include rest, snacks and somewhere comfortable to sit."
+        }
+
+    };
+
+
+    return types[top];
+}
+
+
+/* =========================================================
+   HOME SCREEN
+   ========================================================= */
+
+function showHomeScreen() {
+
+    gameStarted = false;
+
+    const saved =
+        getSave();
+
+    const completed =
+        getCompletedTrails();
+
+    background.className =
+        "scene-dawn";
+
+
+    content.innerHTML = `
+
+        <div class="homeScreen">
+
+            <div class="homeIcon">
+                🐾
+            </div>
+
+            <h1>
+                Mystery Trail
+            </h1>
+
+            <div class="homeSubtitle">
+
+                A tiny creature.
+                <br>
+                A mysterious forest.
+                <br>
+                And several questionable decisions.
+
+            </div>
+
+            <div class="homeButtons">
+
+                <button
+                    type="button"
+                    class="homeButton primary"
+                    id="newGameButton">
+
+                    🌲 Start New Mystery
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="homeButton"
+                    id="continueButton"
+                    ${saved ? "" : "disabled"}>
+
+                    ▶️ Continue Game
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="homeButton"
+                    id="homeTrailsButton">
+
+                    🐾 Trail Tracker
+                    (${completed.length}/${endingOrder.length})
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="homeButton"
+                    id="homeForestButton">
+
+                    🌲 Return to Forest
+
+                </button>
+
+            </div>
+
+
+            <div class="homeStatus">
+
+                ${
+                    saved
+                    ? "💾 A saved adventure is waiting for you."
+                    : "No saved adventure yet."
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("newGameButton")
+        .addEventListener(
+            "click",
+            function() {
+                restartGame();
+            }
+        );
+
+
+    document
+        .getElementById("continueButton")
+        .addEventListener(
+            "click",
+            function() {
+
+                if (saved) {
+                    continueGame();
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("homeTrailsButton")
+        .addEventListener(
+            "click",
+            showTrailTracker
+        );
+
+
+    document
+        .getElementById("homeForestButton")
+        .addEventListener(
+            "click",
+            function() {
+                window.location.href =
+                    "forest.html";
+            }
+        );
+
+
+    updateHUDForHome();
+
+}
+
+
+/* =========================================================
+   CONTINUE GAME
+   ========================================================= */
+
+function continueGame() {
+
+    const save =
+        getSave();
+
+    if (!save) {
+
+        showTemporaryMessage(
+            "There is no saved adventure yet."
+        );
+
+        return;
+    }
+
+
+    resetTraits();
+
+
+    if (save.traits) {
+
+        Object.keys(traits)
+            .forEach(
+                function(trait) {
+
+                    traits[trait] =
+                        Number(
+                            save.traits[trait]
+                        ) || 0;
+
+                }
+            );
+
+    }
+
+
+    previousSceneId =
+        save.previousSceneId || null;
+
+    gameStarted =
+        true;
+
+
+    showScene(
+        save.sceneId
+    );
+
+
+    showTemporaryMessage(
+        "▶️ Adventure continued!"
+    );
+
+}
+
+
+/* =========================================================
+   NEW GAME
+   ========================================================= */
+
+function restartGame() {
+
+    resetTraits();
+
+    previousSceneId =
+        null;
+
+    currentSceneId =
+        "start";
+
+    gameStarted =
+        true;
+
+
+    deleteSave();
+
+    showScene(
+        "start"
+    );
+
+}
+
+
+/* =========================================================
+   SHOW ENDING
+   ========================================================= */
+
+function showEnding(scene, sceneId) {
+
+    recordEnding(sceneId);
+
+    const traveler =
+        getTravelerType();
+
+
+    deleteSave();
+
+
+    content.innerHTML = `
+
+        <div class="ending">
+
+            <div class="bigIcon">
+                ${scene.icon}
+            </div>
+
+            <div class="chapter">
+                Your Ending
+            </div>
+
+            <h1>
+                ${scene.title}
+            </h1>
+
+            <div class="story">
+                ${scene.text}
+            </div>
+
+
+            <div id="travelerResult">
+
+                <strong>
+                    ${traveler.name}
+                </strong>
+
+                <br><br>
+
+                ${traveler.text}
+
+            </div>
+
+
+            <button
+                id="restartButton"
+                type="button">
+
+                🌲 Start the Mystery Trail Again
+
+            </button>
+
+
+            <button
+                id="endingTrailsButton"
+                type="button"
+                class="homeButton"
+                style="margin-top:12px;">
+
+                🐾 View Trail Tracker
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("restartButton")
+        .addEventListener(
+            "click",
+            restartGame
+        );
+
+
+    document
+        .getElementById("endingTrailsButton")
+        .addEventListener(
+            "click",
+            showTrailTracker
+        );
+
+
+    updateProgress(
+        sceneId
+    );
+
+}
+
+
+/* =========================================================
+   SHOW SCENE
+   ========================================================= */
+
+function showScene(sceneId) {
+
+    const scene =
+        scenes[sceneId];
+
+
+    if (!scene) {
+
+        console.error(
+            "Scene not found:",
+            sceneId
+        );
+
+        return;
+    }
+
+
+    previousSceneId =
+        currentSceneId;
+
+
+    currentSceneId =
+        sceneId;
+
+
+    gameStarted =
+        true;
+
+
+    background.className =
+        scene.background;
+
+
+    detectItems(
+        sceneId
+    );
+
+
+    if (scene.ending) {
+
+        showEnding(
+            scene,
+            sceneId
+        );
+
+        return;
+    }
+
+
+    content.innerHTML = `
+
+        <div class="chapter">
+            ${scene.chapter}
+        </div>
+
+        <div class="icon">
+            ${scene.icon}
+        </div>
+
+        <h2>
+            ${scene.title}
+        </h2>
+
+        <div class="story">
+            ${scene.text}
+        </div>
+
+        <div
+            class="choices"
+            id="choices">
+        </div>
+
+    `;
+
+
+    const choicesContainer =
+        document.getElementById(
+            "choices"
+        );
+
+
+    scene.choices.forEach(
+        function(choice) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "choice";
+
+            button.type =
+                "button";
+
+            button.textContent =
+                choice.text;
+
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    addTrait(
+                        choice.trait
+                    );
+
+
+                    detectItems(
+                        choice.next
+                    );
+
+
+                    showScene(
+                        choice.next
+                    );
+
+                }
+            );
+
+
+            choicesContainer.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    updateProgress(
+        sceneId
+    );
+
+}
+
+
+/* =========================================================
+   PROGRESS CALCULATION
+   ========================================================= */
+
+function getReachableScenes() {
+
+    const visited =
+        new Set();
+
+    const queue =
+        ["start"];
+
+
+    while (queue.length) {
+
+        const id =
+            queue.shift();
+
+        if (
+            visited.has(id) ||
+            !scenes[id]
+        ) {
+            continue;
+        }
+
+
+        visited.add(id);
+
+
+        const scene =
+            scenes[id];
+
+
+        if (
+            scene.choices
+        ) {
+
+            scene.choices
+                .forEach(
+                    function(choice) {
+
+                        if (
+                            !visited.has(
+                                choice.next
+                            )
+                        ) {
+
+                            queue.push(
+                                choice.next
+                            );
+
+                        }
+
+                    }
+                );
+
+        }
+
+    }
+
+
+    return visited;
+}
+
+
+const reachableScenes =
+    getReachableScenes();
+
+
+function updateProgress(sceneId) {
+
+    const fill =
+        document.getElementById(
+            "mysteryProgressFill"
+        );
+
+    const text =
+        document.getElementById(
+            "mysteryProgressText"
+        );
+
+
+    if (!fill || !text) {
+        return;
+    }
+
+
+    const scene =
+        scenes[sceneId];
+
+
+    if (!scene) {
+        return;
+    }
+
+
+    if (scene.ending) {
+
+        fill.style.width =
+            "100%";
+
+        text.textContent =
+            "Trail complete!";
+
+        return;
+    }
+
+
+    const chapterNumber =
+        parseInt(
+            String(
+                scene.chapter || ""
+            ).replace(
+                /\D/g,
+                ""
+            ),
+            10
+        ) || 1;
+
+
+    const maxChapter =
+        13;
+
+
+    const percent =
+        Math.min(
+            95,
+            Math.max(
+                5,
+                (chapterNumber / maxChapter) * 100
+            )
+        );
+
+
+    fill.style.width =
+        percent + "%";
+
+
+    text.textContent =
+        scene.chapter +
+        " • Your story is unfolding…";
+
+}
+
+
+/* =========================================================
+   HUD HOME STATE
+   ========================================================= */
+
+function updateHUDForHome() {
+
+    const saveButton =
+        document.getElementById(
+            "mysterySaveButton"
+        );
+
+    const backButton =
+        document.getElementById(
+            "mysteryBackButton"
+        );
+
+    const traitsButton =
+        document.getElementById(
+            "mysteryTraitsButton"
+        );
+
+    const bagButton =
+        document.getElementById(
+            "mysteryBagButton"
+        );
+
+    const trailsButton =
+        document.getElementById(
+            "mysteryTrailsButton"
+        );
+
+
+    saveButton.disabled =
+        true;
+
+    backButton.disabled =
+        true;
+
+    traitsButton.disabled =
+        true;
+
+    bagButton.disabled =
+        true;
+
+    trailsButton.disabled =
+        false;
+
+
+    document
+        .getElementById(
+            "mysteryProgress"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+function updateHUDForGame() {
+
+    const saveButton =
+        document.getElementById(
+            "mysterySaveButton"
+        );
+
+    const backButton =
+        document.getElementById(
+            "mysteryBackButton"
+        );
+
+    const traitsButton =
+        document.getElementById(
+            "mysteryTraitsButton"
+        );
+
+    const bagButton =
+        document.getElementById(
+            "mysteryBagButton"
+        );
+
+    const trailsButton =
+        document.getElementById(
+            "mysteryTrailsButton"
+        );
+
+
+    saveButton.disabled =
+        false;
+
+    backButton.disabled =
+        false;
+
+    traitsButton.disabled =
+        false;
+
+    bagButton.disabled =
+        false;
+
+    trailsButton.disabled =
+        false;
+
+
+    document
+        .getElementById(
+            "mysteryProgress"
+        )
+        .style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   TRAIL TRACKER
+   ========================================================= */
+
+function showTrailTracker() {
+
+    const completed =
+        getCompletedTrails();
+
+
+    background.className =
+        "scene-deep";
+
+
+    content.innerHTML = `
+
+        <div class="trailTracker">
+
+            <div class="icon">
+                🐾
+            </div>
+
+            <div class="chapter">
+                Mystery Collection
+            </div>
+
+            <h2>
+                Trail Tracker
+            </h2>
+
+            <div class="trailCount">
+
+                <div class="trailCountNumber">
+                    ${completed.length}
+                    /
+                    ${endingOrder.length}
+                </div>
+
+                <div class="trailCountLabel">
+                    DIFFERENT TRAILS DISCOVERED
+                </div>
+
+            </div>
+
+
+            <div class="trailList">
+
+                ${
+                    endingOrder
+                        .map(
+                            function(id, index) {
+
+                                const found =
+                                    completed.includes(
+                                        id
+                                    );
+
+                                const info =
+                                    endingNames[id];
+
+
+                                return `
+
+                                    <div class="trailItem">
+
+                                        <div class="trailItemIcon">
+
+                                            ${
+                                                found
+                                                ? info.icon
+                                                : "❓"
+                                            }
+
+                                        </div>
+
+                                        <div class="trailItemName">
+
+                                            ${
+                                                found
+                                                ? info.name
+                                                : "Undiscovered Trail"
+                                            }
+
+                                        </div>
+
+                                        <div class="trailItemNumber">
+
+                                            Trail
+                                            ${index + 1}
+
+                                        </div>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+                }
+
+            </div>
+
+
+            ${
+                completed.length === 0
+                ? `
+                    <div class="trailEmpty">
+
+                        You haven't completed a trail yet.
+
+                        <br><br>
+
+                        Every ending you discover will be
+                        remembered here.
+
+                    </div>
+                `
+                : ""
+            }
+
+
+            <button
+                type="button"
+                class="trailBackButton"
+                id="trailBackButton">
+
+                ← Back
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "trailBackButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                if (gameStarted) {
+
+                    showScene(
+                        currentSceneId
+                    );
+
+                } else {
+
+                    showHomeScreen();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "mysteryTraitsPanel"
+        )
+        ?.classList.remove("open");
+
+    document
+        .getElementById(
+            "mysteryBagPanel"
+        )
+        ?.classList.remove("open");
+
+
+    if (gameStarted) {
+        updateHUDForGame();
+    } else {
+        updateHUDForHome();
+    }
+
+}
+
+
+/* =========================================================
+   TRAITS PANEL
+   ========================================================= */
+
+function updateTraitsPanel() {
+
+    const box =
+        document.getElementById(
+            "mysteryTraitsContent"
+        );
+
+
+    if (!box) {
+        return;
+    }
+
+
+    const traitNames = {
+
+        brave:
+            "🦁 Brave",
+
+        kind:
+            "💚 Kind",
+
+        clever:
+            "🧠 Clever",
+
+        curious:
+            "🔍 Curious",
+
+        chaotic:
+            "🌪️ Chaotic",
+
+        cozy:
+            "🛏️ Cozy"
+
+    };
+
+
+    let html = "";
+
+
+    Object.keys(traitNames)
+        .forEach(
+            function(trait) {
+
+                const amount =
+                    traits[trait] || 0;
+
+
+                html += `
+
+                    <div class="mysteryTrait">
+
+                        <span>
+                            ${traitNames[trait]}
+                        </span>
+
+                        <strong>
+                            ${amount}
+                        </strong>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+    box.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   BAG PANEL
+   ========================================================= */
+
+function updateBagPanel() {
+
+    const items =
+        document.querySelectorAll(
+            "#mysteryBagPanel .mysteryItem"
+        );
+
+
+    const savedItems =
+        getItems();
+
+
+    items.forEach(
+        function(item) {
+
+            const itemName =
+                item.dataset.item;
+
+
+            if (
+                savedItems[itemName]
+            ) {
+
+                item.classList.add(
+                    "found"
+                );
+
+            } else {
+
+                item.classList.remove(
+                    "found"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BUTTON EVENTS
+   ========================================================= */
+
+const traitsButton =
+    document.getElementById(
+        "mysteryTraitsButton"
+    );
+
+const bagButton =
+    document.getElementById(
+        "mysteryBagButton"
+    );
+
+const trailsButton =
+    document.getElementById(
+        "mysteryTrailsButton"
+    );
+
+const saveButton =
+    document.getElementById(
+        "mysterySaveButton"
+    );
+
+const backButton =
+    document.getElementById(
+        "mysteryBackButton"
+    );
+
+
+const traitsPanel =
+    document.getElementById(
+        "mysteryTraitsPanel"
+    );
+
+const bagPanel =
+    document.getElementById(
+        "mysteryBagPanel"
+    );
+
+
+/* =========================================================
+   TRAITS BUTTON
+   ========================================================= */
+
+traitsButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        if (!gameStarted) {
+            return;
+        }
+
+        bagPanel.classList.remove(
+            "open"
+        );
+
+        updateTraitsPanel();
+
+        traitsPanel.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   BAG BUTTON
+   ========================================================= */
+
+bagButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        if (!gameStarted) {
+            return;
+        }
+
+        traitsPanel.classList.remove(
+            "open"
+        );
+
+        updateBagPanel();
+
+        bagPanel.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   TRAILS BUTTON
+   ========================================================= */
+
+trailsButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        showTrailTracker();
+
+    }
+);
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+saveButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        saveGame(
+            true
+        );
+
+    }
+);
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+backButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        if (!gameStarted) {
+            return;
+        }
+
+
+        traitsPanel.classList.remove(
+            "open"
+        );
+
+        bagPanel.classList.remove(
+            "open"
+        );
+
+
+        if (
+            previousSceneId &&
+            scenes[previousSceneId] &&
+            previousSceneId !== currentSceneId
+        ) {
+
+            const target =
+                previousSceneId;
+
+            currentSceneId =
+                target;
+
+            showScene(
+                target
+            );
+
+            return;
+        }
+
+
+        showHomeScreen();
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE PANELS
+   ========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                "#mysteryTraitsPanel"
+            ) &&
+            !event.target.closest(
+                "#mysteryTraitsButton"
+            )
+        ) {
+
+            traitsPanel.classList.remove(
+                "open"
+            );
+
+        }
+
+
+        if (
+            !event.target.closest(
+                "#mysteryBagPanel"
+            ) &&
+            !event.target.closest(
+                "#mysteryBagButton"
+            )
+        ) {
+
+            bagPanel.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTO SAVE BEFORE LEAVING
+   ========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    function() {
+
+        if (
+            gameStarted &&
+            scenes[currentSceneId] &&
+            !scenes[currentSceneId].ending
+        ) {
+
+            saveGame(
+                false
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LEAF PARTICLES
+   ========================================================= */
+
+function createLeaves() {
+
+    const leaves = [
+        "🍃",
+        "🍂",
+        "🌿"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 8;
+        i++
+    ) {
+
+        const leaf =
+            document.createElement(
+                "div"
+            );
+
+        leaf.className =
+            "mystery-leaf";
+
+        leaf.textContent =
+            leaves[
+                Math.floor(
+                    Math.random() *
+                    leaves.length
+                )
+            ];
+
+
+        leaf.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        leaf.style.animationDuration =
+            (
+                12 +
+                Math.random() * 15
+            ) +
+            "s";
+
+
+        leaf.style.animationDelay =
+            (
+                Math.random() * 12
+            ) +
+            "s";
+
+
+        document.body.appendChild(
+            leaf
+        );
+
+    }
+
+}
+
+
+createLeaves();
 
 
 /* =========================================================
@@ -1055,10 +3329,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       STRETCH
-       ----------------------------------------------------- */
-
     stretch: {
 
         chapter: "Chapter Two",
@@ -1102,10 +3372,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       WINDOW
-       ----------------------------------------------------- */
 
     window: {
 
@@ -1152,10 +3418,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       LISTENING AT THE DOOR
-       ----------------------------------------------------- */
-
     listenDoor: {
 
         chapter: "Chapter Three",
@@ -1199,10 +3461,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       DOOR
-       ----------------------------------------------------- */
 
     door: {
 
@@ -1252,10 +3510,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       WINDOW WAVE
-       ----------------------------------------------------- */
-
     windowWave: {
 
         chapter: "Chapter Three",
@@ -1297,10 +3551,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       WINDOW HIDE
-       ----------------------------------------------------- */
 
     windowHide: {
 
@@ -1347,10 +3597,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       SECOND LOOK
-       ----------------------------------------------------- */
-
     secondLook: {
 
         chapter: "Chapter Three",
@@ -1391,10 +3637,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       COFFEE
-       ----------------------------------------------------- */
 
     coffee: {
 
@@ -1441,10 +3683,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       COFFEE VISITOR
-       ----------------------------------------------------- */
 
     coffeeVisitor: {
 
@@ -1497,10 +3735,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       ASK VISITOR
-       ----------------------------------------------------- */
-
     askVisitor: {
 
         chapter: "Chapter Five",
@@ -1545,10 +3779,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       EAGER MISSION
-       ----------------------------------------------------- */
 
     eagerMission: {
 
@@ -1596,10 +3826,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       READ NOTE
-       ----------------------------------------------------- */
 
     readNote: {
 
@@ -1657,10 +3883,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       FOLLOW TRAVELLER
-       ----------------------------------------------------- */
-
     followTraveller: {
 
         chapter: "Chapter Five",
@@ -1705,10 +3927,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       FLOWER LOCATION
-       ----------------------------------------------------- */
 
     flowerLocation: {
 
@@ -1756,10 +3974,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       ABOUT WITCH
-       ----------------------------------------------------- */
-
     aboutWitch: {
 
         chapter: "Chapter Six",
@@ -1804,10 +4018,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       FOREST DANGER
-       ----------------------------------------------------- */
-
     forestDanger: {
 
         chapter: "Chapter Six",
@@ -1851,10 +4061,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       PATH CHOICE
-       ----------------------------------------------------- */
-
     pathChoice: {
 
         chapter: "Chapter Six",
@@ -1895,10 +4101,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       RUSH FOREST
-       ----------------------------------------------------- */
 
     rushForest: {
 
@@ -1945,10 +4147,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       STONE BRIDGE
-       ----------------------------------------------------- */
-
     stoneBridge: {
 
         chapter: "Chapter Seven",
@@ -1993,10 +4191,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       SEARCH MAP
-       ----------------------------------------------------- */
-
     searchMap: {
 
         chapter: "Chapter Five",
@@ -2039,10 +4233,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       GUARDIAN ADVICE
-       ----------------------------------------------------- */
 
     guardianAdvice: {
 
@@ -2088,10 +4278,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       POTION EXPLANATION
-       ----------------------------------------------------- */
-
     potionExplanation: {
 
         chapter: "Chapter Seven",
@@ -2130,10 +4316,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       FIND WITCH
-       ----------------------------------------------------- */
 
     findWitch: {
 
@@ -2176,10 +4358,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       LISTEN FOREST
-       ----------------------------------------------------- */
 
     listenForest: {
 
@@ -2231,10 +4409,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       SHORTCUT
-       ----------------------------------------------------- */
-
     shortcut: {
 
         chapter: "Chapter Six",
@@ -2278,10 +4452,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       DARK PATH
-       ----------------------------------------------------- */
-
     darkPath: {
 
         chapter: "Chapter Seven",
@@ -2322,10 +4492,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       FLOWER PATH
-       ----------------------------------------------------- */
 
     flowerPath: {
 
@@ -2370,10 +4536,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       WATCH GUARDIAN
-       ----------------------------------------------------- */
 
     watchGuardian: {
 
@@ -2423,10 +4585,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       GUARDIAN
-       ----------------------------------------------------- */
-
     guardian: {
 
         chapter: "Chapter Eight",
@@ -2438,9 +4596,9 @@ const scenes = {
         background: "scene-flower",
 
         text: `
-        You conveniently find the guardian is your neighbour so you ring his doorbell
+            You conveniently find the guardian is your neighbour so you ring his doorbell
             <br><br>
-            
+
             The guardian opens its door.
             <br><br>
 
@@ -2476,10 +4634,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       GUARDIAN FRIENDLY
-       ----------------------------------------------------- */
 
     guardianFriendly: {
 
@@ -2522,10 +4676,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       GUARDIAN REQUEST
-       ----------------------------------------------------- */
 
     guardianRequest: {
 
@@ -2574,10 +4724,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       BISCUIT
-       ----------------------------------------------------- */
-
     biscuitGuardian: {
 
         chapter: "Chapter Nine",
@@ -2623,10 +4769,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       EAT BISCUIT
-       ----------------------------------------------------- */
-
     eatBiscuit: {
 
         chapter: "Chapter Eight",
@@ -2668,10 +4810,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       GUARDIAN HAT
-       ----------------------------------------------------- */
 
     guardianHat: {
 
@@ -2717,10 +4855,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       STARING CONTEST
-       ----------------------------------------------------- */
 
     staringContest: {
 
@@ -2769,10 +4903,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       GUARDIAN TASK
-       ----------------------------------------------------- */
-
     guardianTask: {
 
         chapter: "Chapter Ten",
@@ -2816,10 +4946,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       TASK CLEVER
-       ----------------------------------------------------- */
 
     taskClever: {
 
@@ -2866,10 +4992,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       TASK SUCCESS
-       ----------------------------------------------------- */
-
     taskSuccess: {
 
         chapter: "Chapter Eleven",
@@ -2915,10 +5037,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       FLOWER GRANTED
-       ----------------------------------------------------- */
-
     flowerGranted: {
 
         chapter: "Chapter Twelve",
@@ -2962,10 +5080,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       GUARDIAN FRIEND
-       ----------------------------------------------------- */
 
     guardianFriend: {
 
@@ -3011,10 +5125,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       GUARDIAN ANGRY
-       ----------------------------------------------------- */
-
     guardianAngry: {
 
         chapter: "Chapter Nine",
@@ -3058,10 +5168,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       SOUP ESCAPE
-       ----------------------------------------------------- */
 
     soupEscape: {
 
@@ -3111,10 +5217,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       RUN WITH FLOWER
-       ----------------------------------------------------- */
-
     runWithFlower: {
 
         chapter: "Chapter Thirteen",
@@ -3158,10 +5260,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       SCENIC ROUTE
-       ----------------------------------------------------- */
 
     scenicRoute: {
 
@@ -3209,10 +5307,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       WITCH ADVICE
-       ----------------------------------------------------- */
-
     witchAdvice: {
 
         chapter: "Chapter Nine",
@@ -3256,10 +5350,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       WITCH FLOWER CLUE
-       ----------------------------------------------------- */
 
     witchFlowerClue: {
 
@@ -3305,10 +5395,6 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
-       WITCH TRICK
-       ----------------------------------------------------- */
-
     witchTrick: {
 
         chapter: "Chapter Eleven",
@@ -3349,10 +5435,6 @@ const scenes = {
         ]
     },
 
-
-    /* -----------------------------------------------------
-       BELL GUARDIAN
-       ----------------------------------------------------- */
 
     bellGuardian: {
 
@@ -3398,9 +5480,9 @@ const scenes = {
     },
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        ENDINGS
-       ----------------------------------------------------- */
+       ===================================================== */
 
     napEnding: {
 
@@ -3588,379 +5670,11 @@ const scenes = {
 
 
 /* =========================================================
-   TRAVELER TYPE
+   INITIALIZE
    ========================================================= */
 
-function getTravelerType() {
+showHomeScreen();
 
-    const entries =
-        Object.entries(traits);
-
-    entries.sort(function(a, b) {
-        return b[1] - a[1];
-    });
-
-    const top =
-        entries[0][0];
-
-    const types = {
-
-        brave: {
-            name: "The Fearless Wanderer",
-            text:
-                "You charge into strange situations with impressive confidence."
-        },
-
-        kind: {
-            name: "The Gentle Forest Friend",
-            text:
-                "You lead with kindness, even when the forest gets weird."
-        },
-
-        clever: {
-            name: "The Clever Pathfinder",
-            text:
-                "You prefer a smart solution over a dramatic one."
-        },
-
-        curious: {
-            name: "The Curious Explorer",
-            text:
-                "You cannot resist investigating whatever looks mysterious."
-        },
-
-        chaotic: {
-            name: "The Chaotic Little Creature",
-            text:
-                "You somehow turn every simple decision into an adventure."
-        },
-
-        cozy: {
-            name: "The Cozy Wanderer",
-            text:
-                "You believe every adventure should include rest, snacks and somewhere comfortable to sit."
-        }
-
-    };
-
-    return types[top];
-}
-
-
-/* =========================================================
-   RESTART
-   ========================================================= */
-
-function restartGame() {
-
-    traits = {
-        brave: 0,
-        kind: 0,
-        clever: 0,
-        curious: 0,
-        chaotic: 0,
-        cozy: 0
-    };
-
-    showScene("start");
-}
-
-
-/* =========================================================
-   SHOW ENDING
-   ========================================================= */
-
-function showEnding(scene) {
-
-    const traveler =
-        getTravelerType();
-
-    content.innerHTML = `
-
-        <div class="ending">
-
-            <div class="bigIcon">
-                ${scene.icon}
-            </div>
-
-            <div class="chapter">
-                Your Ending
-            </div>
-
-            <h1>
-                ${scene.title}
-            </h1>
-
-            <div class="story">
-                ${scene.text}
-            </div>
-
-            <div id="travelerResult">
-
-                <strong>
-                    ${traveler.name}
-                </strong>
-
-                <br><br>
-
-                ${traveler.text}
-
-            </div>
-
-            <button
-                id="restartButton"
-                type="button"
-            >
-                🌲 Start the Mystery Trail Again
-            </button>
-
-        </div>
-
-    `;
-
-    document
-        .getElementById("restartButton")
-        .addEventListener(
-            "click",
-            restartGame
-        );
-}
-
-
-/* =========================================================
-   SHOW SCENE
-   ========================================================= */
-
-function showScene(sceneId) {
-
-    const scene =
-        scenes[sceneId];
-
-    if (!scene) {
-
-        console.error(
-            "Scene not found:",
-            sceneId
-        );
-
-        return;
-    }
-
-    background.className =
-        scene.background;
-
-    if (scene.ending) {
-
-        showEnding(scene);
-
-        return;
-    }
-
-    content.innerHTML = `
-
-        <div class="chapter">
-            ${scene.chapter}
-        </div>
-
-        <div class="icon">
-            ${scene.icon}
-        </div>
-
-        <h2>
-            ${scene.title}
-        </h2>
-
-        <div class="story">
-            ${scene.text}
-        </div>
-
-        <div
-            class="choices"
-            id="choices"
-        ></div>
-
-    `;
-
-    const choicesContainer =
-        document.getElementById("choices");
-
-
-    scene.choices.forEach(function(choice) {
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "choice";
-
-        button.type =
-            "button";
-
-        button.textContent =
-            choice.text;
-
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                addTrait(choice.trait);
-
-                showScene(
-                    choice.next
-                );
-
-            }
-        );
-
-
-        choicesContainer.appendChild(
-            button
-        );
-
-    });
-}
-
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-showScene("start");
-    // =====================================================
-// MYSTERY TRAIL HUD BUTTONS
-// =====================================================
-
-const traitsButton = document.getElementById("mysteryTraitsButton");
-const bagButton = document.getElementById("mysteryBagButton");
-
-const traitsPanel = document.getElementById("mysteryTraitsPanel");
-const bagPanel = document.getElementById("mysteryBagPanel");
-
-
-// TRAITS BUTTON
-if (traitsButton && traitsPanel) {
-    traitsButton.addEventListener("click", () => {
-
-        bagPanel?.classList.remove("open");
-
-        updateTraitsPanel();
-
-        traitsPanel.classList.toggle("open");
-    });
-}
-
-
-// BAG BUTTON
-if (bagButton && bagPanel) {
-    bagButton.addEventListener("click", () => {
-
-        traitsPanel?.classList.remove("open");
-
-        updateBagPanel();
-
-        bagPanel.classList.toggle("open");
-    });
-}
-
-
-// Close panels when clicking outside them
-document.addEventListener("click", (event) => {
-
-    if (
-        !event.target.closest("#mysteryTraitsPanel") &&
-        !event.target.closest("#mysteryTraitsButton")
-    ) {
-        traitsPanel?.classList.remove("open");
-    }
-
-    if (
-        !event.target.closest("#mysteryBagPanel") &&
-        !event.target.closest("#mysteryBagButton")
-    ) {
-        bagPanel?.classList.remove("open");
-    }
-
-});
-
-
-// =====================================================
-// TRAITS DISPLAY
-// =====================================================
-
-function updateTraitsPanel() {
-
-    const box = document.getElementById("mysteryTraitsContent");
-
-    if (!box) return;
-
-    const traitNames = {
-        brave: "🦁 Brave",
-        kind: "💚 Kind",
-        clever: "🧠 Clever",
-        curious: "🔍 Curious",
-        chaotic: "🌪️ Chaotic",
-        cozy: "🛏️ Cozy"
-    };
-
-    let html = "";
-
-    Object.keys(traitNames).forEach(trait => {
-
-        const amount = traits[trait] || 0;
-
-        html += `
-            <div class="mysteryTrait">
-                <span>${traitNames[trait]}</span>
-                <strong>${amount}</strong>
-            </div>
-        `;
-    });
-
-    box.innerHTML = html;
-}
-
-
-// =====================================================
-// BAG DISPLAY
-// =====================================================
-
-function updateBagPanel() {
-
-    const items = document.querySelectorAll(
-        "#mysteryBagPanel .mysteryItem"
-    );
-
-    /*
-       For now this checks the game's existing progress
-       rather than creating a second inventory system.
-    */
-
-    const currentText = document.body.innerText;
-
-    const itemChecks = [
-        currentText.includes("mysterious note"),
-        currentText.includes("hand-drawn map"),
-        currentText.includes("cup of coffee"),
-        currentText.includes("biscuit"),
-        currentText.includes("tiny bell"),
-        currentText.includes("magical flower"),
-        currentText.includes("tiny hat")
-    ];
-
-    items.forEach((item, index) => {
-
-        if (itemChecks[index]) {
-            item.classList.add("found");
-        } else {
-            item.classList.remove("found");
-        }
-
-    });
-}
-
-</script>
 </script>
 
 </body>
