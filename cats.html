@@ -1064,6 +1064,41 @@ h2 {
 <a href="forest.html" class="back">
     🌲 Return to the Forest
 </a>
+    // =====================================================
+// BACK TO FOREST
+// =====================================================
+
+const mysteryBackButton =
+    document.getElementById("mysteryBackButton");
+
+if (mysteryBackButton) {
+    mysteryBackButton.addEventListener("click", function () {
+        window.location.href = "forest.html";
+    });
+}
+    // =====================================================
+// SAVE GAME
+// =====================================================
+
+const mysterySaveButton =
+    document.getElementById("mysterySaveButton");
+
+if (mysterySaveButton) {
+    mysterySaveButton.addEventListener("click", function () {
+
+        localStorage.setItem(
+            "mysteryTrailTraits",
+            JSON.stringify(traits)
+        );
+
+        mysterySaveButton.textContent = "✅ Saved!";
+
+        setTimeout(function () {
+            mysterySaveButton.textContent = "💾 Save";
+        }, 1500);
+
+    });
+}
 
 <script>
 
