@@ -833,7 +833,7 @@ h2 {
     opacity: 1;
     background: rgba(120,150,100,0.15);
 }
-#homeScreen {
+    #homeScreen {
     position: fixed;
     inset: 0;
     z-index: 3000;
@@ -843,18 +843,11 @@ h2 {
     justify-content: center;
     align-items: center;
 
-    box-sizing: border-box;
+    text-align: center;
     padding: 30px;
 
-    text-align: center;
-
     background:
-        radial-gradient(
-            circle at top,
-            #294b38 0%,
-            #132b20 45%,
-            #07150f 100%
-        );
+        radial-gradient(circle at top, #294b38 0%, #132b20 45%, #07150f 100%);
 
     color: #eee9d8;
 }
@@ -878,23 +871,13 @@ h2 {
 
 #homeScreen p {
     max-width: 550px;
-    margin: 0;
     line-height: 1.7;
     font-size: 17px;
 }
 
-.home-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
-
-#continueAdventure,
-#backToForest {
-    padding: 15px 25px;
+#continueAdventure {
+    margin-top: 25px;
+    padding: 15px 30px;
 
     border: 1px solid #9caf91;
     border-radius: 30px;
@@ -903,8 +886,32 @@ h2 {
     color: #eee9d8;
 
     font-family: Georgia, serif;
-    font-size: 16px;
+    font-size: 17px;
 
+    cursor: pointer;
+}
+
+#continueAdventure:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+    .home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+#continueAdventure,
+#backToForest {
+    padding: 15px 25px;
+    border: 1px solid #9caf91;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    color: #eee9d8;
+    font-family: Georgia, serif;
+    font-size: 16px;
     cursor: pointer;
     transition: 0.2s ease;
 }
@@ -942,10 +949,23 @@ h2 {
             ← Back
         </button>
 
-<div class="mysteryHUD-right">
-    <button type="button" id="mysteryTraitsButton">🧠 Traits</button>
-    <button type="button" id="mysteryBagButton">🎒 Bag</button>
-</div>
+    </div>
+
+    <div class="mysteryHUD-right">
+
+        <button
+            type="button"
+            id="mysteryTraitsButton">
+            🧠 Traits
+        </button>
+
+        <button
+            type="button"
+            id="mysteryBagButton">
+            🎒 Bag
+        </button>
+
+    </div>
 
 </div>
 
@@ -1056,41 +1076,6 @@ h2 {
 <a href="forest.html" class="back">
     🌲 Return to the Forest
 </a>
-    // =====================================================
-// BACK TO FOREST
-// =====================================================
-
-const mysteryBackButton =
-    document.getElementById("mysteryBackButton");
-
-if (mysteryBackButton) {
-    mysteryBackButton.addEventListener("click", function () {
-        window.location.href = "forest.html";
-    });
-}
-    // =====================================================
-// SAVE GAME
-// =====================================================
-
-const mysterySaveButton =
-    document.getElementById("mysterySaveButton");
-
-if (mysterySaveButton) {
-    mysterySaveButton.addEventListener("click", function () {
-
-        localStorage.setItem(
-            "mysteryTrailTraits",
-            JSON.stringify(traits)
-        );
-
-        mysterySaveButton.textContent = "✅ Saved!";
-
-        setTimeout(function () {
-            mysterySaveButton.textContent = "💾 Save";
-        }, 1500);
-
-    });
-}
 
 <script>
 
@@ -3798,7 +3783,12 @@ function restartGame() {
         cozy: 0
     };
 
-}
+
+    // =====================================================
+// MYSTERY TRAIL HUD BUTTONS
+// =====================================================
+
+
 
 
 /* =========================================================
