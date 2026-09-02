@@ -833,7 +833,7 @@ h2 {
     opacity: 1;
     background: rgba(120,150,100,0.15);
 }
-    #homeScreen {
+#homeScreen {
     position: fixed;
     inset: 0;
     z-index: 3000;
@@ -843,11 +843,18 @@ h2 {
     justify-content: center;
     align-items: center;
 
-    text-align: center;
+    box-sizing: border-box;
     padding: 30px;
 
+    text-align: center;
+
     background:
-        radial-gradient(circle at top, #294b38 0%, #132b20 45%, #07150f 100%);
+        radial-gradient(
+            circle at top,
+            #294b38 0%,
+            #132b20 45%,
+            #07150f 100%
+        );
 
     color: #eee9d8;
 }
@@ -871,47 +878,33 @@ h2 {
 
 #homeScreen p {
     max-width: 550px;
+    margin: 0;
     line-height: 1.7;
     font-size: 17px;
 }
 
-#continueAdventure {
-    margin-top: 25px;
-    padding: 15px 30px;
-
-    border: 1px solid #9caf91;
-    border-radius: 30px;
-
-    background: rgba(255,255,255,0.08);
-    color: #eee9d8;
-
-    font-family: Georgia, serif;
-    font-size: 17px;
-
-    cursor: pointer;
-}
-
-#continueAdventure:hover {
-    background: rgba(255,255,255,0.16);
-    transform: translateY(-2px);
-}
-    .home-buttons {
+.home-buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
     flex-wrap: wrap;
-    margin-top: 25px;
+    margin-top: 30px;
 }
 
 #continueAdventure,
 #backToForest {
     padding: 15px 25px;
+
     border: 1px solid #9caf91;
     border-radius: 30px;
+
     background: rgba(255,255,255,0.08);
     color: #eee9d8;
+
     font-family: Georgia, serif;
     font-size: 16px;
+
     cursor: pointer;
     transition: 0.2s ease;
 }
@@ -950,7 +943,6 @@ h2 {
         </button>
 
 <div class="mysteryHUD-right">
-    <button type="button" id="mysteryTrackerButton">🗺️ Trail</button>
     <button type="button" id="mysteryTraitsButton">🧠 Traits</button>
     <button type="button" id="mysteryBagButton">🎒 Bag</button>
 </div>
