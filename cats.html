@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Mystery Trail 🌿</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: Georgia, serif;
+    color: #fff;
+    background: #101b18;
+    overflow-x: hidden;
+}
+
+/* =========================
+   SCENE
+========================= */
+
+#scene {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: background 1s ease;
+}
+
+.scene-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.scene-content {
+    position: relative;
+    z-index: 10;
+    width: min(900px, 94%);
+    margin: auto;
+    padding: 35px 0 50px;
+}
+
+/* =========================
+   BACKGROUNDS
+========================= */
+
+.scene-morning {
+    background:
+        radial-gradient(circle at 78% 18%, rgba(255,245,176,.9) 0 45px, transparent 47px),
+        linear-gradient(
+            to bottom,
+            #8cc8d9 0%,
+            #cbe6df 48%,
+            #789b61 49%,
+            #45623e 100%
+        );
+}
+
+.scene-door {
+    background:
+        radial-gradient(circle at 82% 16%, rgba(255,236,151,.8) 0 35px, transparent 37px),
+        linear-gradient(
+            to bottom,
+            #7aa8ae 0%,
+            #b5cfc3 42%,
+            #566e4e 43%,
+            #263b2c 100%
+        );
+}
+
+.scene-forest {
+    background:
+        radial-gradient(circle at 50% 22%, rgba(215,235,180,.18), transparent 28%),
+        linear-gradient(
+            90deg,
+            #13251d,
+            #284632 30%,
+            #1d3829 60%,
+            #102119
+        );
+}
+
+.scene-bridge {
+    background:
+        radial-gradient(circle at 78% 15%, rgba(247,228,158,.35), transparent 20%),
+        linear-gradient(
+            to bottom,
+            #657f91 0%,
+            #9ab1a9 43%,
+            #355344 44%,
+            #1c3027 100%
+        );
+}
+
+.scene-flower {
+    background:
+        radial-gradient(circle at 50% 48%, rgba(255,224,113,.24), transparent 20%),
+        linear-gradient(
+            to bottom,
+            #526e77 0%,
+            #718d77 43%,
+            #304c35 44%,
+            #14251d 100%
+        );
+}
+
+.scene-witch {
+    background:
+        radial-gradient(circle at 72% 17%, rgba(220,198,255,.65) 0 38px, transparent 40px),
+        linear-gradient(
+            to bottom,
+            #252b50 0%,
+            #45436d 42%,
+            #293b31 43%,
+            #14231d 100%
+        );
+}
+
+.scene-ending {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255,239,164,.55), transparent 25%),
+        linear-gradient(
+            to bottom,
+            #293c4d 0%,
+            #657d72 50%,
+            #233c2d 100%
+        );
+}
+
+/* =========================
+   DECORATION
+========================= */
+
+.decor {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+}
+
+.tree {
+    bottom: 0;
+    font-size: 95px;
+    opacity: .72;
+}
+
+.tree1 {
+    left: 2%;
+}
+
+.tree2 {
+    right: 3%;
+    font-size: 125px;
+}
+
+.tree3 {
+    left: 25%;
+    font-size: 75px;
+}
+
+.tree4 {
+    right: 25%;
+    font-size: 80px;
+}
+
+.cloud {
+    top: 70px;
+    font-size: 48px;
+    opacity: .5;
+}
+
+.cloud1 {
+    left: 8%;
+}
+
+.cloud2 {
+    right: 15%;
+}
+
+.moon {
+    top: 55px;
+    right: 12%;
+    font-size: 65px;
+}
+
+.star {
+    font-size: 22px;
+    opacity: .8;
+}
+
+.star1 {
+    top: 15%;
+    left: 18%;
+}
+
+.star2 {
+    top: 23%;
+    left: 72%;
+}
+
+.star3 {
+    top: 12%;
+    left: 48%;
+}
+
+.star4 {
+    top: 30%;
+    right: 25%;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.title {
+    text-align: center;
+    margin-bottom: 12px;
+    text-shadow: 0 3px 8px rgba(0,0,0,.35);
+}
+
+.title h1 {
+    margin: 0;
+    font-size: clamp(32px, 7vw, 56px);
+    color: #fff5cf;
+}
+
+.title p {
+    margin: 7px 0 0;
+    font-size: 17px;
+    color: #e4efdd;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress {
+    width: min(600px, 90%);
+    height: 10px;
+    margin: 22px auto;
+    background: rgba(0,0,0,.3);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,.4);
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #e5c968;
+    transition: width .5s ease;
+}
+
+/* =========================
+   STORY CARD
+========================= */
+
+.story-card {
+    width: min(650px, 100%);
+    margin: 30px auto;
+    padding: 30px 28px;
+    background: rgba(25,40,31,.88);
+    border: 2px solid rgba(229,201,104,.7);
+    border-radius: 26px;
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.38),
+        inset 0 0 35px rgba(255,255,255,.025);
+    backdrop-filter: blur(5px);
+}
+
+.chapter {
+    color: #e5c968;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+}
+
+.story-card h2 {
+    margin: 0 0 16px;
+    color: #fff2c4;
+    font-size: clamp(25px, 5vw, 36px);
+}
+
+.story-text {
+    color: #edf2e6;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.story-text p {
+    margin: 0 0 15px;
+}
+
+/* =========================
+   SCENE ILLUSTRATION
+========================= */
+
+.illustration {
+    min-height: 150px;
+    margin: 5px 0 24px;
+    border-radius: 20px;
+    background: rgba(0,0,0,.18);
+    border: 1px solid rgba(255,255,255,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 85px;
+    letter-spacing: 8px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,.15);
+}
+
+/* =========================
+   CHOICES
+========================= */
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 25px;
+}
+
+.choice {
+    border: 2px solid rgba(229,201,104,.5);
+    border-radius: 17px;
+    padding: 15px 16px;
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.choice:hover {
+    transform: translateY(-3px);
+    background: rgba(229,201,104,.17);
+    border-color: #e5c968;
+}
+
+.choice:active {
+    transform: translateY(0);
+}
+
+.choice span {
+    display: block;
+    color: #e5c968;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* =========================
+   VISITOR / RESULT
+========================= */
+
+.quote {
+    margin: 22px 0;
+    padding: 17px 20px;
+    border-left: 4px solid #e5c968;
+    background: rgba(0,0,0,.16);
+    color: #f4eac5;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.next-button {
+    display: block;
+    margin: 25px auto 0;
+    border: none;
+    border-radius: 25px;
+    padding: 13px 27px;
+    background: #e5c968;
+    color: #263625;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform .2s ease;
+}
+
+.next-button:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   ENDING
+========================= */
+
+#endingScreen {
+    display: none;
+}
+
+.ending-card {
+    text-align: center;
+}
+
+.ending-icon {
+    font-size: 100px;
+    margin-bottom: 10px;
+}
+
+.ending-card h2 {
+    color: #ffe9a8;
+    font-size: clamp(30px, 6vw, 48px);
+    margin: 8px 0 18px;
+}
+
+.traveler-type {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(229,201,104,.16);
+    border: 1px solid #e5c968;
+    color: #ffe8a1;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.stat {
+    padding: 10px 14px;
+    border-radius: 15px;
+    background: rgba(255,255,255,.08);
+    font-size: 14px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.back {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    color: #dceacb;
+    text-decoration: none;
+}
+
+.back:hover {
+    color: #fff0ae;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .scene-content {
+        padding-top: 22px;
+    }
+
+    .story-card {
+        padding: 23px 18px;
+        border-radius: 21px;
+    }
+
+    .choices {
+        grid-template-columns: 1fr;
+    }
+
+    .illustration {
+        min-height: 125px;
+        font-size: 65px;
+    }
+
+    .tree {
+        font-size: 65px;
+    }
+
+    .tree2 {
+        font-size: 80px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="scene" class="scene-morning">
+
+    <div class="scene-overlay">
+
+        <div class="decor cloud cloud1">☁️</div>
+        <div class="decor cloud cloud2">☁️</div>
+
+        <div class="decor moon">🌙</div>
+
+        <div class="decor star star1">✦</div>
+        <div class="decor star star2">✧</div>
+        <div class="decor star star3">✦</div>
+        <div class="decor star star4">✧</div>
+
+        <div class="decor tree tree1">🌲</div>
+        <div class="decor tree tree2">🌳</div>
+        <div class="decor tree tree3">🌲</div>
+        <div class="decor tree tree4">🌳</div>
+
+    </div>
+
+
+    <main class="scene-content">
+
+        <header class="title">
+
+            <h1>🧿 The Mystery Trail</h1>
+
+            <p>
+                A tiny adventure about choices, questionable decisions,
+                and possibly becoming soup.
+            </p>
+
+        </header>
+
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+
+        <section class="story-card" id="storyScreen">
+
+            <div class="chapter" id="chapter">
+                Chapter One
+            </div>
+
+            <h2 id="storyTitle">
+                The Little Traveler
+            </h2>
+
+            <div class="illustration" id="illustration">
+                🛏️ 🌿 🐈
+            </div>
+
+            <div class="story-text" id="storyText"></div>
+
+            <div class="choices" id="choices"></div>
+
+        </section>
+
+
+        <section class="story-card ending-card" id="endingScreen">
+
+            <div class="ending-icon" id="endingIcon">
+                🌿
+            </div>
+
+            <div class="chapter">
+                Your Journey Is Complete
+            </div>
+
+            <h2 id="endingTitle">
+                The Curious Traveler
+            </h2>
+
+            <div class="traveler-type" id="travelerType">
+                You are The Curious Traveler
+            </div>
+
+            <div class="story-text" id="endingText"></div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    🌿 Choices:
+                    <strong id="choiceCount">0</strong>
+                </div>
+
+                <div class="stat">
+                    🐸 Friends:
+                    <strong id="friendCount">0</strong>
+                </div>
+
+                <div class="stat">
+                    ⚠️ Questionable decisions:
+                    <strong id="chaosCount">0</strong>
+                </div>
+
+            </div>
+
+            <button class="next-button" onclick="restartAdventure()">
+                ↻ Take Another Path
+            </button>
+
+        </section>
+
+
+        <a href="forest.html" class="back">
+            🌲 Return to the Forest
+        </a>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   THE LITTLE TRAVELER
+========================================================= */
+
+const scene = document.getElementById("scene");
+const storyTitle = document.getElementById("storyTitle");
+const storyText = document.getElementById("storyText");
+const choices = document.getElementById("choices");
+const chapter = document.getElementById("chapter");
+const illustration = document.getElementById("illustration");
+const progressBar = document.getElementById("progressBar");
+
+const storyScreen = document.getElementById("storyScreen");
+const endingScreen = document.getElementById("endingScreen");
+
+const endingIcon = document.getElementById("endingIcon");
+const endingTitle = document.getElementById("endingTitle");
+const travelerType = document.getElementById("travelerType");
+const endingText = document.getElementById("endingText");
+
+const choiceCount = document.getElementById("choiceCount");
+const friendCount = document.getElementById("friendCount");
+const chaosCount = document.getElementById("chaosCount");
+
+
+let currentScene = "morning";
+
+let choicesMade = 0;
+let friends = 0;
+let chaos = 0;
+
+let traits = {
+    kind: 0,
+    curious: 0,
+    brave: 0,
+    lazy: 0,
+    chaotic: 0,
+    cautious: 0
+};
+
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+const scenes = {
+
+    morning: {
+
+        className: "scene-morning",
+
+        chapter: "Chapter One",
+
+        title: "You Wake Up",
+
+        illustration: "🛏️ 🌿 ☀️",
+
+        text: `
+            <p>
+                You open your eyes.
+            </p>
+
+            <p>
+                You are lying in a tiny bed inside a tiny woodland cottage.
+                You are also, apparently, a tiny creature.
+            </p>
+
+            <p>
+                You don't remember how you got here.
+            </p>
+
+            <p>
+                On the little table beside your bed sits a mysterious envelope.
+            </p>
+
+            <p>
+                What do you do first?
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Yawn and have a big stretch.",
+                traits: { kind: 1 }
+            },
+
+            {
+                text: "Get back into bed for a lil.",
+                traits: { lazy: 2 }
+            },
+
+            {
+                text: "Immediately look for breakfast.",
+                traits: { brave: 1 }
+            },
+
+            {
+                text: "Inspect the mysterious envelope.",
+                traits: { curious: 2 }
+            }
+
+        ],
+
+        next: "envelope"
+
+    },
+
+
+    envelope: {
+
+        className: "scene-morning",
+
+        chapter: "Chapter One",
+
+        title: "The Mysterious Envelope",
+
+        illustration: "✉️ 🔮 🌿",
+
+        text: `
+            <p>
+                You pick up the envelope.
+            </p>
+
+            <p>
+                It is addressed simply:
+            </p>
+
+            <div class="quote">
+                “To whoever is awake enough to read this.”
+            </div>
+
+            <p>
+                Inside is a hand-drawn map of the forest and one sentence:
+            </p>
+
+            <div class="quote">
+                “A magical flower needs delivering.
+                The forest is counting on you.”
+            </div>
+
+            <p>
+                Before you can investigate further...
+            </p>
+
+            <p>
+                <strong>KNOCK KNOCK KNOCK.</strong>
+            </p>
+
+            <p>
+                Someone is at your door.
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Open the door immediately.",
+                traits: { brave: 2 }
+            },
+
+            {
+                text: "Look through the window first.",
+                traits: { cautious: 2 }
+            },
+
+            {
+                text: "Hide behind the bed.",
+                traits: { lazy: 1, cautious: 1 }
+            },
+
+            {
+                text: "Yell “WHO GOES THERE?!”",
+                traits: { chaotic: 2 }
+            }
+
+        ],
+
+        next: "visitor"
+
+    },
+
+
+    visitor: {
+
+        className: "scene-door",
+
+        chapter: "Chapter Two",
+
+        title: "The Visitor",
+
+        illustration: "🚪 🦊 ☕",
+
+        text: `
+            <p>
+                At the door stands a strange woodland traveler wearing
+                a very serious hat.
+            </p>
+
+            <p>
+                They look down at you.
+            </p>
+
+            <div class="quote">
+                “Ah. Good. You're awake.”
+            </div>
+
+            <p>
+                They explain that the magical flower must reach a nice witch
+                who lives beyond the forest.
+            </p>
+
+            <p>
+                Apparently the flower is needed for a spell that will stop
+                the forest from losing its magic.
+            </p>
+
+            <p>
+                The visitor waits patiently.
+            </p>
+
+            <p>
+                What do you do?
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Invite them in for coffee.",
+                traits: { kind: 2 },
+                friends: 1
+            },
+
+            {
+                text: "Ask exactly what is going on.",
+                traits: { curious: 2 }
+            },
+
+            {
+                text: "Tell them you will do it.",
+                traits: { brave: 2 }
+            },
+
+            {
+                text: "Yell at them for disturbing your sleep.",
+                traits: { chaotic: 2 }
+            }
+
+        ],
+
+        next: "mission"
+
+    },
+
+
+    mission: {
+
+        className: "scene-door",
+
+        chapter: "Chapter Two",
+
+        title: "The Mission",
+
+        illustration: "🌸 🗺️ 🎒",
+
+        text: `
+            <p>
+                The traveler hands you a small satchel.
+            </p>
+
+            <p>
+                Inside is a map, a snack, and a note that says:
+            </p>
+
+            <div class="quote">
+                “Please do not eat the flower.”
+            </div>
+
+            <p>
+                This feels like an oddly specific warning.
+            </p>
+
+            <p>
+                The magical flower grows deep in the forest.
+                You need to collect it and take it safely to the witch.
+            </p>
+
+            <p>
+                You set off.
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Follow the map carefully.",
+                traits: { cautious: 2 }
+            },
+
+            {
+                text: "Head straight into the forest.",
+                traits: { brave: 2 }
+            },
+
+            {
+                text: "Ask the traveler if there are snacks.",
+                traits: { lazy: 1, kind: 1 }
+            },
+
+            {
+                text: "Take the map and immediately lose it.",
+                traits: { chaotic: 3 }
+            }
+
+        ],
+
+        next: "fork"
+
+    },
+
+
+    fork: {
+
+        className: "scene-forest",
+
+        chapter: "Chapter Three",
+
+        title: "The Forest Fork",
+
+        illustration: "🌲 🌲 🛤️ 🌲",
+
+        text: `
+            <p>
+                The path divides into two.
+            </p>
+
+            <p>
+                One path is sunny and covered in flowers.
+                The other disappears beneath enormous old trees.
+            </p>
+
+            <p>
+                A tiny wooden sign reads:
+            </p>
+
+            <div class="quote">
+                “SUNNY PATH →”
+                <br>
+                “DARK PATH ←”
+            </div>
+
+            <p>
+                There is absolutely no further information.
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Take the sunny path.",
+                traits: { cautious: 1, kind: 1 }
+            },
+
+            {
+                text: "Take the dark path.",
+                traits: { brave: 2, curious: 1 }
+            },
+
+            {
+                text: "Climb a tree to investigate both.",
+                traits: { curious: 2, brave: 1 }
+            },
+
+            {
+                text: "Ask a squirrel which way to go.",
+                traits: { kind: 1, chaotic: 1 },
+                friends: 1
+            }
+
+        ],
+
+        next: "squirrel"
+
+    },
+
+
+    squirrel: {
+
+        className: "scene-forest",
+
+        chapter: "Chapter Three",
+
+        title: "The Squirrel",
+
+        illustration: "🐿️ 🌰 🌳",
+
+        text: `
+            <p>
+                You encounter a squirrel.
+            </p>
+
+            <p>
+                You ask for directions.
+            </p>
+
+            <div class="quote">
+                “Left.”
+            </div>
+
+            <p>
+                You start walking left.
+            </p>
+
+            <div class="quote">
+                “Actually, right.”
+            </div>
+
+            <p>
+                You turn around.
+            </p>
+
+            <div class="quote">
+                “I was thinking of another forest.”
+            </div>
+
+            <p>
+                The squirrel disappears.
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Thank the squirrel anyway.",
+                traits: { kind: 2 },
+                friends: 1
+            },
+
+            {
+                text: "Ask where the other forest is.",
+                traits: { curious: 2 }
+            },
+
+            {
+                text: "Follow the squirrel.",
+                traits: { brave: 1, chaotic: 1 }
+            },
+
+            {
+                text: "Give up and sit under a tree.",
+                traits: { lazy: 2 }
+            }
+
+        ],
+
+        next: "bridge"
+
+    },
+
+
+    bridge: {
+
+        className: "scene-bridge",
+
+        chapter: "Chapter Four",
+
+        title: "The Bridge Guardian",
+
+        illustration: "🌉 🐸 🪵",
+
+        text: `
+            <p>
+                Eventually you reach an old wooden bridge.
+            </p>
+
+            <p>
+                A large frog is sitting in the middle of it.
+            </p>
+
+            <div class="quote">
+                “Nobody crosses without paying the bridge fee.”
+            </div>
+
+            <p>
+                You look confused.
+            </p>
+
+            <div class="quote">
+                “The fee is friendship.”
+            </div>
+
+            <p>
+                The frog waits.
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Offer the frog some of your snack.",
+                traits: { kind: 2 },
+                friends: 2
+            },
+
+            {
+                text: "Try to make friends with the frog.",
+                traits: { kind: 1, curious: 1 },
+                friends: 2
+            },
+
+            {
+                text: "Sneak past while the frog isn't looking.",
+                traits: { brave: 1, chaotic: 1 }
+            },
+
+            {
+                text: "Challenge the frog to a race.",
+                traits: { brave: 2, chaotic: 2 }
+            }
+
+        ],
+
+        next: "flower"
+
+    },
+
+
+    flower: {
+
+        className: "scene-flower",
+
+        chapter: "Chapter Five",
+
+        title: "The Magical Flower",
+
+        illustration: "🌸 ✨ 🌿",
+
+        text: `
+            <p>
+                At last, you find it.
+            </p>
+
+            <p>
+                The magical flower grows in a little clearing.
+            </p>
+
+            <p>
+                It glows softly in the shade, and tiny golden sparks
+                drift from its petals.
+            </p>
+
+            <p>
+                Beside it is a little wooden sign:
+            </p>
+
+            <div class="quote">
+                “Take only what you need.”
+            </div>
+
+            <p>
+                The flower is beautiful.
+            </p>
+
+            <p>
+                What do you do?
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Carefully pick exactly one flower.",
+                traits: { kind: 2 }
+            },
+
+            {
+                text: "Study the flower before touching it.",
+                traits: { curious: 2, cautious: 1 }
+            },
+
+            {
+                text: "Grab it and run before anything happens.",
+                traits: { brave: 2 }
+            },
+
+            {
+                text: "Smell it.",
+                traits: { chaotic: 2, curious: 1 }
+            }
+
+        ],
+
+        next: "witch"
+
+    },
+
+
+    witch: {
+
+        className: "scene-witch",
+
+        chapter: "Chapter Six",
+
+        title: "The Witch's Cottage",
+
+        illustration: "🏡 🧙‍♀️ 🔮",
+
+        text: `
+            <p>
+                The forest becomes darker as evening approaches.
+            </p>
+
+            <p>
+                Eventually you see a little cottage covered in ivy,
+                glowing windows, and several suspiciously large mushrooms.
+            </p>
+
+            <p>
+                You knock.
+            </p>
+
+            <p>
+                The door opens.
+            </p>
+
+            <div class="quote">
+                “Oh! Hello, little traveler.”
+            </div>
+
+            <p>
+                The witch smiles warmly.
+            </p>
+
+            <p>
+                “Did you bring the flower?”
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Hand over the flower politely.",
+                traits: { kind: 2 },
+                friends: 1
+            },
+
+            {
+                text: "Ask what the flower is for.",
+                traits: { curious: 2 }
+            },
+
+            {
+                text: "Explain everything that happened.",
+                traits: { kind: 1, curious: 1 }
+            },
+
+            {
+                text: "Hide the flower behind your back.",
+                traits: { chaotic: 2 }
+            }
+
+        ],
+
+        next: "warning"
+
+    },
+
+
+    warning: {
+
+        className: "scene-witch",
+
+        chapter: "Chapter Six",
+
+        title: "The Warning",
+
+        illustration: "🌸 ⚠️ 🧙‍♀️",
+
+        text: `
+            <p>
+                Before the witch can take the flower, you notice something
+                written on the underside of its stem.
+            </p>
+
+            <div class="quote">
+                “Do not pick this flower unless you are prepared
+                to accept the consequences.”
+            </div>
+
+            <p>
+                You slowly look at the witch.
+            </p>
+
+            <p>
+                She looks back at you.
+            </p>
+
+            <div class="quote">
+                “Ah.”
+                <br><br>
+                “You found that part.”
+            </div>
+
+            <p>
+                What do you do?
+            </p>
+        `,
+
+        options: [
+
+            {
+                text: "Ask the witch what it means.",
+                traits: { curious: 2, cautious: 1 }
+            },
+
+            {
+                text: "Trust the witch and give it to her.",
+                traits: { kind: 2 }
+            },
+
+            {
+                text: "Put the flower back.",
+                traits: { cautious: 2 }
+            },
+
+            {
+                text: "Eat the flower.",
+                traits: { chaotic: 5 }
+            }
+
+        ],
+
+        next: "finale"
+
+    }
+
+};
+
+
+/* =========================================================
+   RENDER SCENE
+========================================================= */
+
+function renderScene(sceneId) {
+
+    currentScene = sceneId;
+
+    const data = scenes[sceneId];
+
+    scene.className = data.className;
+
+    chapter.innerText = data.chapter;
+
+    storyTitle.innerText = data.title;
+
+    illustration.innerHTML = data.illustration;
+
+    storyText.innerHTML = data.text;
+
+    choices.innerHTML = "";
+
+    data.options.forEach(function(option, index) {
+
+        const button = document.createElement("button");
+
+        button.className = "choice";
+
+        button.innerHTML = `
+            <span>${String.fromCharCode(65 + index)}</span>
+            ${option.text}
+        `;
+
+        button.addEventListener("click", function() {
+
+            makeChoice(option, data.next);
+
+        });
+
+        choices.appendChild(button);
+
+    });
+
+    updateProgress();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================================================
+   CHOICE HANDLING
+========================================================= */
+
+function makeChoice(option, nextScene) {
+
+    choicesMade++;
+
+    if (option.traits) {
+
+        Object.keys(option.traits).forEach(function(trait) {
+
+            traits[trait] += option.traits[trait];
+
+        });
+
+    }
+
+    if (option.friends) {
+        friends += option.friends;
+    }
+
+    if (option.traits && option.traits.chaotic) {
+        chaos++;
+    }
+
+    updateProgress();
+
+    setTimeout(function() {
+
+        if (nextScene === "finale") {
+
+            showEnding();
+
+        } else {
+
+            renderScene(nextScene);
+
+        }
+
+    }, 150);
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress() {
+
+    const totalScenes = 10;
+
+    const progress =
+        Math.min(
+            100,
+            ((choicesMade + 1) / totalScenes) * 100
+        );
+
+    progressBar.style.width = progress + "%";
+
+}
+
+
+/* =========================================================
+   DETERMINE TRAVELER
+========================================================= */
+
+function determineTraveler() {
+
+    const scores = traits;
+
+    let highest = "curious";
+
+    Object.keys(scores).forEach(function(trait) {
+
+        if (scores[trait] > scores[highest]) {
+            highest = trait;
+        }
+
+    });
+
+    return highest;
+
+}
+
+
+/* =========================================================
+   ENDINGS
+========================================================= */
+
+function showEnding() {
+
+    const traveler = determineTraveler();
+
+    let ending;
+
+    /*
+       Some endings have priority because they represent
+       specific choices rather than just personality.
+    */
+
+    if (traits.chaotic >= 5) {
+
+        ending = {
+
+            icon: "🥣",
+
+            title: "The Soup",
+
+            type: "You are The Chaotic Traveler",
+
+            text: `
+                <p>
+                    You ate the magical flower.
+                </p>
+
+                <p>
+                    The witch stared at you.
+                </p>
+
+                <p>
+                    You stared at the witch.
+                </p>
+
+                <p>
+                    There was a tiny magical <strong>POP</strong>.
+                </p>
+
+                <p>
+                    The forest would like it noted that you were warned.
+                    Several times.
+                </p>
+
+                <p>
+                    You are now soup.
+                </p>
+
+                <div class="quote">
+                    🥣 The forest will remember you fondly.
+                </div>
+            `
+
+        };
+
+    }
+
+    else if (
+        traits.kind >= 6 &&
+        friends >= 4
+    ) {
+
+        ending = {
+
+            icon: "🧙‍♀️",
+
+            title: "The Witch's Apprentice",
+
+            type: "You are The Kind Traveler",
+
+            text: `
+                <p>
+                    You helped everyone you met along the way.
+                </p>
+
+                <p>
+                    The frog likes you.
+                    The squirrel has forgiven you.
+                    Even the suspicious woodland traveler has stopped
+                    pretending not to be impressed.
+                </p>
+
+                <p>
+                    The witch takes the flower and completes the spell.
+                </p>
+
+                <p>
+                    Golden light spreads through the forest.
+                </p>
+
+                <p>
+                    Then she smiles.
+                </p>
+
+                <div class="quote">
+                    “You know, little traveler...
+                    I could use someone like you around here.”
+                </div>
+
+                <p>
+                    You came looking for an adventure.
+                    You found a home instead.
+                </p>
+            `
+
+        };
+
+    }
+
+    else if (
+        traits.curious >= 6 &&
+        traits.cautious >= 2
+    ) {
+
+        ending = {
+
+            icon: "🔮",
+
+            title: "The Secret Spell",
+
+            type: "You are The Curious Traveler",
+
+            text: `
+                <p>
+                    You ask questions.
+                </p>
+
+                <p>
+                    Then you ask more questions.
+                </p>
+
+                <p>
+                    Eventually you discover that the magical flower
+                    is not simply an ingredient.
+                </p>
+
+                <p>
+                    It contains a tiny piece of the forest's oldest magic.
+                </p>
+
+                <p>
+                    Because you took the time to understand it,
+                    the witch is able to use the flower without harming it.
+                </p>
+
+                <div class="quote">
+                    “I suspected you'd figure that out.”
+                </div>
+
+                <p>
+                    You didn't just complete the mission.
+                    You uncovered a secret nobody else had noticed.
+                </p>
+            `
+
+        };
+
+    }
+
+    else if (
+        traits.brave >= 6 &&
+        traits.kind < 4
+    ) {
+
+        ending = {
+
+            icon: "⚔️",
+
+            title: "The Brave Traveler",
+
+            type: "You are The Brave Traveler",
+
+            text: `
+                <p>
+                    You never knew exactly what you were doing.
+                </p>
+
+                <p>
+                    You went into the dark forest anyway.
+                </p>
+
+                <p>
+                    You crossed the bridge.
+                    You faced the strange flower.
+                    You stood at the witch's door.
+                </p>
+
+                <p>
+                    Somehow, against all reasonable expectations,
+                    you succeeded.
+                </p>
+
+                <div class="quote">
+                    “Courage is sometimes just walking forward
+                    while having absolutely no idea what happens next.”
+                </div>
+
+                <p>
+                    The forest is saved.
+                </p>
+            `
+
+        };
+
+    }
+
+    else if (traits.lazy >= 4) {
+
+        ending = {
+
+            icon: "🛏️",
+
+            title: "The Great Nap",
+
+            type: "You are The Sleepy Traveler",
+
+            text: `
+                <p>
+                    You did your best.
+                </p>
+
+                <p>
+                    Unfortunately, your best involved several naps.
+                </p>
+
+                <p>
+                    At some point during the journey, you returned home.
+                </p>
+
+                <p>
+                    You got back into bed.
+                </p>
+
+                <p>
+                    You woke up three days later.
+                </p>
+
+                <div class="quote">
+                    “The forest is still in danger.”
+                    <br><br>
+                    “But you are extremely well rested.”
+                </div>
+
+                <p>
+                    Honestly, that's something.
+                </p>
+            `
+
+        };
+
+    }
+
+    else if (friends >= 5) {
+
+        ending = {
+
+            icon: "🐸",
+
+            title: "The Frog Café",
+
+            type: "You are The Friendly Traveler",
+
+            text: `
+                <p>
+                    Somewhere along the way, you stopped thinking
+                    about the mission.
+                </p>
+
+                <p>
+                    You made friends with a frog.
+                </p>
+
+                <p>
+                    Then another frog.
+                </p>
+
+                <p>
+                    Then somehow a squirrel became involved.
+                </p>
+
+                <p>
+                    By sunset, you had abandoned the magical flower quest
+                    and opened a tiny woodland café.
+                </p>
+
+                <div class="quote">
+                    ☕ “One acorn latte, coming right up.”
+                </div>
+
+                <p>
+                    The forest may or may not be saved.
+                    But business is booming.
+                </p>
+            `
+
+        };
+
+    }
+
+    else {
+
+        ending = {
+
+            icon: "🌸",
+
+            title: "The Forest Is Saved",
+
+            type: "You are The Adventurous Traveler",
+
+            text: `
+                <p>
+                    You make it to the witch with the magical flower.
+                </p>
+
+                <p>
+                    She completes the spell.
+                </p>
+
+                <p>
+                    A warm golden glow spreads through the forest.
+                </p>
+
+                <p>
+                    The trees shimmer.
+                    The flowers bloom.
+                    Somewhere nearby, a frog cheers.
+                </p>
+
+                <div class="quote">
+                    “You did it, little traveler.”
+                </div>
+
+                <p>
+                    You may not have taken the perfect path,
+                    but you kept going.
+                </p>
+
+                <p>
+                    And sometimes that's what makes an adventure.
+                </p>
+            `
+
+        };
+
+    }
+
+
+    endingIcon.innerText = ending.icon;
+
+    endingTitle.innerText = ending.title;
+
+    travelerType.innerText = ending.type;
+
+    endingText.innerHTML = ending.text;
+
+    choiceCount.innerText = choicesMade;
+
+    friendCount.innerText = friends;
+
+    chaosCount.innerText = chaos;
+
+    storyScreen.style.display = "none";
+
+    endingScreen.style.display = "block";
+
+    scene.className = "scene-ending";
+
+    progressBar.style.width = "100%";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartAdventure() {
+
+    choicesMade = 0;
+
+    friends = 0;
+
+    chaos = 0;
+
+    traits = {
+        kind: 0,
+        curious: 0,
+        brave: 0,
+        lazy: 0,
+        chaotic: 0,
+        cautious: 0
+    };
+
+    endingScreen.style.display = "none";
+
+    storyScreen.style.display = "block";
+
+    renderScene("morning");
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+renderScene("morning");
+
+</script>
+
+</body>
+</html>
