@@ -1888,7 +1888,10 @@ const scenes = {
         background: "scene-flower",
 
         text: `
-            The guardian steps out of the shadows.
+        You conveniently find the guardian is your neighbour so you ring his doorbell
+            <br><br>
+            
+            The guardian opens its door.
             <br><br>
 
             It is enormous.
@@ -3274,7 +3277,1613 @@ function showScene(sceneId) {
    ========================================================= */
 
 showScene("start");
+<!-- =========================================================
+     MYSTERY TRAIL — BIG UPGRADE LAYER
+     Paste this immediately before </body>
+     ========================================================= -->
 
+<style>
+/* ---------- UPGRADED ATMOSPHERE ---------- */
+
+#upgradeTitleScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(circle at 50% 25%, rgba(91,126,87,.45), transparent 35%),
+        linear-gradient(135deg, #07140d, #173424 55%, #07110b);
+    transition: opacity .6s ease, visibility .6s ease;
+}
+
+#upgradeTitleScreen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.upgrade-title-card {
+    width: min(650px, 100%);
+    padding: 45px 25px;
+    text-align: center;
+    border: 2px solid rgba(185,205,151,.45);
+    border-radius: 30px;
+    background: rgba(8,24,15,.88);
+    box-shadow: 0 25px 80px rgba(0,0,0,.55);
+    backdrop-filter: blur(12px);
+    animation: upgradeTitleIn .8s ease;
+}
+
+.upgrade-title-paw {
+    font-size: 90px;
+    animation: upgradeFloat 3s ease-in-out infinite;
+}
+
+.upgrade-title-card h1 {
+    margin: 10px 0 15px;
+    color: #e3d39a;
+    font-size: clamp(40px, 9vw, 72px);
+}
+
+.upgrade-title-card p {
+    margin: 0 auto 28px;
+    max-width: 450px;
+    color: #d8ddc7;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.upgrade-start {
+    padding: 15px 30px;
+    border: 2px solid #a5b87e;
+    border-radius: 30px;
+    background: #d2b86c;
+    color: #20291e;
+    font: bold 17px Georgia, serif;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.upgrade-start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+.upgrade-start.secondary {
+    display: none;
+    margin-top: 10px;
+    background: transparent;
+    color: #e5eadb;
+}
+
+@keyframes upgradeTitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes upgradeFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-9px); }
+}
+
+
+/* ---------- HUD ---------- */
+
+#upgradeHUD {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9000;
+    width: min(880px, calc(100% - 24px));
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.upgrade-hud-group {
+    display: flex;
+    gap: 7px;
+    pointer-events: auto;
+}
+
+.upgrade-hud-button {
+    border: 1px solid rgba(185,205,151,.5);
+    border-radius: 13px;
+    padding: 8px 12px;
+    background: rgba(7,21,15,.86);
+    color: #eee9d8;
+    font: 13px Georgia, serif;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: .15s ease;
+}
+
+.upgrade-hud-button:hover {
+    transform: translateY(-2px);
+    background: rgba(45,70,48,.96);
+}
+
+.upgrade-hud-button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ---------- PROGRESS ---------- */
+
+#upgradeProgress {
+    position: fixed;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 8999;
+    width: min(500px, calc(100% - 50px));
+    text-align: center;
+}
+
+#upgradeProgressBar {
+    height: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(220,230,200,.12);
+}
+
+#upgradeProgressFill {
+    width: 0;
+    height: 100%;
+    border-radius: 10px;
+    background: #b8c99d;
+    transition: width .5s ease;
+}
+
+#upgradeProgressText {
+    margin-top: 5px;
+    color: rgba(238,233,216,.7);
+    font: 11px Georgia, serif;
+    letter-spacing: 1px;
+}
+
+
+/* ---------- SIDE PANELS ---------- */
+
+.upgrade-panel {
+    position: fixed;
+    z-index: 9100;
+    top: 90px;
+    width: 245px;
+    padding: 18px;
+    border: 2px solid #657d59;
+    border-radius: 18px;
+    background: rgba(8,20,13,.97);
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: .2s ease;
+}
+
+.upgrade-panel.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+#upgradeTraits {
+    left: 15px;
+}
+
+#upgradeBag {
+    right: 15px;
+}
+
+.upgrade-panel h3 {
+    margin: 0 0 15px;
+    color: #e1cf8b;
+    text-align: center;
+}
+
+.upgrade-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px;
+    margin-bottom: 7px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.05);
+}
+
+.upgrade-item.missing {
+    opacity: .3;
+}
+
+.upgrade-item-icon {
+    font-size: 22px;
+}
+
+
+/* ---------- TOAST ---------- */
+
+#upgradeToast {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translate(-50%, 20px);
+    z-index: 99999;
+    padding: 10px 17px;
+    border: 1px solid #657d59;
+    border-radius: 20px;
+    background: rgba(8,20,13,.95);
+    color: #eee9d8;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
+}
+
+#upgradeToast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+
+/* ---------- AMBIENT PARTICLES ---------- */
+
+.upgrade-particle {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+    opacity: .45;
+    animation: upgradeParticle linear infinite;
+}
+
+@keyframes upgradeParticle {
+    from {
+        transform: translateY(105vh) rotate(0deg);
+    }
+    to {
+        transform: translateY(-80px) rotate(360deg);
+    }
+}
+
+
+/* ---------- SCENE ANIMATION ---------- */
+
+#content.upgrade-scene-in {
+    animation: upgradeSceneIn .45s ease;
+}
+
+@keyframes upgradeSceneIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.99);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.choice,
+.choices button {
+    transition:
+        transform .15s ease,
+        background .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+.choice:hover,
+.choices button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+    #upgradeHUD {
+        top: 7px;
+    }
+
+    .upgrade-hud-button {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+
+    #upgradeProgress {
+        top: 52px;
+    }
+
+    .upgrade-panel {
+        top: 82px;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto;
+    }
+
+    .upgrade-title-card {
+        padding: 35px 20px;
+    }
+
+    .upgrade-title-paw {
+        font-size: 70px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+
+
+<!-- ---------- TITLE SCREEN ---------- -->
+
+<div id="upgradeTitleScreen">
+    <div class="upgrade-title-card">
+        <div class="upgrade-title-paw">🐾</div>
+
+        <h1>Mystery Trail</h1>
+
+        <p>
+            A strange forest awaits.<br>
+            The choices are yours.
+        </p>
+
+        <button
+            id="upgradeNewGame"
+            class="upgrade-start"
+            type="button">
+            🌲 Begin the Adventure
+        </button>
+
+        <br>
+
+        <button
+            id="upgradeContinue"
+            class="upgrade-start secondary"
+            type="button">
+            ✨ Continue Adventure
+        </button>
+    </div>
+</div>
+
+
+<!-- ---------- HUD ---------- -->
+
+<div id="upgradeHUD">
+
+    <div class="upgrade-hud-group">
+        <button
+            id="upgradeBack"
+            class="upgrade-hud-button"
+            type="button">
+            ← Back
+        </button>
+
+        <button
+            id="upgradeSave"
+            class="upgrade-hud-button"
+            type="button">
+            💾 Save
+        </button>
+    </div>
+
+    <div class="upgrade-hud-group">
+        <button
+            id="upgradeTraitButton"
+            class="upgrade-hud-button"
+            type="button">
+            🧠 Traits
+        </button>
+
+        <button
+            id="upgradeBagButton"
+            class="upgrade-hud-button"
+            type="button">
+            🎒 Bag
+        </button>
+    </div>
+
+</div>
+
+
+<!-- ---------- PROGRESS ---------- -->
+
+<div id="upgradeProgress">
+    <div id="upgradeProgressBar">
+        <div id="upgradeProgressFill"></div>
+    </div>
+
+    <div id="upgradeProgressText">
+        Mystery Trail
+    </div>
+</div>
+
+
+<!-- ---------- TRAITS ---------- -->
+
+<div id="upgradeTraits" class="upgrade-panel">
+
+    <h3>🧠 Your Adventure</h3>
+
+    <p>
+        Every choice shapes the kind of little creature
+        you become.
+    </p>
+
+    <div id="upgradeTraitResult"></div>
+
+</div>
+
+
+<!-- ---------- INVENTORY ---------- -->
+
+<div id="upgradeBag" class="upgrade-panel">
+
+    <h3>🎒 Adventure Bag</h3>
+
+    <div class="upgrade-item missing" data-upgrade-item="note">
+        <span class="upgrade-item-icon">📜</span>
+        <span>Mysterious Note</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="map">
+        <span class="upgrade-item-icon">🗺️</span>
+        <span>Forest Map</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="coffee">
+        <span class="upgrade-item-icon">☕</span>
+        <span>Forest Coffee</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="biscuit">
+        <span class="upgrade-item-icon">🍪</span>
+        <span>Guardian Biscuit</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="bell">
+        <span class="upgrade-item-icon">🔔</span>
+        <span>Witch's Bell</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="flower">
+        <span class="upgrade-item-icon">🌼</span>
+        <span>Magical Flower</span>
+    </div>
+
+    <div class="upgrade-item missing" data-upgrade-item="hat">
+        <span class="upgrade-item-icon">🎩</span>
+        <span>Tiny Hat</span>
+    </div>
+
+</div>
+
+
+<div id="upgradeToast"></div>
+
+
+<script>
+/* =========================================================
+   MYSTERY TRAIL UPGRADE ENGINE
+   ========================================================= */
+
+(function () {
+
+    const SAVE_KEY = "mysteryTrailUpgradeSave";
+
+    const content = document.getElementById("content");
+
+    const titleScreen =
+        document.getElementById("upgradeTitleScreen");
+
+    const newGameButton =
+        document.getElementById("upgradeNewGame");
+
+    const continueButton =
+        document.getElementById("upgradeContinue");
+
+    const backButton =
+        document.getElementById("upgradeBack");
+
+    const saveButton =
+        document.getElementById("upgradeSave");
+
+    const traitButton =
+        document.getElementById("upgradeTraitButton");
+
+    const bagButton =
+        document.getElementById("upgradeBagButton");
+
+    const traitPanel =
+        document.getElementById("upgradeTraits");
+
+    const bagPanel =
+        document.getElementById("upgradeBag");
+
+    const progressFill =
+        document.getElementById("upgradeProgressFill");
+
+    const progressText =
+        document.getElementById("upgradeProgressText");
+
+    const toast =
+        document.getElementById("upgradeToast");
+
+    let sceneHistory = [];
+
+    let discoveredScenes = new Set();
+
+    let inventory = {
+        note: false,
+        map: false,
+        coffee: false,
+        biscuit: false,
+        bell: false,
+        flower: false,
+        hat: false
+    };
+
+    let choicesMade = 0;
+
+    let traitCounts = {
+        brave: 0,
+        kind: 0,
+        clever: 0,
+        curious: 0,
+        chaotic: 0,
+        cozy: 0
+    };
+
+
+    /* -----------------------------------------------------
+       TOAST
+       ----------------------------------------------------- */
+
+    function showToast(message) {
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(showToast.timer);
+
+        showToast.timer =
+            setTimeout(function () {
+                toast.classList.remove("show");
+            }, 1600);
+    }
+
+
+    /* -----------------------------------------------------
+       SAVE
+       ----------------------------------------------------- */
+
+    function save() {
+
+        try {
+
+            const data = {
+                history: sceneHistory,
+                discovered:
+                    Array.from(discoveredScenes),
+                inventory: inventory,
+                choicesMade: choicesMade,
+                traits: traitCounts
+            };
+
+            localStorage.setItem(
+                SAVE_KEY,
+                JSON.stringify(data)
+            );
+
+            updateContinueButton();
+
+            showToast("Adventure saved ✓");
+
+        } catch (error) {
+
+            console.warn(
+                "Mystery Trail save failed:",
+                error
+            );
+
+        }
+    }
+
+
+    function silentSave() {
+
+        try {
+
+            const data = {
+                history: sceneHistory,
+                discovered:
+                    Array.from(discoveredScenes),
+                inventory: inventory,
+                choicesMade: choicesMade,
+                traits: traitCounts
+            };
+
+            localStorage.setItem(
+                SAVE_KEY,
+                JSON.stringify(data)
+            );
+
+        } catch (error) {}
+    }
+
+
+    /* -----------------------------------------------------
+       LOAD
+       ----------------------------------------------------- */
+
+    function loadSave() {
+
+        try {
+
+            const raw =
+                localStorage.getItem(SAVE_KEY);
+
+            if (!raw) return false;
+
+            const data =
+                JSON.parse(raw);
+
+            sceneHistory =
+                Array.isArray(data.history)
+                    ? data.history
+                    : [];
+
+            discoveredScenes =
+                new Set(
+                    Array.isArray(data.discovered)
+                        ? data.discovered
+                        : []
+                );
+
+            if (data.inventory) {
+
+                Object.keys(inventory).forEach(function (key) {
+
+                    inventory[key] =
+                        Boolean(data.inventory[key]);
+
+                });
+
+            }
+
+            choicesMade =
+                Number(data.choicesMade) || 0;
+
+            if (data.traits) {
+
+                Object.keys(traitCounts).forEach(function (key) {
+
+                    traitCounts[key] =
+                        Number(data.traits[key]) || 0;
+
+                });
+
+            }
+
+            updateInventory();
+
+            updateTraits();
+
+            updateProgress();
+
+            return true;
+
+        } catch (error) {
+
+            console.warn(
+                "Mystery Trail load failed:",
+                error
+            );
+
+            return false;
+        }
+    }
+
+
+    /* -----------------------------------------------------
+       CONTINUE BUTTON
+       ----------------------------------------------------- */
+
+    function updateContinueButton() {
+
+        const exists =
+            Boolean(localStorage.getItem(SAVE_KEY));
+
+        continueButton.style.display =
+            exists
+                ? "inline-block"
+                : "none";
+    }
+
+
+    /* -----------------------------------------------------
+       TRAITS
+       ----------------------------------------------------- */
+
+    function recordTrait(trait) {
+
+        if (
+            trait &&
+            Object.prototype.hasOwnProperty.call(
+                traitCounts,
+                trait
+            )
+        ) {
+
+            traitCounts[trait]++;
+
+            updateTraits();
+        }
+    }
+
+
+    function getPersonality() {
+
+        let best = "cozy";
+
+        Object.keys(traitCounts).forEach(function (trait) {
+
+            if (
+                traitCounts[trait] >
+                traitCounts[best]
+            ) {
+
+                best = trait;
+
+            }
+
+        });
+
+        const personalities = {
+
+            brave: [
+                "💪 The Fearless Wanderer",
+                "You charge into strange situations with impressive confidence."
+            ],
+
+            kind: [
+                "💚 The Gentle Forest Friend",
+                "You lead with kindness, even when the forest gets weird."
+            ],
+
+            clever: [
+                "🧠 The Clever Pathfinder",
+                "You prefer a smart solution over a dramatic one."
+            ],
+
+            curious: [
+                "👀 The Curious Explorer",
+                "You cannot resist investigating whatever looks mysterious."
+            ],
+
+            chaotic: [
+                "😈 The Chaotic Little Creature",
+                "You somehow turn every simple decision into an adventure."
+            ],
+
+            cozy: [
+                "🛏️ The Cozy Wanderer",
+                "You believe every adventure should include rest, snacks and somewhere comfortable to sit."
+            ]
+
+        };
+
+        return personalities[best];
+    }
+
+
+    function updateTraits() {
+
+        const result =
+            getPersonality();
+
+        let html =
+            "<strong>" +
+            result[0] +
+            "</strong>" +
+            "<br><br>" +
+            result[1] +
+            "<br><br>";
+
+        Object.keys(traitCounts).forEach(function (trait) {
+
+            html +=
+                "<small>" +
+                trait.charAt(0).toUpperCase() +
+                trait.slice(1) +
+                ": " +
+                traitCounts[trait] +
+                "</small><br>";
+
+        });
+
+        document.getElementById(
+            "upgradeTraitResult"
+        ).innerHTML = html;
+    }
+
+
+    /* -----------------------------------------------------
+       INVENTORY
+       ----------------------------------------------------- */
+
+    function updateInventory() {
+
+        Object.keys(inventory).forEach(function (item) {
+
+            const element =
+                document.querySelector(
+                    '[data-upgrade-item="' +
+                    item +
+                    '"]'
+                );
+
+            if (!element) return;
+
+            element.classList.toggle(
+                "missing",
+                !inventory[item]
+            );
+
+        });
+
+    }
+
+
+    function detectInventory(text) {
+
+        const lower =
+            text.toLowerCase();
+
+        if (
+            lower.includes(
+                "folded note"
+            ) ||
+            lower.includes(
+                "mysterious note"
+            )
+        ) {
+
+            inventory.note = true;
+
+        }
+
+        if (
+            lower.includes(
+                "hand-drawn map"
+            )
+        ) {
+
+            inventory.map = true;
+
+        }
+
+        if (
+            lower.includes(
+                "tiny cup"
+            ) ||
+            lower.includes(
+                "cup of coffee"
+            )
+        ) {
+
+            inventory.coffee = true;
+
+        }
+
+        if (
+            lower.includes(
+                "hands you a small biscuit"
+            ) ||
+            lower.includes(
+                "hand you one"
+            ) ||
+            lower.includes(
+                "the biscuit"
+            )
+        ) {
+
+            /*
+             * Only visually track the biscuit when
+             * the player has reached a biscuit-related
+             * scene. This does not alter the story.
+             */
+
+            if (
+                lower.includes(
+                    "biscuit"
+                )
+            ) {
+
+                inventory.biscuit = true;
+
+            }
+
+        }
+
+        if (
+            lower.includes(
+                "tiny bell"
+            )
+        ) {
+
+            inventory.bell = true;
+
+        }
+
+        if (
+            lower.includes(
+                "magical flower"
+            )
+        ) {
+
+            /*
+             * This is deliberately conservative:
+             * the flower becomes an inventory item once
+             * the scene is actually about receiving it.
+             */
+
+            if (
+                lower.includes(
+                    "gives you the magical flower"
+                ) ||
+                lower.includes(
+                    "gives you the flower"
+                ) ||
+                lower.includes(
+                    "hand her the magical flower"
+                )
+            ) {
+
+                inventory.flower = true;
+
+            }
+
+        }
+
+        if (
+            lower.includes(
+                "tiny hat"
+            ) &&
+            (
+                lower.includes(
+                    "places it carefully"
+                ) ||
+                lower.includes(
+                    "leave the forest wearing"
+                )
+            )
+        ) {
+
+            inventory.hat = true;
+
+        }
+
+        updateInventory();
+    }
+
+
+    /* -----------------------------------------------------
+       PROGRESS
+       ----------------------------------------------------- */
+
+    function updateProgress() {
+
+        const count =
+            discoveredScenes.size;
+
+        /*
+         * We do not pretend the story is linear.
+         * Instead, progress measures how much of the
+         * discovered adventure the player has explored.
+         */
+
+        const percent =
+            Math.min(
+                100,
+                Math.round(
+                    Math.min(
+                        count / 45,
+                        1
+                    ) * 100
+                )
+            );
+
+        progressFill.style.width =
+            percent + "%";
+
+        progressText.textContent =
+            "Trail explored • " +
+            count +
+            " scene" +
+            (count === 1 ? "" : "s") +
+            " discovered • " +
+            percent +
+            "%";
+
+        backButton.disabled =
+            sceneHistory.length === 0;
+    }
+
+
+    /* -----------------------------------------------------
+       PANELS
+       ----------------------------------------------------- */
+
+    function closePanels() {
+
+        traitPanel.classList.remove("open");
+
+        bagPanel.classList.remove("open");
+
+    }
+
+
+    traitButton.addEventListener(
+        "click",
+        function () {
+
+            bagPanel.classList.remove("open");
+
+            traitPanel.classList.toggle("open");
+
+        }
+    );
+
+
+    bagButton.addEventListener(
+        "click",
+        function () {
+
+            traitPanel.classList.remove("open");
+
+            bagPanel.classList.toggle("open");
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !traitPanel.contains(event.target) &&
+                !traitButton.contains(event.target)
+            ) {
+
+                traitPanel.classList.remove("open");
+
+            }
+
+            if (
+                !bagPanel.contains(event.target) &&
+                !bagButton.contains(event.target)
+            ) {
+
+                bagPanel.classList.remove("open");
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       SCENE ANIMATION
+       ----------------------------------------------------- */
+
+    function animateScene() {
+
+        if (!content) return;
+
+        content.classList.remove(
+            "upgrade-scene-in"
+        );
+
+        void content.offsetWidth;
+
+        content.classList.add(
+            "upgrade-scene-in"
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       WATCH THE ORIGINAL GAME
+       ----------------------------------------------------- */
+
+    let previousHTML = "";
+
+    const observer =
+        new MutationObserver(
+            function () {
+
+                if (!content) return;
+
+                const html =
+                    content.innerHTML;
+
+                if (
+                    html &&
+                    html !== previousHTML
+                ) {
+
+                    previousHTML = html;
+
+                    animateScene();
+
+                    discoveredScenes.add(
+                        html.slice(0, 80)
+                    );
+
+                    /*
+                     * Look at the currently displayed
+                     * story text and automatically detect
+                     * useful items.
+                     */
+
+                    detectInventory(
+                        content.innerText
+                    );
+
+                    updateProgress();
+
+                }
+
+            }
+        );
+
+    observer.observe(
+        content,
+        {
+            childList: true,
+            subtree: true
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       CHOICE TRACKING
+       ----------------------------------------------------- */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const button =
+                event.target.closest(
+                    ".choice, .choices button"
+                );
+
+            if (!button) return;
+
+            choicesMade++;
+
+            const text =
+                button.textContent.toLowerCase();
+
+            /*
+             * Track personality without touching
+             * the original game's trait system.
+             */
+
+            if (
+                text.includes("brav") ||
+                text.includes("run") ||
+                text.includes("confident") ||
+                text.includes("push")
+            ) {
+
+                recordTrait("brave");
+
+            }
+
+            if (
+                text.includes("kind") ||
+                text.includes("hello") ||
+                text.includes("friend") ||
+                text.includes("offer")
+            ) {
+
+                recordTrait("kind");
+
+            }
+
+            if (
+                text.includes("clever") ||
+                text.includes("map") ||
+                text.includes("listen") ||
+                text.includes("solution")
+            ) {
+
+                recordTrait("clever");
+
+            }
+
+            if (
+                text.includes("ask") ||
+                text.includes("look") ||
+                text.includes("follow") ||
+                text.includes("flower")
+            ) {
+
+                recordTrait("curious");
+
+            }
+
+            if (
+                text.includes("staring") ||
+                text.includes("pretend") ||
+                text.includes("hat")
+            ) {
+
+                recordTrait("chaotic");
+
+            }
+
+            if (
+                text.includes("bed") ||
+                text.includes("coffee") ||
+                text.includes("biscuit")
+            ) {
+
+                recordTrait("cozy");
+
+            }
+
+            /*
+             * Inventory clues from choices.
+             */
+
+            if (text.includes("note")) {
+                inventory.note = true;
+            }
+
+            if (text.includes("map")) {
+                inventory.map = true;
+            }
+
+            if (text.includes("coffee")) {
+                inventory.coffee = true;
+            }
+
+            if (text.includes("biscuit")) {
+                inventory.biscuit = true;
+            }
+
+            if (text.includes("bell")) {
+                inventory.bell = true;
+            }
+
+            if (text.includes("tiny hat")) {
+                inventory.hat = true;
+            }
+
+            updateInventory();
+
+            updateTraits();
+
+            setTimeout(
+                silentSave,
+                100
+            );
+
+        },
+        true
+    );
+
+
+    /* -----------------------------------------------------
+       BACK BUTTON
+       ----------------------------------------------------- */
+
+    backButton.addEventListener(
+        "click",
+        function () {
+
+            /*
+             * Because the original story already changes
+             * scenes internally, use browser-style history
+             * when available rather than modifying the
+             * original scene engine.
+             */
+
+            if (window.history.length > 1) {
+
+                window.history.back();
+
+                showToast(
+                    "Going back…"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       SAVE BUTTON
+       ----------------------------------------------------- */
+
+    saveButton.addEventListener(
+        "click",
+        save
+    );
+
+
+    /* -----------------------------------------------------
+       AUTO SAVE
+       ----------------------------------------------------- */
+
+    setInterval(
+        silentSave,
+        15000
+    );
+
+    window.addEventListener(
+        "beforeunload",
+        silentSave
+    );
+
+
+    /* -----------------------------------------------------
+       TITLE SCREEN
+       ----------------------------------------------------- */
+
+    updateContinueButton();
+
+    newGameButton.addEventListener(
+        "click",
+        function () {
+
+            const existing =
+                localStorage.getItem(
+                    SAVE_KEY
+                );
+
+            if (existing) {
+
+                const okay =
+                    confirm(
+                        "Start a new Mystery Trail?\n\nYour current upgraded save will be replaced."
+                    );
+
+                if (!okay) return;
+
+            }
+
+            localStorage.removeItem(
+                SAVE_KEY
+            );
+
+            sceneHistory = [];
+
+            discoveredScenes =
+                new Set();
+
+            choicesMade = 0;
+
+            inventory = {
+                note:false,
+                map:false,
+                coffee:false,
+                biscuit:false,
+                bell:false,
+                flower:false,
+                hat:false
+            };
+
+            traitCounts = {
+                brave:0,
+                kind:0,
+                clever:0,
+                curious:0,
+                chaotic:0,
+                cozy:0
+            };
+
+            updateInventory();
+
+            updateTraits();
+
+            updateProgress();
+
+            titleScreen.classList.add(
+                "hidden"
+            );
+
+            showToast(
+                "The adventure begins… 🐾"
+            );
+
+        }
+    );
+
+
+    continueButton.addEventListener(
+        "click",
+        function () {
+
+            if (loadSave()) {
+
+                titleScreen.classList.add(
+                    "hidden"
+                );
+
+                showToast(
+                    "Welcome back, little explorer ✨"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       KEYBOARD CONTROLS
+       ----------------------------------------------------- */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            /*
+             * Number keys select visible choices.
+             */
+
+            if (
+                event.key === "1" ||
+                event.key === "2" ||
+                event.key === "3"
+            ) {
+
+                const choices =
+                    Array.from(
+                        document.querySelectorAll(
+                            ".choice, .choices button"
+                        )
+                    );
+
+                const index =
+                    Number(event.key) - 1;
+
+                if (choices[index]) {
+
+                    choices[index].click();
+
+                }
+
+            }
+
+            /*
+             * Escape closes panels.
+             */
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closePanels();
+
+            }
+
+            /*
+             * S = save
+             */
+
+            if (
+                event.key.toLowerCase() === "s" &&
+                !event.ctrlKey &&
+                !event.metaKey
+            ) {
+
+                save();
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       AMBIENT FOREST PARTICLES
+       ----------------------------------------------------- */
+
+    const particleSymbols = [
+        "🍃",
+        "·",
+        "✦",
+        "🌿"
+    ];
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+        particle.className =
+            "upgrade-particle";
+
+        particle.textContent =
+            particleSymbols[
+                Math.floor(
+                    Math.random() *
+                    particleSymbols.length
+                )
+            ];
+
+        particle.style.left =
+            Math.random() * 100 +
+            "vw";
+
+        particle.style.fontSize =
+            8 +
+            Math.random() * 12 +
+            "px";
+
+        particle.style.animationDuration =
+            9 +
+            Math.random() * 13 +
+            "s";
+
+        particle.style.animationDelay =
+            -(Math.random() * 15) +
+            "s";
+
+        document.body.appendChild(
+            particle
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       INITIAL STATE
+       ----------------------------------------------------- */
+
+    updateInventory();
+
+    updateTraits();
+
+    updateProgress();
+
+    updateContinueButton();
+
+})();
+</script>
 </script>
 
 </body>
