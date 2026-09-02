@@ -3783,22 +3783,7 @@ function restartGame() {
         cozy: 0
     };
 
-const homeScreen = document.getElementById("homeScreen");
-const continueAdventure = document.getElementById("continueAdventure");
-const backToForest = document.getElementById("backToForest");
 
-if (continueAdventure) {
-    continueAdventure.addEventListener("click", function () {
-        homeScreen.style.display = "none";
-        showScene("start");
-    });
-}
-
-if (backToForest) {
-    backToForest.addEventListener("click", function () {
-        window.location.href = "forest.html";
-    });
-}
     // =====================================================
 // MYSTERY TRAIL HUD BUTTONS
 // =====================================================
@@ -4099,8 +4084,27 @@ function updateBagPanel() {
 
     });
 }
+// =====================================================
+// HOME SCREEN
+// =====================================================
 
-</script>
+const homeScreen = document.getElementById("homeScreen");
+const continueAdventure = document.getElementById("continueAdventure");
+const backToForest = document.getElementById("backToForest");
+
+if (continueAdventure) {
+    continueAdventure.addEventListener("click", function () {
+        homeScreen.style.display = "none";
+        showScene("start");
+    });
+}
+
+if (backToForest) {
+    backToForest.addEventListener("click", function () {
+        window.location.href = "forest.html";
+    });
+}
+
 </script>
 
 </body>
