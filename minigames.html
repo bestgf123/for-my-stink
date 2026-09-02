@@ -692,33 +692,491 @@ h1 {
 </p>
 
 
-<!-- =========================
-     FOREST WOODLE
-========================= -->
+/* =====================================================
+   FOREST WOODLE
+===================================================== */
 
-<section class="game-card">
+const woodleWords = [
+    "BALDY",
+    "STARS",
+    "PLANE",
+    "BEANS"
+];
 
-<h2>
-    🌲 Forest Woodle
-</h2>
+let woodleTarget = "";
+let woodleGuesses = [];
+let woodleCurrent = "";
 
-<p class="game-description">
-    Guess the secret five-letter word.
-    You have six tries.
-    The forest is judging you.
-</p>
+let lastWoodleTarget = "";
+let woodleGameOver = false;
 
-<div id="woodleBoard"></div>
 
-<div id="woodleKeyboard"></div>
+/* -------------------------
+   CHOOSE WORD
+------------------------- */
 
-<button
-    class="game-button"
-    onclick="startWoodle()">
-    🌿 New Woodle
-</button>
+function chooseWoodleWord() {
 
-</section>
+    let available =
+        woodleWords.filter(
+            word => word !== lastWoodleTarget
+        );
+
+    const index =
+        Math.floor(
+            Math.random() * available.length
+        );
+
+    woodleTarget =
+        available[index];
+
+    lastWoodleTarget =
+        woodleTarget;
+}
+
+
+/* -------------------------
+   START / RESET
+------------------------- */
+
+function startWoodle() {
+
+    chooseWoodleWord();
+
+    woodleGuesses = [];
+    woodleCurrent = "";
+    woodleGameOver = false;
+
+    closePopup();
+
+    renderWoodleBoard();
+    renderWoodleKeyboard();
+
+}
+
+
+/* -------------------------
+   RENDER BOARD
+------------------------- */
+
+function renderWoodleBoard() {
+
+    const board =
+        document.getElementById(
+            "woodleBoard"
+        );
+
+    board.innerHTML = "";
+
+    for (
+        let row = 0;
+        row < 6;
+        row++
+    ) {
+
+        for (
+            let col = 0;
+            col < 5;
+            col++
+        ) {
+
+            const cell =
+                document.createElement("div");
+
+            cell.className =
+                "woodle-cell";
+
+            const guess =
+                woodleGuesses[row];
+
+            if (guess) {
+
+                cell.innerText =
+                    guess[col];
+
+                const letter =
+                    guess[col];
+
+                if (
+                    letter ===
+                    woodleTarget[col]
+                ) {
+
+                    cell.classList.add(
+                        "correct"
+                    );
+
+                } else if (
+                    woodleTarget.includes(
+                        letter
+                    )
+                ) {
+
+                    cell.classList.add(
+                        "present"
+                    );
+
+                } else {
+
+                    cell.classList.add(
+                        "absent"
+                    );
+
+                }
+
+            } else if (
+                row ===
+                woodleGuesses.length
+            ) {
+
+                if (
+                    woodleCurrent[col]
+                ) {
+
+                    cell.innerText =
+                        woodleCurrent[col];
+
+                    cell.classList.add(
+                        "filled"
+                    );
+
+                }
+
+            }
+
+            board.appendChild(
+                cell
+            );
+
+        }
+
+    }
+
+}
+
+
+/* -------------------------
+   RENDER KEYBOARD
+------------------------- */
+
+function renderWoodleKeyboard() {
+
+    const keyboard =
+        document.getElementById(
+            "woodleKeyboard"
+        );
+
+    keyboard.innerHTML = "";
+
+    const rows = [
+        "QWERTYUIOP",
+        "ASDFGHJKL",
+        "ZXCVBNM"
+    ];
+
+    rows.forEach(function(row) {
+
+        [...row].forEach(function(letter) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "key";
+
+            button.innerText =
+                letter;
+
+            button.onclick =
+                function() {
+
+                    pressWoodleLetter(
+                        letter
+                    );
+
+                };
+
+            keyboard.appendChild(
+                button
+            );
+
+        });
+
+        if (
+            row === "ZXCVBNM"
+        ) {
+
+            const enter =
+                document.createElement(
+                    "button"
+                );
+
+            enter.className =
+                "key wide";
+
+            enter.innerText =
+                "ENTER";
+
+            enter.onclick =
+                submitWoodle;
+
+            keyboard.appendChild(
+                enter
+            );
+
+
+            const back =
+                document.createElement(
+                    "button"
+                );
+
+            back.className =
+                "key wide";
+
+            back.innerText =
+                "⌫";
+
+            back.onclick =
+                deleteWoodleLetter;
+
+            keyboard.appendChild(
+                back
+            );
+
+        }
+
+    });
+
+}
+
+
+/* -------------------------
+   TYPE LETTER
+------------------------- */
+
+function pressWoodleLetter(letter) {
+
+    if (
+        woodleGameOver
+    ) {
+        return;
+    }
+
+    if (
+        woodleCurrent.length >= 5
+    ) {
+        return;
+    }
+
+    woodleCurrent +=
+        letter.toUpperCase();
+
+    renderWoodleBoard();
+
+}
+
+
+/* -------------------------
+   DELETE LETTER
+------------------------- */
+
+function deleteWoodleLetter() {
+
+    if (
+        woodleGameOver
+    ) {
+        return;
+    }
+
+    woodleCurrent =
+        woodleCurrent.slice(
+            0,
+            -1
+        );
+
+    renderWoodleBoard();
+
+}
+
+
+/* -------------------------
+   SUBMIT GUESS
+------------------------- */
+
+function submitWoodle() {
+
+    if (
+        woodleGameOver
+    ) {
+        return;
+    }
+
+    if (
+        woodleCurrent.length !== 5
+    ) {
+
+        showPopup(
+            "🌲 Not quite!",
+            "The forest requires a five-letter offering."
+        );
+
+        return;
+    }
+
+    const guess =
+        woodleCurrent.toUpperCase();
+
+    woodleGuesses.push(
+        guess
+    );
+
+
+    /* -------------------------
+       WIN
+    ------------------------- */
+
+    if (
+        guess === woodleTarget
+    ) {
+
+        woodleGameOver = true;
+
+        woodleCurrent = "";
+
+        renderWoodleBoard();
+        renderWoodleKeyboard();
+
+        setTimeout(
+            function() {
+
+                showPopup(
+                    "🌟 You got it!",
+                    "You found the secret word: " +
+                    woodleTarget +
+                    ". The forest is extremely impressed."
+                );
+
+            },
+            350
+        );
+
+        return;
+    }
+
+
+    /* -------------------------
+       LOSS
+    ------------------------- */
+
+    if (
+        woodleGuesses.length >= 6
+    ) {
+
+        woodleGameOver = true;
+
+        woodleCurrent = "";
+
+        renderWoodleBoard();
+        renderWoodleKeyboard();
+
+        setTimeout(
+            function() {
+
+                showPopup(
+                    "🌲 The forest wins.",
+                    "The secret word was " +
+                    woodleTarget +
+                    ". The trees are being smug about it."
+                );
+
+            },
+            350
+        );
+
+        return;
+    }
+
+
+    woodleCurrent = "";
+
+    renderWoodleBoard();
+    renderWoodleKeyboard();
+
+}
+
+
+/* -------------------------
+   REAL KEYBOARD SUPPORT
+------------------------- */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+         * Ignore keyboard input if
+         * the user is typing somewhere
+         * else on the page.
+         */
+
+        if (
+            event.target.tagName ===
+            "INPUT" ||
+            event.target.tagName ===
+            "TEXTAREA"
+        ) {
+            return;
+        }
+
+
+        /* LETTERS */
+
+        if (
+            /^[a-zA-Z]$/.test(
+                event.key
+            )
+        ) {
+
+            pressWoodleLetter(
+                event.key
+            );
+
+            return;
+        }
+
+
+        /* BACKSPACE */
+
+        if (
+            event.key ===
+            "Backspace"
+        ) {
+
+            event.preventDefault();
+
+            deleteWoodleLetter();
+
+            return;
+        }
+
+
+        /* ENTER */
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            event.preventDefault();
+
+            submitWoodle();
+
+        }
+
+    }
+);
 
 
 <!-- =========================
