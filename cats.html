@@ -808,6 +808,31 @@ h2 {
     }
 
 }
+    .mysteryTrait {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 10px;
+    margin: 5px 0;
+
+    border-radius: 9px;
+    background: rgba(255,255,255,0.05);
+}
+
+.mysteryTrait strong {
+    color: #e2d18e;
+}
+
+.mysteryItem {
+    opacity: 0.35;
+    transition: 0.2s ease;
+}
+
+.mysteryItem.found {
+    opacity: 1;
+    background: rgba(120,150,100,0.15);
+}
 </style>
 </head>
 
@@ -3797,11 +3822,143 @@ function showScene(sceneId) {
 }
 
 
+
 /* =========================================================
    START
    ========================================================= */
 
 showScene("start");
+    // =====================================================
+// MYSTERY TRAIL HUD BUTTONS
+// =====================================================
+
+const traitsButton = document.getElementById("mysteryTraitsButton");
+const bagButton = document.getElementById("mysteryBagButton");
+
+const traitsPanel = document.getElementById("mysteryTraitsPanel");
+const bagPanel = document.getElementById("mysteryBagPanel");
+
+
+// TRAITS BUTTON
+if (traitsButton && traitsPanel) {
+    traitsButton.addEventListener("click", () => {
+
+        bagPanel?.classList.remove("open");
+
+        updateTraitsPanel();
+
+        traitsPanel.classList.toggle("open");
+    });
+}
+
+
+// BAG BUTTON
+if (bagButton && bagPanel) {
+    bagButton.addEventListener("click", () => {
+
+        traitsPanel?.classList.remove("open");
+
+        updateBagPanel();
+
+        bagPanel.classList.toggle("open");
+    });
+}
+
+
+// Close panels when clicking outside them
+document.addEventListener("click", (event) => {
+
+    if (
+        !event.target.closest("#mysteryTraitsPanel") &&
+        !event.target.closest("#mysteryTraitsButton")
+    ) {
+        traitsPanel?.classList.remove("open");
+    }
+
+    if (
+        !event.target.closest("#mysteryBagPanel") &&
+        !event.target.closest("#mysteryBagButton")
+    ) {
+        bagPanel?.classList.remove("open");
+    }
+
+});
+
+
+// =====================================================
+// TRAITS DISPLAY
+// =====================================================
+
+function updateTraitsPanel() {
+
+    const box = document.getElementById("mysteryTraitsContent");
+
+    if (!box) return;
+
+    const traitNames = {
+        brave: "🦁 Brave",
+        kind: "💚 Kind",
+        clever: "🧠 Clever",
+        curious: "🔍 Curious",
+        chaotic: "🌪️ Chaotic",
+        cozy: "🛏️ Cozy"
+    };
+
+    let html = "";
+
+    Object.keys(traitNames).forEach(trait => {
+
+        const amount = traits[trait] || 0;
+
+        html += `
+            <div class="mysteryTrait">
+                <span>${traitNames[trait]}</span>
+                <strong>${amount}</strong>
+            </div>
+        `;
+    });
+
+    box.innerHTML = html;
+}
+
+
+// =====================================================
+// BAG DISPLAY
+// =====================================================
+
+function updateBagPanel() {
+
+    const items = document.querySelectorAll(
+        "#mysteryBagPanel .mysteryItem"
+    );
+
+    /*
+       For now this checks the game's existing progress
+       rather than creating a second inventory system.
+    */
+
+    const currentText = document.body.innerText;
+
+    const itemChecks = [
+        currentText.includes("mysterious note"),
+        currentText.includes("hand-drawn map"),
+        currentText.includes("cup of coffee"),
+        currentText.includes("biscuit"),
+        currentText.includes("tiny bell"),
+        currentText.includes("magical flower"),
+        currentText.includes("tiny hat")
+    ];
+
+    items.forEach((item, index) => {
+
+        if (itemChecks[index]) {
+            item.classList.add("found");
+        } else {
+            item.classList.remove("found");
+        }
+
+    });
+}
 
 </script>
 </script>
