@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mini Games 📰</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Georgia, serif;
+    text-align: center;
+
+    color: #24442b;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            #315c38 0%,
+            #173b28 45%,
+            #0c2519 100%
+        );
+
+    padding: 20px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+h1 {
+    margin: 10px 0 5px;
+
+    color: #f4e8b0;
+
+    font-size: clamp(32px, 7vw, 52px);
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.4);
+}
+
+.subtitle {
+    color: #dceccf;
+
+    margin: 0 auto 25px;
+
+    max-width: 600px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   GAME CARDS
+========================= */
+
+.games {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.gameCard {
+
+    background: rgba(255,255,255,.95);
+
+    border: 4px solid #6d8b4e;
+
+    border-radius: 24px;
+
+    padding: 25px;
+
+    margin: 25px auto;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.3);
+}
+
+.gameCard h2 {
+
+    color: #315c38;
+
+    margin-top: 0;
+
+    font-size: 30px;
+}
+
+.gameDescription {
+
+    color: #52664e;
+
+    margin-bottom: 20px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   FOREST WOODLE
+===================================================== */
+
+#woodle {
+
+    max-width: 500px;
+
+    margin: auto;
+}
+
+
+/* BOARD */
+
+#board {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 58px);
+
+    gap: 7px;
+
+    justify-content: center;
+
+    margin: 20px auto;
+}
+
+.tile {
+
+    width: 58px;
+
+    height: 58px;
+
+    border: 2px solid #a9b69e;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    background: #f7faf4;
+}
+
+
+/* CORRECT */
+
+.tile.correct {
+
+    background: #6b9b61;
+
+    color: white;
+
+    border-color: #6b9b61;
+}
+
+
+/* PRESENT */
+
+.tile.present {
+
+    background: #c8a84e;
+
+    color: white;
+
+    border-color: #c8a84e;
+}
+
+
+/* ABSENT */
+
+.tile.absent {
+
+    background: #68736a;
+
+    color: white;
+
+    border-color: #68736a;
+}
+
+
+#woodleMessage {
+
+    min-height: 28px;
+
+    font-weight: bold;
+
+    color: #315c38;
+}
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+#keyboard {
+
+    max-width: 470px;
+
+    margin: 15px auto 5px;
+}
+
+.keyboardRow {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin: 5px 0;
+}
+
+.key {
+
+    border: none;
+
+    border-radius: 6px;
+
+    min-width: 34px;
+
+    height: 43px;
+
+    padding: 0 7px;
+
+    background: #d9e2d1;
+
+    color: #24442b;
+
+    font-family: Georgia, serif;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.key:hover {
+
+    transform: translateY(-1px);
+}
+
+.key.correct {
+
+    background: #6b9b61;
+
+    color: white;
+}
+
+.key.present {
+
+    background: #c8a84e;
+
+    color: white;
+}
+
+.key.absent {
+
+    background: #68736a;
+
+    color: white;
+}
+
+
+/* =====================================================
+   CATNECTIONS
+===================================================== */
+
+#connections {
+
+    max-width: 700px;
+
+    margin: auto;
+}
+
+.connectionsGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin: 20px auto;
+}
+
+.connectionWord {
+
+    min-height: 70px;
+
+    border: 2px solid #a9b69e;
+
+    border-radius: 10px;
+
+    background: #f7faf4;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.connectionWord:hover {
+
+    background: #edf3e8;
+}
+
+.connectionWord.selected {
+
+    background: #315c38;
+
+    color: white;
+
+    border-color: #315c38;
+}
+
+
+/* SOLVED GROUPS */
+
+.connectionGroup {
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    margin: 8px 0;
+
+    font-weight: bold;
+}
+
+.connectionGroup small {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-weight: normal;
+}
+
+.yellow {
+    background: #f2dc78;
+}
+
+.green {
+    background: #91bd78;
+}
+
+.blue {
+    background: #91b9d1;
+}
+
+.purple {
+    background: #b59bc9;
+}
+
+
+#mistakes {
+
+    font-weight: bold;
+
+    margin: 10px;
+}
+
+#connectionsMessage {
+
+    min-height: 28px;
+
+    font-weight: bold;
+
+    color: #315c38;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.newGameButton,
+.backButton {
+
+    border: none;
+
+    border-radius: 22px;
+
+    padding: 11px 20px;
+
+    background: #d5b65a;
+
+    color: #243b27;
+
+    font-family: Georgia, serif;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    margin-top: 10px;
+}
+
+.newGameButton:hover,
+.backButton:hover {
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+#popup {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(5,20,10,.65);
+
+    z-index: 100;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.popupBox {
+
+    background: #fffdf4;
+
+    border: 4px solid #6d8b4e;
+
+    border-radius: 22px;
+
+    max-width: 420px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.4);
+}
+
+.popupBox h2 {
+
+    color: #315c38;
+
+    margin-top: 0;
+}
+
+.popupBox button {
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 10px 22px;
+
+    background: #d5b65a;
+
+    font-family: Georgia, serif;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .gameCard {
+        padding: 17px 10px;
+    }
+
+    #board {
+
+        grid-template-columns:
+            repeat(5, 52px);
+
+        gap: 6px;
+    }
+
+    .tile {
+
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 22px;
+    }
+
+    .key {
+
+        min-width: 27px;
+
+        height: 40px;
+
+        padding: 0 5px;
+
+        font-size: 12px;
+    }
+
+    .connectionsGrid {
+
+        gap: 5px;
+    }
+
+    .connectionWord {
+
+        min-height: 65px;
+
+        font-size: 12px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>
+📰 Mini Games
+</h1>
+
+
+<p class="subtitle">
+
+Take a little break from exploring the forest...
+
+<br>
+
+You have important games to play.
+
+Obviously.
+
+</p>
+
+
+
+<div class="games">
+
+
+<!-- =====================================================
+     FOREST WOODLE
+===================================================== -->
+
+<div class="gameCard">
+
+<h2>
+🌲 Forest Woodle
+</h2>
+
+<p class="gameDescription">
+
+Guess the secret five-letter word.
+
+<br>
+
+You have six tries.
+
+The forest is judging you.
+
+</p>
+
+
+<div id="woodle">
+
+
+<div id="board"></div>
+
+
+<p id="woodleMessage"></p>
+
+
+<div id="keyboard"></div>
+
+
+<button
+    class="newGameButton"
+    onclick="startWoodle()"
+>
+
+🌿 New Woodle
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CATNECTIONS
+===================================================== -->
+
+<div class="gameCard">
+
+<h2>
+🐾 Catnections
+</h2>
+
+<p class="gameDescription">
+
+Find four groups of four related words.
+
+<br>
+
+Choose carefully.
+
+The cats are watching.
+
+</p>
+
+
+<div id="connections">
+
+
+<div id="solvedGroups"></div>
+
+
+<div
+    id="connectionsGrid"
+    class="connectionsGrid"
+></div>
+
+
+<p id="mistakes">
+
+Mistakes remaining: 4
+
+</p>
+
+
+<p id="connectionsMessage"></p>
+
+
+<button
+    class="newGameButton"
+    onclick="startConnections()"
+>
+
+🐈 New Catnections
+
+</button>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button
+    class="backButton"
+    onclick="location.href='forest.html'"
+>
+
+🌲 Return to the Forest
+
+</button>
+
+
+
+<!-- =====================================================
+     POPUP
+===================================================== -->
+
+<div id="popup">
+
+<div class="popupBox">
+
+<h2 id="popupTitle"></h2>
+
+<p id="popupText"></p>
+
+<button onclick="closePopup()">
+
+Okay 🐾
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   FOREST WOODLE
+===================================================== */
+
+
+/*
+    YOUR WORD LIST
+
+    Add more five-letter words here
+    whenever you think of them.
+*/
+
+const woodleWords = [
+
+    "BALDY",
+    "STARS",
+    "PLANE",
+    "BEANS"
+
+];
+
+
+let targetWord = "";
+
+let previousWord = "";
+
+let currentRow = 0;
+
+let currentGuess = "";
+
+let woodleGameOver = false;
+
+
+
+/* CREATE BOARD */
+
+function createBoard() {
+
+    const board =
+        document.getElementById("board");
+
+    board.innerHTML = "";
+
+
+    for (
+        let row = 0;
+        row < 6;
+        row++
+    ) {
+
+        for (
+            let col = 0;
+            col < 5;
+            col++
+        ) {
+
+            const tile =
+                document.createElement("div");
+
+            tile.className = "tile";
+
+            tile.id =
+                `tile-${row}-${col}`;
+
+            board.appendChild(tile);
+
+        }
+
+    }
+
+}
+
+
+
+/* CHOOSE RANDOM WORD */
+
+function chooseWord() {
+
+    let availableWords =
+        woodleWords.filter(
+            word => word !== previousWord
+        );
+
+
+    if (
+        availableWords.length === 0
+    ) {
+
+        availableWords =
+            woodleWords;
+
+    }
+
+
+    const index =
+        Math.floor(
+            Math.random() *
+            availableWords.length
+        );
+
+
+    targetWord =
+        availableWords[index];
+
+
+    previousWord =
+        targetWord;
+
+}
+
+
+
+/* START GAME */
+
+function startWoodle() {
+
+    chooseWord();
+
+    currentRow = 0;
+
+    currentGuess = "";
+
+    woodleGameOver = false;
+
+
+    document
+        .getElementById("woodleMessage")
+        .innerText = "";
+
+
+    createBoard();
+
+    createKeyboard();
+
+}
+
+
+
+/* CREATE KEYBOARD */
+
+function createKeyboard() {
+
+    const keyboard =
+        document.getElementById("keyboard");
+
+    keyboard.innerHTML = "";
+
+
+    const rows = [
+
+        "QWERTYUIOP",
+
+        "ASDFGHJKL",
+
+        "ZXCVBNM"
+
+    ];
+
+
+    rows.forEach(function(row) {
+
+        const rowDiv =
+            document.createElement("div");
+
+        rowDiv.className =
+            "keyboardRow";
+
+
+        row.split("").forEach(
+            function(letter) {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "key";
+
+                button.innerText =
+                    letter;
+
+                button.dataset.letter =
+                    letter;
+
+
+                button.onclick =
+                    function() {
+
+                        enterLetter(letter);
+
+                    };
+
+
+                rowDiv.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        keyboard.appendChild(
+            rowDiv
+        );
+
+    });
+
+
+    const bottomRow =
+        document.createElement("div");
+
+    bottomRow.className =
+        "keyboardRow";
+
+
+    const enter =
+        document.createElement("button");
+
+    enter.className =
+        "key";
+
+    enter.innerText =
+        "ENTER";
+
+    enter.onclick =
+        submitGuess;
+
+
+    bottomRow.appendChild(
+        enter
+    );
+
+
+    const backspace =
+        document.createElement("button");
+
+    backspace.className =
+        "key";
+
+    backspace.innerText =
+        "⌫";
+
+    backspace.onclick =
+        deleteLetter;
+
+
+    bottomRow.appendChild(
+        backspace
+    );
+
+
+    keyboard.appendChild(
+        bottomRow
+    );
+
+}
+
+
+
+/* PHYSICAL KEYBOARD */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (woodleGameOver) {
+            return;
+        }
+
+
+        const key =
+            event.key.toUpperCase();
+
+
+        if (/^[A-Z]$/.test(key)) {
+
+            enterLetter(key);
+
+        }
+
+        else if (
+            event.key === "Enter"
+        ) {
+
+            submitGuess();
+
+        }
+
+        else if (
+            event.key === "Backspace"
+        ) {
+
+            deleteLetter();
+
+        }
+
+    }
+);
+
+
+
+/* ENTER LETTER */
+
+function enterLetter(letter) {
+
+    if (woodleGameOver) {
+        return;
+    }
+
+
+    if (
+        currentGuess.length >= 5
+    ) {
+
+        return;
+    }
+
+
+    currentGuess += letter;
+
+
+    updateCurrentRow();
+
+}
+
+
+
+/* DELETE LETTER */
+
+function deleteLetter() {
+
+    if (woodleGameOver) {
+        return;
+    }
+
+
+    currentGuess =
+        currentGuess.slice(0, -1);
+
+
+    updateCurrentRow();
+
+}
+
+
+
+/* UPDATE ROW */
+
+function updateCurrentRow() {
+
+    for (
+        let col = 0;
+        col < 5;
+        col++
+    ) {
+
+        const tile =
+            document.getElementById(
+                `tile-${currentRow}-${col}`
+            );
+
+
+        tile.innerText =
+            currentGuess[col] || "";
+
+    }
+
+}
+
+
+
+/* SUBMIT GUESS */
+
+function submitGuess() {
+
+    if (woodleGameOver) {
+        return;
+    }
+
+
+    if (
+        currentGuess.length !== 5
+    ) {
+
+        document
+            .getElementById(
+                "woodleMessage"
+            )
+            .innerText =
+            "🌱 You need five letters, little adventurer.";
+
+        return;
+
+    }
+
+
+    const guess =
+        currentGuess;
+
+
+    evaluateGuess(guess);
+
+
+    if (
+        guess === targetWord
+    ) {
+
+        woodleGameOver = true;
+
+
+        document
+            .getElementById(
+                "woodleMessage"
+            )
+            .innerText =
+            "🌲 You found the forest word!";
+
+
+        setTimeout(
+            function() {
+
+                showPopup(
+                    "🌲 Forest Woodle!",
+                    "You found the secret word. The forest is mildly impressed."
+                );
+
+            },
+            300
+        );
+
+
+        return;
+
+    }
+
+
+    currentRow++;
+
+    currentGuess = "";
+
+
+    if (
+        currentRow >= 6
+    ) {
+
+        woodleGameOver = true;
+
+
+        document
+            .getElementById(
+                "woodleMessage"
+            )
+            .innerText =
+            "🐾 The forest wins this round.";
+
+
+        setTimeout(
+            function() {
+
+                showPopup(
+                    "🌲 So close!",
+                    "The word was " +
+                    targetWord +
+                    ". Better luck next time, forest explorer."
+                );
+
+            },
+            300
+        );
+
+    }
+
+}
+
+
+
+/* EVALUATE GUESS */
+
+function evaluateGuess(guess) {
+
+    const remaining =
+        targetWord.split("");
+
+
+    const states = [
+
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent"
+
+    ];
+
+
+    /* CORRECT LETTERS */
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        if (
+            guess[i] === targetWord[i]
+        ) {
+
+            states[i] =
+                "correct";
+
+            remaining[i] =
+                null;
+
+        }
+
+    }
+
+
+    /* PRESENT LETTERS */
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        if (
+            states[i] === "correct"
+        ) {
+
+            continue;
+
+        }
+
+
+        const index =
+            remaining.indexOf(
+                guess[i]
+            );
+
+
+        if (
+            index !== -1
+        ) {
+
+            states[i] =
+                "present";
+
+            remaining[index] =
+                null;
+
+        }
+
+    }
+
+
+    /* APPLY TILE COLOURS */
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        const tile =
+            document.getElementById(
+                `tile-${currentRow}-${i}`
+            );
+
+
+        tile.classList.add(
+            states[i]
+        );
+
+    }
+
+
+    /* UPDATE KEYBOARD */
+
+    states.forEach(
+        function(state, index) {
+
+            const letter =
+                guess[index];
+
+
+            const key =
+                document.querySelector(
+                    `.key[data-letter="${letter}"]`
+                );
+
+
+            if (!key) {
+                return;
+            }
+
+
+            if (
+                state === "correct"
+            ) {
+
+                key.classList.remove(
+                    "present",
+                    "absent"
+                );
+
+                key.classList.add(
+                    "correct"
+                );
+
+            }
+
+            else if (
+                state === "present" &&
+                !key.classList.contains(
+                    "correct"
+                )
+            ) {
+
+                key.classList.remove(
+                    "absent"
+                );
+
+                key.classList.add(
+                    "present"
+                );
+
+            }
+
+            else if (
+                state === "absent" &&
+                !key.classList.contains(
+                    "correct"
+                ) &&
+                !key.classList.contains(
+                    "present"
+                )
+            ) {
+
+                key.classList.add(
+                    "absent"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* START WOODLE */
+
+startWoodle();
+
+
+
+/* =====================================================
+   CATNECTIONS
+===================================================== */
+
+
+/*
+    Four groups of four.
+*/
+
+const connectionGroups = [
+
+    {
+        name: "Things found in a forest",
+
+        className: "yellow",
+
+        words: [
+            "MUSHROOM",
+            "FERN",
+            "PINECONE",
+            "ACORN"
+        ]
+    },
+
+
+    {
+        name: "Things that fly",
+
+        className: "green",
+
+        words: [
+            "BEE",
+            "PLANE",
+            "BUTTERFLY",
+            "KITE"
+        ]
+    },
+
+
+    {
+        name: "Cat-related words",
+
+        className: "blue",
+
+        words: [
+            "PAW",
+            "WHISKER",
+            "PURR",
+            "TAIL"
+        ]
+    },
+
+
+    {
+        name: "Birthday-related things",
+
+        className: "purple",
+
+        words: [
+            "CAKE",
+            "CANDLE",
+            "BALLOON",
+            "PRESENT"
+        ]
+    }
+
+];
+
+
+let connectionWords = [];
+
+let selectedWords = [];
+
+let solvedGroups = [];
+
+let mistakes = 4;
+
+
+
+/* START CONNECTIONS */
+
+function startConnections() {
+
+    selectedWords = [];
+
+    solvedGroups = [];
+
+    mistakes = 4;
+
+
+    document
+        .getElementById("mistakes")
+        .innerText =
+        "Mistakes remaining: 4";
+
+
+    document
+        .getElementById(
+            "connectionsMessage"
+        )
+        .innerText = "";
+
+
+    document
+        .getElementById(
+            "solvedGroups"
+        )
+        .innerHTML = "";
+
+
+    connectionWords = [];
+
+
+    connectionGroups.forEach(
+        function(group) {
+
+            group.words.forEach(
+                function(word) {
+
+                    connectionWords.push({
+
+                        word: word,
+
+                        group: group
+
+                    });
+
+                }
+            );
+
+        }
+    );
+
+
+    shuffleArray(
+        connectionWords
+    );
+
+
+    renderConnections();
+
+}
+
+
+
+/* RENDER CONNECTIONS */
+
+function renderConnections() {
+
+    const grid =
+        document.getElementById(
+            "connectionsGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    connectionWords.forEach(
+        function(item) {
+
+            if (
+                solvedGroups.includes(
+                    item.group.name
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const button =
+                document.createElement(
+                    "div"
+                );
+
+
+            button.className =
+                "connectionWord";
+
+
+            button.innerText =
+                item.word;
+
+
+            button.onclick =
+                function() {
+
+                    toggleConnectionWord(
+                        button,
+                        item.word
+                    );
+
+                };
+
+
+            grid.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+
+/* SELECT WORD */
+
+function toggleConnectionWord(
+    button,
+    word
+) {
+
+    if (
+        selectedWords.includes(word)
+    ) {
+
+        selectedWords =
+            selectedWords.filter(
+                item =>
+                    item !== word
+            );
+
+
+        button.classList.remove(
+            "selected"
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        selectedWords.length >= 4
+    ) {
+
+        return;
+
+    }
+
+
+    selectedWords.push(word);
+
+
+    button.classList.add(
+        "selected"
+    );
+
+
+    if (
+        selectedWords.length === 4
+    ) {
+
+        setTimeout(
+            checkConnectionGroup,
+            250
+        );
+
+    }
+
+}
+
+
+
+/* CHECK GROUP */
+
+function checkConnectionGroup() {
+
+    let matchingGroup =
+        null;
+
+
+    for (
+        const group of connectionGroups
+    ) {
+
+        const allMatch =
+            selectedWords.every(
+                function(word) {
+
+                    return group.words.includes(
+                        word
+                    );
+
+                }
+            );
+
+
+        if (
+            allMatch &&
+            !solvedGroups.includes(
+                group.name
+            )
+        ) {
+
+            matchingGroup =
+                group;
+
+            break;
+
+        }
+
+    }
+
+
+    if (matchingGroup) {
+
+        solveConnectionGroup(
+            matchingGroup
+        );
+
+    }
+
+    else {
+
+        mistakes--;
+
+
+        document
+            .getElementById(
+                "mistakes"
+            )
+            .innerText =
+            "Mistakes remaining: " +
+            mistakes;
+
+
+        document
+            .getElementById(
+                "connectionsMessage"
+            )
+            .innerText =
+            "🐾 Not quite. The cats remain unconvinced.";
+
+
+        clearSelections();
+
+
+        if (
+            mistakes <= 0
+        ) {
+
+            document
+                .getElementById(
+                    "connectionsMessage"
+                )
+                .innerText =
+                "🐈 The cats have defeated you. Try again!";
+
+        }
+
+    }
+
+}
+
+
+
+/* SOLVE GROUP */
+
+function solveConnectionGroup(
+    group
+) {
+
+    solvedGroups.push(
+        group.name
+    );
+
+
+    const solvedBox =
+        document.getElementById(
+            "solvedGroups"
+        );
+
+
+    const groupBox =
+        document.createElement(
+            "div"
+        );
+
+
+    groupBox.className =
+        "connectionGroup " +
+        group.className;
+
+
+    groupBox.innerHTML =
+        group.name +
+        "<small>" +
+        group.words.join(" • ") +
+        "</small>";
+
+
+    solvedBox.appendChild(
+        groupBox
+    );
+
+
+    selectedWords = [];
+
+
+    renderConnections();
+
+
+    if (
+        solvedGroups.length === 4
+    ) {
+
+        document
+            .getElementById(
+                "connectionsMessage"
+            )
+            .innerText =
+            "🎉 You found all four groups! The cats are impressed.";
+
+
+        showPopup(
+            "🐾 Catnections Complete!",
+            "You successfully untangled the forest's suspicious collection of words."
+        );
+
+    }
+
+}
+
+
+
+/* CLEAR SELECTIONS */
+
+function clearSelections() {
+
+    selectedWords = [];
+
+
+    document
+        .querySelectorAll(
+            ".connectionWord.selected"
+        )
+        .forEach(
+            function(button) {
+
+                button.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
+}
+
+
+
+/* SHUFFLE */
+
+function shuffleArray(array) {
+
+    for (
+        let i = array.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            array[i],
+            array[j]
+        ] = [
+            array[j],
+            array[i]
+        ];
+
+    }
+
+}
+
+
+
+/* START CATNECTIONS */
+
+startConnections();
+
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+function showPopup(
+    title,
+    text
+) {
+
+    document
+        .getElementById(
+            "popupTitle"
+        )
+        .innerText =
+        title;
+
+
+    document
+        .getElementById(
+            "popupText"
+        )
+        .innerText =
+        text;
+
+
+    document
+        .getElementById(
+            "popup"
+        )
+        .style.display =
+        "flex";
+
+}
+
+
+function closePopup() {
+
+    document
+        .getElementById(
+            "popup"
+        )
+        .style.display =
+        "none";
+
+}
+
+</script>
+
+</body>
+
+</html>
