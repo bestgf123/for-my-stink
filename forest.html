@@ -714,6 +714,124 @@ body.dayMode .fireflies {
         right: 12%;
     }
 }
+    /* -------------------------
+   FINAL GIFT
+------------------------- */
+
+.final {
+    cursor: pointer;
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease,
+        background .4s ease,
+        border-color .4s ease;
+}
+
+.final.locked {
+    filter: grayscale(.35);
+    opacity: .75;
+}
+
+.final.locked:hover {
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+}
+
+.final.unlocked {
+    background:
+        linear-gradient(
+            135deg,
+            #765a32,
+            #9b783d,
+            #604525
+        );
+
+    border-color: #f6df91;
+
+    box-shadow:
+        0 0 15px rgba(246,223,145,.35),
+        0 15px 35px rgba(0,0,0,.45);
+}
+
+.final.unlocked:hover {
+    transform:
+        translateX(-50%)
+        scale(1.1)
+        rotate(0deg)
+        translateY(-6px);
+
+    box-shadow:
+        0 0 30px rgba(246,223,145,.55),
+        0 20px 45px rgba(0,0,0,.5);
+}
+
+#finalGiftIcon {
+    transition: .4s ease;
+}
+
+.final.unlocked #finalGiftIcon {
+    animation:
+        giftGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes giftGlow {
+
+    0%,100% {
+        transform: scale(1);
+        filter:
+            drop-shadow(
+                0 0 3px rgba(246,223,145,.4)
+            );
+    }
+
+    50% {
+        transform: scale(1.15) rotate(-4deg);
+        filter:
+            drop-shadow(
+                0 0 14px rgba(246,223,145,.9)
+            );
+    }
+}
+
+.final.unlocked #finalGiftLock {
+    color: #f6df91;
+}
+
+
+/* Little celebration */
+
+.forestCompleteFlash {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(246,223,145,.18),
+            transparent 65%
+        );
+
+    animation:
+        forestFlash 1.5s ease-out forwards;
+}
+
+@keyframes forestFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -888,20 +1006,27 @@ body.dayMode .fireflies {
 </a>
 
     <!-- FINAL -->
-    <a
-        href="secret.html"
-        class="destination final">
-        <div class="icon">🎁</div>
-        <h2>
-            The Final Gift
-        </h2>
-        <p>
-            Something special waits beyond this point.
-        </p>
-        <p>
-            🔒
-        </p>
-    </a>
+    <div
+    class="destination final"
+    id="finalGift"
+    role="button"
+    tabindex="0">
+
+    <div class="icon" id="finalGiftIcon">🎁</div>
+
+    <h2>
+        The Final Gift
+    </h2>
+
+    <p id="finalGiftText">
+        Something special waits beyond this point.
+    </p>
+
+    <p id="finalGiftLock">
+        🔒
+    </p>
+
+</div>
     <!-- FLOWERS -->
     <div class="flower f1">🌼</div>
     <div class="flower f2">🌸</div>
@@ -1027,6 +1152,156 @@ const popup =
     document.getElementById("discoveryPopup");
 let discovered =
     new Set();
+    /* -------------------------
+   FINAL GIFT TRAIL
+------------------------- */
+
+const finalGift =
+    document.getElementById("finalGift");
+
+const finalGiftIcon =
+    document.getElementById("finalGiftIcon");
+
+const finalGiftText =
+    document.getElementById("finalGiftText");
+
+const finalGiftLock =
+    document.getElementById("finalGiftLock");
+
+let forestCompleted = false;
+
+
+/* Load previous discoveries */
+
+try {
+
+    const saved =
+        JSON.parse(
+            localStorage.getItem(
+                "birthdayForestDiscoveries"
+            )
+        );
+
+    if (Array.isArray(saved)) {
+
+        saved.forEach(function(index) {
+            discovered.add(index);
+        });
+
+    }
+
+} catch (error) {
+
+    console.log(
+        "No previous forest discoveries found."
+    );
+
+}
+
+
+/* Update the counter when the page loads */
+
+counter.textContent =
+    "🌿 Secrets discovered: " +
+    discovered.size +
+    " / 8";
+
+
+/* Mark previously discovered objects */
+
+discoveries.forEach(
+    function(item, index) {
+
+        if (discovered.has(index)) {
+
+            item.classList.add("found");
+
+        }
+
+    }
+);
+
+
+/* Save progress */
+
+function saveForestProgress() {
+
+    localStorage.setItem(
+        "birthdayForestDiscoveries",
+        JSON.stringify(
+            Array.from(discovered)
+        )
+    );
+
+}
+
+
+/* Unlock the final gift */
+
+function unlockFinalGift() {
+
+    if (forestCompleted) {
+        return;
+    }
+
+    forestCompleted = true;
+
+    finalGift.classList.remove(
+        "locked"
+    );
+
+    finalGift.classList.add(
+        "unlocked"
+    );
+
+    finalGiftIcon.textContent =
+        "✨🎁";
+
+    finalGiftText.textContent =
+        "You found every secret. The final trail is open.";
+
+    finalGiftLock.textContent =
+        "✨ UNLOCKED ✨";
+
+
+    /* Little screen celebration */
+
+    const flash =
+        document.createElement("div");
+
+    flash.className =
+        "forestCompleteFlash";
+
+    document.body.appendChild(
+        flash
+    );
+
+    setTimeout(
+        function() {
+            flash.remove();
+        },
+        1500
+    );
+
+
+    showDiscoveryMessage(
+        "✨ You found every secret in the forest. The Final Gift is waiting..."
+    );
+
+}
+
+
+/* Check progress */
+
+function checkFinalGift() {
+
+    if (discovered.size >= 8) {
+
+        unlockFinalGift();
+
+    }
+
+}
 function showDiscoveryMessage(message) {
     popup.textContent = message;
     popup.classList.add("show");
@@ -1053,16 +1328,24 @@ function completeForest() {
     );
 }
 function discoverItem(item, index) {
-    if (
-        !discovered.has(index)
-    ) {
+
+    if (!discovered.has(index)) {
+
         discovered.add(index);
+
         item.classList.add("found");
+
         counter.textContent =
             "🌿 Secrets discovered: " +
             discovered.size +
             " / 8";
+
+        saveForestProgress();
+
+        checkFinalGift();
+
     }
+
     showDiscoveryMessage(
         item.dataset.message
     );
@@ -1174,6 +1457,77 @@ setInterval(
     },
     18000
 );
+    /* -------------------------
+   FINAL GIFT CLICK
+------------------------- */
+
+function openFinalGift() {
+
+    if (!forestCompleted) {
+
+        showDiscoveryMessage(
+            "🔒 The Final Gift is still locked. Something is hidden in the forest..."
+        );
+
+        return;
+
+    }
+
+    showDiscoveryMessage(
+        "✨ The final trail has opened..."
+    );
+
+    setTimeout(
+        function() {
+
+            window.location.href =
+                "secret.html";
+
+        },
+        900
+    );
+
+}
+
+
+finalGift.addEventListener(
+    "click",
+    openFinalGift
+);
+
+
+finalGift.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
+
+            event.preventDefault();
+
+            openFinalGift();
+
+        }
+
+    }
+);
+
+
+/* Restore the final gift state */
+
+if (discovered.size >= 8) {
+
+    unlockFinalGift();
+
+} else {
+
+    finalGift.classList.add(
+        "locked"
+    );
+
+}
 </script>
 </body>
 </html>
