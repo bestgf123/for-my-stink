@@ -16,8 +16,15 @@ body {
     min-height: 100vh;
     font-family: Georgia, serif;
     color: #eee9d8;
+
     background:
-        radial-gradient(circle at top, #294b38 0%, #132b20 42%, #07150f 100%);
+        radial-gradient(
+            circle at top,
+            #294b38 0%,
+            #132b20 45%,
+            #07150f 100%
+        );
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,20 +35,24 @@ body {
     position: relative;
     width: min(900px, 100%);
     min-height: 650px;
+
     overflow: hidden;
+
     border: 3px solid #607b55;
     border-radius: 30px;
-    box-shadow: 0 15px 45px rgba(0,0,0,.45);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.45);
+
     background: #132b20;
 }
 
-/* Decorative background layer.
-   IMPORTANT: it cannot block clicks. */
 #background {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
+
     transition: background .5s ease;
 }
 
@@ -49,11 +60,24 @@ body {
     content: "";
     position: absolute;
     inset: 0;
+
     background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.08) 0 2px, transparent 3px),
-        radial-gradient(circle at 75% 30%, rgba(255,255,255,.06) 0 2px, transparent 3px),
-        radial-gradient(circle at 45% 75%, rgba(255,255,255,.05) 0 2px, transparent 3px);
-    background-size: 150px 130px, 210px 170px, 190px 160px;
+        radial-gradient(circle at 15% 20%,
+            rgba(255,255,255,.08) 0 2px,
+            transparent 3px),
+
+        radial-gradient(circle at 75% 30%,
+            rgba(255,255,255,.06) 0 2px,
+            transparent 3px),
+
+        radial-gradient(circle at 45% 75%,
+            rgba(255,255,255,.05) 0 2px,
+            transparent 3px);
+
+    background-size:
+        150px 130px,
+        210px 170px,
+        190px 160px;
 }
 
 .scene-dawn {
@@ -68,7 +92,12 @@ body {
 
 .scene-bedroom {
     background:
-        radial-gradient(circle at 50% 25%, #7d6b56 0%, #433b34 35%, #171916 100%);
+        radial-gradient(
+            circle at 50% 25%,
+            #7d6b56 0%,
+            #433b34 35%,
+            #171916 100%
+        );
 }
 
 .scene-cottage {
@@ -93,29 +122,52 @@ body {
 
 .scene-deep {
     background:
-        radial-gradient(circle at 50% 35%, #31543e 0%, #12271b 55%, #06100a 100%);
-}
-
-.scene-swamp {
-    background:
-        radial-gradient(circle at 60% 30%, #52643a 0%, #27351e 45%, #10170d 100%);
-}
-
-.scene-witch {
-    background:
-        radial-gradient(circle at 50% 25%, #66526e 0%, #30253d 45%, #111018 100%);
+        radial-gradient(
+            circle at 50% 35%,
+            #31543e 0%,
+            #12271b 55%,
+            #06100a 100%
+        );
 }
 
 .scene-flower {
     background:
-        radial-gradient(circle at 50% 25%, #71634e 0%, #304a35 48%, #101a12 100%);
+        radial-gradient(
+            circle at 50% 25%,
+            #71634e 0%,
+            #304a35 48%,
+            #101a12 100%
+        );
+}
+
+.scene-witch {
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #66526e 0%,
+            #30253d 45%,
+            #111018 100%
+        );
+}
+
+.scene-swamp {
+    background:
+        radial-gradient(
+            circle at 60% 30%,
+            #52643a 0%,
+            #27351e 45%,
+            #10170d 100%
+        );
 }
 
 #content {
     position: relative;
     z-index: 10;
+
     min-height: 650px;
+
     padding: 45px 35px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,7 +176,9 @@ body {
 
 .chapter {
     margin-bottom: 10px;
+
     color: #b8c99d;
+
     font-size: 14px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -133,51 +187,72 @@ body {
 .icon {
     font-size: 75px;
     margin-bottom: 10px;
-    filter: drop-shadow(0 5px 8px rgba(0,0,0,.3));
+
+    filter:
+        drop-shadow(0 5px 8px rgba(0,0,0,.3));
 }
 
 h1 {
     margin: 0 0 15px;
+
     text-align: center;
+
     color: #e3d39a;
-    font-size: clamp(30px, 6vw, 52px);
+
+    font-size:
+        clamp(30px, 6vw, 52px);
 }
 
 h2 {
     margin: 0 0 20px;
+
     color: #d5c38c;
+
     font-size: 28px;
     text-align: center;
 }
 
 .story {
     width: min(680px, 100%);
-    margin: 0 auto 30px;
+
+    margin:
+        0 auto 30px;
+
     font-size: 18px;
     line-height: 1.75;
+
     text-align: center;
+
     color: #eee9d8;
 }
 
 .choices {
     width: min(650px, 100%);
+
     display: flex;
     flex-direction: column;
+
     gap: 13px;
 }
 
 .choice {
     position: relative;
     z-index: 20;
+
     pointer-events: auto;
 
     width: 100%;
+
     padding: 16px 20px;
 
-    border: 2px solid #6c825c;
+    border:
+        2px solid #6c825c;
+
     border-radius: 16px;
 
-    background: rgba(25, 43, 31, .92);
+    background:
+        rgba(25,43,31,.92);
+
     color: #f0ead8;
 
     font-family: Georgia, serif;
@@ -185,6 +260,7 @@ h2 {
     line-height: 1.4;
 
     cursor: pointer;
+
     transition:
         transform .15s ease,
         background .15s ease,
@@ -193,7 +269,10 @@ h2 {
 
 .choice:hover {
     transform: translateY(-2px);
-    background: rgba(56, 79, 53, .98);
+
+    background:
+        rgba(56,79,53,.98);
+
     border-color: #a5b87e;
 }
 
@@ -203,6 +282,7 @@ h2 {
 
 .ending {
     width: min(650px, 100%);
+
     text-align: center;
 }
 
@@ -212,30 +292,43 @@ h2 {
 }
 
 .ending h1 {
-    font-size: clamp(28px, 6vw, 48px);
+    font-size:
+        clamp(28px, 6vw, 48px);
 }
 
 .ending button {
     position: relative;
     z-index: 20;
-    margin-top: 10px;
+
+    margin-top: 20px;
+
     padding: 13px 26px;
+
     border: none;
     border-radius: 25px;
+
     background: #d2b86c;
+
     color: #20291e;
+
     font-family: Georgia, serif;
     font-weight: bold;
     font-size: 16px;
+
     cursor: pointer;
 }
 
 #travelerResult {
     margin-top: 20px;
     padding: 20px;
-    border: 2px solid #657d59;
+
+    border:
+        2px solid #657d59;
+
     border-radius: 18px;
-    background: rgba(13, 25, 17, .65);
+
+    background:
+        rgba(13,25,17,.65);
 }
 
 #travelerResult strong {
@@ -245,12 +338,16 @@ h2 {
 
 .back {
     position: fixed;
+
     bottom: 15px;
     left: 15px;
+
     z-index: 100;
 
     color: #cbd6b5;
+
     text-decoration: none;
+
     font-size: 14px;
 }
 
@@ -259,18 +356,23 @@ h2 {
 }
 
 @media (max-width: 600px) {
+
     body {
         padding: 10px;
         align-items: flex-start;
     }
 
     #game {
-        min-height: calc(100vh - 20px);
+        min-height:
+            calc(100vh - 20px);
     }
 
     #content {
-        min-height: calc(100vh - 20px);
-        padding: 35px 18px 65px;
+        min-height:
+            calc(100vh - 20px);
+
+        padding:
+            35px 18px 65px;
     }
 
     .icon {
@@ -296,9 +398,7 @@ h2 {
 
     <div id="background" class="scene-dawn"></div>
 
-    <div id="content">
-        <!-- Story gets inserted here -->
-    </div>
+    <div id="content"></div>
 
 </div>
 
@@ -307,18 +407,21 @@ h2 {
 </a>
 
 <script>
-const content = document.getElementById("content");
-const background = document.getElementById("background");
 
-/*
-    Each choice has its OWN destination.
+/* =========================================================
+   MYSTERY TRAIL
+   ========================================================= */
 
-    So:
-    choice A -> chapter A
-    choice B -> chapter B
+const content =
+    document.getElementById("content");
 
-    They do not secretly merge back into the same chapter.
-*/
+const background =
+    document.getElementById("background");
+
+
+/* =========================================================
+   TRAVELER TRAITS
+   ========================================================= */
 
 let traits = {
     brave: 0,
@@ -329,1407 +432,2674 @@ let traits = {
     cozy: 0
 };
 
+
+function addTrait(trait) {
+
+    if (
+        trait &&
+        Object.prototype.hasOwnProperty.call(traits, trait)
+    ) {
+        traits[trait]++;
+    }
+}
+
+
+/* =========================================================
+   STORY
+   ========================================================= */
+
 const scenes = {
 
+    /* -----------------------------------------------------
+       CHAPTER ONE
+       ----------------------------------------------------- */
+
     start: {
+
         chapter: "Chapter One",
+
         icon: "🐾",
+
         title: "You Wake Up",
+
         background: "scene-dawn",
 
         text: `
-            You wake up as a very small creature in a very large forest.
+            You wake up as a very small creature in a very
+            large forest.
             <br><br>
+
             You don't remember how you got here.
             <br><br>
+
+            Your tiny bedroom is quiet.
+            <br><br>
+
             Outside, something rustles in the trees.
-            <br>
-            Somewhere in the distance, a bird makes a noise that sounds suspiciously like laughing.
+            <br><br>
+
+            You have a feeling that today might be important.
         `,
 
         choices: [
+
             {
                 text: "🌿 Yawn and have a stretch",
                 next: "stretch",
                 trait: "cozy"
             },
+
             {
                 text: "🛏️ Get back into bed for a lil",
                 next: "napEnding",
                 trait: "cozy"
             },
+
             {
                 text: "👀 Peek out the window",
                 next: "window",
                 trait: "curious"
             }
+
         ]
     },
 
+
+    /* -----------------------------------------------------
+       STRETCH
+       ----------------------------------------------------- */
+
     stretch: {
+
         chapter: "Chapter Two",
+
         icon: "🐈",
+
         title: "A Very Important Stretch",
+
         background: "scene-bedroom",
 
         text: `
             You stretch your tiny legs.
             <br><br>
+
             You stretch your back.
             <br><br>
+
             You stretch one paw dramatically toward the ceiling.
             <br><br>
+
             Honestly, you're feeling pretty powerful now.
+            <br><br>
+
+            A knock suddenly comes from the front door.
         `,
 
         choices: [
+
             {
-                text: "🚪 Investigate the noise outside",
+                text: "🚪 Go and answer the door",
                 next: "door",
                 trait: "curious"
             },
+
             {
-                text: "☕ Make yourself some forest coffee",
-                next: "coffee",
-                trait: "cozy"
+                text: "👂 Listen quietly before opening it",
+                next: "listenDoor",
+                trait: "clever"
             }
+
         ]
     },
 
+
+    /* -----------------------------------------------------
+       WINDOW
+       ----------------------------------------------------- */
+
     window: {
+
         chapter: "Chapter Two",
+
         icon: "🌲",
+
         title: "Something Outside",
+
         background: "scene-bedroom",
 
         text: `
             You creep toward the window.
             <br><br>
-            Through the trees, you spot a strange little figure carrying a walking stick.
+
+            Through the trees, you spot a strange little
+            traveller carrying a walking stick.
             <br><br>
+
             They stop.
             <br><br>
+
             They look directly at your window.
             <br><br>
+
             Then they wave.
         `,
 
         choices: [
+
             {
                 text: "👋 Wave back",
-                next: "visitorFriendly",
+                next: "windowWave",
                 trait: "kind"
             },
+
             {
                 text: "🫣 Hide behind the curtains",
-                next: "visitorHide",
+                next: "windowHide",
                 trait: "clever"
             }
+
         ]
     },
 
-    door: {
+
+    /* -----------------------------------------------------
+       LISTENING AT THE DOOR
+       ----------------------------------------------------- */
+
+    listenDoor: {
+
         chapter: "Chapter Three",
+
+        icon: "👂",
+
+        title: "Who Is There?",
+
+        background: "scene-bedroom",
+
+        text: `
+            You press your ear against the door.
+            <br><br>
+
+            You hear someone outside sigh.
+            <br><br>
+
+            Then they knock again.
+            <br><br>
+
+            “Hello?” a voice calls.
+            <br><br>
+
+            They sound tired rather than threatening.
+        `,
+
+        choices: [
+
+            {
+                text: "🚪 Open the door",
+                next: "door",
+                trait: "brave"
+            },
+
+            {
+                text: "🪟 Look through the window again",
+                next: "secondLook",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       DOOR
+       ----------------------------------------------------- */
+
+    door: {
+
+        chapter: "Chapter Four",
+
         icon: "🚪",
+
         title: "The Visitor",
+
         background: "scene-cottage",
 
         text: `
             You open the door.
             <br><br>
-            The mysterious traveller is standing there.
+
+            The traveller is standing there with a walking
+            stick, muddy boots and a very worried expression.
             <br><br>
-            They look tired, muddy, and slightly concerned.
+
+            “Sorry to bother you,” they say.
             <br><br>
-            “I need help,” they say.
+
+            “But I think the forest needs your help.”
         `,
 
         choices: [
+
             {
                 text: "☕ Invite them in for coffee",
                 next: "coffeeVisitor",
                 trait: "kind"
             },
+
             {
-                text: "😾 Yell at them for disturbing your sleep",
-                next: "yellVisitor",
-                trait: "chaotic"
+                text: "😾 Ask why they are disturbing you",
+                next: "askVisitor",
+                trait: "curious"
+            },
+
+            {
+                text: "🏃 Tell them you'll help immediately",
+                next: "eagerMission",
+                trait: "brave"
             }
+
         ]
     },
 
-    coffee: {
+
+    /* -----------------------------------------------------
+       WINDOW WAVE
+       ----------------------------------------------------- */
+
+    windowWave: {
+
         chapter: "Chapter Three",
-        icon: "☕",
-        title: "Forest Coffee",
-        background: "scene-cottage",
+
+        icon: "👋",
+
+        title: "A Friendly Wave",
+
+        background: "scene-bedroom",
 
         text: `
-            You make a cup of coffee.
+            You wave back.
             <br><br>
-            It tastes mostly like wet leaves.
+
+            The traveller smiles and points toward your
+            front door.
             <br><br>
-            Still, it wakes you up.
+
+            A moment later, there is a gentle knock.
             <br><br>
-            Unfortunately, the smell attracts a traveller to your door.
+
+            At least they seem friendly.
         `,
 
         choices: [
+
             {
-                text: "🚪 Open the door",
-                next: "coffeeVisitor",
+                text: "🚪 Go answer the door",
+                next: "door",
                 trait: "kind"
             },
+
             {
-                text: "🫖 Pretend you're not home",
-                next: "pretendHome",
-                trait: "clever"
+                text: "☕ Make some coffee first",
+                next: "coffee",
+                trait: "cozy"
             }
+
         ]
     },
 
-    visitorFriendly: {
+
+    /* -----------------------------------------------------
+       WINDOW HIDE
+       ----------------------------------------------------- */
+
+    windowHide: {
+
         chapter: "Chapter Three",
-        icon: "👋",
-        title: "A Friendly Wave",
-        background: "scene-cottage",
 
-        text: `
-            The traveller smiles.
-            <br><br>
-            They walk toward your cottage.
-            <br><br>
-            “There is a problem in the forest,” they explain.
-            <br><br>
-            A magical flower is needed to help save something very important.
-        `,
+        icon: "🫣",
 
-        choices: [
-            {
-                text: "🌼 Ask where the flower is",
-                next: "mission",
-                trait: "curious"
-            },
-            {
-                text: "🧭 Ask what could go wrong",
-                next: "missionCautious",
-                trait: "clever"
-            }
-        ]
-    },
-
-    visitorHide: {
-        chapter: "Chapter Three",
-        icon: "🪟",
         title: "Behind the Curtain",
-        background: "scene-cottage",
+
+        background: "scene-bedroom",
 
         text: `
-            You hide.
+            You hide behind the curtain.
             <br><br>
+
             The traveller waits.
             <br><br>
-            Five seconds pass.
+
+            You peek out.
             <br><br>
-            Ten seconds.
+
+            They look toward your cottage and leave a small
+            folded note beside the door.
             <br><br>
-            Eventually they sigh and leave a note by the door.
-            <br><br>
-            “The forest needs you.”
+
+            Then they walk away.
         `,
 
         choices: [
+
             {
-                text: "📜 Read the note",
-                next: "mission",
+                text: "📜 Go outside and pick up the note",
+                next: "readNote",
                 trait: "curious"
             },
+
             {
-                text: "🏃 Follow the traveller",
+                text: "👣 Follow the traveller from a distance",
+                next: "followTraveller",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       SECOND LOOK
+       ----------------------------------------------------- */
+
+    secondLook: {
+
+        chapter: "Chapter Three",
+
+        icon: "🔍",
+
+        title: "A Closer Look",
+
+        background: "scene-bedroom",
+
+        text: `
+            You peek through the window again.
+            <br><br>
+
+            The traveller is still there.
+            <br><br>
+
+            They have placed a folded note on the doorstep.
+            <br><br>
+
+            Then they begin walking away down the forest path.
+        `,
+
+        choices: [
+
+            {
+                text: "📜 Go read the note",
+                next: "readNote",
+                trait: "curious"
+            },
+
+            {
+                text: "👣 Follow them instead",
                 next: "followTraveller",
                 trait: "brave"
             }
+
         ]
     },
 
-    coffeeVisitor: {
+
+    /* -----------------------------------------------------
+       COFFEE
+       ----------------------------------------------------- */
+
+    coffee: {
+
         chapter: "Chapter Four",
+
         icon: "☕",
-        title: "The Mission",
+
+        title: "Forest Coffee",
+
         background: "scene-cottage",
 
         text: `
-            You give the traveller a cup of coffee.
+            You decide that nobody should begin an adventure
+            before coffee.
             <br><br>
-            They take one sip and stare into the middle distance.
+
+            You make yourself a tiny cup.
             <br><br>
-            “That's... very strong.”
+
+            It tastes mostly like wet leaves.
             <br><br>
-            Then they explain the mission.
+
+            You make another cup.
             <br><br>
-            A magical flower is growing deep in the forest.
-            <br>
-            It must be taken to a kind witch before sunset.
+
+            When you finally open the door, the traveller is
+            still waiting outside.
         `,
 
         choices: [
+
             {
-                text: "🌼 Agree to find the flower",
-                next: "mission",
-                trait: "brave"
+                text: "☕ Offer them a cup",
+                next: "coffeeVisitor",
+                trait: "kind"
             },
+
             {
-                text: "❓ Ask why the witch needs it",
-                next: "witchQuestion",
+                text: "🚪 Ask what is going on",
+                next: "askVisitor",
                 trait: "curious"
             }
+
         ]
     },
 
-    yellVisitor: {
-        chapter: "Chapter Four",
-        icon: "😾",
-        title: "An Awkward Introduction",
+
+    /* -----------------------------------------------------
+       COFFEE VISITOR
+       ----------------------------------------------------- */
+
+    coffeeVisitor: {
+
+        chapter: "Chapter Five",
+
+        icon: "☕",
+
+        title: "Coffee and a Confession",
+
         background: "scene-cottage",
 
         text: `
-            You yell.
+            You invite the traveller inside and give them a cup
+            of coffee.
             <br><br>
-            The traveller blinks.
+
+            They take one sip.
             <br><br>
-            “Fair enough,” they say.
+
+            They stare into the distance.
             <br><br>
-            Then they quietly explain that the forest is in danger.
+
+            “That's... very strong.”
             <br><br>
-            There is one magical flower that can help.
+
+            After recovering, they finally explain why they came.
+            <br><br>
+
+            A magical flower grows deep in the forest.
+            <br>
+            A kind witch needs it to make a potion that will
+            protect the forest.
         `,
 
         choices: [
+
             {
-                text: "🌼 Fine. I'll get the flower.",
-                next: "mission",
-                trait: "brave"
+                text: "🌼 Ask where the flower grows",
+                next: "flowerLocation",
+                trait: "curious"
             },
+
             {
-                text: "🚪 Slam the door",
-                next: "doorEnding",
-                trait: "chaotic"
+                text: "🧙 Ask about the witch",
+                next: "aboutWitch",
+                trait: "kind"
             }
+
         ]
     },
 
-    pretendHome: {
-        chapter: "Chapter Four",
-        icon: "🫥",
-        title: "Definitely Not Home",
+
+    /* -----------------------------------------------------
+       ASK VISITOR
+       ----------------------------------------------------- */
+
+    askVisitor: {
+
+        chapter: "Chapter Five",
+
+        icon: "🧭",
+
+        title: "Why Me?",
+
         background: "scene-cottage",
 
         text: `
-            You stand completely still.
+            “Why me?” you ask.
             <br><br>
-            The traveller knocks again.
+
+            The traveller looks at you very seriously.
             <br><br>
-            You continue standing completely still.
+
+            “Because,” they say, “the forest has chosen you.”
             <br><br>
-            Eventually, a note slides underneath the door.
+
+            You are not entirely sure what that means.
             <br><br>
-            It contains a map to a magical flower.
+
+            They explain that a magical flower is needed by
+            a kind witch who is trying to protect the forest.
         `,
 
         choices: [
+
             {
-                text: "🗺️ Take the map",
-                next: "missionMap",
+                text: "🌼 Ask where to find the flower",
+                next: "flowerLocation",
+                trait: "curious"
+            },
+
+            {
+                text: "❓ Ask why the forest is in danger",
+                next: "forestDanger",
                 trait: "clever"
-            },
-            {
-                text: "🔥 Use the map as a coaster",
-                next: "mapEnding",
-                trait: "chaotic"
             }
+
         ]
     },
 
-    followTraveller: {
-        chapter: "Chapter Four",
-        icon: "👣",
-        title: "Following Footsteps",
+
+    /* -----------------------------------------------------
+       EAGER MISSION
+       ----------------------------------------------------- */
+
+    eagerMission: {
+
+        chapter: "Chapter Five",
+
+        icon: "🏃",
+
+        title: "No Time to Waste",
+
         background: "scene-path",
 
         text: `
-            You follow the traveller through the trees.
+            You grab your tiny adventure bag.
             <br><br>
-            They eventually notice you.
+
+            The traveller looks surprised.
             <br><br>
-            Instead of being annoyed, they laugh.
+
+            “You're ready already?”
             <br><br>
-            “I suppose you're coming too.”
+
+            You nod.
             <br><br>
-            They point toward a fork in the path.
+
+            They point down the forest path.
+            <br><br>
+
+            Somewhere beyond the trees is the magical flower.
         `,
 
         choices: [
+
             {
-                text: "🌲 Take the darker path",
+                text: "🌲 Ask which path to take",
+                next: "pathChoice",
+                trait: "clever"
+            },
+
+            {
+                text: "🏃 Start running toward the forest",
+                next: "rushForest",
+                trait: "brave"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       READ NOTE
+       ----------------------------------------------------- */
+
+    readNote: {
+
+        chapter: "Chapter Four",
+
+        icon: "📜",
+
+        title: "The Mysterious Note",
+
+        background: "scene-cottage",
+
+        text: `
+            You carefully pick up the folded note.
+            <br><br>
+
+            You unfold it.
+            <br><br>
+
+            Inside, written in surprisingly neat handwriting,
+            are the words:
+            <br><br>
+
+            <em>
+            “The forest is in danger.
+            A magical flower can save it.
+            Find the kind witch beyond the old stone bridge.
+            She will know what to do.”
+            </em>
+            <br><br>
+
+            At the bottom is a tiny drawing of a flower.
+        `,
+
+        choices: [
+
+            {
+                text: "🌉 Look for the old stone bridge",
+                next: "stoneBridge",
+                trait: "brave"
+            },
+
+            {
+                text: "🗺️ Search the cottage for a map",
+                next: "searchMap",
+                trait: "clever"
+            },
+
+            {
+                text: "👣 Follow the traveller's footprints",
+                next: "followTraveller",
+                trait: "curious"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       FOLLOW TRAVELLER
+       ----------------------------------------------------- */
+
+    followTraveller: {
+
+        chapter: "Chapter Five",
+
+        icon: "👣",
+
+        title: "Following Footsteps",
+
+        background: "scene-path",
+
+        text: `
+            You follow the traveller's footprints through the
+            trees.
+            <br><br>
+
+            They lead to a small clearing.
+            <br><br>
+
+            The traveller is waiting there.
+            <br><br>
+
+            “I wondered if you'd follow,” they say.
+            <br><br>
+
+            They point toward two paths.
+        `,
+
+        choices: [
+
+            {
+                text: "🌑 Take the darker path",
                 next: "darkPath",
                 trait: "brave"
             },
+
             {
-                text: "🌿 Take the flower-covered path",
+                text: "🌸 Take the flower-covered path",
                 next: "flowerPath",
                 trait: "curious"
             }
+
         ]
     },
 
-    mission: {
-        chapter: "Chapter Five",
+
+    /* -----------------------------------------------------
+       FLOWER LOCATION
+       ----------------------------------------------------- */
+
+    flowerLocation: {
+
+        chapter: "Chapter Six",
+
         icon: "🌼",
-        title: "The Magical Flower",
+
+        title: "Where the Flower Grows",
+
         background: "scene-path",
 
         text: `
-            You set off.
+            The traveller points toward the oldest part of the
+            forest.
             <br><br>
-            The magical flower lies somewhere deep in the forest.
+
+            “You'll need to cross the old stone bridge,” they
+            explain.
             <br><br>
-            The traveller warns you:
+
+            “Then follow the glowing flowers.”
             <br><br>
-            “Do not anger the forest guardian.”
+
+            They pause.
+            <br><br>
+
+            “And whatever you do, don't upset the guardian.”
         `,
 
         choices: [
+
             {
-                text: "🦁 Look for the guardian",
-                next: "guardian",
+                text: "🌉 Head for the stone bridge",
+                next: "stoneBridge",
                 trait: "brave"
             },
+
             {
-                text: "🌿 Quietly sneak past",
-                next: "sneakForest",
+                text: "🧠 Ask how to avoid the guardian",
+                next: "guardianAdvice",
                 trait: "clever"
             }
+
         ]
     },
 
-    missionCautious: {
-        chapter: "Chapter Five",
-        icon: "🧭",
-        title: "A Careful Mission",
+
+    /* -----------------------------------------------------
+       ABOUT WITCH
+       ----------------------------------------------------- */
+
+    aboutWitch: {
+
+        chapter: "Chapter Six",
+
+        icon: "🧙",
+
+        title: "The Kind Witch",
+
+        background: "scene-cottage",
+
+        text: `
+            The traveller explains that the witch lives beyond
+            the old stone bridge.
+            <br><br>
+
+            She is kind, clever and very good at making magical
+            potions.
+            <br><br>
+
+            Unfortunately, she is missing one important
+            ingredient.
+            <br><br>
+
+            The magical flower.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Ask how to reach the flower",
+                next: "flowerLocation",
+                trait: "curious"
+            },
+
+            {
+                text: "🧙 Ask what the potion will do",
+                next: "potionExplanation",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       FOREST DANGER
+       ----------------------------------------------------- */
+
+    forestDanger: {
+
+        chapter: "Chapter Six",
+
+        icon: "🌲",
+
+        title: "The Trouble in the Forest",
+
+        background: "scene-deep",
+
+        text: `
+            The traveller lowers their voice.
+            <br><br>
+
+            The magical protection around the forest is fading.
+            <br><br>
+
+            If it disappears completely, strange things could
+            begin wandering into the forest.
+            <br><br>
+
+            The witch can restore the protection, but only with
+            the magical flower.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Find the flower",
+                next: "flowerLocation",
+                trait: "brave"
+            },
+
+            {
+                text: "🧙 Find the witch first",
+                next: "findWitch",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       PATH CHOICE
+       ----------------------------------------------------- */
+
+    pathChoice: {
+
+        chapter: "Chapter Six",
+
+        icon: "🌲",
+
+        title: "The Fork in the Path",
+
         background: "scene-path",
 
         text: `
-            You ask what could go wrong.
+            The path splits in two.
             <br><br>
-            The traveller gives you a very long list.
+
+            One route disappears beneath enormous dark trees.
             <br><br>
-            The important part is simple:
+
+            The other is lined with tiny glowing flowers.
             <br><br>
-            “Find the flower. Don't eat it. Don't annoy the guardian.”
+
+            The traveller waits for you to choose.
         `,
 
         choices: [
+
             {
-                text: "🌼 Head toward the flower",
-                next: "flowerPath",
+                text: "🌑 Take the dark forest route",
+                next: "darkPath",
                 trait: "brave"
             },
+
             {
-                text: "📖 Study the map first",
-                next: "mapStudy",
-                trait: "clever"
-            }
-        ]
-    },
-
-    witchQuestion: {
-        chapter: "Chapter Five",
-        icon: "🔮",
-        title: "The Witch",
-        background: "scene-witch",
-
-        text: `
-            The traveller explains that the witch isn't dangerous.
-            <br><br>
-            She simply needs the flower to make a potion that will protect the forest.
-            <br><br>
-            Apparently, she is also very nice.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Go get the flower",
+                text: "🌸 Follow the glowing flowers",
                 next: "flowerPath",
-                trait: "kind"
-            },
-            {
-                text: "🧙 Ask to meet the witch first",
-                next: "meetWitch",
                 trait: "curious"
             }
+
         ]
     },
 
-    missionMap: {
+
+    /* -----------------------------------------------------
+       RUSH FOREST
+       ----------------------------------------------------- */
+
+    rushForest: {
+
+        chapter: "Chapter Six",
+
+        icon: "🏃",
+
+        title: "Too Much Enthusiasm",
+
+        background: "scene-path",
+
+        text: `
+            You sprint into the forest.
+            <br><br>
+
+            Unfortunately, you forgot to ask where you were
+            going.
+            <br><br>
+
+            After several minutes, you reach a fork in the path.
+            <br><br>
+
+            One direction is dark.
+            <br><br>
+
+            The other glows with tiny flowers.
+        `,
+
+        choices: [
+
+            {
+                text: "🌑 Choose the dark path",
+                next: "darkPath",
+                trait: "brave"
+            },
+
+            {
+                text: "🌸 Choose the glowing path",
+                next: "flowerPath",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       STONE BRIDGE
+       ----------------------------------------------------- */
+
+    stoneBridge: {
+
+        chapter: "Chapter Seven",
+
+        icon: "🌉",
+
+        title: "The Old Stone Bridge",
+
+        background: "scene-path",
+
+        text: `
+            You find the old stone bridge.
+            <br><br>
+
+            Mist curls around the stones below.
+            <br><br>
+
+            Halfway across, you notice a tiny sign.
+            <br><br>
+
+            “THE FOREST GUARDIAN LIVES BEYOND THIS POINT.”
+            <br><br>
+
+            You continue.
+        `,
+
+        choices: [
+
+            {
+                text: "🌸 Follow the glowing flowers",
+                next: "flowerPath",
+                trait: "curious"
+            },
+
+            {
+                text: "👂 Stop and listen to the forest",
+                next: "listenForest",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       SEARCH MAP
+       ----------------------------------------------------- */
+
+    searchMap: {
+
         chapter: "Chapter Five",
+
         icon: "🗺️",
-        title: "The Secret Map",
+
+        title: "The Cottage Map",
+
+        background: "scene-cottage",
+
+        text: `
+            You search the cottage.
+            <br><br>
+
+            Under a stack of old books, you discover a hand-drawn
+            map.
+            <br><br>
+
+            It shows your cottage, the old stone bridge and a
+            strange clearing marked with a flower.
+            <br><br>
+
+            At least now you know where you're going.
+        `,
+
+        choices: [
+
+            {
+                text: "🗺️ Follow the map to the bridge",
+                next: "stoneBridge",
+                trait: "clever"
+            },
+
+            {
+                text: "👣 Use the map to find a shortcut",
+                next: "shortcut",
+                trait: "curious"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN ADVICE
+       ----------------------------------------------------- */
+
+    guardianAdvice: {
+
+        chapter: "Chapter Seven",
+
+        icon: "🐾",
+
+        title: "One Important Warning",
+
         background: "scene-path",
 
         text: `
-            The map is surprisingly useful.
+            The traveller gives you one piece of advice:
             <br><br>
-            It shows a safe route through the forest.
+
+            “The guardian doesn't like shouting.”
             <br><br>
-            Unfortunately, there is also a giant drawing of a soup pot.
+
+            They think for a moment.
             <br><br>
-            You decide not to ask.
+
+            “It also appreciates biscuits.”
+            <br><br>
+
+            Conveniently, they hand you one.
         `,
 
         choices: [
-            {
-                text: "🌼 Follow the safe route",
-                next: "flowerPath",
-                trait: "clever"
-            },
-            {
-                text: "🥣 Investigate the soup symbol",
-                next: "soupWarning",
-                trait: "curious"
-            }
-        ]
-    },
 
-    darkPath: {
-        chapter: "Chapter Six",
-        icon: "🌑",
-        title: "The Dark Path",
-        background: "scene-deep",
-
-        text: `
-            You choose the darkest path.
-            <br><br>
-            It gets darker.
-            <br><br>
-            And darker.
-            <br><br>
-            Then two enormous eyes appear between the trees.
-        `,
-
-        choices: [
-            {
-                text: "🫶 Say hello",
-                next: "guardianFriendly",
-                trait: "kind"
-            },
-            {
-                text: "🏃 Run",
-                next: "runGuardian",
-                trait: "brave"
-            }
-        ]
-    },
-
-    flowerPath: {
-        chapter: "Chapter Six",
-        icon: "🌸",
-        title: "The Flower Path",
-        background: "scene-flower",
-
-        text: `
-            The path is covered in tiny glowing flowers.
-            <br><br>
-            At the end stands the magical flower.
-            <br><br>
-            Beside it sits the forest guardian.
-            <br><br>
-            It watches you carefully.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Politely ask for the flower",
-                next: "guardianFriendly",
-                trait: "kind"
-            },
-            {
-                text: "🤫 Wait quietly",
-                next: "guardianQuiet",
-                trait: "clever"
-            }
-        ]
-    },
-
-    mapStudy: {
-        chapter: "Chapter Six",
-        icon: "📖",
-        title: "Studying the Map",
-        background: "scene-deep",
-
-        text: `
-            You study the map carefully.
-            <br><br>
-            You notice something important:
-            <br><br>
-            The flower guardian responds to kindness, not force.
-            <br><br>
-            You continue with a plan.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Approach politely",
-                next: "guardianFriendly",
-                trait: "kind"
-            },
-            {
-                text: "🧠 Try to distract the guardian",
-                next: "guardianDistract",
-                trait: "clever"
-            }
-        ]
-    },
-
-    meetWitch: {
-        chapter: "Chapter Six",
-        icon: "🧙",
-        title: "A Meeting With the Witch",
-        background: "scene-witch",
-
-        text: `
-            Somehow, you find the witch before finding the flower.
-            <br><br>
-            She smiles warmly.
-            <br><br>
-            “Ah,” she says. “The little forest traveller.”
-            <br><br>
-            She tells you that the flower is protected by a guardian.
-        `,
-
-        choices: [
-            {
-                text: "💚 Ask what the guardian likes",
-                next: "witchAdvice",
-                trait: "kind"
-            },
-            {
-                text: "🌼 Promise to bring the flower",
-                next: "flowerPath",
-                trait: "brave"
-            }
-        ]
-    },
-
-    guardian: {
-        chapter: "Chapter Seven",
-        icon: "🐻",
-        title: "The Guardian",
-        background: "scene-deep",
-
-        text: `
-            The guardian steps out of the shadows.
-            <br><br>
-            It is enormous.
-            <br><br>
-            It is also wearing a tiny hat.
-            <br><br>
-            Somehow, that makes it more intimidating.
-        `,
-
-        choices: [
-            {
-                text: "🎩 Compliment the hat",
-                next: "guardianHat",
-                trait: "kind"
-            },
-            {
-                text: "😼 Challenge it to a staring contest",
-                next: "staringContest",
-                trait: "chaotic"
-            }
-        ]
-    },
-
-    sneakForest: {
-        chapter: "Chapter Seven",
-        icon: "🌿",
-        title: "Sneaking",
-        background: "scene-deep",
-
-        text: `
-            You creep through the undergrowth.
-            <br><br>
-            One step.
-            <br>
-            Two steps.
-            <br>
-            Three steps.
-            <br><br>
-            Then you step directly on a very loud twig.
-        `,
-
-        choices: [
-            {
-                text: "😇 Pretend nothing happened",
-                next: "guardianAngry",
-                trait: "chaotic"
-            },
-            {
-                text: "🙇 Apologise immediately",
-                next: "guardianFriendly",
-                trait: "kind"
-            }
-        ]
-    },
-
-    guardianFriendly: {
-        chapter: "Chapter Eight",
-        icon: "🐾",
-        title: "A Gentle Meeting",
-        background: "scene-flower",
-
-        text: `
-            You approach slowly.
-            <br><br>
-            You explain that you need the flower to help the forest.
-            <br><br>
-            The guardian looks at you.
-            <br><br>
-            Then it looks at the flower.
-            <br><br>
-            Then back at you.
-        `,
-
-        choices: [
-            {
-                text: "💚 Wait patiently",
-                next: "flowerGranted",
-                trait: "kind"
-            },
-            {
-                text: "🌼 Offer to help the guardian first",
-                next: "guardianTask",
-                trait: "kind"
-            }
-        ]
-    },
-
-    guardianQuiet: {
-        chapter: "Chapter Eight",
-        icon: "🌙",
-        title: "Patience",
-        background: "scene-flower",
-
-        text: `
-            You sit quietly.
-            <br><br>
-            The guardian watches you.
-            <br><br>
-            Eventually, it seems to decide that you are not a nuisance.
-            <br><br>
-            It nudges the magical flower toward you.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Take the flower carefully",
-                next: "flowerGranted",
-                trait: "clever"
-            },
-            {
-                text: "🫶 Thank the guardian",
-                next: "guardianFriend",
-                trait: "kind"
-            }
-        ]
-    },
-
-    guardianDistract: {
-        chapter: "Chapter Eight",
-        icon: "🦋",
-        title: "The Distraction",
-        background: "scene-flower",
-
-        text: `
-            You point toward a butterfly.
-            <br><br>
-            The guardian looks.
-            <br><br>
-            You grab the flower.
-            <br><br>
-            You have successfully outsmarted a magical forest guardian.
-        `,
-
-        choices: [
-            {
-                text: "🏃 Run away with the flower",
-                next: "runWithFlower",
-                trait: "brave"
-            },
-            {
-                text: "😌 Stay and explain yourself",
-                next: "guardianTask",
-                trait: "kind"
-            }
-        ]
-    },
-
-    guardianHat: {
-        chapter: "Chapter Eight",
-        icon: "🎩",
-        title: "The Hat",
-        background: "scene-flower",
-
-        text: `
-            You compliment the guardian's hat.
-            <br><br>
-            The guardian looks delighted.
-            <br><br>
-            It removes the hat and puts it on your head.
-            <br><br>
-            You now look extremely important.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Ask for the flower",
-                next: "flowerGranted",
-                trait: "kind"
-            },
-            {
-                text: "🎩 Keep the hat",
-                next: "hatEnding",
-                trait: "chaotic"
-            }
-        ]
-    },
-
-    staringContest: {
-        chapter: "Chapter Eight",
-        icon: "👁️",
-        title: "The Staring Contest",
-        background: "scene-deep",
-
-        text: `
-            You stare at the guardian.
-            <br><br>
-            The guardian stares back.
-            <br><br>
-            You stare harder.
-            <br><br>
-            The guardian blinks.
-            <br><br>
-            You have won.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Take the flower",
-                next: "flowerGranted",
-                trait: "brave"
-            },
-            {
-                text: "😎 Act like this was all part of the plan",
-                next: "flowerGranted",
-                trait: "chaotic"
-            }
-        ]
-    },
-
-    guardianAngry: {
-        chapter: "Chapter Eight",
-        icon: "😾",
-        title: "Uh Oh",
-        background: "scene-deep",
-
-        text: `
-            The guardian is not impressed by your twig-related deception.
-            <br><br>
-            It picks you up.
-            <br><br>
-            You are now approximately the size of one of its paws.
-            <br><br>
-            It carries you toward a suspiciously large cooking pot.
-        `,
-
-        choices: [
-            {
-                text: "🙇 Apologise profusely",
-                next: "soupEscape",
-                trait: "kind"
-            },
-            {
-                text: "🏃 Attempt a dramatic escape",
-                next: "soupEnding",
-                trait: "brave"
-            }
-        ]
-    },
-
-    guardianTask: {
-        chapter: "Chapter Nine",
-        icon: "🪵",
-        title: "One Small Favour",
-        background: "scene-flower",
-
-        text: `
-            The guardian agrees to give you the flower...
-            <br><br>
-            ...if you help move a fallen branch.
-            <br><br>
-            It looks enormous.
-            <br><br>
-            You are very small.
-        `,
-
-        choices: [
-            {
-                text: "💪 Push with everything you've got",
-                next: "taskSuccess",
-                trait: "brave"
-            },
-            {
-                text: "🧠 Figure out a clever way around it",
-                next: "taskClever",
-                trait: "clever"
-            }
-        ]
-    },
-
-    guardianFriend: {
-        chapter: "Chapter Nine",
-        icon: "💚",
-        title: "A New Friend",
-        background: "scene-flower",
-
-        text: `
-            The guardian seems touched that you thanked it.
-            <br><br>
-            It gives you the flower.
-            <br><br>
-            Then it gently boops your forehead.
-            <br><br>
-            You have made a forest friend.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Continue to the witch",
-                next: "witchEnding",
-                trait: "kind"
-            },
-            {
-                text: "🐻 Stay with your new friend",
-                next: "guardianEnding",
-                trait: "cozy"
-            }
-        ]
-    },
-
-    witchAdvice: {
-        chapter: "Chapter Seven",
-        icon: "🧙",
-        title: "The Witch's Advice",
-        background: "scene-witch",
-
-        text: `
-            The witch smiles.
-            <br><br>
-            “The guardian likes honesty,” she says.
-            <br><br>
-            “And snacks.”
-            <br><br>
-            She hands you a little biscuit.
-        `,
-
-        choices: [
             {
                 text: "🍪 Save the biscuit for the guardian",
                 next: "biscuitGuardian",
                 trait: "kind"
             },
+
             {
-                text: "🍪 Eat the biscuit immediately",
+                text: "🍪 Eat the biscuit",
                 next: "eatBiscuit",
                 trait: "cozy"
             }
+
         ]
     },
 
-    biscuitGuardian: {
-        chapter: "Chapter Eight",
-        icon: "🍪",
-        title: "The Biscuit",
-        background: "scene-flower",
+
+    /* -----------------------------------------------------
+       POTION EXPLANATION
+       ----------------------------------------------------- */
+
+    potionExplanation: {
+
+        chapter: "Chapter Seven",
+
+        icon: "🔮",
+
+        title: "The Potion",
+
+        background: "scene-cottage",
 
         text: `
-            You find the guardian and offer it the biscuit.
+            The traveller explains that the witch's potion will
+            restore the magical protection around the forest.
             <br><br>
-            The guardian takes it.
+
+            Without it, the forest will slowly lose its magic.
             <br><br>
-            It considers you carefully.
-            <br><br>
-            Then it hands you the magical flower.
+
+            Suddenly, the mission feels rather important.
         `,
 
         choices: [
+
             {
-                text: "🌼 Thank the guardian and leave",
-                next: "witchEnding",
-                trait: "kind"
+                text: "🌼 Go find the magical flower",
+                next: "flowerPath",
+                trait: "brave"
             },
+
             {
-                text: "🐾 Ask if you can visit again",
-                next: "guardianEnding",
-                trait: "cozy"
+                text: "🧙 Find the witch and ask for advice",
+                next: "findWitch",
+                trait: "clever"
             }
+
         ]
     },
 
-    eatBiscuit: {
+
+    /* -----------------------------------------------------
+       FIND WITCH
+       ----------------------------------------------------- */
+
+    findWitch: {
+
         chapter: "Chapter Eight",
+
+        icon: "🧙",
+
+        title: "The Witch's Cottage",
+
+        background: "scene-witch",
+
+        text: `
+            You follow a trail of purple flowers through the
+            trees.
+            <br><br>
+
+            Eventually, you find a crooked little cottage.
+            <br><br>
+
+            A kind-looking witch opens the door.
+            <br><br>
+
+            “You must be here about the flower,” she says.
+        `,
+
+        choices: [
+
+            {
+                text: "💚 Ask how you can help",
+                next: "witchAdvice",
+                trait: "kind"
+            },
+
+            {
+                text: "🌼 Ask where the flower is",
+                next: "witchFlowerClue",
+                trait: "curious"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       LISTEN FOREST
+       ----------------------------------------------------- */
+
+    listenForest: {
+
+        chapter: "Chapter Eight",
+
+        icon: "🌲",
+
+        title: "Listening to the Trees",
+
+        background: "scene-deep",
+
+        text: `
+            You stop walking.
+            <br><br>
+
+            You listen.
+            <br><br>
+
+            Somewhere ahead, you hear water.
+            <br><br>
+
+            Then you hear a low rumble.
+            <br><br>
+
+            And then...
+            <br><br>
+
+            a sneeze.
+            <br><br>
+
+            Something very large is nearby.
+        `,
+
+        choices: [
+
+            {
+                text: "🐾 Follow the sound carefully",
+                next: "guardian",
+                trait: "curious"
+            },
+
+            {
+                text: "🌸 Follow the flowers instead",
+                next: "flowerPath",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       SHORTCUT
+       ----------------------------------------------------- */
+
+    shortcut: {
+
+        chapter: "Chapter Six",
+
+        icon: "🌿",
+
+        title: "The Shortcut",
+
+        background: "scene-deep",
+
+        text: `
+            The map shows a tiny shortcut through the trees.
+            <br><br>
+
+            You squeeze between two enormous roots.
+            <br><br>
+
+            On the other side is a clearing covered in glowing
+            flowers.
+            <br><br>
+
+            Unfortunately, something huge is sitting in the middle
+            of it.
+        `,
+
+        choices: [
+
+            {
+                text: "🐻 Approach the guardian",
+                next: "guardian",
+                trait: "brave"
+            },
+
+            {
+                text: "🌿 Hide and watch it first",
+                next: "watchGuardian",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       DARK PATH
+       ----------------------------------------------------- */
+
+    darkPath: {
+
+        chapter: "Chapter Seven",
+
+        icon: "🌑",
+
+        title: "The Dark Path",
+
+        background: "scene-deep",
+
+        text: `
+            You choose the darkest path.
+            <br><br>
+
+            The trees become enormous.
+            <br><br>
+
+            The forest becomes strangely quiet.
+            <br><br>
+
+            Then two enormous eyes appear between the trees.
+        `,
+
+        choices: [
+
+            {
+                text: "🫶 Say hello",
+                next: "guardianFriendly",
+                trait: "kind"
+            },
+
+            {
+                text: "🏃 Keep walking confidently",
+                next: "guardian",
+                trait: "brave"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       FLOWER PATH
+       ----------------------------------------------------- */
+
+    flowerPath: {
+
+        chapter: "Chapter Seven",
+
+        icon: "🌸",
+
+        title: "The Glowing Path",
+
+        background: "scene-flower",
+
+        text: `
+            You follow the glowing flowers.
+            <br><br>
+
+            Their light becomes brighter with every step.
+            <br><br>
+
+            Eventually, you reach a beautiful clearing.
+            <br><br>
+
+            In the centre is the magical flower.
+            <br><br>
+
+            Beside it sits an enormous forest guardian.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Politely approach the guardian",
+                next: "guardianFriendly",
+                trait: "kind"
+            },
+
+            {
+                text: "🤫 Wait quietly and observe",
+                next: "watchGuardian",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       WATCH GUARDIAN
+       ----------------------------------------------------- */
+
+    watchGuardian: {
+
+        chapter: "Chapter Eight",
+
+        icon: "👀",
+
+        title: "Watching Carefully",
+
+        background: "scene-flower",
+
+        text: `
+            You hide behind a tree and watch.
+            <br><br>
+
+            The guardian picks up a flower.
+            <br>
+            Smells it.
+            <br>
+            Sneezes.
+            <br><br>
+
+            Then it sits down again.
+            <br><br>
+
+            It doesn't seem particularly scary.
+            <br><br>
+
+            Just enormous.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Walk out and introduce yourself",
+                next: "guardianFriendly",
+                trait: "kind"
+            },
+
+            {
+                text: "🍪 Leave the biscuit nearby",
+                next: "biscuitGuardian",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN
+       ----------------------------------------------------- */
+
+    guardian: {
+
+        chapter: "Chapter Eight",
+
+        icon: "🐻",
+
+        title: "The Forest Guardian",
+
+        background: "scene-flower",
+
+        text: `
+            The guardian steps out of the shadows.
+            <br><br>
+
+            It is enormous.
+            <br><br>
+
+            It is also wearing a comically tiny hat.
+            <br><br>
+
+            Somehow, that makes the situation even stranger.
+        `,
+
+        choices: [
+
+            {
+                text: "🎩 Compliment the hat",
+                next: "guardianHat",
+                trait: "kind"
+            },
+
+            {
+                text: "👁️ Challenge it to a staring contest",
+                next: "staringContest",
+                trait: "chaotic"
+            },
+
+            {
+                text: "🌼 Explain why you need the flower",
+                next: "guardianRequest",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN FRIENDLY
+       ----------------------------------------------------- */
+
+    guardianFriendly: {
+
+        chapter: "Chapter Nine",
+
+        icon: "🐾",
+
+        title: "A Gentle Introduction",
+
+        background: "scene-flower",
+
+        text: `
+            You approach slowly.
+            <br><br>
+
+            You explain that the forest is in danger and that
+            the witch needs the magical flower.
+            <br><br>
+
+            The guardian listens.
+            <br><br>
+
+            It seems to understand.
+        `,
+
+        choices: [
+
+            {
+                text: "💚 Wait patiently for its decision",
+                next: "flowerGranted",
+                trait: "kind"
+            },
+
+            {
+                text: "🍪 Offer the guardian a biscuit",
+                next: "biscuitGuardian",
+                trait: "kind"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN REQUEST
+       ----------------------------------------------------- */
+
+    guardianRequest: {
+
+        chapter: "Chapter Nine",
+
+        icon: "🌼",
+
+        title: "The Request",
+
+        background: "scene-flower",
+
+        text: `
+            You explain everything.
+            <br><br>
+
+            The forest.
+            <br>
+            The witch.
+            <br>
+            The potion.
+            <br>
+            The flower.
+            <br><br>
+
+            The guardian listens carefully.
+            <br><br>
+
+            Finally, it points toward a fallen branch.
+        `,
+
+        choices: [
+
+            {
+                text: "💪 Offer to move the branch",
+                next: "guardianTask",
+                trait: "brave"
+            },
+
+            {
+                text: "🧠 Figure out a clever way around it",
+                next: "taskClever",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       BISCUIT
+       ----------------------------------------------------- */
+
+    biscuitGuardian: {
+
+        chapter: "Chapter Nine",
+
         icon: "🍪",
+
+        title: "The Biscuit",
+
+        background: "scene-flower",
+
+        text: `
+            You carefully hold out the biscuit.
+            <br><br>
+
+            The guardian's enormous eyes widen.
+            <br><br>
+
+            It takes the biscuit very gently.
+            <br><br>
+
+            It eats it in one bite.
+            <br><br>
+
+            Then it looks at you as though you have passed some
+            kind of important test.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Ask for the magical flower",
+                next: "flowerGranted",
+                trait: "kind"
+            },
+
+            {
+                text: "🐾 Ask if you can be forest friends",
+                next: "guardianFriend",
+                trait: "cozy"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       EAT BISCUIT
+       ----------------------------------------------------- */
+
+    eatBiscuit: {
+
+        chapter: "Chapter Eight",
+
+        icon: "🍪",
+
         title: "A Delicious Mistake",
+
         background: "scene-path",
 
         text: `
             You eat the biscuit.
             <br><br>
+
             It is excellent.
             <br><br>
-            Unfortunately, you have nothing to offer the guardian now.
+
+            Unfortunately, you now have nothing to offer the
+            guardian.
             <br><br>
-            You'll have to improvise.
+
+            You'll have to find another way to impress it.
         `,
 
         choices: [
+
             {
                 text: "🗣️ Be completely honest",
                 next: "guardianFriendly",
                 trait: "kind"
             },
+
             {
-                text: "🎭 Pretend you have another biscuit",
+                text: "🎭 Pretend you still have a biscuit",
                 next: "guardianAngry",
                 trait: "chaotic"
             }
+
         ]
     },
 
-    runWithFlower: {
+
+    /* -----------------------------------------------------
+       GUARDIAN HAT
+       ----------------------------------------------------- */
+
+    guardianHat: {
+
         chapter: "Chapter Nine",
-        icon: "🏃",
-        title: "Run!",
-        background: "scene-path",
+
+        icon: "🎩",
+
+        title: "The Tiny Hat",
+
+        background: "scene-flower",
 
         text: `
-            You run through the forest with the magical flower.
+            You compliment the guardian's hat.
             <br><br>
-            Behind you, the guardian lets out one enormous roar.
+
+            The guardian looks delighted.
             <br><br>
-            You do not look back.
+
+            It removes the hat and places it carefully on your
+            head.
+            <br><br>
+
+            It is slightly too large.
+            <br><br>
+
+            But you look magnificent.
         `,
 
         choices: [
+
             {
-                text: "🧙 Find the witch",
-                next: "witchEnding",
-                trait: "brave"
+                text: "🌼 Ask for the magical flower",
+                next: "flowerGranted",
+                trait: "kind"
             },
+
             {
-                text: "🌲 Hide until things calm down",
-                next: "lostEnding",
-                trait: "clever"
+                text: "🎩 Keep the hat",
+                next: "hatEnding",
+                trait: "chaotic"
             }
+
         ]
     },
 
-    taskSuccess: {
+
+    /* -----------------------------------------------------
+       STARING CONTEST
+       ----------------------------------------------------- */
+
+    staringContest: {
+
+        chapter: "Chapter Nine",
+
+        icon: "👁️",
+
+        title: "The Staring Contest",
+
+        background: "scene-deep",
+
+        text: `
+            You stare at the guardian.
+            <br><br>
+
+            The guardian stares back.
+            <br><br>
+
+            You stare harder.
+            <br><br>
+
+            The guardian blinks.
+            <br><br>
+
+            You have won.
+            <br><br>
+
+            You are not entirely sure why this happened.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Take your victory and ask for the flower",
+                next: "flowerGranted",
+                trait: "brave"
+            },
+
+            {
+                text: "😎 Pretend this was all part of your plan",
+                next: "flowerGranted",
+                trait: "chaotic"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN TASK
+       ----------------------------------------------------- */
+
+    guardianTask: {
+
         chapter: "Chapter Ten",
+
+        icon: "🪵",
+
+        title: "One Small Favour",
+
+        background: "scene-flower",
+
+        text: `
+            The guardian points toward a huge fallen branch.
+            <br><br>
+
+            It is blocking the path to the flower.
+            <br><br>
+
+            You are very small.
+            <br><br>
+
+            The branch is extremely large.
+            <br><br>
+
+            This seems unfair.
+        `,
+
+        choices: [
+
+            {
+                text: "💪 Push with everything you've got",
+                next: "taskSuccess",
+                trait: "brave"
+            },
+
+            {
+                text: "🧠 Look for a clever solution",
+                next: "taskClever",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       TASK CLEVER
+       ----------------------------------------------------- */
+
+    taskClever: {
+
+        chapter: "Chapter Eleven",
+
+        icon: "🧠",
+
+        title: "A Clever Solution",
+
+        background: "scene-flower",
+
+        text: `
+            Instead of trying to push the enormous branch,
+            you look around.
+            <br><br>
+
+            Nearby is a smaller branch.
+            <br><br>
+
+            You use it as a lever.
+            <br><br>
+
+            The huge branch slowly rolls away.
+            <br><br>
+
+            The guardian looks extremely impressed.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Take the magical flower",
+                next: "flowerGranted",
+                trait: "clever"
+            },
+
+            {
+                text: "🎩 Ask for another tiny hat",
+                next: "hatEnding",
+                trait: "chaotic"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       TASK SUCCESS
+       ----------------------------------------------------- */
+
+    taskSuccess: {
+
+        chapter: "Chapter Eleven",
+
         icon: "💪",
+
         title: "Tiny But Mighty",
+
         background: "scene-flower",
 
         text: `
             You push.
-            <br>
+            <br><br>
+
             You shove.
-            <br>
-            You make a noise that is far too dramatic for such a tiny creature.
             <br><br>
-            Eventually, the branch moves.
+
+            You make a noise that is far too dramatic for such
+            a tiny creature.
             <br><br>
-            The guardian is impressed.
+
+            Somehow, the branch moves.
             <br><br>
-            It gives you the flower.
+
+            The guardian nods approvingly.
         `,
 
         choices: [
+
             {
-                text: "🌼 Take the flower to the witch",
-                next: "witchEnding",
+                text: "🌼 Collect the magical flower",
+                next: "flowerGranted",
                 trait: "brave"
             },
+
             {
                 text: "🐻 Thank your new forest friend",
-                next: "guardianEnding",
+                next: "guardianFriend",
                 trait: "kind"
             }
+
         ]
     },
 
-    taskClever: {
-        chapter: "Chapter Ten",
-        icon: "🧠",
-        title: "A Clever Solution",
-        background: "scene-flower",
 
-        text: `
-            Instead of pushing the branch, you find a smaller branch underneath it.
-            <br><br>
-            You move that one.
-            <br><br>
-            The enormous branch rolls away.
-            <br><br>
-            The guardian looks impressed.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Collect the flower",
-                next: "witchEnding",
-                trait: "clever"
-            },
-            {
-                text: "🎩 Ask for a tiny guardian hat",
-                next: "hatEnding",
-                trait: "chaotic"
-            }
-        ]
-    },
-
-    soupEscape: {
-        chapter: "Chapter Nine",
-        icon: "🥣",
-        title: "The Soup Pot",
-        background: "scene-swamp",
-
-        text: `
-            You apologise.
-            <br><br>
-            The guardian pauses.
-            <br><br>
-            It lowers you beside the pot.
-            <br><br>
-            “Fine,” it says.
-            <br><br>
-            You have narrowly avoided becoming soup.
-        `,
-
-        choices: [
-            {
-                text: "🌼 Ask for the flower",
-                next: "flowerGranted",
-                trait: "kind"
-            },
-            {
-                text: "🏃 Run before it changes its mind",
-                next: "runWithFlower",
-                trait: "brave"
-            }
-        ]
-    },
+    /* -----------------------------------------------------
+       FLOWER GRANTED
+       ----------------------------------------------------- */
 
     flowerGranted: {
-        chapter: "Chapter Ten",
+
+        chapter: "Chapter Twelve",
+
         icon: "🌼",
-        title: "The Flower Is Yours",
+
+        title: "The Magical Flower",
+
         background: "scene-flower",
 
         text: `
             The guardian finally gives you the magical flower.
             <br><br>
+
             Its petals glow softly in your paws.
             <br><br>
-            Now there is only one thing left to do:
+
+            The whole clearing seems to brighten.
             <br><br>
-            Find the witch.
+
+            Now you know exactly what you need to do.
+            <br><br>
+
+            Take the flower to the witch.
         `,
 
         choices: [
+
             {
-                text: "🧙 Take the flower to the witch",
+                text: "🧙 Take the flower straight to the witch",
                 next: "witchEnding",
                 trait: "kind"
             },
+
             {
-                text: "🌲 Take a scenic route first",
+                text: "🌲 Take a scenic route through the forest",
                 next: "scenicRoute",
                 trait: "curious"
             }
+
         ]
     },
 
-    scenicRoute: {
-        chapter: "Chapter Eleven",
-        icon: "🌲",
-        title: "One Last Detour",
-        background: "scene-path",
+
+    /* -----------------------------------------------------
+       GUARDIAN FRIEND
+       ----------------------------------------------------- */
+
+    guardianFriend: {
+
+        chapter: "Chapter Twelve",
+
+        icon: "💚",
+
+        title: "A New Forest Friend",
+
+        background: "scene-flower",
 
         text: `
-            You take the scenic route.
+            The guardian seems touched.
             <br><br>
-            It is beautiful.
+
+            It gives you the magical flower.
             <br><br>
-            It is peaceful.
+
+            Then it gently boops your forehead.
             <br><br>
-            It is also very easy to get lost here.
+
+            You have made a forest friend.
+            <br><br>
+
+            The witch is still waiting for the flower.
         `,
 
         choices: [
+
+            {
+                text: "🧙 Continue to the witch",
+                next: "witchEnding",
+                trait: "kind"
+            },
+
+            {
+                text: "🐻 Stay with your new friend",
+                next: "guardianEnding",
+                trait: "cozy"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       GUARDIAN ANGRY
+       ----------------------------------------------------- */
+
+    guardianAngry: {
+
+        chapter: "Chapter Nine",
+
+        icon: "😾",
+
+        title: "That Was Not Convincing",
+
+        background: "scene-deep",
+
+        text: `
+            You pretend that you have another biscuit.
+            <br><br>
+
+            The guardian stares at you.
+            <br><br>
+
+            You stare back.
+            <br><br>
+
+            The guardian looks at your empty paws.
+            <br><br>
+
+            It knows.
+        `,
+
+        choices: [
+
+            {
+                text: "🙇 Admit the truth and apologise",
+                next: "soupEscape",
+                trait: "kind"
+            },
+
+            {
+                text: "🏃 Run away",
+                next: "runWithFlower",
+                trait: "brave"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       SOUP ESCAPE
+       ----------------------------------------------------- */
+
+    soupEscape: {
+
+        chapter: "Chapter Ten",
+
+        icon: "🥣",
+
+        title: "The Suspicious Soup Pot",
+
+        background: "scene-swamp",
+
+        text: `
+            You apologise.
+            <br><br>
+
+            The guardian sighs.
+            <br><br>
+
+            It carries you toward a suspiciously large soup pot.
+            <br><br>
+
+            You begin to regret every decision you've made today.
+            <br><br>
+
+            Just before anything terrible happens, the guardian
+            puts you down.
+            <br><br>
+
+            Apparently, it was only making soup for lunch.
+        `,
+
+        choices: [
+
+            {
+                text: "🙇 Thank the guardian and behave",
+                next: "guardianFriendly",
+                trait: "kind"
+            },
+
+            {
+                text: "🏃 Leave very quickly",
+                next: "runWithFlower",
+                trait: "brave"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       RUN WITH FLOWER
+       ----------------------------------------------------- */
+
+    runWithFlower: {
+
+        chapter: "Chapter Thirteen",
+
+        icon: "🏃",
+
+        title: "Run!",
+
+        background: "scene-path",
+
+        text: `
+            You race through the forest.
+            <br><br>
+
+            Leaves fly everywhere.
+            <br><br>
+
+            You clutch the magical flower tightly.
+            <br><br>
+
+            Behind you, the guardian lets out one enormous roar.
+            <br><br>
+
+            You do not look back.
+        `,
+
+        choices: [
+
+            {
+                text: "🧙 Find the witch",
+                next: "witchEnding",
+                trait: "brave"
+            },
+
+            {
+                text: "🌲 Hide until everything is quiet",
+                next: "lostEnding",
+                trait: "clever"
+            }
+
+        ]
+    },
+
+
+    /* -----------------------------------------------------
+       SCENIC ROUTE
+       ----------------------------------------------------- */
+
+    scenicRoute: {
+
+        chapter: "Chapter Thirteen",
+
+        icon: "🌲",
+
+        title: "One Last Detour",
+
+        background: "scene-path",
+
+        text: `
+            You decide that carrying a magical flower through a
+            mysterious forest deserves a scenic route.
+            <br><br>
+
+            You walk beneath enormous trees.
+            <br><br>
+
+            Fireflies float around you.
+            <br><br>
+
+            For a moment, everything feels peaceful.
+            <br><br>
+
+            Then you realise you aren't entirely sure where you
+            are.
+        `,
+
+        choices: [
+
             {
                 text: "🧭 Trust your instincts",
                 next: "witchEnding",
                 trait: "brave"
             },
+
             {
                 text: "🐾 Follow tiny paw prints",
                 next: "lostEnding",
                 trait: "curious"
             }
+
         ]
     },
 
-    soupWarning: {
-        chapter: "Chapter Six",
-        icon: "🥣",
-        title: "The Soup Symbol",
-        background: "scene-swamp",
+
+    /* -----------------------------------------------------
+       WITCH ADVICE
+       ----------------------------------------------------- */
+
+    witchAdvice: {
+
+        chapter: "Chapter Nine",
+
+        icon: "🧙",
+
+        title: "The Witch's Advice",
+
+        background: "scene-witch",
 
         text: `
-            You investigate the soup symbol.
+            The witch smiles warmly.
             <br><br>
-            You find a sign.
+
+            “The guardian protects the flower,” she explains.
             <br><br>
-            “WARNING: SOUP.”
+
+            “But it isn't cruel.”
             <br><br>
-            You decide this information is sufficient.
+
+            She hands you a small biscuit.
+            <br><br>
+
+            “Try kindness first.”
         `,
 
         choices: [
+
             {
-                text: "🌲 Turn around",
-                next: "flowerPath",
-                trait: "clever"
+                text: "🍪 Save the biscuit for the guardian",
+                next: "biscuitGuardian",
+                trait: "kind"
             },
+
             {
-                text: "🥣 Investigate anyway",
-                next: "soupEnding",
-                trait: "chaotic"
+                text: "🌼 Ask where to find the guardian",
+                next: "witchFlowerClue",
+                trait: "curious"
             }
+
         ]
     },
 
-    doorEnding: {
-        ending: true,
-        background: "scene-bedroom",
-        icon: "🚪",
-        title: "The Door Slam Ending",
+
+    /* -----------------------------------------------------
+       WITCH FLOWER CLUE
+       ----------------------------------------------------- */
+
+    witchFlowerClue: {
+
+        chapter: "Chapter Ten",
+
+        icon: "🌼",
+
+        title: "A Very Specific Direction",
+
+        background: "scene-witch",
 
         text: `
-            You slam the door.
+            The witch points toward the trees.
             <br><br>
-            The forest remains in danger.
+
+            “Follow the glowing flowers until you reach a clearing.”
             <br><br>
-            The traveller goes home.
+
+            “The guardian will be there.”
             <br><br>
-            You go back to bed.
+
+            She pauses.
             <br><br>
-            Honestly, this is not your finest adventure.
-        `
+
+            “Be nice.”
+        `,
+
+        choices: [
+
+            {
+                text: "🌸 Follow the glowing flowers",
+                next: "flowerPath",
+                trait: "kind"
+            },
+
+            {
+                text: "🧠 Ask for a clever trick",
+                next: "witchTrick",
+                trait: "clever"
+            }
+
+        ]
     },
 
-    mapEnding: {
-        ending: true,
-        background: "scene-cottage",
-        icon: "🗺️",
-        title: "The Coaster Ending",
+
+    /* -----------------------------------------------------
+       WITCH TRICK
+       ----------------------------------------------------- */
+
+    witchTrick: {
+
+        chapter: "Chapter Eleven",
+
+        icon: "✨",
+
+        title: "The Witch's Little Trick",
+
+        background: "scene-witch",
 
         text: `
-            You use the magical map as a coaster.
+            The witch thinks for a moment.
             <br><br>
-            Unfortunately, the map was the only way to find the flower.
+
+            Then she gives you a tiny bell.
             <br><br>
-            The forest remains mysterious.
+
+            “Ring this when you meet the guardian.”
             <br><br>
-            Your coffee is very well protected, though.
-        `
+
+            “It will know that I sent you.”
+        `,
+
+        choices: [
+
+            {
+                text: "🔔 Take the bell and find the guardian",
+                next: "bellGuardian",
+                trait: "clever"
+            },
+
+            {
+                text: "🌸 Follow the flowers without the bell",
+                next: "flowerPath",
+                trait: "brave"
+            }
+
+        ]
     },
 
-    hatEnding: {
-        ending: true,
+
+    /* -----------------------------------------------------
+       BELL GUARDIAN
+       ----------------------------------------------------- */
+
+    bellGuardian: {
+
+        chapter: "Chapter Twelve",
+
+        icon: "🔔",
+
+        title: "The Little Bell",
+
         background: "scene-flower",
-        icon: "🎩",
-        title: "The Hat Ending",
 
         text: `
-            You leave the forest wearing the guardian's tiny hat.
+            You reach the guardian's clearing.
             <br><br>
-            You never actually deliver the flower.
+
+            You ring the tiny bell.
             <br><br>
-            But you look absolutely fantastic.
+
+            The guardian looks up.
             <br><br>
-            The forest will remember you as the tiny hat creature.
-        `
+
+            It recognises the witch's magic immediately.
+            <br><br>
+
+            The path to the flower is open.
+        `,
+
+        choices: [
+
+            {
+                text: "🌼 Carefully take the flower",
+                next: "flowerGranted",
+                trait: "clever"
+            },
+
+            {
+                text: "💚 Thank the guardian first",
+                next: "guardianFriend",
+                trait: "kind"
+            }
+
+        ]
     },
 
-    soupEnding: {
-        ending: true,
-        background: "scene-swamp",
-        icon: "🥣",
-        title: "The Soup Ending",
 
-        text: `
-            You made several questionable decisions.
-            <br><br>
-            The guardian catches you.
-            <br><br>
-            You are turned into soup.
-            <br><br>
-            It is a very respectable soup.
-            <br>
-            Probably.
-        `
-    },
-
-    lostEnding: {
-        ending: true,
-        background: "scene-deep",
-        icon: "🌲",
-        title: "The Lost Ending",
-
-        text: `
-            You wander deeper into the forest.
-            <br><br>
-            The trees all start looking the same.
-            <br><br>
-            You eventually find a very comfortable patch of moss.
-            <br><br>
-            You decide to stay there.
-            <br><br>
-            The flower is still missing.
-        `
-    },
+    /* -----------------------------------------------------
+       ENDINGS
+       ----------------------------------------------------- */
 
     napEnding: {
+
         ending: true,
+
         background: "scene-bedroom",
+
         icon: "🛏️",
+
         title: "The Extremely Well-Rested Ending",
 
         text: `
             You get back into bed.
             <br><br>
-            You had a nice nap.
+
+            You pull the blankets up.
             <br><br>
+
+            You have a very nice nap.
+            <br><br>
+
             The forest is still in danger.
             <br><br>
+
             But you are extremely well rested.
         `
     },
 
-    guardianEnding: {
+
+    doorEnding: {
+
         ending: true,
+
+        background: "scene-bedroom",
+
+        icon: "🚪",
+
+        title: "The Door Slam Ending",
+
+        text: `
+            You decide that mysterious travellers are not your
+            problem today.
+            <br><br>
+
+            You close the door.
+            <br><br>
+
+            The traveller walks away.
+            <br><br>
+
+            You go back to bed.
+            <br><br>
+
+            It is not your finest adventure.
+        `
+    },
+
+
+    lostEnding: {
+
+        ending: true,
+
+        background: "scene-deep",
+
+        icon: "🌲",
+
+        title: "The Lost Ending",
+
+        text: `
+            You wander deeper into the forest.
+            <br><br>
+
+            The trees all start looking the same.
+            <br><br>
+
+            Eventually you find a beautiful patch of glowing moss.
+            <br><br>
+
+            It is extremely comfortable.
+            <br><br>
+
+            You decide to stay there.
+            <br><br>
+
+            The flower is still missing.
+        `
+    },
+
+
+    guardianEnding: {
+
+        ending: true,
+
         background: "scene-flower",
+
         icon: "🐻",
+
         title: "The Forest Friend Ending",
 
         text: `
-            You decide to stay with the guardian.
+            You decide to stay with your new forest friend.
             <br><br>
-            You spend the afternoon sitting beneath the magical flowers.
+
+            You spend the afternoon sitting beneath the glowing
+            flowers.
             <br><br>
+
             The forest is still mysterious.
             <br><br>
+
             But now you have a very large friend.
         `
     },
 
-    witchEnding: {
+
+    hatEnding: {
+
         ending: true,
+
+        background: "scene-flower",
+
+        icon: "🎩",
+
+        title: "The Tiny Hat Ending",
+
+        text: `
+            You leave the forest wearing the guardian's tiny hat.
+            <br><br>
+
+            You never actually deliver the flower.
+            <br><br>
+
+            But you look absolutely fantastic.
+            <br><br>
+
+            The forest will remember you forever as
+            the tiny hat creature.
+        `
+    },
+
+
+    witchEnding: {
+
+        ending: true,
+
         background: "scene-witch",
+
         icon: "🧙‍♀️",
+
         title: "You Saved the Forest!",
 
         text: `
-            You bring the magical flower to the witch.
+            You finally reach the witch's cottage.
             <br><br>
+
+            You carefully hand her the magical flower.
+            <br><br>
+
             She smiles.
             <br><br>
+
             “You did it.”
             <br><br>
+
             She makes the potion.
             <br><br>
-            The forest glows.
+
+            Golden-green magic spreads through the forest.
             <br><br>
-            You have saved the day.
+
+            The trees glow.
             <br><br>
-            And, more importantly, you have made a new friend.
+
+            The forest is safe again.
+            <br><br>
+
+            And the kind witch asks if you'd like to stay for tea.
+            <br><br>
+
+            You have made a new friend.
         `
     }
+
 };
 
-function addTrait(trait) {
-    if (trait && traits.hasOwnProperty(trait)) {
-        traits[trait]++;
-    }
-}
+
+/* =========================================================
+   TRAVELER TYPE
+   ========================================================= */
 
 function getTravelerType() {
-    const entries = Object.entries(traits);
+
+    const entries =
+        Object.entries(traits);
 
     entries.sort(function(a, b) {
         return b[1] - a[1];
     });
 
-    const top = entries[0][0];
+    const top =
+        entries[0][0];
 
     const types = {
+
         brave: {
             name: "The Fearless Wanderer",
-            text: "You charge into strange situations with impressive confidence."
+            text:
+                "You charge into strange situations with impressive confidence."
         },
 
         kind: {
             name: "The Gentle Forest Friend",
-            text: "You lead with kindness, even when the forest gets weird."
+            text:
+                "You lead with kindness, even when the forest gets weird."
         },
 
         clever: {
             name: "The Clever Pathfinder",
-            text: "You prefer a smart solution over a dramatic one."
+            text:
+                "You prefer a smart solution over a dramatic one."
         },
 
         curious: {
             name: "The Curious Explorer",
-            text: "You cannot resist investigating whatever looks mysterious."
+            text:
+                "You cannot resist investigating whatever looks mysterious."
         },
 
         chaotic: {
             name: "The Chaotic Little Creature",
-            text: "You somehow turn every simple decision into an adventure."
+            text:
+                "You somehow turn every simple decision into an adventure."
         },
 
         cozy: {
             name: "The Cozy Wanderer",
-            text: "You believe every adventure should include rest, snacks, and a comfortable place to sit."
+            text:
+                "You believe every adventure should include rest, snacks and somewhere comfortable to sit."
         }
+
     };
 
     return types[top];
 }
 
+
+/* =========================================================
+   RESTART
+   ========================================================= */
+
 function restartGame() {
+
     traits = {
         brave: 0,
         kind: 0,
@@ -1742,96 +3112,169 @@ function restartGame() {
     showScene("start");
 }
 
+
+/* =========================================================
+   SHOW ENDING
+   ========================================================= */
+
 function showEnding(scene) {
-    const traveler = getTravelerType();
+
+    const traveler =
+        getTravelerType();
 
     content.innerHTML = `
+
         <div class="ending">
 
-            <div class="bigIcon">${scene.icon}</div>
+            <div class="bigIcon">
+                ${scene.icon}
+            </div>
 
-            <div class="chapter">Your Ending</div>
+            <div class="chapter">
+                Your Ending
+            </div>
 
-            <h1>${scene.title}</h1>
+            <h1>
+                ${scene.title}
+            </h1>
 
             <div class="story">
                 ${scene.text}
             </div>
 
             <div id="travelerResult">
-                <strong>${traveler.name}</strong>
+
+                <strong>
+                    ${traveler.name}
+                </strong>
+
                 <br><br>
+
                 ${traveler.text}
+
             </div>
 
-            <button id="restartButton">
+            <button
+                id="restartButton"
+                type="button"
+            >
                 🌲 Start the Mystery Trail Again
             </button>
 
         </div>
+
     `;
 
     document
         .getElementById("restartButton")
-        .addEventListener("click", restartGame);
+        .addEventListener(
+            "click",
+            restartGame
+        );
 }
 
+
+/* =========================================================
+   SHOW SCENE
+   ========================================================= */
+
 function showScene(sceneId) {
-    const scene = scenes[sceneId];
+
+    const scene =
+        scenes[sceneId];
 
     if (!scene) {
-        console.error("Scene not found:", sceneId);
+
+        console.error(
+            "Scene not found:",
+            sceneId
+        );
+
         return;
     }
 
-    background.className = scene.background;
+    background.className =
+        scene.background;
 
     if (scene.ending) {
+
         showEnding(scene);
+
         return;
     }
 
     content.innerHTML = `
-        <div class="chapter">${scene.chapter}</div>
 
-        <div class="icon">${scene.icon}</div>
+        <div class="chapter">
+            ${scene.chapter}
+        </div>
 
-        <h2>${scene.title}</h2>
+        <div class="icon">
+            ${scene.icon}
+        </div>
+
+        <h2>
+            ${scene.title}
+        </h2>
 
         <div class="story">
             ${scene.text}
         </div>
 
-        <div class="choices" id="choices"></div>
+        <div
+            class="choices"
+            id="choices"
+        ></div>
+
     `;
 
-    const choicesContainer = document.getElementById("choices");
+    const choicesContainer =
+        document.getElementById("choices");
+
 
     scene.choices.forEach(function(choice) {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
-        button.className = "choice";
-        button.type = "button";
-        button.textContent = choice.text;
+        button.className =
+            "choice";
 
-        /*
-            The listener is attached directly to the button.
-            No overlay or inline click handler is involved.
-        */
-        button.addEventListener("click", function() {
+        button.type =
+            "button";
 
-            addTrait(choice.trait);
+        button.textContent =
+            choice.text;
 
-            showScene(choice.next);
-        });
 
-        choicesContainer.appendChild(button);
+        button.addEventListener(
+            "click",
+            function() {
+
+                addTrait(choice.trait);
+
+                showScene(
+                    choice.next
+                );
+
+            }
+        );
+
+
+        choicesContainer.appendChild(
+            button
+        );
+
     });
 }
 
-/* Start the game */
+
+/* =========================================================
+   START
+   ========================================================= */
+
 showScene("start");
+
 </script>
 
 </body>
