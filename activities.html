@@ -3,507 +3,977 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Adventure Wheel 🎡</title>
+<title> Our Adventure Wheel 🎡</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-html {
-    scroll-behavior: smooth;
-}
+    html {
+        scroll-behavior: smooth;
+    }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Georgia, "Times New Roman", serif;
-    color: #f4ead5;
-    background:
-        radial-gradient(circle at 50% 15%, rgba(95, 130, 80, .35), transparent 35%),
-        radial-gradient(circle at 20% 80%, rgba(55, 85, 50, .35), transparent 35%),
-        linear-gradient(180deg, #0c2418 0%, #07150e 100%);
-    overflow-x: hidden;
-}
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        color: #f7f0dc;
+        background:
+            radial-gradient(circle at 50% 10%, rgba(80, 110, 75, .35), transparent 35%),
+            radial-gradient(circle at 20% 80%, rgba(48, 79, 55, .35), transparent 35%),
+            linear-gradient(180deg, #102b20 0%, #071812 50%, #04100c 100%);
+        overflow-x: hidden;
+    }
 
-/* Stars */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,.45) 1px, transparent 1px);
-    background-size: 95px 95px, 145px 145px;
-    background-position: 10px 20px, 50px 80px;
-    opacity: .45;
-}
+    /* --------------------------------------------------
+       BACKGROUND
+    -------------------------------------------------- */
 
-/* Heart cursor */
-body,
-button,
-a,
-input {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='25'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E"), auto;
-}
+    .stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: .8;
+    }
 
-.back-link {
-    display: inline-block;
-    margin: 22px;
-    padding: 10px 18px;
-    color: #f4ead5;
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 30px;
-    background: rgba(20, 50, 32, .7);
-    transition: .25s ease;
-}
+    .star {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #fff7d6;
+        box-shadow: 0 0 8px rgba(255, 247, 214, .8);
+        animation: twinkle 3s infinite ease-in-out;
+    }
 
-.back-link:hover {
-    background: rgba(70, 100, 65, .8);
-    transform: translateY(-2px);
-}
+    @keyframes twinkle {
+        0%, 100% {
+            opacity: .25;
+            transform: scale(.7);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+    }
 
-.page {
-    width: min(1000px, 94%);
-    margin: 0 auto;
-    padding-bottom: 100px;
-}
+    .fireflies {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
 
-header {
-    text-align: center;
-    padding: 20px 20px 35px;
-}
+    .firefly {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #d7f59a;
+        box-shadow: 0 0 12px 4px rgba(215, 245, 154, .5);
+        animation: floatFirefly 8s infinite ease-in-out;
+    }
 
-header h1 {
-    margin: 0 0 10px;
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    color: #f5df9b;
-    text-shadow: 0 3px 12px rgba(0,0,0,.6);
-}
+    @keyframes floatFirefly {
+        0% {
+            transform: translate(0, 0);
+            opacity: .2;
+        }
+        30% {
+            opacity: 1;
+        }
+        60% {
+            transform: translate(35px, -55px);
+            opacity: .7;
+        }
+        100% {
+            transform: translate(-15px, -100px);
+            opacity: .1;
+        }
+    }
 
-header p {
-    max-width: 650px;
-    margin: auto;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #d8d2bd;
-}
+    /* --------------------------------------------------
+       PAGE
+    -------------------------------------------------- */
 
-/* Wheel */
-.wheel-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .page {
+        position: relative;
+        z-index: 2;
+        width: min(1000px, 92%);
+        margin: 0 auto;
+        padding: 45px 0 100px;
+    }
 
-.wheel-wrap {
-    position: relative;
-    width: min(700px, 94vw);
-    aspect-ratio: 1;
-    margin: 10px auto 25px;
-}
+    .back-button {
+        display: inline-block;
+        margin-bottom: 25px;
+        padding: 10px 18px;
+        border: 1px solid rgba(255, 240, 190, .25);
+        border-radius: 30px;
+        color: #f8edc9;
+        text-decoration: none;
+        background: rgba(0, 0, 0, .22);
+        transition: .25s ease;
+    }
 
-#wheel {
-    width: 100%;
-    height: 100%;
-    display: block;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,.5));
-}
+    .back-button:hover {
+        transform: translateY(-2px);
+        background: rgba(0, 0, 0, .4);
+        box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    }
 
-.pointer {
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 22px solid transparent;
-    border-right: 22px solid transparent;
-    border-top: 45px solid #e7c96f;
-    filter: drop-shadow(0 3px 4px rgba(0,0,0,.6));
-    z-index: 5;
-}
+    header {
+        text-align: center;
+        margin-bottom: 45px;
+    }
 
-.spin-button {
-    border: none;
-    padding: 15px 34px;
-    border-radius: 50px;
-    background: #d6b85a;
-    color: #172315;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.1rem;
-    font-weight: bold;
-    box-shadow: 0 7px 18px rgba(0,0,0,.35);
-    transition: .25s ease;
-}
+    header .little-title {
+        font-size: .95rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #b8c998;
+        margin-bottom: 12px;
+    }
 
-.spin-button:hover {
-    transform: scale(1.05);
-    background: #e7cc78;
-}
+    header h1 {
+        margin: 0;
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        color: #fff2c7;
+        text-shadow:
+            0 3px 0 #3c2b1e,
+            0 7px 18px rgba(0,0,0,.45);
+    }
 
-.spin-button:disabled {
-    opacity: .45;
-    transform: none;
-}
+    header p {
+        max-width: 650px;
+        margin: 18px auto 0;
+        line-height: 1.7;
+        font-size: 1.1rem;
+        color: #d8d3bb;
+    }
 
-/* Selected activity */
-.selected-card {
-    width: min(650px, 94%);
-    margin: 20px auto 60px;
-    padding: 30px;
-    text-align: center;
-    border-radius: 24px;
-    background: rgba(30, 62, 39, .82);
-    border: 1px solid rgba(222, 196, 112, .35);
-    box-shadow: 0 15px 35px rgba(0,0,0,.35);
-}
+    /* --------------------------------------------------
+       SECTION TITLES
+    -------------------------------------------------- */
 
-.selected-card.hidden {
-    display: none;
-}
+    .section-title {
+        text-align: center;
+        margin: 55px 0 25px;
+    }
 
-.selected-emoji {
-    font-size: 4rem;
-    margin-bottom: 8px;
-}
+    .section-title h2 {
+        margin: 0;
+        font-size: 2rem;
+        color: #f9e8b1;
+    }
 
-.selected-card h2 {
-    margin: 5px 0 12px;
-    color: #f5df9b;
-    font-size: 2rem;
-}
+    .section-title p {
+        margin: 8px 0 0;
+        color: #bfc5aa;
+    }
 
-.selected-card p {
-    line-height: 1.6;
-    color: #ddd7c5;
-}
+    /* --------------------------------------------------
+       WHEEL
+    -------------------------------------------------- */
 
-.done-button {
-    margin-top: 12px;
-    padding: 13px 24px;
-    border: none;
-    border-radius: 30px;
-    background: #c9a957;
-    color: #172315;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 1rem;
-}
+    .wheel-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.done-button:hover {
-    background: #e0c46e;
-    transform: translateY(-2px);
-}
-
-/* Sections */
-.section {
-    margin: 60px auto;
-}
-
-.section-title {
-    text-align: center;
-    color: #f5df9b;
-    font-size: 2rem;
-    margin-bottom: 25px;
-}
-
-/* Checklist */
-.checklist {
-    display: grid;
-    gap: 12px;
-}
-
-.activity-check {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 16px 18px;
-    border-radius: 16px;
-    background: rgba(25, 53, 34, .8);
-    border: 1px solid rgba(255,255,255,.08);
-    transition: .2s ease;
-}
-
-.activity-check:hover {
-    background: rgba(40, 73, 47, .9);
-}
-
-.activity-check input {
-    width: 21px;
-    height: 21px;
-    accent-color: #d6b85a;
-    flex-shrink: 0;
-}
-
-.activity-check label {
-    flex: 1;
-    line-height: 1.4;
-}
-
-.activity-check.completed label {
-    text-decoration: line-through;
-    opacity: .55;
-}
-
-.check-emoji {
-    font-size: 1.6rem;
-}
-
-/* Badge cabinet */
-.badge-cabinet {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-    gap: 22px;
-}
-
-.badge-card {
-    text-align: center;
-    padding: 16px 10px;
-    border-radius: 20px;
-    background: rgba(24, 52, 33, .8);
-    border: 1px solid rgba(255,255,255,.08);
-    transition: .25s ease;
-}
-
-.badge-card:hover {
-    transform: translateY(-5px);
-    background: rgba(40, 73, 47, .9);
-}
-
-.badge-circle {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #344735;
-    border: 3px solid #d6b85a;
-    font-size: 2.3rem;
-}
-
-.badge-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.badge-card.locked .badge-circle {
-    filter: grayscale(1);
-    opacity: .42;
-    border-color: #777;
-}
-
-.badge-name {
-    color: #f5df9b;
-    font-size: .95rem;
-    line-height: 1.3;
-}
-
-.badge-card.locked .badge-name {
-    color: #8c8c7f;
-}
-
-.badge-status {
-    margin-top: 5px;
-    font-size: .8rem;
-    color: #aaa995;
-}
-
-/* Popup */
-.popup {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(0,0,0,.72);
-    z-index: 100;
-}
-
-.popup.hidden {
-    display: none;
-}
-
-.popup-box {
-    position: relative;
-    width: min(450px, 95%);
-    padding: 35px;
-    text-align: center;
-    border-radius: 25px;
-    background: #173622;
-    border: 1px solid rgba(222, 196, 112, .45);
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-}
-
-.popup-badge {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #334936;
-    border: 4px solid #d6b85a;
-    font-size: 4rem;
-}
-
-.popup-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.popup-box h2 {
-    margin: 5px 0 10px;
-    color: #f5df9b;
-}
-
-.popup-box p {
-    color: #d8d2bd;
-    line-height: 1.6;
-}
-
-.close-popup {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    border: none;
-    background: none;
-    color: #ddd;
-    font-size: 1.7rem;
-}
-
-/* Small note */
-.note {
-    text-align: center;
-    color: #aaa995;
-    font-size: .9rem;
-    margin-top: 25px;
-}
-
-@media (max-width: 600px) {
     .wheel-wrap {
-        width: 94vw;
+        position: relative;
+        width: min(470px, 88vw);
+        aspect-ratio: 1;
+        margin: 10px auto 30px;
     }
 
-    .selected-card {
-        padding: 23px 18px;
+    canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        filter:
+            drop-shadow(0 22px 25px rgba(0,0,0,.45))
+            drop-shadow(0 0 20px rgba(218, 184, 93, .12));
     }
 
-    .badge-cabinet {
-        grid-template-columns: repeat(2, 1fr);
+    .wheel-pointer {
+        position: absolute;
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-top: 38px solid #f3d27a;
+        filter: drop-shadow(0 3px 3px rgba(0,0,0,.5));
+        z-index: 5;
+    }
+
+    .wheel-centre {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 82px;
+        height: 82px;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background:
+            radial-gradient(circle at 35% 30%, #fff3bc, #c99746 55%, #66421f);
+        border: 5px solid #f0d68d;
+        box-shadow:
+            0 0 0 4px #4a301c,
+            0 8px 18px rgba(0,0,0,.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        z-index: 4;
+    }
+
+    .spin-button {
+        border: none;
+        padding: 16px 38px;
+        border-radius: 40px;
+        font-family: Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: bold;
+        color: #2c2115;
+        background: linear-gradient(135deg, #f4d88e, #bd873c);
+        box-shadow:
+            0 8px 0 #70451f,
+            0 14px 25px rgba(0,0,0,.3);
+        cursor: pointer;
+        transition: .2s ease;
+    }
+
+    .spin-button:hover {
+        transform: translateY(-3px);
+        box-shadow:
+            0 11px 0 #70451f,
+            0 17px 28px rgba(0,0,0,.35);
+    }
+
+    .spin-button:active {
+        transform: translateY(4px);
+        box-shadow:
+            0 4px 0 #70451f,
+            0 8px 15px rgba(0,0,0,.3);
+    }
+
+    .spin-button:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* --------------------------------------------------
+       RESULT CARD
+    -------------------------------------------------- */
+
+    .result-card {
+        width: min(680px, 100%);
+        min-height: 190px;
+        margin: 10px auto 0;
+        padding: 28px;
+        text-align: center;
+        border: 1px solid rgba(244, 216, 142, .25);
+        border-radius: 24px;
+        background:
+            linear-gradient(145deg, rgba(76, 58, 35, .72), rgba(31, 48, 34, .88));
+        box-shadow:
+            inset 0 0 35px rgba(255, 222, 139, .04),
+            0 15px 35px rgba(0,0,0,.3);
+    }
+
+    .result-card.empty {
+        color: #aeb49e;
+    }
+
+    .result-emoji {
+        font-size: 3.2rem;
+        margin-bottom: 5px;
+    }
+
+    .result-card h3 {
+        margin: 4px 0 10px;
+        font-size: 1.8rem;
+        color: #fff0bd;
+    }
+
+    .result-card p {
+        max-width: 550px;
+        margin: 0 auto 20px;
+        line-height: 1.6;
+        color: #d8d3bf;
+    }
+
+    .complete-result {
+        border: none;
+        padding: 11px 22px;
+        border-radius: 25px;
+        background: #d5ad61;
+        color: #302314;
+        font-family: Georgia, serif;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .complete-result:hover {
+        background: #efd18b;
+    }
+
+    /* --------------------------------------------------
+       CHECKLIST
+    -------------------------------------------------- */
+
+    .checklist {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
     }
 
-    .badge-circle {
-        width: 82px;
-        height: 82px;
+    .activity-card {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 17px 18px;
+        border: 1px solid rgba(220, 205, 161, .14);
+        border-radius: 16px;
+        background: rgba(16, 31, 23, .72);
+        transition: .25s ease;
     }
-}
+
+    .activity-card:hover {
+        transform: translateY(-3px);
+        background: rgba(37, 55, 39, .85);
+        border-color: rgba(236, 211, 139, .25);
+    }
+
+    .activity-card.done {
+        opacity: .65;
+        background: rgba(49, 62, 43, .55);
+    }
+
+    .activity-card input {
+        appearance: none;
+        flex: 0 0 auto;
+        width: 24px;
+        height: 24px;
+        border: 2px solid #a98a50;
+        border-radius: 7px;
+        cursor: pointer;
+        position: relative;
+        background: rgba(0,0,0,.2);
+    }
+
+    .activity-card input:checked {
+        background: #c49a4d;
+        border-color: #e7c979;
+    }
+
+    .activity-card input:checked::after {
+        content: "✓";
+        position: absolute;
+        inset: -1px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #302314;
+        font-weight: bold;
+    }
+
+    .activity-emoji {
+        font-size: 1.9rem;
+        flex: 0 0 auto;
+    }
+
+    .activity-text {
+        flex: 1;
+    }
+
+    .activity-text strong {
+        display: block;
+        color: #f4e8c2;
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+
+    .activity-text span {
+        display: block;
+        color: #9fa995;
+        font-size: .9rem;
+        line-height: 1.4;
+    }
+
+    /* --------------------------------------------------
+       BADGE CABINET
+    -------------------------------------------------- */
+
+    .cabinet {
+        position: relative;
+        margin-top: 20px;
+        padding: 30px 25px 35px;
+        border-radius: 25px;
+        border: 8px solid #4a2d19;
+        background:
+            linear-gradient(
+                90deg,
+                rgba(79, 46, 24, .95),
+                rgba(112, 69, 34, .95) 5%,
+                rgba(71, 41, 22, .95) 10%,
+                rgba(106, 62, 31, .95) 50%,
+                rgba(71, 41, 22, .95) 90%,
+                rgba(112, 69, 34, .95) 95%,
+                rgba(79, 46, 24, .95)
+            );
+        box-shadow:
+            inset 0 0 30px rgba(0,0,0,.45),
+            0 20px 40px rgba(0,0,0,.35);
+    }
+
+    .cabinet::before,
+    .cabinet::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 92%;
+        height: 4px;
+        background: #3b2415;
+        box-shadow: 0 2px 0 rgba(222, 174, 91, .2);
+    }
+
+    .cabinet::before {
+        top: 112px;
+    }
+
+    .cabinet::after {
+        bottom: 30px;
+    }
+
+    .cabinet-title {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        margin-bottom: 35px;
+    }
+
+    .cabinet-title .key {
+        font-size: 2rem;
+    }
+
+    .cabinet-title h2 {
+        margin: 5px 0;
+        color: #ffe7a5;
+        font-size: 2rem;
+        text-shadow: 0 2px 3px rgba(0,0,0,.5);
+    }
+
+    .cabinet-title p {
+        margin: 0;
+        color: #cdbb92;
+        font-size: .95rem;
+    }
+
+    .badge-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px 18px;
+    }
+
+    .badge {
+        min-width: 0;
+        text-align: center;
+        transition: .25s ease;
+    }
+
+    .badge:hover {
+        transform: translateY(-5px);
+    }
+
+    .badge-circle {
+        position: relative;
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        border: 5px solid #e1bd67;
+        background:
+            radial-gradient(circle at 35% 30%, #fff0a9, #a56d2d 65%, #4b2a17);
+        box-shadow:
+            0 5px 8px rgba(0,0,0,.4),
+            inset 0 0 10px rgba(255,255,255,.15);
+    }
+
+    .badge.earned .badge-circle {
+        filter: none;
+    }
+
+    .badge.locked .badge-circle {
+        border-color: #725b3e;
+        background:
+            radial-gradient(circle at 35% 30%, #5a5b4b, #292d27 65%, #171b18);
+        filter: grayscale(.7);
+    }
+
+    .badge-lock {
+        position: absolute;
+        right: -3px;
+        bottom: -3px;
+        width: 29px;
+        height: 29px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1b211b;
+        border: 2px solid #a48755;
+        font-size: .9rem;
+    }
+
+    .badge-name {
+        min-height: 35px;
+        color: #ffe7ad;
+        font-weight: bold;
+        font-size: .88rem;
+        line-height: 1.25;
+    }
+
+    .badge.locked .badge-name {
+        color: #8d8b79;
+    }
+
+    .badge-status {
+        margin-top: 4px;
+        color: #a8b094;
+        font-size: .72rem;
+    }
+
+    .badge.earned .badge-status {
+        color: #dfc879;
+    }
+
+    /* Badge image support */
+    .badge-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    /* --------------------------------------------------
+       PROGRESS
+    -------------------------------------------------- */
+
+    .progress-area {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .progress-text {
+        color: #c7c8af;
+        margin-bottom: 9px;
+    }
+
+    .progress-bar {
+        width: min(500px, 90%);
+        height: 12px;
+        margin: auto;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(0,0,0,.35);
+        border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #7d9c58, #d6b45d);
+        transition: width .5s ease;
+    }
+
+    /* --------------------------------------------------
+       ALL DONE
+    -------------------------------------------------- */
+
+    .all-done {
+        display: none;
+        margin-top: 35px;
+        padding: 28px;
+        text-align: center;
+        border-radius: 20px;
+        background: rgba(104, 78, 37, .3);
+        border: 1px solid rgba(233, 203, 121, .3);
+    }
+
+    .all-done.show {
+        display: block;
+    }
+
+    .all-done .big {
+        font-size: 3rem;
+    }
+
+    .all-done h2 {
+        color: #ffe7a5;
+        margin: 10px 0;
+    }
+
+    .all-done p {
+        color: #d0cbb6;
+        line-height: 1.6;
+    }
+
+    /* --------------------------------------------------
+       BADGE POPUP
+    -------------------------------------------------- */
+
+    .badge-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, .7);
+        backdrop-filter: blur(5px);
+    }
+
+    .badge-overlay.show {
+        display: flex;
+    }
+
+    .badge-popup {
+        width: min(430px, 100%);
+        padding: 35px 25px;
+        text-align: center;
+        border: 4px solid #9a7137;
+        border-radius: 25px;
+        background:
+            radial-gradient(circle at top, #46523a, #1c2c21 65%, #101b15);
+        box-shadow: 0 25px 60px rgba(0,0,0,.6);
+        animation: popupIn .35s ease;
+    }
+
+    @keyframes popupIn {
+        from {
+            opacity: 0;
+            transform: scale(.8) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .popup-stars {
+        font-size: 1.2rem;
+        letter-spacing: 8px;
+        color: #f2d27c;
+    }
+
+    .popup-badge {
+        width: 135px;
+        height: 135px;
+        margin: 18px auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        border: 7px solid #e1bd67;
+        background:
+            radial-gradient(circle at 35% 30%, #fff1a6, #a66f2d 65%, #4b2b18);
+        box-shadow: 0 10px 25px rgba(0,0,0,.45);
+        overflow: hidden;
+    }
+
+    .popup-badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .badge-popup h2 {
+        margin: 10px 0;
+        color: #ffe8a8;
+    }
+
+    .badge-popup p {
+        color: #d3d0bc;
+        line-height: 1.5;
+    }
+
+    .close-popup {
+        margin-top: 15px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 25px;
+        background: #d4ae61;
+        color: #302314;
+        font-family: Georgia, serif;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* --------------------------------------------------
+       HEART CURSOR
+    -------------------------------------------------- */
+
+    .heart {
+        position: fixed;
+        z-index: 9999;
+        pointer-events: none;
+        font-size: 15px;
+        animation: heartFloat .9s ease-out forwards;
+    }
+
+    @keyframes heartFloat {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(.8);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -110px) scale(1.5) rotate(15deg);
+        }
+    }
+
+    /* --------------------------------------------------
+       RESPONSIVE
+    -------------------------------------------------- */
+
+    @media (max-width: 720px) {
+        .page {
+            width: 94%;
+            padding-top: 30px;
+        }
+
+        .checklist {
+            grid-template-columns: 1fr;
+        }
+
+        .badge-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px 10px;
+        }
+
+        .badge-circle {
+            width: 75px;
+            height: 75px;
+            font-size: 2rem;
+        }
+
+        .badge-name {
+            font-size: .75rem;
+        }
+
+        .cabinet {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .cabinet::before {
+            top: 105px;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .badge-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .wheel-wrap {
+            width: 92vw;
+        }
+
+        .result-card {
+            padding: 22px 16px;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<a href="forest.html" class="back-link">← Back to the Forest</a>
+<div class="stars" id="stars"></div>
+<div class="fireflies" id="fireflies"></div>
 
 <div class="page">
 
-<header>
-    <h1>Our Adventure Wheel 🎡</h1>
-    <p>
-        Spin the wheel and let fate decide what adventure we're going on next.
-        Once we've done something, tick it off the list and earn its badge!
-    </p>
-</header>
+    <a href="forest.html" class="back-button">← Back to the Forest</a>
 
-<section class="wheel-section">
+    <header>
+        <div class="little-title">A little collection of things to do</div>
+        <h1>Our Adventures 🎡</h1>
+        <p>
+            Spin the wheel, see what fate has chosen for us,
+            and collect our little adventure badges along the way.
+        </p>
+    </header>
 
-    <div class="wheel-wrap">
-        <canvas id="wheel" width="700" height="700"></canvas>
-        <div class="pointer"></div>
-    </div>
 
-    <button class="spin-button" id="spinButton">
-        🎡 SPIN THE WHEEL
-    </button>
+    <!-- ================================================
+         WHEEL
+    ================================================= -->
 
-    <div class="selected-card hidden" id="selectedCard">
-        <div class="selected-emoji" id="selectedEmoji"></div>
-        <h2 id="selectedName"></h2>
-        <p id="selectedDescription"></p>
+    <section class="wheel-section">
 
-        <button class="done-button" id="doneButton">
-            We did it! Earn the badge 🏆
+        <div class="section-title">
+            <h2>What shall we do? ✨</h2>
+            <p>The wheel only shows the adventures still waiting for us.</p>
+        </div>
+
+        <div class="wheel-wrap">
+            <div class="wheel-pointer"></div>
+
+            <canvas id="wheel" width="700" height="700"></canvas>
+
+            <div class="wheel-centre">✨</div>
+        </div>
+
+        <button class="spin-button" id="spinButton">
+            SPIN THE WHEEL 🎡
         </button>
+
+        <div class="result-card empty" id="resultCard">
+            <div class="result-emoji">🎲</div>
+            <h3>Let's see what fate chooses...</h3>
+            <p>
+                Give the wheel a spin and it will choose one of our
+                adventures for us.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ================================================
+         PROGRESS
+    ================================================= -->
+
+    <div class="progress-area">
+        <div class="progress-text" id="progressText">
+            0 of 17 adventures completed
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
     </div>
 
-</section>
 
-<section class="section">
+    <!-- ================================================
+         CHECKLIST
+    ================================================= -->
 
-    <h2 class="section-title">🌿 Our Adventure Checklist</h2>
+    <section>
+        <div class="section-title">
+            <h2>Our Adventure List 📜</h2>
+            <p>
+                Tick something off when we've done it.
+                Untick it if you change your mind.
+            </p>
+        </div>
 
-    <div class="checklist" id="checklist"></div>
+        <div class="checklist" id="checklist"></div>
 
-    <p class="note">
-        Tick something off when we've done it. Uncheck it if we need to put it back on the wheel!
-    </p>
+        <div class="all-done" id="allDone">
+            <div class="big">🏆✨🌲</div>
+            <h2>We've done them all!</h2>
+            <p>
+                Somehow we've managed to complete every adventure
+                on the list. Our cabinet is full of badges. 💚
+            </p>
+        </div>
+    </section>
 
-</section>
 
-<section class="section">
+    <!-- ================================================
+         BADGE CABINET
+    ================================================= -->
 
-    <h2 class="section-title">🏆 Badge Cabinet</h2>
+    <section>
+        <div class="section-title">
+            <h2>Our Adventure Cabinet 🗝️</h2>
+            <p>
+                Every adventure earns us a little badge.
+                The locked ones are still waiting for us.
+            </p>
+        </div>
 
-    <div class="badge-cabinet" id="badgeCabinet"></div>
+        <div class="cabinet">
 
-</section>
+            <div class="cabinet-title">
+                <div class="key">🗝️</div>
+                <h2>OUR ADVENTURE CABINET</h2>
+                <p>Little memories of things we've done together</p>
+            </div>
+
+            <div class="badge-grid" id="badgeGrid"></div>
+
+        </div>
+    </section>
 
 </div>
 
-<!-- Badge popup -->
-<div class="popup hidden" id="badgePopup">
 
-    <div class="popup-box">
+<!-- ================================================
+     BADGE POPUP
+================================================= -->
 
-        <button class="close-popup" id="closePopup">×</button>
+<div class="badge-overlay" id="badgeOverlay">
 
-        <div class="popup-badge" id="popupBadge"></div>
+    <div class="badge-popup">
 
-        <h2 id="popupTitle"></h2>
+        <div class="popup-stars">✦ ✧ ✦</div>
+
+        <div class="popup-badge" id="popupBadge">
+            🏆
+        </div>
+
+        <h2 id="popupTitle">Badge Earned!</h2>
 
         <p id="popupDescription"></p>
 
+        <button class="close-popup" id="closePopup">
+            Add it to the cabinet ✨
+        </button>
+
     </div>
 
 </div>
 
+
 <script>
 
-/* =========================================================
+/* ==================================================
    ACTIVITIES
-========================================================= */
+================================================== */
 
 const activities = [
-
     {
         id: "beach",
         emoji: "🏖️",
         name: "Go to the Beach",
         description: "Get some sea air, search for seaglass, and spend a day doing absolutely nothing important.",
         badge: "Beach Bums",
-        badgeDescription: "Awarded for a glorious beach day together.",
+        badgeDescription: "Awarded for successfully becoming beach bums together.",
         image: "beach-badge.jpg"
     },
 
@@ -511,7 +981,7 @@ const activities = [
         id: "psl",
         emoji: "🎃",
         name: "Make Pumpkin Spice Lattes",
-        description: "Make our own pumpkin spice lattes and get aggressively excited about autumn.",
+        description: "Make our own cosy autumn pumpkin spice lattes and pretend we're in a tiny autumn café.",
         badge: "PSL Professionals",
         badgeDescription: "Awarded for mastering the sacred art of the pumpkin spice latte.",
         image: "psl-badge.jpg"
@@ -523,7 +993,7 @@ const activities = [
         name: "Go Fruit Picking",
         description: "Go fruit picking together and inevitably eat half of what we pick before we get home.",
         badge: "Fruit Goblins",
-        badgeDescription: "Awarded for surviving a fruit-picking adventure.",
+        badgeDescription: "Awarded for becoming fruit-picking goblins.",
         image: "fruit-badge.jpg"
     },
 
@@ -531,9 +1001,9 @@ const activities = [
         id: "craft",
         emoji: "🧶",
         name: "Do One Cozy Craft",
-        description: "Find a cute craft idea and spend an evening making something together.",
+        description: "Choose one cute craft and spend an evening making something cosy together.",
         badge: "Crafty Little Menaces",
-        badgeDescription: "Awarded for completing a cozy craft together.",
+        badgeDescription: "Awarded for creating something adorable and probably making a mess.",
         image: "craft-badge.jpg"
     },
 
@@ -543,7 +1013,7 @@ const activities = [
         name: "M&S Snacks Night",
         description: "Buy an unreasonable amount of M&S snacks and have a dedicated snack night.",
         badge: "Snack Scientists",
-        badgeDescription: "Awarded for conducting extremely important snack research.",
+        badgeDescription: "Awarded for being brave enough to go into the M&S snack aisle.",
         image: "snacks-badge.jpg"
     },
 
@@ -551,7 +1021,7 @@ const activities = [
         id: "crumble",
         emoji: "🍎",
         name: "Bake a Crumble",
-        description: "Bake a warm, cosy crumble together and eat it while pretending we made enough to share.",
+        description: "Make a warm homemade crumble and eat it while it's still far too hot.",
         badge: "Crumble Connoisseurs",
         badgeDescription: "Awarded for achieving peak crumble excellence.",
         image: "crumble-badge.jpg"
@@ -563,7 +1033,7 @@ const activities = [
         name: "Make Pizza From Scratch",
         description: "Make our own dough, and create the ultimate homemade pizza.",
         badge: "Pizza Architects",
-        badgeDescription: "Awarded for constructing an elite homemade pizza.",
+        badgeDescription: "Awarded for designing and constructing pizza from scratch.",
         image: "pizza-badge.jpg"
     },
 
@@ -571,9 +1041,9 @@ const activities = [
         id: "film",
         emoji: "🎬",
         name: "Smell Gets to Pick an At-Home Film",
-        description: "Smell gets complete control over the film choice and we have a cosy movie night at home.",
+        description: "Smell gets complete and unquestionable control over the film choice for one cosy night in.",
         badge: "Film Director",
-        badgeDescription: "Awarded to the person who gets to be in charge of film night.",
+        badgeDescription: "Awarded to the person brave enough to surrender film-picking power.",
         image: "film-badge.jpg"
     },
 
@@ -581,7 +1051,7 @@ const activities = [
         id: "cinema",
         emoji: "🎥",
         name: "Go to the Cinema",
-        description: "Pick a film, get snacks, and have a proper cinema date.",
+        description: "Pick a film, get cinema snacks and have a proper little cinema date.",
         badge: "Cinema Critics",
         badgeDescription: "Awarded for surviving another trip to the lowestoft cinema together.",
         image: "cinema-badge.jpg"
@@ -591,9 +1061,9 @@ const activities = [
         id: "walk",
         emoji: "🌿",
         name: "Have a Scenic Walk",
-        description: "Go somewhere pretty, get some fresh air, and have a wander together.",
+        description: "Find somewhere beautiful and go for a slow walk with no particular destination.",
         badge: "Wandering Adventurers",
-        badgeDescription: "Awarded for embarking on a scenic adventure together.",
+        badgeDescription: "Awarded for wandering somewhere lovely together.",
         image: "walk-badge.jpg"
     },
 
@@ -603,7 +1073,7 @@ const activities = [
         name: "Minecraft World Update",
         description: "Smell gets to show off all his world updates and plans.",
         badge: "World Builders",
-        badgeDescription: "Awarded for building a Minecraft world with enthusiasm.",
+        badgeDescription: "Awarded for Smell's enthisiasm and bravery for adding this on the list.",
         image: "minecraft-badge.jpg"
     },
 
@@ -611,9 +1081,9 @@ const activities = [
         id: "picnic",
         emoji: "🧺",
         name: "Go for a Picnic",
-        description: "Pack some tasty things, find a lovely spot, and have a picnic together.",
+        description: "Pack a blanket, snacks and drinks and find somewhere lovely for a picnic.",
         badge: "Picnic Professionals",
-        badgeDescription: "Awarded for a successful outdoor feast.",
+        badgeDescription: "Awarded for becoming suspiciously good at picnicking.",
         image: "picnic-badge.jpg"
     },
 
@@ -621,19 +1091,19 @@ const activities = [
         id: "cocktail",
         emoji: "🍸",
         name: "Cocktail Night",
-        description: "Make some cocktails together and have a fancy little night in.",
+        description: "Choose some cocktails to make, gather the ingredients and have our own little cocktail bar at home.",
         badge: "Mixology Menaces",
-        badgeDescription: "Awarded for causing chaos behind the cocktail bar.",
+        badgeDescription: "Awarded for mixing questionable but delicious cocktails together.",
         image: "cocktail-badge.jpg"
     },
 
     {
-        id: "apartment",
+        id: "pinterest",
         emoji: "🏠",
         name: "Make a Pinterest Board for Our Apartment",
         description: "Make a Pinterest board full of ideas for making our future apartment.",
         badge: "Interior Designers",
-        badgeDescription: "Awarded for designing our dream future home.",
+        badgeDescription: "Awarded for turning Pinterest dreams into apartment plans.",
         image: "apartment-badge.jpg"
     },
 
@@ -641,9 +1111,9 @@ const activities = [
         id: "content",
         emoji: "📸",
         name: "Togtastic Fall Content Shoot",
-        description: "Go out and make some ridiculously cute autumn content together.",
+        description: "Get dressed up, find some autumn scenery and create some very Togtastic fall content.",
         badge: "Content Creators",
-        badgeDescription: "Awarded for producing elite fall content.",
+        badgeDescription: "Awarded for creating an unnecessarily iconic autumn content shoot.",
         image: "content-badge.jpg"
     },
 
@@ -651,7 +1121,7 @@ const activities = [
         id: "pub",
         emoji: "🍻",
         name: "Pub Night",
-        description: "Go to the pub, have some drinks, chat nonsense and enjoy a proper night out.",
+        description: "Go to a cosy pub, have some drinks and spend an evening being silly together.",
         badge: "Pub Legends",
         badgeDescription: "Awarded for an epic pub night.",
         image: "pub-badge.jpg"
@@ -661,252 +1131,295 @@ const activities = [
         id: "sunset",
         emoji: "🌅",
         name: "Watch the Sunset",
-        description: "Find somewhere beautiful and sit together while we watch the sunset.",
+        description: "Find somewhere beautiful, sit together and properly watch the sun go down.",
         badge: "Professional Sunset Watchers",
-        badgeDescription: "Awarded for taking sunset appreciation extremely seriously.",
+        badgeDescription: "Awarded for taking sunset watching extremely seriously.",
         image: "sunset-badge.jpg"
     }
-
 ];
 
 
-/* =========================================================
-   SAVE / LOAD PROGRESS
-========================================================= */
+/* ==================================================
+   SAVED PROGRESS
+================================================== */
 
 const STORAGE_KEY = "birthdayForestAdventureProgress";
 
-let completed = JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "[]"
+let completed = new Set(
+    JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
 );
+
+let selectedActivity = null;
+let spinning = false;
 
 function saveProgress() {
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(completed)
+        JSON.stringify([...completed])
     );
 }
 
 
-/* =========================================================
+/* ==================================================
+   BACKGROUND
+================================================== */
+
+function createStars() {
+    const container = document.getElementById("stars");
+
+    for (let i = 0; i < 80; i++) {
+        const star = document.createElement("div");
+
+        star.className = "star";
+
+        star.style.left = Math.random() * 100 + "%";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.animationDelay = Math.random() * 4 + "s";
+
+        container.appendChild(star);
+    }
+}
+
+function createFireflies() {
+    const container = document.getElementById("fireflies");
+
+    for (let i = 0; i < 18; i++) {
+        const fly = document.createElement("div");
+
+        fly.className = "firefly";
+
+        fly.style.left = Math.random() * 100 + "%";
+        fly.style.top = 35 + Math.random() * 60 + "%";
+        fly.style.animationDelay = Math.random() * 8 + "s";
+        fly.style.animationDuration = 6 + Math.random() * 6 + "s";
+
+        container.appendChild(fly);
+    }
+}
+
+
+/* ==================================================
    WHEEL
-========================================================= */
+================================================== */
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const spinButton = document.getElementById("spinButton");
+let wheelRotation = 0;
 
-let currentRotation = 0;
-let spinning = false;
-let selectedActivity = null;
+const wheelFonts = [
+    "#e5c779",
+    "#718e5a",
+    "#a46d45",
+    "#687f66",
+    "#bd8d48",
+    "#526f55"
+];
 
 function getAvailableActivities() {
-    return activities.filter(
-        activity => !completed.includes(activity.id)
-    );
+    return activities.filter(activity => !completed.has(activity.id));
 }
 
 function drawWheel() {
 
     const available = getAvailableActivities();
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    const width = canvas.width;
+    const height = canvas.height;
 
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = 320;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const radius = width / 2 - 12;
+
+    ctx.clearRect(0, 0, width, height);
 
     if (available.length === 0) {
-
         ctx.beginPath();
-        ctx.arc(
-            centerX,
-            centerY,
-            radius,
-            0,
-            Math.PI * 2
-        );
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
 
-        ctx.fillStyle = "#284a32";
+        ctx.fillStyle = "#30432e";
         ctx.fill();
 
-        ctx.strokeStyle = "#d6b85a";
-        ctx.lineWidth = 5;
+        ctx.strokeStyle = "#d9bd70";
+        ctx.lineWidth = 12;
         ctx.stroke();
 
-        ctx.fillStyle = "#f5df9b";
-        ctx.font = "bold 28px Georgia";
+        ctx.fillStyle = "#f4df9e";
+        ctx.font = "bold 32px Georgia";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+        ctx.fillText("ALL DONE!", centerX, centerY - 20);
 
-        ctx.fillText(
-            "All adventures",
-            centerX,
-            centerY - 20
-        );
-
-        ctx.fillText(
-            "completed! 🏆",
-            centerX,
-            centerY + 25
-        );
-
-        spinButton.disabled = true;
+        ctx.font = "55px serif";
+        ctx.fillText("🏆", centerX, centerY + 55);
 
         return;
     }
 
     const slice = (Math.PI * 2) / available.length;
 
-    available.forEach((activity, index) => {
+    ctx.save();
 
-        const start = currentRotation + index * slice;
+    ctx.translate(centerX, centerY);
+    ctx.rotate(wheelRotation);
+
+    for (let i = 0; i < available.length; i++) {
+
+        const start = i * slice;
         const end = start + slice;
 
         ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(
-            centerX,
-            centerY,
-            radius,
-            start,
-            end
-        );
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, radius, start, end);
         ctx.closePath();
 
-        /*
-         * Alternating forest colours.
-         * These are deliberately subtle so the emoji remains
-         * the main visual element.
-         */
-        ctx.fillStyle =
-            index % 2 === 0
-                ? "#31543a"
-                : "#406447";
-
+        ctx.fillStyle = wheelFonts[i % wheelFonts.length];
         ctx.fill();
 
-        ctx.strokeStyle = "rgba(245,223,155,.35)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(255, 235, 171, .55)";
+        ctx.lineWidth = 3;
         ctx.stroke();
 
-        /* Emoji only — no text on the wheel */
-        const angle = start + slice / 2;
 
-        const emojiX =
-            centerX + Math.cos(angle) * 235;
+        /*
+         * EMOJI ONLY
+         *
+         * No activity text is drawn here.
+         * This keeps the wheel clean and prevents
+         * the labels from overlapping.
+         */
 
-        const emojiY =
-            centerY + Math.sin(angle) * 235;
+        const emojiAngle = start + slice / 2;
 
-        ctx.font = "42px serif";
+        const emojiRadius =
+            Math.min(
+                radius * .68,
+                radius * Math.max(.55, Math.sin(slice / 2) * 1.45)
+            );
+
+        const emojiX = Math.cos(emojiAngle) * emojiRadius;
+        const emojiY = Math.sin(emojiAngle) * emojiRadius;
+
+        ctx.save();
+
+        ctx.translate(emojiX, emojiY);
+        ctx.rotate(emojiAngle + Math.PI / 2);
+
+        const fontSize =
+            available.length > 13 ? 29 :
+            available.length > 9 ? 34 :
+            39;
+
+        ctx.font = `${fontSize}px serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
         ctx.fillText(
-            activity.emoji,
-            emojiX,
-            emojiY
+            available[i].emoji,
+            0,
+            0
         );
-    });
 
-    /* Centre circle */
+        ctx.restore();
+    }
+
+    ctx.restore();
+
+    /*
+     * Outer ring
+     */
 
     ctx.beginPath();
-    ctx.arc(
-        centerX,
-        centerY,
-        72,
-        0,
-        Math.PI * 2
-    );
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
 
-    ctx.fillStyle = "#1c3524";
-    ctx.fill();
-
-    ctx.strokeStyle = "#d6b85a";
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = "#e4c978";
+    ctx.lineWidth = 12;
     ctx.stroke();
 
-    ctx.font = "38px serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius - 10, 0, Math.PI * 2);
 
-    ctx.fillText(
-        "🎡",
-        centerX,
-        centerY
-    );
+    ctx.strokeStyle = "#49301d";
+    ctx.lineWidth = 4;
+    ctx.stroke();
 }
 
 
-/* =========================================================
+/* ==================================================
    SPIN
-========================================================= */
+================================================== */
 
-spinButton.addEventListener("click", () => {
+document.getElementById("spinButton").addEventListener("click", spinWheel);
+
+function spinWheel() {
+
+    if (spinning) return;
 
     const available = getAvailableActivities();
 
-    if (
-        spinning ||
-        available.length === 0
-    ) {
-        return;
-    }
+    if (!available.length) return;
 
     spinning = true;
-    spinButton.disabled = true;
 
-    const winnerIndex =
-        Math.floor(
-            Math.random() * available.length
-        );
+    document.getElementById("spinButton").disabled = true;
+
+    const chosenIndex =
+        Math.floor(Math.random() * available.length);
+
+    /*
+     * Pointer sits at the top of the wheel.
+     * Work out which rotation puts the chosen
+     * slice underneath it.
+     */
 
     const slice =
         (Math.PI * 2) / available.length;
 
-    /*
-     * The pointer is at the top.
-     * We rotate the wheel so the selected slice
-     * finishes underneath the pointer.
-     */
-
     const targetAngle =
-        -Math.PI / 2
-        - (winnerIndex + 0.5) * slice;
+        -(chosenIndex * slice + slice / 2) - Math.PI / 2;
+
+    const current =
+        wheelRotation % (Math.PI * 2);
+
+    let difference =
+        targetAngle - current;
+
+    while (difference < 0) {
+        difference += Math.PI * 2;
+    }
 
     const extraSpins =
-        5 + Math.floor(Math.random() * 3);
+        6 + Math.floor(Math.random() * 3);
 
-    const startRotation = currentRotation;
-
-    const targetRotation =
-        targetAngle +
+    const finalRotation =
+        wheelRotation +
+        difference +
         extraSpins * Math.PI * 2;
 
+    const startRotation = wheelRotation;
+
     const duration = 4200;
+
     const startTime = performance.now();
 
     function animate(now) {
 
         const elapsed = now - startTime;
+
         const progress =
             Math.min(elapsed / duration, 1);
 
-        /* Ease out */
+        /*
+         * Ease-out cubic
+         */
+
         const eased =
             1 - Math.pow(1 - progress, 4);
 
-        currentRotation =
+        wheelRotation =
             startRotation +
-            (targetRotation - startRotation) * eased;
+            (finalRotation - startRotation) * eased;
 
         drawWheel();
 
@@ -916,314 +1429,444 @@ spinButton.addEventListener("click", () => {
 
         } else {
 
-            currentRotation %= Math.PI * 2;
-
-            selectedActivity =
-                available[winnerIndex];
-
-            showSelectedActivity(
-                selectedActivity
-            );
+            wheelRotation = finalRotation;
 
             spinning = false;
-            spinButton.disabled = false;
 
-            drawWheel();
+            document.getElementById("spinButton").disabled = false;
+
+            selectedActivity = available[chosenIndex];
+
+            showResult(selectedActivity);
+
+            createHeartBurst();
         }
     }
 
     requestAnimationFrame(animate);
-});
-
-
-/* =========================================================
-   SELECTED ACTIVITY
-========================================================= */
-
-const selectedCard =
-    document.getElementById("selectedCard");
-
-const selectedEmoji =
-    document.getElementById("selectedEmoji");
-
-const selectedName =
-    document.getElementById("selectedName");
-
-const selectedDescription =
-    document.getElementById("selectedDescription");
-
-const doneButton =
-    document.getElementById("doneButton");
-
-function showSelectedActivity(activity) {
-
-    selectedEmoji.textContent =
-        activity.emoji;
-
-    selectedName.textContent =
-        activity.name;
-
-    selectedDescription.textContent =
-        activity.description;
-
-    selectedCard.classList.remove("hidden");
-
-    selectedCard.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
 }
 
 
-doneButton.addEventListener("click", () => {
+/* ==================================================
+   RESULT
+================================================== */
 
-    if (
-        !selectedActivity ||
-        completed.includes(selectedActivity.id)
-    ) {
-        return;
-    }
+function showResult(activity) {
 
-    completed.push(
-        selectedActivity.id
-    );
+    const card =
+        document.getElementById("resultCard");
 
-    saveProgress();
+    card.classList.remove("empty");
 
-    renderChecklist();
-    renderBadges();
-    drawWheel();
+    card.innerHTML = `
+        <div class="result-emoji">${activity.emoji}</div>
 
-    selectedCard.classList.add("hidden");
+        <h3>${activity.name}</h3>
+
+        <p>${activity.description}</p>
+
+        <button
+            class="complete-result"
+            onclick="completeSelectedActivity()">
+            We did it! Earn the badge 🏆
+        </button>
+    `;
+}
+
+function completeSelectedActivity() {
+
+    if (!selectedActivity) return;
+
+    completeActivity(selectedActivity.id);
+
+    showBadgePopup(selectedActivity);
 
     selectedActivity = null;
-});
+}
 
 
-/* =========================================================
+/* ==================================================
    CHECKLIST
-========================================================= */
-
-const checklist =
-    document.getElementById("checklist");
+================================================== */
 
 function renderChecklist() {
+
+    const checklist =
+        document.getElementById("checklist");
 
     checklist.innerHTML = "";
 
     activities.forEach(activity => {
 
-        const isCompleted =
-            completed.includes(activity.id);
+        const isDone =
+            completed.has(activity.id);
 
-        const row =
-            document.createElement("div");
+        const card =
+            document.createElement("label");
 
-        row.className =
-            "activity-check" +
-            (isCompleted ? " completed" : "");
+        card.className =
+            "activity-card" +
+            (isDone ? " done" : "");
 
-        row.innerHTML = `
-
+        card.innerHTML = `
             <input
                 type="checkbox"
-                id="check-${activity.id}"
-                ${isCompleted ? "checked" : ""}
+                ${isDone ? "checked" : ""}
+                onchange="toggleActivity('${activity.id}', this.checked)"
             >
 
-            <span class="check-emoji">
+            <div class="activity-emoji">
                 ${activity.emoji}
-            </span>
+            </div>
 
-            <label for="check-${activity.id}">
-                ${activity.name}
-            </label>
-
+            <div class="activity-text">
+                <strong>${activity.name}</strong>
+                <span>${activity.description}</span>
+            </div>
         `;
 
-        const checkbox =
-            row.querySelector("input");
-
-        checkbox.addEventListener(
-            "change",
-            () => {
-
-                if (checkbox.checked) {
-
-                    if (
-                        !completed.includes(activity.id)
-                    ) {
-                        completed.push(activity.id);
-                    }
-
-                } else {
-
-                    completed =
-                        completed.filter(
-                            id => id !== activity.id
-                        );
-                }
-
-                saveProgress();
-
-                renderChecklist();
-                renderBadges();
-                drawWheel();
-            }
-        );
-
-        checklist.appendChild(row);
+        checklist.appendChild(card);
     });
 }
 
+function toggleActivity(id, checked) {
 
-/* =========================================================
-   BADGES
-========================================================= */
+    if (checked) {
 
-const badgeCabinet =
-    document.getElementById("badgeCabinet");
+        completeActivity(id);
+
+        const activity =
+            activities.find(a => a.id === id);
+
+        if (activity) {
+            showBadgePopup(activity);
+        }
+
+    } else {
+
+        completed.delete(id);
+
+        saveProgress();
+
+        renderEverything();
+    }
+}
+
+function completeActivity(id) {
+
+    completed.add(id);
+
+    saveProgress();
+
+    renderEverything();
+}
+
+
+/* ==================================================
+   BADGE CABINET
+================================================== */
 
 function renderBadges() {
 
-    badgeCabinet.innerHTML = "";
+    const grid =
+        document.getElementById("badgeGrid");
+
+    grid.innerHTML = "";
 
     activities.forEach(activity => {
 
         const earned =
-            completed.includes(activity.id);
+            completed.has(activity.id);
 
-        const card =
+        const badge =
             document.createElement("div");
 
-        card.className =
-            "badge-card" +
-            (earned ? "" : " locked");
+        badge.className =
+            "badge " +
+            (earned ? "earned" : "locked");
 
         let badgeVisual;
 
+        /*
+         * Add your badge image here later.
+         *
+         * Example:
+         *
+         * image: "images/beach-badge.png"
+         */
+
         if (activity.image) {
 
-            badgeVisual = `
-                <img
-                    src="${activity.image}"
-                    alt="${activity.badge}"
-                >
-            `;
+            badgeVisual =
+                `<img src="${activity.image}" alt="${activity.badge}">`;
 
         } else {
 
             badgeVisual =
-                earned
-                    ? activity.emoji
-                    : "🔒";
+                activity.emoji;
         }
 
-        card.innerHTML = `
-
+        badge.innerHTML = `
             <div class="badge-circle">
                 ${badgeVisual}
+
+                ${
+                    earned
+                    ? ""
+                    : `<div class="badge-lock">🔒</div>`
+                }
             </div>
 
             <div class="badge-name">
-                ${earned ? activity.badge : "???"}
+                ${
+                    earned
+                    ? activity.badge
+                    : "???"
+                }
             </div>
 
             <div class="badge-status">
-                ${earned ? "✨ Earned!" : "🔒 Locked"}
+                ${
+                    earned
+                    ? "✦ EARNED ✦"
+                    : "Still waiting..."
+                }
             </div>
-
         `;
+
+        /*
+         * Clicking an earned badge shows its details.
+         */
 
         if (earned) {
 
-            card.addEventListener(
+            badge.style.cursor = "pointer";
+
+            badge.addEventListener(
                 "click",
-                () => openBadgePopup(activity)
+                () => showBadgePopup(activity)
             );
         }
 
-        badgeCabinet.appendChild(card);
+        grid.appendChild(badge);
     });
 }
 
 
-/* =========================================================
-   BADGE POPUP
-========================================================= */
+/* ==================================================
+   PROGRESS
+================================================== */
 
-const badgePopup =
-    document.getElementById("badgePopup");
+function updateProgress() {
 
-const popupBadge =
-    document.getElementById("popupBadge");
+    const total =
+        activities.length;
 
-const popupTitle =
-    document.getElementById("popupTitle");
+    const done =
+        completed.size;
 
-const popupDescription =
-    document.getElementById("popupDescription");
+    const percentage =
+        (done / total) * 100;
 
-const closePopup =
-    document.getElementById("closePopup");
+    document.getElementById("progressText")
+        .textContent =
+        `${done} of ${total} adventures completed`;
 
+    document.getElementById("progressFill")
+        .style.width =
+        percentage + "%";
 
-function openBadgePopup(activity) {
+    document.getElementById("allDone")
+        .classList.toggle(
+            "show",
+            done === total
+        );
 
-    if (activity.image) {
+    const spinButton =
+        document.getElementById("spinButton");
 
-        popupBadge.innerHTML = `
-            <img
-                src="${activity.image}"
-                alt="${activity.badge}"
-            >
-        `;
+    if (done === total) {
+
+        spinButton.disabled = true;
+
+        spinButton.textContent =
+            "EVERY ADVENTURE COMPLETE 🏆";
 
     } else {
 
-        popupBadge.textContent =
+        spinButton.disabled = spinning;
+
+        spinButton.textContent =
+            "SPIN THE WHEEL 🎡";
+    }
+}
+
+
+/* ==================================================
+   RENDER EVERYTHING
+================================================== */
+
+function renderEverything() {
+
+    drawWheel();
+    renderChecklist();
+    renderBadges();
+    updateProgress();
+}
+
+
+/* ==================================================
+   BADGE POPUP
+================================================== */
+
+function showBadgePopup(activity) {
+
+    const overlay =
+        document.getElementById("badgeOverlay");
+
+    const badge =
+        document.getElementById("popupBadge");
+
+    if (activity.image) {
+
+        badge.innerHTML =
+            `<img src="${activity.image}" alt="${activity.badge}">`;
+
+    } else {
+
+        badge.textContent =
             activity.emoji;
     }
 
-    popupTitle.textContent =
+    document.getElementById("popupTitle")
+        .textContent =
         activity.badge;
 
-    popupDescription.textContent =
+    document.getElementById("popupDescription")
+        .textContent =
         activity.badgeDescription;
 
-    badgePopup.classList.remove("hidden");
+    overlay.classList.add("show");
 }
 
+document.getElementById("closePopup")
+    .addEventListener("click", () => {
 
-function closeBadgePopup() {
-    badgePopup.classList.add("hidden");
-}
+        document
+            .getElementById("badgeOverlay")
+            .classList.remove("show");
+    });
 
+document.getElementById("badgeOverlay")
+    .addEventListener("click", event => {
 
-closePopup.addEventListener(
-    "click",
-    closeBadgePopup
-);
+        if (
+            event.target.id === "badgeOverlay"
+        ) {
 
-
-badgePopup.addEventListener(
-    "click",
-    event => {
-
-        if (event.target === badgePopup) {
-            closeBadgePopup();
+            event.currentTarget
+                .classList.remove("show");
         }
+    });
+
+
+/* ==================================================
+   HEART CURSOR
+================================================== */
+
+let lastHeart = 0;
+
+document.addEventListener("mousemove", event => {
+
+    const now = Date.now();
+
+    /*
+     * Don't create hundreds of hearts per second.
+     */
+
+    if (now - lastHeart < 75) return;
+
+    lastHeart = now;
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.textContent =
+        Math.random() > .35 ? "♥" : "♡";
+
+    heart.style.left =
+        event.clientX + "px";
+
+    heart.style.top =
+        event.clientY + "px";
+
+    heart.style.fontSize =
+        10 + Math.random() * 12 + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 900);
+});
+
+
+/* ==================================================
+   HEART CELEBRATION
+================================================== */
+
+function createHeartBurst() {
+
+    const symbols =
+        ["♥", "♡", "💚", "💛"];
+
+    for (let i = 0; i < 18; i++) {
+
+        const heart =
+            document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        heart.style.left =
+            (window.innerWidth / 2 +
+             (Math.random() - .5) * 250) + "px";
+
+        heart.style.top =
+            (window.innerHeight / 2 +
+             (Math.random() - .5) * 100) + "px";
+
+        heart.style.fontSize =
+            14 + Math.random() * 18 + "px";
+
+        heart.style.animationDuration =
+            .8 + Math.random() * .7 + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 1600);
     }
-);
+}
 
 
-/* =========================================================
-   INITIALISE
-========================================================= */
+/* ==================================================
+   START
+================================================== */
 
-renderChecklist();
-renderBadges();
-drawWheel();
+createStars();
+createFireflies();
+renderEverything();
 
 </script>
 
