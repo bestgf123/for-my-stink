@@ -522,12 +522,13 @@
         filter: none;
     }
 
-    .badge.locked .badge-circle {
-        border-color: #725b3e;
-        background:
-            radial-gradient(circle at 35% 30%, #5a5b4b, #292d27 65%, #171b18);
-        filter: grayscale(.7);
-    }
+.badge.locked .badge-circle {
+    border-color: #725b3e;
+    background:
+        radial-gradient(circle at 35% 30%, #5a5b4b, #292d27 65%, #171b18);
+    filter: grayscale(1) blur(5px);
+    opacity: .25;
+}
 
     .badge-lock {
         position: absolute;
