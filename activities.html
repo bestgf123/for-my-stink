@@ -1,1551 +1,1213 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Our Adventure Wheel 🎡</title>
-
+<title>The Birthday Forest 🌿</title>
 <style>
-
-/* =========================================================
-   BASIC RESET
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
-
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     margin: 0;
     min-height: 100vh;
-
     font-family: Georgia, serif;
-
     color: #f8f0d8;
-
     background:
-        radial-gradient(
-            circle at 50% 5%,
-            #49684b 0%,
-            #25472f 35%,
-            #10291b 100%
-        );
-
+        radial-gradient(circle at 50% 5%, #49684b 0%, #25472f 35%, #10291b 100%);
     overflow-x: hidden;
+    transition: background 1s ease;
 }
-
-
-/* =========================================================
-   HEART CURSOR TRAIL
-========================================================= */
-
-.heartTrail {
-    position: fixed;
-
-    pointer-events: none;
-
-    z-index: 99999;
-
-    font-size: 18px;
-
-    transform:
-        translate(-50%, -50%)
-        scale(.7);
-
-    opacity: 0;
-
-    animation:
-        heartFade 1s ease-out forwards;
+body.dayMode {
+    background:
+        radial-gradient(circle at 50% 5%, #a8d98d 0%, #4f8b54 40%, #24472d 100%);
 }
-
-@keyframes heartFade {
-
-    0% {
-        opacity: .9;
-
-        transform:
-            translate(-50%, -50%)
-            scale(.6)
-            rotate(-10deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -80px)
-            scale(1.15)
-            rotate(15deg);
-    }
-
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
+/* -------------------------
+   SKY
+------------------------- */
 .sky {
     position: fixed;
-
     inset: 0;
-
     pointer-events: none;
-
     z-index: 0;
 }
-
 .star {
     position: absolute;
-
     color: #f6df91;
-
-    animation:
-        twinkle 3s infinite ease-in-out;
+    animation: twinkle 3s infinite ease-in-out;
 }
-
 .star:nth-child(1) {
     top: 8%;
-    left: 10%;
+    left: 12%;
     font-size: 18px;
 }
-
 .star:nth-child(2) {
-    top: 15%;
-    right: 12%;
+    top: 13%;
+    right: 15%;
     font-size: 25px;
     animation-delay: 1s;
 }
-
 .star:nth-child(3) {
-    top: 40%;
-    left: 6%;
+    top: 30%;
+    left: 7%;
     animation-delay: 2s;
 }
-
 .star:nth-child(4) {
-    top: 65%;
-    right: 7%;
+    top: 45%;
+    right: 8%;
     animation-delay: .5s;
 }
-
 .star:nth-child(5) {
-    top: 82%;
-    left: 12%;
+    top: 70%;
+    left: 10%;
     font-size: 22px;
     animation-delay: 1.5s;
 }
-
 .star:nth-child(6) {
-    top: 92%;
-    right: 18%;
+    top: 82%;
+    right: 12%;
     animation-delay: 2s;
 }
-
+body.dayMode .star {
+    opacity: 0;
+}
 @keyframes twinkle {
-
     0%,100% {
         opacity: .25;
         transform: scale(.8);
     }
-
     50% {
         opacity: 1;
         transform: scale(1.25);
     }
-
 }
-
-
-/* =========================================================
-   FIRELIES
-========================================================= */
-
-.fireflies {
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-.firefly {
-    position: absolute;
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #ffe98a;
-
-    box-shadow:
-        0 0 12px 4px rgba(255,229,120,.7);
-
-    animation:
-        fireflyFloat 4s ease-in-out infinite;
-}
-
-.firefly:nth-child(1) {
-    left: 15%;
-    top: 20%;
-}
-
-.firefly:nth-child(2) {
-    left: 75%;
-    top: 18%;
-    animation-delay: 1s;
-}
-
-.firefly:nth-child(3) {
-    left: 35%;
-    top: 45%;
-    animation-delay: 2s;
-}
-
-.firefly:nth-child(4) {
-    left: 82%;
-    top: 58%;
-    animation-delay: .5s;
-}
-
-.firefly:nth-child(5) {
-    left: 20%;
-    top: 72%;
-    animation-delay: 1.5s;
-}
-
-.firefly:nth-child(6) {
-    left: 65%;
-    top: 85%;
-    animation-delay: 2.5s;
-}
-
-@keyframes fireflyFloat {
-
-    0%,100% {
-        opacity: .15;
-        transform: translate(0,0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translate(12px,-18px);
-    }
-
-}
-
-
-/* =========================================================
+/* -------------------------
    MAIN
-========================================================= */
-
-.page {
+------------------------- */
+.forest {
     position: relative;
-
-    z-index: 2;
-
-    max-width: 1100px;
-
+    z-index: 1;
+    max-width: 1000px;
     margin: auto;
-
-    padding:
-        40px 20px 100px;
-
+    padding: 45px 20px 120px;
     text-align: center;
 }
-
-
-/* =========================================================
+/* -------------------------
    HEADER
-========================================================= */
-
-.backButton {
-    display: inline-block;
-
-    margin-bottom: 20px;
-
-    padding: 10px 18px;
-
-    border-radius: 25px;
-
-    color: #f8f0d8;
-
-    text-decoration: none;
-
-    background: rgba(20,35,24,.55);
-
-    border:
-        1px solid rgba(246,223,145,.45);
-
-    transition: .3s;
-}
-
-.backButton:hover {
-    transform: translateY(-3px);
-
-    background:
-        rgba(245,233,197,.18);
-}
-
+------------------------- */
 .moon {
-    font-size: 55px;
-
-    animation:
-        float 4s ease-in-out infinite;
+    font-size: 65px;
+    animation: float 4s ease-in-out infinite;
+    cursor: pointer;
+    user-select: none;
 }
-
 @keyframes float {
-
     0%,100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-8px);
     }
-
 }
-
 h1 {
     margin: 5px 0;
-
-    font-size:
-        clamp(42px, 8vw, 72px);
-
+    font-size: clamp(45px, 8vw, 75px);
     color: #f5e9c5;
-
-    text-shadow:
-        0 5px 20px rgba(0,0,0,.4);
+    text-shadow: 0 5px 20px rgba(0,0,0,.4);
 }
-
 .intro {
     max-width: 650px;
-
-    margin:
-        15px auto 25px;
-
+    margin: 15px auto 25px;
     line-height: 1.7;
-
     color: #ded7bd;
-
     font-style: italic;
 }
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progressBox {
-    display: inline-block;
-
-    margin-bottom: 35px;
-
-    padding: 12px 24px;
-
+/* -------------------------
+   DAY/NIGHT BUTTON
+------------------------- */
+.modeButton {
+    border: none;
     border-radius: 30px;
-
-    background:
-        rgba(20,35,24,.6);
-
-    border:
-        1px solid rgba(246,223,145,.5);
-
-    color: #f6df91;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.25);
+    padding: 11px 20px;
+    margin-bottom: 18px;
+    background: rgba(245,233,197,.15);
+    border: 1px solid rgba(245,233,197,.4);
+    color: #f8f0d8;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
 }
-
-
-/* =========================================================
-   WHEEL AREA
-========================================================= */
-
-.wheelSection {
+.modeButton:hover {
+    transform: translateY(-3px);
+    background: rgba(245,233,197,.25);
+}
+/* -------------------------
+   DISCOVERY COUNTER
+------------------------- */
+.discoveryCounter {
+    display: inline-block;
+    margin: 5px auto 25px;
+    padding: 12px 22px;
+    border-radius: 30px;
+    background: rgba(20,35,24,.55);
+    border: 1px solid rgba(246,223,145,.5);
+    color: #f6df91;
+    font-size: 15px;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.2);
+}
+/* -------------------------
+   MAP
+------------------------- */
+.map {
+    position: relative;
+    width: 100%;
     max-width: 850px;
-
-    margin:
-        0 auto 70px;
-
-    padding:
-        35px 20px 45px;
-
+    height: 1550px;
+    margin: auto;
+    overflow: hidden;
     border-radius: 35px;
-
     background:
         radial-gradient(
             ellipse at center,
             rgba(91,126,77,.45),
-            rgba(21,55,32,.25) 70%,
+            rgba(21,55,32,.15) 60%,
             rgba(7,26,16,.5)
         );
-
-    border:
-        2px solid rgba(198,168,91,.55);
-
+    border: 2px solid rgba(198,168,91,.55);
     box-shadow:
-        inset 0 0 60px rgba(0,0,0,.25),
+        inset 0 0 80px rgba(0,0,0,.25),
         0 25px 60px rgba(0,0,0,.35);
+    transition: 1s;
 }
-
-.wheelTitle {
-    margin-top: 0;
-
-    color: #f5e4ad;
-
-    font-size: 28px;
-}
-
-
-/* =========================================================
-   WHEEL
-========================================================= */
-
-.wheelContainer {
-    position: relative;
-
-    width: min(82vw, 500px);
-
-    height: min(82vw, 500px);
-
-    margin:
-        25px auto 30px;
-}
-
-#wheelCanvas {
-    width: 100%;
-    height: 100%;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.5),
-        inset 0 0 20px rgba(255,255,255,.15);
-
-    transition:
-        transform 5s cubic-bezier(.12,.65,.15,1);
-}
-
-
-/* =========================================================
-   WHEEL POINTER
-========================================================= */
-
-.wheelPointer {
-    position: absolute;
-
-    top: -15px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    z-index: 5;
-
-    width: 0;
-    height: 0;
-
-    border-left:
-        18px solid transparent;
-
-    border-right:
-        18px solid transparent;
-
-    border-top:
-        45px solid #f6df91;
-
-    filter:
-        drop-shadow(
-            0 4px 4px rgba(0,0,0,.5)
+body.dayMode .map {
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(145,190,105,.5),
+            rgba(57,110,62,.2) 60%,
+            rgba(24,65,35,.5)
         );
 }
+/* -------------------------
+   ACTUAL TRAIL
+------------------------- */
+.trail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+.trail path {
+    fill: none;
+    stroke: #8c7047;
+    stroke-width: 65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter:
+        drop-shadow(0 7px 5px rgba(0,0,0,.25));
+}
+.trail .inner {
+    stroke: #b69a68;
+    stroke-width: 48;
+    opacity: .9;
+}
+/* -------------------------
+   DESTINATIONS
+------------------------- */
+.destination {
+    position: absolute;
+    z-index: 5;
+    width: 190px;
+    min-height: 115px;
+    padding: 15px;
+    text-decoration: none;
+    color: #f6efd8;
+    background: #6f4c2d;
+    border: 3px solid #3e2919;
+    border-radius: 12px;
+    box-shadow:
+        0 10px 18px rgba(0,0,0,.4);
+    transform: rotate(-2deg);
+    transition: .3s ease;
+}
+.destination::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 55px;
+    background: #4b301c;
+    left: 50%;
+    bottom: -53px;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.destination:hover {
+    transform:
+        scale(1.08)
+        rotate(0deg)
+        translateY(-5px);
+    box-shadow:
+        0 18px 30px rgba(0,0,0,.5);
+}
+.destination h2 {
+    margin: 4px 0;
+    font-size: 20px;
+    color: #f5e4ad;
+}
+.destination p {
+    margin: 4px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #eadfc5;
+}
+.icon {
+    font-size: 38px;
+}
+/* -------------------------
+   SIGN POSITIONS
+------------------------- */
 
+.westeros {
+    top: 100px;
+    left: 9%;
+}
+.activities {
+    top: 225px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+}
 
-/* =========================================================
-   SPIN BUTTON
-========================================================= */
+.facts {
+    top: 360px;
+    right: 7%;
+    transform: rotate(2deg);
+}
 
-.spinButton {
-    border: none;
+.game {
+    top: 620px;
+    left: 8%;
+}
 
-    padding:
-        16px 38px;
+.miniGames {
+    top: 880px;
+    right: 7%;
+    transform: rotate(2deg);
+}
 
-    border-radius: 35px;
+.cats {
+    top: 1140px;
+    left: 8%;
+    transform: rotate(-2deg);
+}
 
+.final {
+    top: 1380px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 215px;
+    background: #4b3825;
+}
+/* -------------------------
+   FOREST DECORATIONS
+------------------------- */
+.tree {
+    position: absolute;
+    z-index: 3;
+    font-size: 65px;
+    filter:
+        drop-shadow(0 7px 4px rgba(0,0,0,.35));
+}
+.t1 {
+    left: 15px;
+    top: 80px;
+}
+.t2 {
+    right: 15px;
+    top: 250px;
+}
+.t3 {
+    left: 20px;
+    top: 500px;
+}
+.t4 {
+    right: 10px;
+    top: 680px;
+}
+.t5 {
+    left: 10px;
+    top: 850px;
+}
+.t6 {
+    right: 15px;
+    top: 1000px;
+}
+.t7 {
+    left: 20px;
+    top: 1210px;
+}
+.t8 {
+    right: 15px;
+    top: 1330px;
+}
+/* -------------------------
+   FLOWERS
+------------------------- */
+.flower {
+    position: absolute;
+    z-index: 4;
+    font-size: 28px;
+    animation:
+        flowerFloat 4s infinite ease-in-out;
+}
+.f1 {
+    left: 18%;
+    top: 320px;
+}
+.f2 {
+    right: 17%;
+    top: 610px;
+    animation-delay: 1s;
+}
+.f3 {
+    left: 20%;
+    top: 920px;
+    animation-delay: 2s;
+}
+.f4 {
+    right: 18%;
+    top: 1180px;
+    animation-delay: .5s;
+}
+@keyframes flowerFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+/* -------------------------
+   EXISTING PAW PRINTS
+------------------------- */
+.paws {
+    position: absolute;
+    z-index: 4;
+    font-size: 23px;
+    letter-spacing: 12px;
+    opacity: .8;
+}
+.paws1 {
+    top: 360px;
+    left: 44%;
+    transform: rotate(25deg);
+}
+.paws2 {
+    top: 680px;
+    left: 45%;
+    transform: rotate(-25deg);
+}
+.paws3 {
+    top: 970px;
+    left: 43%;
+    transform: rotate(25deg);
+}
+/* -------------------------
+   HIDDEN DISCOVERIES
+------------------------- */
+.discovery {
+    position: absolute;
+    z-index: 9;
+    cursor: pointer;
+    user-select: none;
+    transition: .3s ease;
+    filter:
+        drop-shadow(0 5px 4px rgba(0,0,0,.35));
+}
+.discovery:hover {
+    transform: scale(1.3);
+}
+.discovery.found {
+    animation: discoveryFound .5s ease;
+}
+@keyframes discoveryFound {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.6) rotate(10deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.discoveryCat1 {
+    left: 6%;
+    top: 390px;
+}
+.discoveryCat2 {
+    right: 5%;
+    top: 875px;
+}
+.discoveryCat3 {
+    left: 7%;
+    top: 1160px;
+}
+.discoveryFrog {
+    right: 20%;
+    top: 250px;
+    font-size: 29px;
+}
+.discoveryMushroom {
+    left: 26%;
+    top: 575px;
+    font-size: 30px;
+}
+.discoveryFox {
+    right: 23%;
+    top: 790px;
+    font-size: 31px;
+}
+.discoveryOwl {
+    left: 30%;
+    top: 1100px;
+    font-size: 31px;
+}
+.discoveryCake {
+    left: 48%;
+    top: 1220px;
+    font-size: 32px;
+}
+/* -------------------------
+   FIRELIES
+------------------------- */
+.fireflies {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+.firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ffe98a;
+    box-shadow:
+        0 0 12px 4px rgba(255,229,120,.7);
+    animation:
+        fireflyFloat 4s ease-in-out infinite;
+}
+.firefly:nth-child(1) {
+    left: 25%;
+    top: 18%;
+    animation-delay: 0s;
+}
+.firefly:nth-child(2) {
+    left: 70%;
+    top: 27%;
+    animation-delay: 1s;
+}
+.firefly:nth-child(3) {
+    left: 37%;
+    top: 43%;
+    animation-delay: 2s;
+}
+.firefly:nth-child(4) {
+    left: 77%;
+    top: 58%;
+    animation-delay: .5s;
+}
+.firefly:nth-child(5) {
+    left: 24%;
+    top: 70%;
+    animation-delay: 1.5s;
+}
+.firefly:nth-child(6) {
+    left: 61%;
+    top: 82%;
+    animation-delay: 2.5s;
+}
+@keyframes fireflyFloat {
+    0%,100% {
+        opacity: .15;
+        transform: translate(0,0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(12px,-18px);
+    }
+}
+body.dayMode .fireflies {
+    opacity: .25;
+}
+/* -------------------------
+   WANDERING OWL
+------------------------- */
+.wanderingOwl {
+    position: fixed;
+    right: -80px;
+    top: 20%;
+    z-index: 100;
+    font-size: 42px;
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0;
+    padding: 35px;
+    margin: -35px;
+    line-height: 1;
+}
+.wanderingOwl.fly {
+    animation:
+        owlFly 8s linear forwards;
+}
+@keyframes owlFly {
+    0% {
+        right: -80px;
+        opacity: 0;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-70px);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        right: 110%;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+/* -------------------------
+   WRONG WAY SIGN
+------------------------- */
+.wrongWay {
+    position: absolute;
+    z-index: 7;
+    top: 485px;
+    left: 7%;
+    width: 150px;
+    padding: 12px;
+    background: #765332;
+    border: 3px solid #3d2718;
+    border-radius: 8px;
+    color: #f6e8bd;
+    font-size: 13px;
+    transform: rotate(-8deg);
+    cursor: pointer;
+    box-shadow:
+        0 8px 15px rgba(0,0,0,.35);
+    transition: .3s;
+}
+.wrongWay:hover {
+    transform:
+        rotate(-3deg)
+        scale(1.08);
+}
+/* -------------------------
+   POPUP
+------------------------- */
+.discoveryPopup {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform:
+        translateX(-50%)
+        translateY(120px);
+    z-index: 10000;
+    max-width: 90%;
+    padding: 15px 23px;
+    border-radius: 25px;
+    background: #f5e9c5;
+    color: #352b25;
+    border: 3px solid #c7a75c;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.4);
+    opacity: 0;
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+    pointer-events: none;
+    font-weight: bold;
+}
+.discoveryPopup.show {
+    opacity: 1;
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+/* -------------------------
+   CAT PAW CURSOR TRAIL
+------------------------- */
+.paw-print {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 21px;
+    line-height: 1;
+    opacity: 0;
+    animation:
+        pawFade 900ms ease-out forwards;
+}
+@keyframes pawFade {
+    0% {
+        opacity: .9;
+        transform:
+            translate(-50%, -50%)
+            rotate(-18deg)
+            scale(.65);
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            rotate(18deg)
+            scale(1.05);
+    }
+}
+/* -------------------------
+   MOBILE
+------------------------- */
+@media (max-width: 700px) {
+    .map {
+        height: 1850px;
+    }
+    .destination {
+        width: 160px;
+    }
+    .destination h2 {
+        font-size: 17px;
+    }
+    .destination p {
+        font-size: 11px;
+    }
+    .icon {
+        font-size: 32px;
+    }
+    .westeros {
+        left: 3%;
+    }
+    .facts {
+        right: 3%;
+    }
+    .game {
+        left: 3%;
+    }
+    .activities {
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+}
+    .cats {
+        right: 3%;
+    }
+    .wrongWay {
+        left: 3%;
+        width: 125px;
+        font-size: 11px;
+    }
+    .discoveryFrog {
+        right: 13%;
+    }
+    .discoveryMushroom {
+        left: 18%;
+    }
+    .discoveryFox {
+        right: 12%;
+    }
+
+}
+    /* -------------------------
+   FINAL GIFT
+------------------------- */
+
+.final {
+    cursor: pointer;
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease,
+        background .4s ease,
+        border-color .4s ease;
+}
+
+.final.locked {
+    filter: grayscale(.35);
+    opacity: .75;
+}
+
+.final.locked:hover {
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+}
+
+.final.unlocked {
     background:
         linear-gradient(
             135deg,
+            #765a32,
             #9b783d,
-            #d0ad61,
-            #765a32
+            #604525
         );
 
-    border:
-        2px solid #f6df91;
-
-    color: #fff6d7;
-
-    font-family: Georgia, serif;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    cursor: pointer;
+    border-color: #f6df91;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.35);
-
-    transition: .3s;
+        0 0 15px rgba(246,223,145,.35),
+        0 15px 35px rgba(0,0,0,.45);
 }
 
-.spinButton:hover {
+.final.unlocked:hover {
     transform:
-        scale(1.07)
-        translateY(-3px);
+        translateX(-50%)
+        scale(1.1)
+        rotate(0deg)
+        translateY(-6px);
 
     box-shadow:
-        0 12px 30px rgba(0,0,0,.45);
+        0 0 30px rgba(246,223,145,.55),
+        0 20px 45px rgba(0,0,0,.5);
 }
 
-.spinButton:disabled {
-    opacity: .5;
-
-    cursor: not-allowed;
-
-    transform: none;
+#finalGiftIcon {
+    transition: .4s ease;
 }
 
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-.resultBox {
-    max-width: 600px;
-
-    margin:
-        30px auto 0;
-
-    padding:
-        20px 25px;
-
-    border-radius: 25px;
-
-    background:
-        rgba(245,233,197,.1);
-
-    border:
-        1px solid rgba(246,223,145,.35);
-
-    opacity: 0;
-
-    transform:
-        translateY(10px);
-
-    transition:
-        .4s ease;
-
-    pointer-events: none;
+.final.unlocked #finalGiftIcon {
+    animation:
+        giftGlow 1.8s ease-in-out infinite;
 }
 
-.resultBox.show {
-    opacity: 1;
+@keyframes giftGlow {
 
-    transform:
-        translateY(0);
+    0%,100% {
+        transform: scale(1);
+        filter:
+            drop-shadow(
+                0 0 3px rgba(246,223,145,.4)
+            );
+    }
+
+    50% {
+        transform: scale(1.15) rotate(-4deg);
+        filter:
+            drop-shadow(
+                0 0 14px rgba(246,223,145,.9)
+            );
+    }
 }
 
-.resultEmoji {
-    font-size: 45px;
-}
-
-.resultBox h3 {
-    margin:
-        8px 0;
-
+.final.unlocked #finalGiftLock {
     color: #f6df91;
-
-    font-size: 25px;
-}
-
-.resultBox p {
-    margin: 5px 0;
-
-    color: #ded7bd;
 }
 
 
-/* =========================================================
-   CHECKLIST
-========================================================= */
+/* Little celebration */
 
-.activitiesSection {
-    max-width: 950px;
-
-    margin: auto;
-}
-
-.sectionHeading {
-    color: #f5e4ad;
-
-    font-size: 32px;
-
-    margin-bottom: 8px;
-}
-
-.sectionIntro {
-    color: #ded7bd;
-
-    margin-bottom: 30px;
-}
-
-.activityGrid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0,1fr));
-
-    gap: 18px;
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   ACTIVITY CARD
-========================================================= */
-
-.activityCard {
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    min-height: 105px;
-
-    padding: 15px 18px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(111,76,45,.75);
-
-    border:
-        2px solid rgba(62,41,25,.8);
-
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.3);
-
-    transition:
-        .35s ease;
-}
-
-.activityCard:hover {
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 13px 25px rgba(0,0,0,.4);
-}
-
-.activityCard.completed {
-    opacity: .7;
-
-    background:
-        rgba(55,75,51,.65);
-
-    border-color:
-        rgba(246,223,145,.35);
-}
-
-
-/* =========================================================
-   CHECKBOX
-========================================================= */
-
-.activityCheckbox {
-    appearance: none;
-
-    flex-shrink: 0;
-
-    width: 28px;
-    height: 28px;
-
-    border-radius: 8px;
-
-    border:
-        2px solid #d8bf7c;
-
-    background:
-        rgba(0,0,0,.2);
-
-    cursor: pointer;
-
-    position: relative;
-
-    transition: .25s;
-}
-
-.activityCheckbox:hover {
-    transform: scale(1.1);
-}
-
-.activityCheckbox:checked {
-    background:
-        #9b783d;
-
-    border-color:
-        #f6df91;
-}
-
-.activityCheckbox:checked::after {
-    content: "✓";
-
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform:
-        translate(-50%,-55%);
-
-    color: #fff8dd;
-
-    font-size: 19px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ACTIVITY CONTENT
-========================================================= */
-
-.activityIcon {
-    font-size: 34px;
-
-    flex-shrink: 0;
-}
-
-.activityInfo {
-    flex: 1;
-}
-
-.activityInfo h3 {
-    margin:
-        0 0 5px;
-
-    color: #f5e4ad;
-
-    font-size: 18px;
-}
-
-.activityInfo p {
-    margin: 0;
-
-    color: #d8ceb3;
-
-    font-size: 13px;
-
-    line-height: 1.4;
-}
-
-.completed .activityInfo h3 {
-    text-decoration:
-        line-through;
-
-    text-decoration-thickness: 2px;
-}
-
-
-/* =========================================================
-   COMPLETED LABEL
-========================================================= */
-
-.completedLabel {
-    display: none;
-
-    color: #f6df91;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-.completed .completedLabel {
-    display: block;
-}
-
-
-/* =========================================================
-   BADGE POPUP
-========================================================= */
-
-.badgeOverlay {
+.forestCompleteFlash {
     position: fixed;
-
     inset: 0;
-
-    z-index: 50000;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    background:
-        rgba(5,18,10,.75);
-
-    backdrop-filter:
-        blur(5px);
-
-    opacity: 0;
-
+    z-index: 9998;
     pointer-events: none;
 
-    transition: .35s;
-}
-
-.badgeOverlay.show {
-    opacity: 1;
-
-    pointer-events: auto;
-}
-
-.badge {
-    width: min(90vw, 430px);
-
-    padding:
-        30px 25px;
-
-    border-radius: 30px;
-
     background:
-        linear-gradient(
-            145deg,
-            #6f4c2d,
-            #49321f
+        radial-gradient(
+            circle,
+            rgba(246,223,145,.18),
+            transparent 65%
         );
 
-    border:
-        3px solid #c7a75c;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.65);
-
     animation:
-        badgePop .55s ease;
+        forestFlash 1.5s ease-out forwards;
 }
 
-@keyframes badgePop {
+@keyframes forestFlash {
 
     0% {
-        transform:
-            scale(.5)
-            rotate(-8deg);
-
         opacity: 0;
     }
 
-    70% {
-        transform:
-            scale(1.05)
-            rotate(2deg);
-    }
-
-    100% {
-        transform:
-            scale(1)
-            rotate(0);
-    }
-
-}
-
-.badgeImage {
-    width: 180px;
-
-    height: 180px;
-
-    margin:
-        0 auto 15px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 25px;
-
-    background:
-        rgba(0,0,0,.2);
-
-    border:
-        2px dashed rgba(246,223,145,.45);
-
-    overflow: hidden;
-
-    font-size: 65px;
-}
-
-.badgeImage img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-.badge h2 {
-    margin:
-        5px 0;
-
-    color: #f6df91;
-
-    font-size: 29px;
-}
-
-.badge p {
-    color: #eadfc5;
-
-    line-height: 1.5;
-}
-
-.closeBadge {
-    margin-top: 10px;
-
-    padding:
-        11px 25px;
-
-    border-radius: 25px;
-
-    border:
-        1px solid #d8bf7c;
-
-    background:
-        rgba(245,233,197,.12);
-
-    color: #f8f0d8;
-
-    font-family: Georgia, serif;
-
-    cursor: pointer;
-}
-
-.closeBadge:hover {
-    background:
-        rgba(245,233,197,.22);
-}
-
-
-/* =========================================================
-   ALL COMPLETE
-========================================================= */
-
-.completeMessage {
-    display: none;
-
-    margin:
-        45px auto 0;
-
-    max-width: 650px;
-
-    padding:
-        25px;
-
-    border-radius: 25px;
-
-    background:
-        rgba(155,120,61,.25);
-
-    border:
-        2px solid #c7a75c;
-
-    box-shadow:
-        0 0 30px rgba(246,223,145,.2);
-}
-
-.completeMessage.show {
-    display: block;
-
-    animation:
-        completeAppear .7s ease;
-}
-
-@keyframes completeAppear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            scale(.9);
-    }
-
-    to {
+    25% {
         opacity: 1;
-
-        transform:
-            scale(1);
-    }
-
-}
-
-.completeMessage h2 {
-    margin-top: 0;
-
-    color: #f6df91;
-}
-
-
-/* =========================================================
-   CONFETTI / HEART CELEBRATION
-========================================================= */
-
-.celebrationHeart {
-    position: fixed;
-
-    z-index: 60000;
-
-    pointer-events: none;
-
-    font-size: 28px;
-
-    animation:
-        celebrationFloat 2s ease-out forwards;
-}
-
-@keyframes celebrationFloat {
-
-    0% {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(.5)
-            rotate(0);
     }
 
     100% {
         opacity: 0;
-
-        transform:
-            translateY(-250px)
-            scale(1.4)
-            rotate(25deg);
     }
-
 }
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .page {
-        padding:
-            25px 13px 80px;
-    }
-
-    .wheelSection {
-        padding:
-            25px 12px 35px;
-        border-radius: 25px;
-    }
-
-    .wheelTitle {
-        font-size: 24px;
-    }
-
-    .activityGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .activityCard {
-        min-height: 95px;
-    }
-
-    .activityInfo h3 {
-        font-size: 16px;
-    }
-
-    .activityInfo p {
-        font-size: 12px;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-
-        animation-iteration-count: 1 !important;
-
-        scroll-behavior: auto !important;
-
-        transition-duration: .01ms !important;
-    }
-
-}
-
 </style>
 </head>
-
-
 <body>
-
-
-<!-- =======================================================
-     BACKGROUND
-======================================================= -->
-
+<!-- STARS -->
 <div class="sky">
-
-    <div class="star">✦</div>
-    <div class="star">✧</div>
-    <div class="star">✦</div>
-    <div class="star">✧</div>
-    <div class="star">✦</div>
-    <div class="star">✧</div>
-
+<div class="star">✦</div>
+<div class="star">✧</div>
+<div class="star">✦</div>
+<div class="star">✧</div>
+<div class="star">✦</div>
+<div class="star">✧</div>
 </div>
-
-
-<div class="fireflies">
-
-    <span class="firefly"></span>
-    <span class="firefly"></span>
-    <span class="firefly"></span>
-    <span class="firefly"></span>
-    <span class="firefly"></span>
-    <span class="firefly"></span>
-
-</div>
-
-
-<!-- =======================================================
-     BADGE POPUP
-======================================================= -->
-
 <div
-    class="badgeOverlay"
-    id="badgeOverlay">
-
-    <div class="badge">
-
-        <div
-            class="badgeImage"
-            id="badgeImage">
-            🏆
-        </div>
-
-        <h2 id="badgeTitle">
-            Achievement Unlocked!
-        </h2>
-
-        <p id="badgeDescription">
-            You completed an adventure!
-        </p>
-
-        <button
-            class="closeBadge"
-            id="closeBadge">
-            ❤️ Keep Adventuring
-        </button>
-
-    </div>
-
+    class="wanderingOwl"
+    id="wanderingOwl"
+    title="Catch the owl!">
+    🦉
 </div>
-
-
-<!-- =======================================================
-     MAIN PAGE
-======================================================= -->
-
-<main class="page">
-
-
-    <a
-        href="index.html"
-        class="backButton">
-
-        🌲 Back to the Birthday Forest
-
-    </a>
-
-
-    <div class="moon">
-        🎡
+<div
+    class="discoveryPopup"
+    id="discoveryPopup">
+</div>
+<main class="forest">
+<div
+    class="moon"
+    id="moonButton"
+    title="Change the forest">
+    🌙
+</div>
+<h1>
+    The Birthday Forest
+</h1>
+<p class="intro">
+    Follow the trails, brave the unknown,
+    and see what you discover along the way...
+</p>
+<button
+    class="modeButton"
+    id="modeButton">
+    ☀️ Enter Daytime
+</button>
+<div
+    class="discoveryCounter"
+    id="discoveryCounter">
+    🌿 Secrets discovered: 0 / 8
+</div>
+<section class="map">
+    <!-- FIRELIES -->
+    <div class="fireflies">
+        <span class="firefly"></span>
+        <span class="firefly"></span>
+        <span class="firefly"></span>
+        <span class="firefly"></span>
+        <span class="firefly"></span>
+        <span class="firefly"></span>
     </div>
+    <!-- TREES -->
+    <div class="tree t1">🌲</div>
+    <div class="tree t2">🌳</div>
+    <div class="tree t3">🌲</div>
+    <div class="tree t4">🌳</div>
+    <div class="tree t5">🌲</div>
+    <div class="tree t6">🌳</div>
+    <div class="tree t7">🌲</div>
+    <div class="tree t8">🌲</div>
+    <!-- REAL CURVED TRAIL -->
+    <svg
+        class="trail"
+        viewBox="0 0 850 1450"
+        preserveAspectRatio="none">
+        <path
+            d="
+            M425 70
+            C300 170,
+            520 260,
+            430 360
+            C340 460,
+            570 520,
+            425 650
+            C280 780,
+            550 850,
+            430 960
+            C330 1060,
+            560 1130,
+            425 1250
+            C400 1300,
+            425 1360,
+            425 1400
+            "
+        />
+        <path
+            class="inner"
+            d="
+            M425 70
+            C300 170,
+            520 260,
+            430 360
+            C340 460,
+            570 520,
+            425 650
+            C280 780,
+            550 850,
+            430 960
+            C330 1060,
+            560 1130,
+            425 1250
+            C400 1300,
+            425 1360,
+            425 1400
+            "
+        />
+    </svg>
+    <!-- WESTEROS -->
+    <a
+        href="quiz.html"
+        class="destination westeros">
+        <div class="icon">🐉</div>
+        <h2>
+            The Westeros Trail
+        </h2>
+        <p>
+            Find out how cool you are!
+        </p>
+    </a>
+    <!-- ACTIVITIES -->
+<a
+    href="activities.html"
+    class="destination activities">
+    <div class="icon">🎡</div>
+    <h2>
+        Our Adventures
+    </h2>
+    <p>
+        Spin the wheel and choose something for us to do together...
+    </p>
+</a>
+    <!-- FACTS -->
+    <a
+        href="facts.html"
+        class="destination facts">
+        <div class="icon">⭐</div>
+        <h2>
+            Birthday Facts
+        </h2>
+        <p>
+            Follow this trail for weird and wonderful knowledge.
+        </p>
+    </a>
+    <!-- GAME -->
+    <a
+        href="game.html"
+        class="destination game">
+        <div class="icon">🎮</div>
+        <h2>
+            The Adventures of Mr Tapus
+        </h2>
+        <p>
+            Jump, explore, and be an absolute menace.
+        </p>
+    </a>
+    <!-- MINI GAMES -->
+<a
+    href="minigames.html"
+    class="destination miniGames">
+    <div class="icon">📰</div>
+    <h2>
+        Mini Games
+    </h2>
+    <p>
+        Take a little break from adventuring...
+    </p>
+</a>
+    <!-- CATS -->
+<a
+    href="cats.html"
+    class="destination cats">
+    <div class="icon">🧿</div>
+    <h2>
+        Mystery Trail
+    </h2>
+    <p>
+        A mysterious adventure awaits you...
+    </p>
+</a>
 
+    <!-- FINAL -->
+    <div
+    class="destination final"
+    id="finalGift"
+    role="button"
+    tabindex="0">
 
-    <h1>
-        Our Adventure Wheel
-    </h1>
+    <div class="icon" id="finalGiftIcon">🎁</div>
 
+    <h2>
+        The Final Gift
+    </h2>
 
-    <p class="intro">
-        So many things to do, so little time...
-        spin the wheel and let fate decide what
-        adventure we're going on next. ❤️
+    <p id="finalGiftText">
+        Something special waits beyond this point.
     </p>
 
+    <p id="finalGiftLock">
+        🔒
+    </p>
 
-    <div
-        class="progressBox"
-        id="progressBox">
-
-        🌿 Adventures completed:
-        <strong id="completedCount">0</strong>
-        /
-        <strong id="totalCount">17</strong>
-
+</div>
+    <!-- FLOWERS -->
+    <div class="flower f1">🌼</div>
+    <div class="flower f2">🌸</div>
+    <div class="flower f3">🌷</div>
+    <div class="flower f4">🌼</div>
+    <!-- EXISTING PAWS -->
+    <div class="paws paws1">
+        🐾 🐾
     </div>
-
-
-    <!-- ===================================================
-         WHEEL
-    =================================================== -->
-
-    <section class="wheelSection">
-
-        <h2 class="wheelTitle">
-            🎡 What shall we do?
-        </h2>
-
-
-        <div class="wheelContainer">
-
-            <div class="wheelPointer"></div>
-
-            <canvas
-                id="wheelCanvas"
-                width="600"
-                height="600">
-            </canvas>
-
-        </div>
-
-
-        <button
-            class="spinButton"
-            id="spinButton">
-
-            🎡 SPIN THE WHEEL
-
-        </button>
-
-
-        <div
-            class="resultBox"
-            id="resultBox">
-
-            <div
-                class="resultEmoji"
-                id="resultEmoji">
-                ✨
-            </div>
-
-            <h3 id="resultTitle">
-                Ready?
-            </h3>
-
-            <p id="resultText">
-                Let's see where the wheel takes us...
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         CHECKLIST
-    =================================================== -->
-
-    <section class="activitiesSection">
-
-        <h2 class="sectionHeading">
-            🌿 Our Adventure List
-        </h2>
-
-        <p class="sectionIntro">
-            Tick something off when we've actually done it.
-            Completed adventures disappear from the wheel,
-            but you can always untick one if you made a
-            mistake. ❤️
-        </p>
-
-
-        <div
-            class="activityGrid"
-            id="activityGrid">
-        </div>
-
-
-        <div
-            class="completeMessage"
-            id="completeMessage">
-
-            <h2>
-                🎉 WE DID EVERYTHING! 🎉
-            </h2>
-
-            <p>
-                Every single adventure has been completed.
-                We may officially be the world's most
-                accomplished adventurers.
-            </p>
-
-            <p>
-                ❤️ 17 adventures. 17 memories.
-            </p>
-
-        </div>
-
-    </section>
-
-
+    <div class="paws paws2">
+        🐾 🐾
+    </div>
+    <div class="paws paws3">
+        🐾 🐾
+    </div>
+    <!-- HIDDEN DISCOVERIES -->
+    <div
+        class="discovery discoveryCat1"
+        data-message="You found a secret cat. Obviously it lives here now."
+        title="Secret cat">
+        🐈
+    </div>
+    <div
+        class="discovery discoveryCat2"
+        data-message="A black cat! This feels suspiciously important."
+        title="Secret cat">
+        🐈‍⬛
+    </div>
+    <div
+        class="discovery discoveryCat3"
+        data-message="pspspspspsps... you found me."
+        title="Secret cat">
+        🐱
+    </div>
+    <div
+        class="discovery discoveryFrog"
+        data-message="You found a frog. He has absolutely nothing to say."
+        title="Frog">
+        🐸
+    </div>
+    <div
+        class="discovery discoveryMushroom"
+        data-message="You found a suspicious mushroom. I would not eat it."
+        title="Suspicious mushroom">
+        🍄
+    </div>
+    <div
+        class="discovery discoveryFox"
+        data-message="A fox! He saw you. He judged you. He left."
+        title="Fox">
+        🦊
+    </div>
+    <div
+        class="discovery discoveryOwl"
+        data-message="You found an owl. He knows something. He won't tell you."
+        title="Owl">
+        🦉
+    </div>
+    <div
+        class="discovery discoveryCake"
+        data-message="WHY IS THERE A CAKE IN THE FOREST?"
+        title="Suspicious cake">
+        🎂
+    </div>
+    <!-- WRONG WAY -->
+    <div
+        class="wrongWay"
+        id="wrongWay">
+        ⚠️ WRONG WAY
+        <br><br>
+        Definitely don't click this.
+    </div>
+</section>
 </main>
-
-
 <script>
-
-/* =========================================================
-   ACTIVITY DATA
-========================================================= */
-
-const activities = [
-
-    {
-        id: "beach",
-        emoji: "🏖️",
-        name: "Go to the Beach",
-        description: "Beach day, sunshine, sea, and probably getting sand everywhere.",
-        badge: "Beach Bums",
-        badgeDescription: "Achievement unlocked: Professional Beach Bums.",
-        image: ""
-    },
-
-    {
-        id: "psl",
-        emoji: "🎃",
-        name: "Make Pumpkin Spice Lattes",
-        description: "Make our own cosy autumn drinks.",
-        badge: "PSL Professionals",
-        badgeDescription: "Achievement unlocked: Certified Pumpkin Spice Professionals.",
-        image: ""
-    },
-
-    {
-        id: "fruit",
-        emoji: "🍓",
-        name: "Go Fruit Picking",
-        description: "Go picking, eat too much fruit, pretend we're in a cottagecore film.",
-        badge: "Fruit Goblins",
-        badgeDescription: "Achievement unlocked: Official Fruit Goblins.",
-        image: ""
-    },
-
-    {
-        id: "craft",
-        emoji: "🧶",
-        name: "Do One Cozy Craft",
-        description: "Pick a cute craft and make something together.",
-        badge: "Crafty Little Menaces",
-        badgeDescription: "Achievement unlocked: Crafty Little Menaces.",
-        image: ""
-    },
-
-    {
-        id: "snacks",
-        emoji: "🍿",
-        name: "M&S Snacks Night",
-        description: "Buy an unreasonable amount of snacks and have a feast.",
-        badge: "Snack Scientists",
-        badgeDescription: "Achievement unlocked: Snack Scientists.",
-        image: ""
-    },
-
-    {
-        id: "crumble",
-        emoji: "🍎",
-        name: "Bake a Crumble",
-        description: "Make a delicious crumble from scratch.",
-        badge: "Crumble Connoisseurs",
-        badgeDescription: "Achievement unlocked: Masters of the Crumble.",
-        image: ""
-    },
-
-    {
-        id: "pizza",
-        emoji: "🍕",
-        name: "Make Pizza From Scratch",
-        description: "Make our own pizza dough, toppings and everything.",
-        badge: "Pizza Architects",
-        badgeDescription: "Achievement unlocked: Pizza Architects.",
-        image: ""
-    },
-
-    {
-        id: "film",
-        emoji: "🎬",
-        name: "Smell Gets to Pick an At-Home Film",
-        description: "One person gets complete control of the film choice.",
-        badge: "Film Director",
-        badgeDescription: "Achievement unlocked: Supreme Film Director.",
-        image: ""
-    },
-
-    {
-        id: "cinema",
-        emoji: "🎥",
-        name: "Go to the Cinema",
-        description: "Pick a film, get snacks and have a proper cinema date.",
-        badge: "Cinema Critics",
-        badgeDescription: "Achievement unlocked: Professional Cinema Critics.",
-        image: ""
-    },
-
-    {
-        id: "walk",
-        emoji: "🌿",
-        name: "Have a Scenic Walk",
-        description: "Go somewhere pretty and take a nice long walk together.",
-        badge: "Wandering Adventurers",
-        badgeDescription: "Achievement unlocked: Wandering Adventurers.",
-        image: ""
-    },
-
-    {
-        id: "minecraft",
-        emoji: "⛏️",
-        name: "Minecraft World Update",
-        description: "Return to our world and cause some Minecraft-related chaos.",
-        badge: "World Builders",
-        badgeDescription: "Achievement unlocked: Certified World Builders.",
-        image: ""
-    },
-
-    {
-        id: "picnic",
-        emoji: "🧺",
-        name: "Go for a Picnic",
-        description: "Pack some food, find somewhere pretty and have a picnic.",
-        badge: "Picnic Professionals",
-        badgeDescription: "Achievement unlocked: Picnic Professionals.",
-        image: ""
-    },
-
-    {
-        id: "cocktails",
-        emoji: "🍸",
-        name: "Cocktail Night",
-        description: "Make some fun cocktails and have a fancy little night in.",
-        badge: "Mixology Menaces",
-        badgeDescription: "Achievement unlocked: Mixology Menaces.",
-        image: ""
-    },
-
-    {
-        id: "pinterest",
-        emoji: "🏠",
-        name: "Make a Pinterest Board for Our Apartment",
-        description: "Plan our dream apartment and collect all the ideas.",
-        badge: "Interior Designers",
-        badgeDescription: "Achievement unlocked: Professional Interior Designers.",
-        image: ""
-    },
-
-    {
-        id: "fall",
-        emoji: "📸",
-        name: "Togtastic Fall Content Shoot",
-        description: "Take ridiculous, cute and autumnal pictures together.",
-        badge: "Content Creators",
-        badgeDescription: "Achievement unlocked: Togtastic Content Creators.",
-        image: ""
-    },
-
-    {
-        id: "pub",
-        emoji: "🍻",
-        name: "Pub Night",
-        description: "Go to the pub, have some drinks and cause absolutely no trouble.",
-        badge: "Pub Legends",
-        badgeDescription: "Achievement unlocked: Certified Pub Legends.",
-        image: ""
-    },
-
-    {
-        id: "sunset",
-        emoji: "🌅",
-        name: "Watch the Sunset",
-        description: "Find somewhere lovely and watch the sun go down together.",
-        badge: "Professional Sunset Watchers",
-        badgeDescription: "Achievement unlocked: Professional Sunset Watchers.",
-        image: ""
+/* -------------------------
+   CAT PAW CURSOR TRAIL
+------------------------- */
+let lastPawTime = 0;
+let pawSide = 0;
+document.addEventListener(
+    "mousemove",
+    function(event) {
+        const now = Date.now();
+        if (now - lastPawTime < 100) {
+            return;
+        }
+        lastPawTime = now;
+        const paw =
+            document.createElement("div");
+        paw.className = "paw-print";
+        paw.textContent = "🐾";
+        paw.style.left =
+            event.clientX + "px";
+        paw.style.top =
+            event.clientY + "px";
+        if (pawSide === 0) {
+            paw.style.transform =
+                "translate(-50%, -50%) rotate(-20deg) scale(.7)";
+            pawSide = 1;
+        } else {
+            paw.style.transform =
+                "translate(-50%, -50%) rotate(20deg) scale(.7)";
+            pawSide = 0;
+        }
+        document.body.appendChild(paw);
+        setTimeout(
+            function() {
+                paw.remove();
+            },
+            900
+        );
     }
-
-];
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const STORAGE_KEY =
-    "birthdayForestAdventureProgress";
-
-
-let completedActivities =
+);
+/* -------------------------
+   DISCOVERY SYSTEM
+------------------------- */
+const discoveries =
+    document.querySelectorAll(".discovery");
+const counter =
+    document.getElementById("discoveryCounter");
+const popup =
+    document.getElementById("discoveryPopup");
+let discovered =
     new Set();
+    /* -------------------------
+   FINAL GIFT TRAIL
+------------------------- */
+
+const finalGift =
+    document.getElementById("finalGift");
+
+const finalGiftIcon =
+    document.getElementById("finalGiftIcon");
+
+const finalGiftText =
+    document.getElementById("finalGiftText");
+
+const finalGiftLock =
+    document.getElementById("finalGiftLock");
+
+let forestCompleted = false;
 
 
-/* Load saved progress */
+/* Load previous discoveries */
 
 try {
 
     const saved =
         JSON.parse(
             localStorage.getItem(
-                STORAGE_KEY
+                "birthdayForestDiscoveries"
             )
         );
 
     if (Array.isArray(saved)) {
 
-        saved.forEach(function(id) {
-
-            completedActivities.add(id);
-
+        saved.forEach(function(index) {
+            discovered.add(index);
         });
 
     }
@@ -1553,1055 +1215,321 @@ try {
 } catch (error) {
 
     console.log(
-        "No previous adventure progress found."
+        "No previous forest discoveries found."
     );
 
 }
 
 
-/* =========================================================
-   DOM
-========================================================= */
+/* Update the counter when the page loads */
 
-const activityGrid =
-    document.getElementById(
-        "activityGrid"
-    );
-
-const completedCount =
-    document.getElementById(
-        "completedCount"
-    );
-
-const totalCount =
-    document.getElementById(
-        "totalCount"
-    );
-
-const spinButton =
-    document.getElementById(
-        "spinButton"
-    );
-
-const canvas =
-    document.getElementById(
-        "wheelCanvas"
-    );
-
-const ctx =
-    canvas.getContext("2d");
-
-const resultBox =
-    document.getElementById(
-        "resultBox"
-    );
-
-const resultEmoji =
-    document.getElementById(
-        "resultEmoji"
-    );
-
-const resultTitle =
-    document.getElementById(
-        "resultTitle"
-    );
-
-const resultText =
-    document.getElementById(
-        "resultText"
-    );
-
-const badgeOverlay =
-    document.getElementById(
-        "badgeOverlay"
-    );
-
-const badgeImage =
-    document.getElementById(
-        "badgeImage"
-    );
-
-const badgeTitle =
-    document.getElementById(
-        "badgeTitle"
-    );
-
-const badgeDescription =
-    document.getElementById(
-        "badgeDescription"
-    );
-
-const closeBadge =
-    document.getElementById(
-        "closeBadge"
-    );
-
-const completeMessage =
-    document.getElementById(
-        "completeMessage"
-    );
-
-const totalCountElement =
-    document.getElementById(
-        "totalCount"
-    );
-
-totalCountElement.textContent =
-    activities.length;
+counter.textContent =
+    "🌿 Secrets discovered: " +
+    discovered.size +
+    " / 8";
 
 
-/* =========================================================
-   SAVE
-========================================================= */
+/* Mark previously discovered objects */
 
-function saveProgress() {
+discoveries.forEach(
+    function(item, index) {
+
+        if (discovered.has(index)) {
+
+            item.classList.add("found");
+
+        }
+
+    }
+);
+
+
+/* Save progress */
+
+function saveForestProgress() {
 
     localStorage.setItem(
-        STORAGE_KEY,
+        "birthdayForestDiscoveries",
         JSON.stringify(
-            Array.from(
-                completedActivities
-            )
+            Array.from(discovered)
         )
     );
 
 }
 
 
-/* =========================================================
-   GET AVAILABLE ACTIVITIES
-========================================================= */
+/* Unlock the final gift */
 
-function getAvailableActivities() {
+function unlockFinalGift() {
 
-    return activities.filter(
-        function(activity) {
-
-            return !completedActivities.has(
-                activity.id
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE COUNTER
-========================================================= */
-
-function updateCounter() {
-
-    completedCount.textContent =
-        completedActivities.size;
-
-    if (
-        completedActivities.size ===
-        activities.length
-    ) {
-
-        completeMessage.classList.add(
-            "show"
-        );
-
-    } else {
-
-        completeMessage.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   BUILD CHECKLIST
-========================================================= */
-
-function renderActivities() {
-
-    activityGrid.innerHTML = "";
-
-
-    activities.forEach(
-        function(activity) {
-
-            const isCompleted =
-                completedActivities.has(
-                    activity.id
-                );
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "activityCard" +
-                (
-                    isCompleted
-                        ? " completed"
-                        : ""
-                );
-
-
-            card.innerHTML = `
-
-                <input
-                    type="checkbox"
-                    class="activityCheckbox"
-                    ${isCompleted ? "checked" : ""}
-                    aria-label="Complete ${activity.name}"
-                >
-
-                <div class="activityIcon">
-                    ${activity.emoji}
-                </div>
-
-                <div class="activityInfo">
-
-                    <h3>
-                        ${activity.name}
-                    </h3>
-
-                    <p>
-                        ${activity.description}
-                    </p>
-
-                    <div class="completedLabel">
-                        ✓ Completed
-                    </div>
-
-                </div>
-
-            `;
-
-
-            const checkbox =
-                card.querySelector(
-                    ".activityCheckbox"
-                );
-
-
-            checkbox.addEventListener(
-                "change",
-                function() {
-
-                    if (checkbox.checked) {
-
-                        completeActivity(
-                            activity.id
-                        );
-
-                    } else {
-
-                        undoActivity(
-                            activity.id
-                        );
-
-                    }
-
-                }
-            );
-
-
-            activityGrid.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    updateCounter();
-
-    drawWheel();
-
-}
-
-
-/* =========================================================
-   COMPLETE ACTIVITY
-========================================================= */
-
-function completeActivity(id) {
-
-    if (
-        completedActivities.has(id)
-    ) {
-
+    if (forestCompleted) {
         return;
-
     }
 
+    forestCompleted = true;
 
-    completedActivities.add(id);
+    finalGift.classList.remove(
+        "locked"
+    );
 
-    saveProgress();
+    finalGift.classList.add(
+        "unlocked"
+    );
 
-    renderActivities();
+    finalGiftIcon.textContent =
+        "✨🎁";
 
+    finalGiftText.textContent =
+        "You found every secret. The final trail is open.";
 
-    const activity =
-        activities.find(
-            function(item) {
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if (activity) {
-
-        showBadge(activity);
-
-        createCelebration();
-
-    }
-
-}
+    finalGiftLock.textContent =
+        "✨ UNLOCKED ✨";
 
 
-/* =========================================================
-   UNDO ACTIVITY
-========================================================= */
+    /* Little screen celebration */
 
-function undoActivity(id) {
+    const flash =
+        document.createElement("div");
 
-    if (
-        !completedActivities.has(id)
-    ) {
+    flash.className =
+        "forestCompleteFlash";
 
-        return;
+    document.body.appendChild(
+        flash
+    );
 
-    }
-
-
-    completedActivities.delete(id);
-
-    saveProgress();
-
-    renderActivities();
+    setTimeout(
+        function() {
+            flash.remove();
+        },
+        1500
+    );
 
 
-    resultBox.classList.remove(
-        "show"
+    showDiscoveryMessage(
+        "✨ You found every secret in the forest. The Final Gift is waiting..."
     );
 
 }
 
 
-/* =========================================================
-   BADGE
-========================================================= */
+/* Check progress */
 
-function showBadge(activity) {
+function checkFinalGift() {
 
-    badgeTitle.textContent =
-        activity.badge;
+    if (discovered.size >= 8) {
 
-    badgeDescription.textContent =
-        activity.badgeDescription;
-
-
-    /*
-       IMAGE PLACEHOLDER
-
-       Later, change activity.image
-       to something like:
-
-       image: "images/beach-badge.jpg"
-
-       The code will automatically
-       display your image.
-    */
-
-    if (activity.image) {
-
-        badgeImage.innerHTML = `
-            <img
-                src="${activity.image}"
-                alt="${activity.badge}"
-            >
-        `;
-
-    } else {
-
-        badgeImage.textContent =
-            activity.emoji;
+        unlockFinalGift();
 
     }
-
-
-    badgeOverlay.classList.add(
-        "show"
-    );
 
 }
-
-
-closeBadge.addEventListener(
-    "click",
-    function() {
-
-        badgeOverlay.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-badgeOverlay.addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            event.target ===
-            badgeOverlay
-        ) {
-
-            badgeOverlay.classList.remove(
+function showDiscoveryMessage(message) {
+    popup.textContent = message;
+    popup.classList.add("show");
+    setTimeout(
+        function() {
+            popup.classList.remove(
                 "show"
             );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   WHEEL DRAWING
-========================================================= */
-
-function drawWheel() {
-
-    const available =
-        getAvailableActivities();
-
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+        },
+        2800
     );
+}
+function completeForest() {
+    popup.textContent =
+        "You have befriended all the creatures of the forest. They wish you well in your adventure";
+    popup.classList.add("show");
+    setTimeout(
+        function() {
+            popup.classList.remove(
+                "show"
+            );
+        },
+        5000
+    );
+}
+function discoverItem(item, index) {
 
+    if (!discovered.has(index)) {
 
-    if (available.length === 0) {
+        discovered.add(index);
 
-        drawEmptyWheel();
+        item.classList.add("found");
 
-        spinButton.disabled = true;
+        counter.textContent =
+            "🌿 Secrets discovered: " +
+            discovered.size +
+            " / 8";
 
-        spinButton.textContent =
-            "🎉 ALL ADVENTURES COMPLETE";
+        saveForestProgress();
 
-        return;
+        checkFinalGift();
 
     }
 
-
-    spinButton.disabled = false;
-
-    spinButton.textContent =
-        "🎡 SPIN THE WHEEL";
-
-
-    const centerX =
-        canvas.width / 2;
-
-    const centerY =
-        canvas.height / 2;
-
-    const radius =
-        canvas.width / 2 - 8;
-
-
-    const slice =
-        (Math.PI * 2) /
-        available.length;
-
-
-    available.forEach(
-        function(activity, index) {
-
-            const startAngle =
-                -Math.PI / 2 +
-                index * slice;
-
-            const endAngle =
-                startAngle +
-                slice;
-
-
-            /* Slice */
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                centerX,
-                centerY
-            );
-
-            ctx.arc(
-                centerX,
-                centerY,
-                radius,
-                startAngle,
-                endAngle
-            );
-
-            ctx.closePath();
-
-
-            /*
-               Alternating earthy wheel
-               colours.
-            */
-
-            const wheelColours = [
-                "#765a32",
-                "#58734b",
-                "#8a6b3d",
-                "#46633f",
-                "#947746",
-                "#536f48"
-            ];
-
-            ctx.fillStyle =
-                wheelColours[
-                    index %
-                    wheelColours.length
-                ];
-
-            ctx.fill();
-
-
-            ctx.strokeStyle =
-                "rgba(246,223,145,.7)";
-
-            ctx.lineWidth = 3;
-
-            ctx.stroke();
-
-
-            /* Emoji */
-
-            const angle =
-                startAngle +
-                slice / 2;
-
-            const textRadius =
-                radius * .67;
-
-
-            const textX =
-                centerX +
-                Math.cos(angle) *
-                textRadius;
-
-            const textY =
-                centerY +
-                Math.sin(angle) *
-                textRadius;
-
-
-            ctx.save();
-
-            ctx.translate(
-                textX,
-                textY
-            );
-
-            ctx.rotate(
-                angle + Math.PI / 2
-            );
-
-
-            ctx.font =
-                "30px serif";
-
-            ctx.textAlign =
-                "center";
-
-            ctx.textBaseline =
-                "middle";
-
-            ctx.fillText(
-                activity.emoji,
-                0,
-                -15
-            );
-
-
-            /*
-               Shortened activity name
-               so the wheel stays readable.
-            */
-
-            let shortName =
-                activity.name;
-
-            if (
-                shortName.length > 22
-            ) {
-
-                shortName =
-                    shortName.substring(
-                        0,
-                        20
-                    ) + "...";
-
+    showDiscoveryMessage(
+        item.dataset.message
+    );
+}
+discoveries.forEach(
+    function(item, index) {
+        item.addEventListener(
+            "click",
+            function() {
+                discoverItem(
+                    item,
+                    index
+                );
             }
-
-
-            ctx.font =
-                "bold 14px Georgia";
-
-            ctx.fillStyle =
-                "#fff4d5";
-
-            ctx.fillText(
-                shortName,
-                0,
-                20
+        );
+    }
+);
+/* -------------------------
+   WRONG WAY SIGN
+------------------------- */
+document
+    .getElementById("wrongWay")
+    .addEventListener(
+        "click",
+        function() {
+            showDiscoveryMessage(
+                "You have successfully gone the wrong way. Get back on track!."
             );
-
-
-            ctx.restore();
-
         }
     );
-
-
-    /* Centre circle */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        centerX,
-        centerY,
-        50,
-        0,
-        Math.PI * 2
+/* -------------------------
+   DAY / NIGHT MODE
+------------------------- */
+const modeButton =
+    document.getElementById("modeButton");
+const moonButton =
+    document.getElementById("moonButton");
+function toggleDayNight() {
+    document.body.classList.toggle(
+        "dayMode"
     );
-
-    ctx.fillStyle =
-        "#3d2919";
-
-    ctx.fill();
-
-    ctx.strokeStyle =
-        "#f6df91";
-
-    ctx.lineWidth = 5;
-
-    ctx.stroke();
-
-
-    ctx.font =
-        "28px serif";
-
-    ctx.textAlign =
-        "center";
-
-    ctx.textBaseline =
-        "middle";
-
-    ctx.fillStyle =
-        "#f6df91";
-
-    ctx.fillText(
-        "❤️",
-        centerX,
-        centerY
-    );
-
-}
-
-
-/* =========================================================
-   EMPTY WHEEL
-========================================================= */
-
-function drawEmptyWheel() {
-
-    const centerX =
-        canvas.width / 2;
-
-    const centerY =
-        canvas.height / 2;
-
-    const radius =
-        canvas.width / 2 - 8;
-
-
-    ctx.beginPath();
-
-    ctx.arc(
-        centerX,
-        centerY,
-        radius,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fillStyle =
-        "#3d5138";
-
-    ctx.fill();
-
-    ctx.strokeStyle =
-        "#f6df91";
-
-    ctx.lineWidth = 5;
-
-    ctx.stroke();
-
-
-    ctx.font =
-        "bold 30px Georgia";
-
-    ctx.textAlign =
-        "center";
-
-    ctx.textBaseline =
-        "middle";
-
-    ctx.fillStyle =
-        "#f6df91";
-
-    ctx.fillText(
-        "WE DID IT! ❤️",
-        centerX,
-        centerY - 25
-    );
-
-
-    ctx.font =
-        "20px Georgia";
-
-    ctx.fillStyle =
-        "#eadfc5";
-
-    ctx.fillText(
-        "Every adventure complete",
-        centerX,
-        centerY + 20
-    );
-
-}
-
-
-/* =========================================================
-   SPINNING
-========================================================= */
-
-let spinning = false;
-
-let currentRotation = 0;
-
-
-spinButton.addEventListener(
-    "click",
-    spinWheel
-);
-
-
-function spinWheel() {
-
-    if (spinning) {
-
-        return;
-
-    }
-
-
-    const available =
-        getAvailableActivities();
-
-
     if (
-        available.length === 0
+        document.body.classList.contains(
+            "dayMode"
+        )
     ) {
+        modeButton.textContent =
+            "🌙 Return to Night";
+        moonButton.textContent =
+            "☀️";
+    } else {
+        modeButton.textContent =
+            "☀️ Enter Daytime";
+        moonButton.textContent =
+            "🌙";
+    }
+}
+modeButton.addEventListener(
+    "click",
+    toggleDayNight
+);
+moonButton.addEventListener(
+    "click",
+    toggleDayNight
+);
+/* -------------------------
+   WANDERING OWL
+------------------------- */
+const owl =
+    document.getElementById(
+        "wanderingOwl"
+    );
+let owlDiscovered = false;
+function sendOwl() {
+    owl.classList.remove("fly");
+    void owl.offsetWidth;
+    owl.classList.add("fly");
+}
+/*
+   The owl has a large invisible
+   clickable area around it.
+*/
+owl.addEventListener(
+    "click",
+    function(event) {
+        event.stopPropagation();
+        if (owlDiscovered) {
+            return;
+        }
+        owlDiscovered = true;
+        owl.classList.remove("fly");
+        discovered.add(7);
+        counter.textContent =
+            "🌿 Secrets discovered: 8 / 8";
+        owl.style.opacity = "0";
+        owl.style.pointerEvents = "none";
+        completeForest();
+    }
+);
+setTimeout(
+    sendOwl,
+    5000
+);
+setInterval(
+    function() {
+        if (!owlDiscovered) {
+            sendOwl();
+        }
+    },
+    18000
+);
+    /* -------------------------
+   FINAL GIFT CLICK
+------------------------- */
+
+function openFinalGift() {
+
+    if (!forestCompleted) {
+
+        showDiscoveryMessage(
+            "🔒 The Final Gift is still locked. Something is hidden in the forest..."
+        );
 
         return;
 
     }
 
-
-    spinning = true;
-
-    spinButton.disabled = true;
-
-
-    resultBox.classList.remove(
-        "show"
+    showDiscoveryMessage(
+        "✨ The final trail has opened..."
     );
-
-
-    /*
-       Pick the winning activity
-       BEFORE spinning.
-    */
-
-    const winnerIndex =
-        Math.floor(
-            Math.random() *
-            available.length
-        );
-
-
-    const winner =
-        available[winnerIndex];
-
-
-    const slice =
-        360 /
-        available.length;
-
-
-    /*
-       The pointer is at the top.
-
-       Calculate the centre of the
-       winner's segment and rotate
-       that segment to the pointer.
-    */
-
-    const targetAngle =
-        360 -
-        (
-            winnerIndex * slice +
-            slice / 2
-        );
-
-
-    const extraSpins =
-        5 + Math.floor(
-            Math.random() * 3
-        );
-
-
-    currentRotation +=
-        extraSpins * 360 +
-        targetAngle;
-
-
-    canvas.style.transform =
-        "rotate(" +
-        currentRotation +
-        "deg)";
-
 
     setTimeout(
         function() {
 
-            spinning = false;
-
-            spinButton.disabled =
-                false;
-
-
-            resultEmoji.textContent =
-                winner.emoji;
-
-            resultTitle.textContent =
-                winner.name;
-
-            resultText.textContent =
-                "Looks like fate has chosen this one! ❤️";
-
-
-            resultBox.classList.add(
-                "show"
-            );
-
-
-            /*
-               The activity is NOT
-               automatically completed.
-
-               You still have to tick it
-               off after actually doing it.
-            */
+            window.location.href =
+                "secret.html";
 
         },
-        5200
+        900
     );
 
 }
 
 
-/* =========================================================
-   CELEBRATION
-========================================================= */
-
-function createCelebration() {
-
-    const hearts = [
-        "❤️",
-        "💕",
-        "💗",
-        "💖",
-        "💘",
-        "✨",
-        "🌿"
-    ];
-
-
-    for (
-        let i = 0;
-        i < 14;
-        i++
-    ) {
-
-        const heart =
-            document.createElement(
-                "div"
-            );
-
-        heart.className =
-            "celebrationHeart";
-
-        heart.textContent =
-            hearts[
-                Math.floor(
-                    Math.random() *
-                    hearts.length
-                )
-            ];
-
-
-        heart.style.left =
-            (
-                Math.random() *
-                100
-            ) + "vw";
-
-        heart.style.bottom =
-            (
-                15 +
-                Math.random() *
-                20
-            ) + "vh";
-
-
-        heart.style.animationDelay =
-            (
-                Math.random() *
-                .5
-            ) + "s";
-
-
-        document.body.appendChild(
-            heart
-        );
-
-
-        setTimeout(
-            function() {
-
-                heart.remove();
-
-            },
-            2500
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   HEART CURSOR
-========================================================= */
-
-let lastHeartTime = 0;
-
-
-document.addEventListener(
-    "mousemove",
-    function(event) {
-
-        const now =
-            Date.now();
-
-
-        if (
-            now - lastHeartTime <
-            120
-        ) {
-
-            return;
-
-        }
-
-
-        lastHeartTime =
-            now;
-
-
-        const heart =
-            document.createElement(
-                "div"
-            );
-
-        heart.className =
-            "heartTrail";
-
-        heart.textContent =
-            Math.random() > .5
-                ? "♥"
-                : "♡";
-
-
-        heart.style.left =
-            event.clientX + "px";
-
-        heart.style.top =
-            event.clientY + "px";
-
-
-        document.body.appendChild(
-            heart
-        );
-
-
-        setTimeout(
-            function() {
-
-                heart.remove();
-
-            },
-            1000
-        );
-
-    }
+finalGift.addEventListener(
+    "click",
+    openFinalGift
 );
 
 
-/* =========================================================
-   ESCAPE KEY CLOSES BADGE
-========================================================= */
-
-document.addEventListener(
+finalGift.addEventListener(
     "keydown",
     function(event) {
 
         if (
-            event.key === "Escape"
+            event.key === "Enter" ||
+            event.key === " "
         ) {
 
-            badgeOverlay.classList.remove(
-                "show"
-            );
+            event.preventDefault();
+
+            openFinalGift();
 
         }
 
@@ -2609,13 +1537,19 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   INITIALISE
-========================================================= */
+/* Restore the final gift state */
 
-renderActivities();
+if (discovered.size >= 8) {
 
+    unlockFinalGift();
+
+} else {
+
+    finalGift.classList.add(
+        "locked"
+    );
+
+}
 </script>
-
 </body>
 </html>
